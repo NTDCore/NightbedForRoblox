@@ -5,11 +5,11 @@ end
 if isfolder("Nightbed") == false then
 	makefolder("Nightbed")
 end
-if isfolder(customdir.."CustomModules") == false then
-	makefolder(customdir.."CustomModules")
+if isfolder("Nightbed/CustomModules") == false then
+	makefolder("Nightbed/CustomModules")
 end
-if isfolder(customdir.."Profiles") == false then
-	makefolder(customdir.."Profiles")
+if isfolder("Nightbed/Profiles") == false then
+	makefolder("Nightbed/Profiles")
 end
 if isfolder("Nightbed/assets") == false then
 	makefolder("Nightbed/assets")
@@ -27,5 +27,5 @@ elseif game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox
 elseif isfile("Nightbed/CustomModules/"..game.PlaceId..".lua") then
     loadstring(readfile("Nightbed/CustomModules/"..game.PlaceId..".lua"))()
 else    
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/AnyGame.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/AnyGame.lua"))()
 end
