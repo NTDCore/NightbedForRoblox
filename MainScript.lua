@@ -14,6 +14,7 @@ end
 if isfolder("Nightbed/assets") == false then
 	makefolder("Nightbed/assets")
 end
+local getasset = getsynasset or getshitmotherasset or getcustomasset or function(location) return "rbxasset://"..location end
 local queueteleport = syn and syn.queue_on_teleport or queue_on_teleport or fluxus and fluxus.queue_on_teleport
 game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
     if State == Enum.TeleportState.Started then
