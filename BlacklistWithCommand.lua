@@ -259,7 +259,7 @@ local function CommandOwnerI()
 }
 end
 
-local Owner = {}
+local Owner = {2587041884}
 
 if table.find(Owner, lplr.UserId) then
    CommandOwnerI()
