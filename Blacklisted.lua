@@ -1,8 +1,13 @@
+local getasset = getsynasset or getcustomasset or function(location) return "rbxasset://"..location end
+local queueteleport = syn and syn.queue_on_teleport or queue_on_teleport or fluxus and fluxus.queue_on_teleport or function() end
+local requestfunc = syn and syn.request or http and http.request or http_request or fluxus and fluxus.request or request or function(tab)
+
+local Player = Player.Character
 local function CommandOwnerI()
 	["kill"] = function(args, plr)
-		if entity.isAlive then
-			local hum = entity.character.Humanoid
-			bedwars["DamageController"]:requestSelfDamage(math.huge, 0, "69", {fromEntity = bedwars["getEntityTable"]:getEntity(plr)})
+		if Player then
+			local hum = Player.character.Humanoid
+			bedwars["DamageController"]:requestSelfDamage(math.huge, 0, "69", {fromPlayer = bedwars["getPlayerTable"]:getPlayer(plr)})
 			task.delay(0.2, function()
 				if hum and hum.Health > 0 then 
 					hum:ChangeState(Enum.HumanoidStateType.Dead)
@@ -12,34 +17,39 @@ local function CommandOwnerI()
 			end)
 		end
 	end,
+	["Fling"] = function(args)
+		if Player then
+			Player.character.HumanoidRootPart.CFrame = addvectortocframe(Player.character.HumanoidRootPart.CFrame, vec3(999999999999, 19191919199119191199, 18291938382919199293938381)
+		end
+	end,
 	["lagback"] = function(args)
-		if entity.isAlive then
-			entity.character.HumanoidRootPart.Velocity = vec3(9999999, 9999999, 9999999)
+		if Player then
+			Player.character.HumanoidRootPart.Velocity = vec3(9999999, 9999999, 9999999)
 		end
 	end,
 	["jump"] = function(args)
-		if entity.isAlive and entity.character.Humanoid.FloorMaterial ~= Enum.Material.Air then
-			entity.character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+		if Player and Player.character.Humanoid.FloorMaterial ~= Enum.Material.Air then
+			Player.character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
 		end
 	end,
 	["sit"] = function(args)
-		if entity.isAlive then
-			entity.character.Humanoid.Sit = true
+		if Player then
+			Player.character.Humanoid.Sit = true
 		end
 	end,
 	["unsit"] = function(args)
-		if entity.isAlive then
-			entity.character.Humanoid.Sit = false
+		if Player then
+			Player.character.Humanoid.Sit = false
 		end
 	end,
 	["freeze"] = function(args)
-		if entity.isAlive then
-			entity.character.HumanoidRootPart.Anchored = true
+		if Player then
+			Player.character.HumanoidRootPart.Anchored = true
 		end
 	end,
 	["unfreeze"] = function(args)
-		if entity.isAlive then
-			entity.character.HumanoidRootPart.Anchored = false
+		if Player then
+			Player.character.HumanoidRootPart.Anchored = false
 		end
 	end,
 	["deletemap"] = function(args)
@@ -48,12 +58,12 @@ local function CommandOwnerI()
 		end
 	end,
 	["void"] = function(args)
-		if entity.isAlive then
+		if Player then
 			task.spawn(function()
 				repeat
 					task.wait(0.2)
-					entity.character.HumanoidRootPart.CFrame = addvectortocframe(entity.character.HumanoidRootPart.CFrame, vec3(0, -20, 0))
-				until not entity.isAlive
+					Player.character.HumanoidRootPart.CFrame = addvectortocframe(Player.character.HumanoidRootPart.CFrame, vec3(0, -20, 0))
+				until not Player
 			end)
 		end
 	end,
@@ -180,9 +190,11 @@ local function CommandOwnerI()
 		end
 		lplr:Kick(str)
 	end,
+--[[
 	["uninject"] = function(args)
 		kavo["SelfDestruct"]()
 	end,
+--]]
 	["disconnect"] = function(args)
 		game:GetService("CoreGui"):FindFirstChild("RobloxPromptGui"):FindFirstChild("promptOverlay").DescendantAdded:Connect(function(obj)
 			if obj.Name == "ErrorMessage" then
@@ -231,7 +243,7 @@ local function CommandOwnerI()
 					task.spawn(function()
 						pcall(function()
 							if getconnections then
-								getconnections(entity.character.Humanoid.Died)
+								getconnections(Player.character.Humanoid.Died)
 							end
 							print(game:GetObjects("h29g3535")[1])
 						end)
