@@ -72,6 +72,25 @@ if isfolder("Nightbed/assets") == false then
 makefolder("Nightbed/assets")
 end
 
+local tabs = function(tabName)
+return kavo = window:NewTab(tabName.."")
+end
+local Combat = tabs("Combat")
+local Blatant = tabs("Blatant")
+local Render = tabs("Render")
+local Utility = tabs("Utility")
+local World = tabs("World")
+local Setting = tabs("Settings")
+local Credit = tabs("Credits")
+
+local sec = function(secName)
+return kavo = window:NewSection(secName.."")
+end)
+--[[
+local bind = function(keytext, keyinf, first, callback)
+return kavo = window:NewKeybind(keytext.."", keyinf.."", first.."", callback.."")
+end
+--]]
 if game.PlaceId == 6872274481 or game.PlaceId == 8560631822 or game.PlaceId == 8444591321 then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/6872274481.lua"))()
 elseif game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua") then
