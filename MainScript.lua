@@ -1,4 +1,6 @@
 repeat task.wait() until game:IsLoaded()
+if not isfile("NightbedConfig.JSON") then writefile("NightbedConfig.JSON","{}")
+end
 local betterisfile = function(file)
 	local suc, res = pcall(function() return readfile(file) end)
 	return suc and res ~= nil
@@ -23,6 +25,7 @@ game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
     end
 end)
 local kavo = loadstring(GetURL("Libraries/kavo.lua"))()
+local window = kavo.CreateLib("Nightbed V2.2.1d", "Luna")
 shared.kavo = kavo
 local function getcustomassetfunc(path)
 	if not betterisfile(path) then
