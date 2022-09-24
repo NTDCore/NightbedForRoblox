@@ -212,6 +212,15 @@ function Kavo.CreateLib(kavName, themeList)
     end
     local ScreenGui = Instance.new("ScreenGui")
     local optionframe
+                    local UI = Instance.new("ScreenGui")
+local boarderoutside = Instance.new("Frame")
+local board = Instance.new("Frame")
+local title = Instance.new("TextLabel")
+local text = Instance.new("TextLabel")
+UI.Name = "UI"
+UI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+UI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+UI.ResetOnSpawn = false
     local Main = Instance.new("Frame")
     local MainCorner = Instance.new("UICorner")
     local MainHeader = Instance.new("Frame")
@@ -348,6 +357,48 @@ function Kavo.CreateLib(kavName, themeList)
 		return cachedassets[path]
 	end
 
+            local function notification(titlez, textz, timecount)
+boarderoutside.Name = "boarderoutside"
+boarderoutside.Parent = UI
+boarderoutside.BackgroundColor3 = colorboardout["Value"]
+boarderoutside.BorderColor3 = Color3.fromRGB(0, 0, 0)
+boarderoutside.LayoutOrder = 1
+boarderoutside.Position = UDim2.new(0.727, 0, 0.836, 0) --{0.727, 0},{0.836, 0}
+boarderoutside.Size = UDim2.new(0, 265, 0, 101)
+boarderoutside.ZIndex = 2
+UICorner.Parent = boarderoutside
+board.Name = "board"
+board.Parent = boarderoutside
+board.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+board.LayoutOrder = 1
+board.Position = UDim2.new(0.0230687559, 0, 0.0665573254, 0)
+board.Size = UDim2.new(0, 252, 0, 87)
+UICorner_2.Parent = board
+title.Name = "title"
+title.Parent = boarderoutside
+title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+title.BackgroundTransparency = 1.000
+title.Position = UDim2.new(-0.245283023, 0, 0.0665573254, 0)
+title.Size = UDim2.new(0, 217, 0, 39)
+title.Font = Enum.Font.SourceSans
+title.Text = titlez
+title.TextColor3 = colortitle["Value"]
+title.TextSize = 22.000
+text.Name = "text"
+text.Parent = boarderoutside
+text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+text.BackgroundTransparency = 1.000
+text.Position = UDim2.new(-0.245283023, 0, 0.531903863, 0)
+text.Size = UDim2.new(0, 202, 0, 34)
+text.Font = Enum.Font.SourceSans
+text.Text = textz
+text.TextColor3 = Coloetextz["Value"]
+text.TextSize = 22.000
+wait(timecount)
+boarderoutside.Visible = false
+end
+notification("Notification", "Press "..oldKeyt.. "to Toggle Ui", 6)
+	
     MainSide.Name = "MainSide"
     MainSide.Parent = Main
     MainSide.BackgroundColor3 = themeList.Header
@@ -397,6 +448,35 @@ function Kavo.CreateLib(kavName, themeList)
     infoContainer.ClipsDescendants = true
     infoContainer.Position = UDim2.new(0.299047619, 0, 0.874213815, 0)
     infoContainer.Size = UDim2.new(0, 368, 0, 33)
+
+function Kavo:KeyTogglekavoUi(keytog, callback)
+	local oldKeyt = keytog.Name
+	callback = callback or function() end
+    if not ScreenGui.Enabled and game:GetService("UserInputService"):GetFocusedTextBox() == nil then
+    	local a, b = game:GetService('UserInputService').InputBegan:wait();
+                        if a.KeyCode.Name ~= "RightShift" then
+                            oldKeyt = a.KeyCode.Name;
+                        end
+                                        game:GetService("UserInputService").InputBegan:connect(function(current, ok) 
+                    if not ok then 
+                        if current.KeyCode.Name == oldKeyt then 
+                            callback()
+                        end
+                    end
+                end)
+    	     ScreenGui.Enabled = true
+    else
+        if game:GetService("UserInputService"):GetFocusedTextBox() == nil then
+        	                    if ok then 
+                        if current.KeyCode.Name == oldKeyt then 
+                            callback()
+                        end
+                    end
+                end)
+            ScreenGui.Enabled = false
+        end
+    end
+end
 
 function Kavo:TogglekavoUi()
     if not ScreenGui.Enabled and game:GetService("UserInputService"):GetFocusedTextBox() == nil then
@@ -2657,7 +2737,6 @@ end
                 end)
                 setcolor({h,s,v})
             end
-            
             function Elements:NewLabel(title)
             	local labelFunctions = {}
             	local label = Instance.new("TextLabel")
