@@ -25,7 +25,7 @@ game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
 	end
 	end)
 local kavo = loadstring(GetURL("Libraries/kavo.lua"))()
-local window = kavo.CreateLib("Nightbed", "Luna")
+local window = kavo.CreateLib("Nightbed " (shared.NightbedPrivate.. "PRIVATE" or ""), "Luna")
 shared.kavo = kavo
 local function getcustomassetfunc(path)
 if not betterisfile(path) then
@@ -51,7 +51,8 @@ writefile(path, req.Body)
 end
 return getasset(path)
 end
-
+local whitelists = loadstring(GetURL("Whitelisted/whitelisted.lua"))()
+shared.inlist = whitelists
 local shalib = loadstring(GetURL("Libraries/sha.lua"))()
 shared.shaonline = shalib
 local entity = loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/Libraries/entityHandler.lua"))()
@@ -72,17 +73,37 @@ if isfolder("Nightbed/assets") == false then
 makefolder("Nightbed/assets")
 end
 
+if shared.NightbedPrivate then
+	if isfolder("NightbedPrivate") == false then
+makefolder("NightbedPrivate")
+end
+if isfolder("NightbedPrivate/CustomModules") == false then
+makefolder("NightbedPrivate/CustomModules")
+end
+if isfolder("NightbedPrivate/Profiles") == false then
+makefolder("NightbedPrivate/Profiles")
+end
 local tabs = function(tabName)
 return kavo = window:NewTab(tabName.."")
 end
+--[[
+local Combat = window:NewTab("Combat")
+local Blatant = window:NewTab("Blatant")
+local Render = window:NewTab("Render")
+local Utility = window:NewTab("Utility")
+local World = window:NewTab("World")
+local hud = window:NewTab("Hud")
+local Setting = window:NewTab("Settings")
+local Credit = window:NewTab("Credits")
+--]]
 local Combat = tabs("Combat")
 local Blatant = tabs("Blatant")
 local Render = tabs("Render")
 local Utility = tabs("Utility")
 local World = tabs("World")
+local hud = tabs("Hud")
 local Setting = tabs("Settings")
 local Credit = tabs("Credits")
-
 local sec = function(secName)
 return kavo = window:NewSection(secName.."")
 end)
@@ -97,6 +118,10 @@ elseif game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox
 loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua"))()
 elseif isfile("Nightbed/CustomModules/"..game.PlaceId..".lua") then
 loadstring(readfile("Nightbed/CustomModules/"..game.PlaceId..".lua"))()
+else
+	if shared.NightbedPrivate then
+		isfile("NightbedPrivate/CustomModules/"..game.PlaceId..".lua") then
+loadstring(readfile("NightbedPrivate/CustomModules/"..game.PlaceId..".lua"))()
 else
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/AnyGame.lua"))()
 end
