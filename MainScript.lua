@@ -22,12 +22,12 @@ local queueteleport = syn and syn.queue_on_teleport or queue_on_teleport or flux
 game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
 	if State == Enum.TeleportState.Started then
 	queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/MainScript.lua'))()")
-	end
-	end)
+     end
+end)
 local GuiLibrary = loadstring(GetURL("GuiLibrary.lua"))()
 shared.GuiLIbrary = GuiLibrary
 local kavo = loadstring(GetURL("Libraries/kavo.lua"))()
-local window = kavo.CreateLib("Nightbed " (shared.NightbedPrivate.. "PRIVATE" or ""), "Luna")
+local window = kavo.CreateLib("Nightbed"..(shared.NightbedPrivate.. " - PRIVATE" or ""), "Luna")
 shared.kavo = kavo
 local function getcustomassetfunc(path)
 if not betterisfile(path) then
