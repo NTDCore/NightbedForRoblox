@@ -2,6 +2,22 @@
 Credit to Moerii
 --]]
 repeat task.wait() until game:IsLoaded()
+if isfolder("Nightbed") == false then
+    makefolder("Nightbed")
+end
+
+if isfolder("Nightbed/assets") == false then
+    makefolder("Nightbed/assets")
+end
+
+if isfolder("Nightbed/Profiles") == false then
+    makefolder("Nightbed/Profiles")
+end
+
+if isfolder("Nightbed/CustomModules") == false then
+    makefolder("Nightbed/CustomModules")
+end
+
 local queueteleport = syn and syn.queue_on_teleport or queue_on_teleport or fluxus and fluxus.queue_on_teleport
 game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
     if State == Enum.TeleportState.Started then
