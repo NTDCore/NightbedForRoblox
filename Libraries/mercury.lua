@@ -65,7 +65,7 @@ local Library = {
 		},
     Luna = {
 			Main = Color3.fromRGB(31, 31, 31),
-			Secondary = Color3.fromRGB(31, 31, 31),
+			Secondary = Color3.fromRGB(65, 63, 63),
 			Tertiary = Color3.fromRGB(126, 6, 232),
 
 			StrongText = Color3.fromHSV(0, 0, 1),		
