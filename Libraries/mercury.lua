@@ -65,11 +65,11 @@ local Library = {
 		},
     Luna = {
 			Main = Color3.fromRGB(31, 31, 31),
-			Secondary = Color3.fromRGB(65, 63, 63),
+			Secondary = Color3.fromRGB(31, 31, 31),
 			Tertiary = Color3.fromRGB(126, 6, 232),
 
 			StrongText = Color3.fromHSV(0, 0, 1),		
-			WeakText = Color3.fromRGB(255,255,255)
+			WeakText = Color3.fromHSV(0, 0, 172/255)
 		},
 		Aqua = {
 			Main = Color3.fromRGB(19, 21, 21),
