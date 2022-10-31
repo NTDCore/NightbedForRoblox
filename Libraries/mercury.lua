@@ -100,7 +100,7 @@ local Library = {
 	DisplayName = nil,
 	DragSpeed = 0.06,
 	LockDragging = false,
-	ToggleKey = Enum.KeyCode.Home,
+	ToggleKey = Enum.KeyCode.RightShift,
 	UrlLabel = nil,
 	Url = nil
 
