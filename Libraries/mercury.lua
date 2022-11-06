@@ -55,18 +55,18 @@ local Library = {
 			StrongText = Color3.fromHSV(0, 0, 1),		
 			WeakText = Color3.fromHSV(0, 0, 172/255)
 		},
-		Rust = {
-			Main = Color3.fromRGB(37, 35, 33),
-			Secondary = Color3.fromRGB(65, 63, 63),
-			Tertiary = Color3.fromRGB(237, 94, 38),
+		Luna = {
+			Main = Color3.fromRGB(31, 31, 31),
+			Secondary = Color3.fromRGB(63, 63, 63),
+			Tertiary = Color3.fromRGB(126, 6, 232),
 
 			StrongText = Color3.fromHSV(0, 0, 1),		
 			WeakText = Color3.fromHSV(0, 0, 172/255)
 		},
-    Luna = {
-			Main = Color3.fromRGB(31, 31, 31),
-			Secondary = Color3.fromRGB(63, 63, 63),
-			Tertiary = Color3.fromRGB(126, 6, 232),
+		Rust = {
+			Main = Color3.fromRGB(37, 35, 33),
+			Secondary = Color3.fromRGB(65, 63, 63),
+			Tertiary = Color3.fromRGB(237, 94, 38),
 
 			StrongText = Color3.fromHSV(0, 0, 1),		
 			WeakText = Color3.fromHSV(0, 0, 172/255)
@@ -100,7 +100,7 @@ local Library = {
 	DisplayName = nil,
 	DragSpeed = 0.06,
 	LockDragging = false,
-	ToggleKey = Enum.KeyCode.RightShift,
+	ToggleKey = Enum.KeyCode.Home,
 	UrlLabel = nil,
 	Url = nil
 
@@ -113,15 +113,6 @@ Library._promptExists = false
 Library._colorPickerExists = false
 
 local GlobalTweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut)
-
-function Library:set_defaults(defaults, options)
-	defaults = defaults or {}
-	options = options or {}
-	for option, value in next, options do
-		defaults[option] = value
-	end
-	return defaults
-end
 
 if isfolder("Nightbed") == false then
     makefolder("Nightbed")
@@ -137,6 +128,15 @@ end
 
 if isfolder("Nightbed/CustomModules") == false then
     makefolder("Nightbed/CustomModules")
+end
+
+function Library:set_defaults(defaults, options)
+	defaults = defaults or {}
+	options = options or {}
+	for option, value in next, options do
+		defaults[option] = value
+	end
+	return defaults
 end
 
 function Library:change_theme(toTheme)
@@ -1315,7 +1315,6 @@ function Library:toggle(options)
 		Callback = function(state) end
 	}, options)
 
-	if options.StartingState then options.Callback(true) end
 	local toggleContainer = self.container:object("TextButton", {
 		Theme = {BackgroundColor3 = "Secondary"},
 		Size = UDim2.new(1, -20, 0, 52)
@@ -1423,8 +1422,10 @@ function Library:toggle(options)
 		else
 			onIcon:crossfade(offIcon, 0.1)
 		end
-		options.Callback(toggled)
+		task.spawn(function() options.Callback(toggled) end)
 	end
+	
+	if options.StartingState then methods:SetState(true) end
 
 	return methods
 end
