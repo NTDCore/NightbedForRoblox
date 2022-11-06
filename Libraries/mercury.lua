@@ -1350,13 +1350,16 @@ end
 function Library:toggle(options)
 	options = self:set_defaults({
 		Name = "Toggle",
-		StartingState = false,
+		StartingState = (configtable or false),
 		Description = nil,
 		Callback = function(state) end
 	}, options)
 
 	if options.StartingState then options.Callback(true) end
-
+configtable[info["Name"]]={
+                ["Keybind"]=((configtable[info["Name"]] and configtable[info["Name"]]["Keybind"]) or "none"), 
+                ["StartingState"]=((configtable[info["Name"]] and configtable[info["Name"]]["StartingState"]) or false)
+            }
 	local toggleContainer = self.container:object("TextButton", {
 		Theme = {BackgroundColor3 = "Secondary"},
 		Size = UDim2.new(1, -20, 0, 52)
@@ -3037,7 +3040,7 @@ end
 function Library:keybind(options)
 	options = self:set_defaults({
 		Name = "Keybind",
-		Keybind = nil,
+		Keybind = (configtable or nil),
 		Description = nil,
 		Callback = function() end
 	}, options)
