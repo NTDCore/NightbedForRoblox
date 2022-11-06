@@ -123,6 +123,62 @@ function Library:set_defaults(defaults, options)
 	return defaults
 end
 
+if isfolder("Nightbed") == false then
+    makefolder("Nightbed")
+end
+
+if isfolder("Nightbed/Profiles") == false then
+    makefolder("Nightbed/Profiles")
+end
+
+if isfolder("Nightbed/assets") == false then
+    makefolder("Nightbed/assets")
+end
+
+if isfolder("Nightbed/CustomModules") == false then
+    makefolder("Nightbed/CustomModules")
+end
+
+local foldername = "Nightbed/Profiles"
+local conf = {
+	["file"]=foldername.."/"..game.PlaceId..".json",
+	["functions"]={}
+}
+
+if game.PlaceId == 6872274481 or game.PlaceId == 8560631822 or game.PlaceId == 8444591321 then
+    conf["file"] = foldername.."/6872274481.json"
+end
+
+function conf.functions:MakeFile()
+	if isfile(conf["file"]) then return end
+	if not isfolder(foldername)  then
+		makefolder(foldername)
+	end
+	writefile(conf["file"],"{}")
+end
+
+function conf.functions:LoadConfigs()
+	if not isfile(conf["file"]) then
+		conf["functions"]:MakeFile()
+	end
+    wait(0.5)
+	return game:GetService("HttpService"):JSONDecode(readfile(conf["file"]))
+end
+
+function conf.functions:WriteConfigs(tab)
+	conf["functions"]:MakeFile()
+	writefile(conf["file"],game:GetService("HttpService"):JSONEncode((tab or {})))
+end
+local configtable = (conf["functions"]:LoadConfigs() or {})
+
+local configsaving = true
+spawn(function()
+    repeat
+        conf["functions"]:WriteConfigs(configtable)
+        task.wait(5)
+    until (not configsaving)
+end)
+
 function Library:change_theme(toTheme)
 	Library.CurrentTheme = toTheme
 	local c = self:lighten(toTheme.Tertiary, 20)
