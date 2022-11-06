@@ -139,46 +139,6 @@ if isfolder("Nightbed/CustomModules") == false then
     makefolder("Nightbed/CustomModules")
 end
 
-local foldername = "Nightbed/Profiles"
-local conf = {
-	["file"]=foldername.."/"..game.PlaceId..".json",
-	["functions"]={}
-}
-
-if game.PlaceId == 6872274481 or game.PlaceId == 8560631822 or game.PlaceId == 8444591321 then
-    conf["file"] = foldername.."/6872274481.json"
-end
-
-function conf.functions:MakeFile()
-	if isfile(conf["file"]) then return end
-	if not isfolder(foldername)  then
-		makefolder(foldername)
-	end
-	writefile(conf["file"],"{}")
-end
-
-function conf.functions:LoadConfigs()
-	if not isfile(conf["file"]) then
-		conf["functions"]:MakeFile()
-	end
-    wait(0.5)
-	return game:GetService("HttpService"):JSONDecode(readfile(conf["file"]))
-end
-
-function conf.functions:WriteConfigs(tab)
-	conf["functions"]:MakeFile()
-	writefile(conf["file"],game:GetService("HttpService"):JSONEncode((tab or {})))
-end
-local configtable = (conf["functions"]:LoadConfigs() or {})
-
-local configsaving = true
-spawn(function()
-    repeat
-        conf["functions"]:WriteConfigs(configtable)
-        task.wait(5)
-    until (not configsaving)
-end)
-
 function Library:change_theme(toTheme)
 	Library.CurrentTheme = toTheme
 	local c = self:lighten(toTheme.Tertiary, 20)
@@ -1350,16 +1310,12 @@ end
 function Library:toggle(options)
 	options = self:set_defaults({
 		Name = "Toggle",
-		StartingState = (configtable or false),
+		StartingState = false,
 		Description = nil,
 		Callback = function(state) end
 	}, options)
 
 	if options.StartingState then options.Callback(true) end
-configtable[info["Name"]]={
-                ["Keybind"]=((configtable[info["Name"]] and configtable[info["Name"]]["Keybind"]) or "none"), 
-                ["StartingState"]=((configtable[info["Name"]] and configtable[info["Name"]]["StartingState"]) or false)
-            }
 	local toggleContainer = self.container:object("TextButton", {
 		Theme = {BackgroundColor3 = "Secondary"},
 		Size = UDim2.new(1, -20, 0, 52)
@@ -3040,7 +2996,7 @@ end
 function Library:keybind(options)
 	options = self:set_defaults({
 		Name = "Keybind",
-		Keybind = (configtable or nil),
+		Keybind = nil,
 		Description = nil,
 		Callback = function() end
 	}, options)
