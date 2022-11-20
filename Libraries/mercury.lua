@@ -55,18 +55,18 @@ local Library = {
 			StrongText = Color3.fromHSV(0, 0, 1),		
 			WeakText = Color3.fromHSV(0, 0, 172/255)
 		},
-		Luna = {
-			Main = Color3.fromRGB(31, 31, 31),
-			Secondary = Color3.fromRGB(63, 63, 63),
-			Tertiary = Color3.fromRGB(126, 6, 232),
-
-			StrongText = Color3.fromHSV(0, 0, 1),		
-			WeakText = Color3.fromHSV(0, 0, 172/255)
-		},
 		Rust = {
 			Main = Color3.fromRGB(37, 35, 33),
 			Secondary = Color3.fromRGB(65, 63, 63),
 			Tertiary = Color3.fromRGB(237, 94, 38),
+
+			StrongText = Color3.fromHSV(0, 0, 1),		
+			WeakText = Color3.fromHSV(0, 0, 172/255)
+		},
+	Luna = {
+			Main = Color3.fromRGB(31, 31, 31),
+			Secondary = Color3.fromRGB(63, 63, 63),
+			Tertiary = Color3.fromRGB(126, 6, 232),
 
 			StrongText = Color3.fromHSV(0, 0, 1),		
 			WeakText = Color3.fromHSV(0, 0, 172/255)
@@ -113,22 +113,6 @@ Library._promptExists = false
 Library._colorPickerExists = false
 
 local GlobalTweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut)
-
-if isfolder("Nightbed") == false then
-    makefolder("Nightbed")
-end
-
-if isfolder("Nightbed/Profiles") == false then
-    makefolder("Nightbed/Profiles")
-end
-
-if isfolder("Nightbed/assets") == false then
-    makefolder("Nightbed/assets")
-end
-
-if isfolder("Nightbed/CustomModules") == false then
-    makefolder("Nightbed/CustomModules")
-end
 
 function Library:set_defaults(defaults, options)
 	defaults = defaults or {}
