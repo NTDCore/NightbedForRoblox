@@ -114,6 +114,15 @@ serversec:NewButton("BrazilGlove", "", function()
 	game:GetService("ReplicatedStorage").BrazilEvent:FireServer(unpack(args))
 	end)
 
+serversec:NewButton("BOBBLE GLOVE", "", function()
+    local args = {
+    [1] = game:GetService("Players").LocalPlayer.Equipped
+}
+
+game:GetService("ReplicatedStorage").BOBBLEEvent:FireServer(unpack(args))
+
+end)
+
 serversec:NewButton("SusGlove", "", function()
 	local args = {
 		[1] = game:GetService("Players").LocalPlayer.Equipped
