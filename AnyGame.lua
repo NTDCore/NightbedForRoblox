@@ -35,7 +35,6 @@ local Blatant = window:NewTab("Blatant")
 local Render = window:NewTab("Render")
 local Utility = window:NewTab("Utility")
 local World = window:NewTab("World")
-local hud = window:NewTab("Hud")
 local Setting = window:NewTab("Settings")
 local Credit = window:NewTab("Credits")
 
@@ -63,3 +62,13 @@ speed:NewToggle("Speed", "Speedy", function(tog)
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
 end
 end)
+
+local toggleui = Setting:NewSection("Toggle Ui")
+toggleui:NewKeybind("Toggle UI","", Enum.KeyCode.RightShift, function()
+	kavo:ToggleUI()
+end)
+
+local Cre = Credit:NewSection("Script Made By NTDCore(Monia#9266), Moon (Moon | NightCore#6654)")
+local Cre = Credit:NewSection("Credit to Infinite Yield")
+local Cre = Credit:NewSection("Credit to Kavo Ui")
+local Cre = Credit:NewSection("Credit to engospy for take a Remote")
