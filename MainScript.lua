@@ -9,17 +9,6 @@ else
 	shared.injected = true
 end
 
-local queueteleport = syn and syn.queue_on_teleport or queue_on_teleport or function() end
-local teleported = false
-local teleportfunc = game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
-    if (not teleported) and (not shared.VapeIndependent) then
-		local teleportstr = 'shared.SwitchServers = true if shared.NightbedDeveloper then loadstring(readfile("Nightbed/MainScript.lua"))() else loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/MainScript.lua", true))() end'
-		if shared.NightbedDeveloper then
-			teleportstr = "shared.NightbedDeveloper = true " ..teleportstr
-		end
-		queueteleport(teleportstr)
-    end
-end
 function betterfile(path)
 	local suc, res = pcall(function() return readfile(path) end)
 	return suc and res ~= nil 
