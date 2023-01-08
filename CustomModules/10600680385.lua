@@ -123,6 +123,14 @@ game:GetService("ReplicatedStorage").BOBBLEEvent:FireServer(unpack(args))
 
 end)
 
+function spawn(wtf)
+local args = {
+    [1] = game:GetService("Players").LocalPlayer.Equipped
+}
+
+game:GetService("ReplicatedStorage").wtf:FireServer(unpack(args))
+end
+
 serversec:NewButton("SusGlove", "", function()
 	local args = {
 		[1] = game:GetService("Players").LocalPlayer.Equipped
