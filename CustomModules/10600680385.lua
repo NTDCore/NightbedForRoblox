@@ -260,6 +260,7 @@ local args = {
 }
 
 game:GetService("ReplicatedStorage").AdminSlateSpawnEvent:FireServer(unpack(args))
+
 end)
 -- Credits --
 
