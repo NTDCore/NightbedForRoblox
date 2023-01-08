@@ -240,21 +240,21 @@ serversec:NewButton("AbilityExploit", "Work at all glove", function()
 	AbilityExploiter()
 	end)
 -- SpawnSided --
-spawnsid:NewButton("EyeSpawn", "", function()
+spawnsec:NewButton("EyeSpawn", "", function()
 	local args = {
     [1] = game:GetService("Players").LocalPlayer.Equipped
 }
 
 game:GetService("ReplicatedStorage").AdminEyeSpawnEvent:FireServer(unpack(args))
 end)
-spawnsid:NewButton("GlitchSpawn", "", function()
+spawnsec:NewButton("GlitchSpawn", "", function()
 	local args = {
     [1] = game:GetService("Players").LocalPlayer.Equipped
 }
 
 game:GetService("ReplicatedStorage").AdminGlitchSpawnEvent:FireServer(unpack(args))
 end)
-serversid:NewButton("SlateSpawn", "", function()
+spawnsec:NewButton("SlateSpawn", "", function()
 local args = {
     [1] = game:GetService("Players").LocalPlayer.Equipped
 }
