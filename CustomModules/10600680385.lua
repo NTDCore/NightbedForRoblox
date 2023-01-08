@@ -193,23 +193,74 @@ game:GetService("ReplicatedStorage").AbiliyEvent:FireServer(unpack(args))
 end
 
 serversec:NewButton("DIENT", "", function()
-	spawn(DientEvent)
+	local args = {
+    [1] = game:GetService("Players").LocalPlayer.Equipped
+}
+
+game:GetService("ReplicatedStorage").DientEvent:FireServer(unpack(args))
+end)
+serversec:NewButton("Crash (You can use any glove)", "", function()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
+	AbilityExploiter()
 end)
 serversec:NewButton("SoldierGlove", "", function()
-	spawn(AdminsoldierEvent)
+	local args = {
+    [1] = game:GetService("Players").LocalPlayer.Equipped
+}
+
+game:GetService("ReplicatedStorage").AdminsoldierEvent:FireServer(unpack(args))
 end)
 serversec:NewButton("AbilityExploit", "Work at all glove", function()
 	AbilityExploiter()
 	end)
 -- SpawnSided --
 spawnsid:NewButton("EyeSpawn", "", function()
-	spawn(AdminEyeSpawnEvent)
+	local args = {
+    [1] = game:GetService("Players").LocalPlayer.Equipped
+}
+
+game:GetService("ReplicatedStorage").AdminEyeSpawnEvent:FireServer(unpack(args))
 end)
 spawnsid:NewButton("GlitchSpawn", "", function()
-	spawn(AdminGlitchSpawnEvent)
+	local args = {
+    [1] = game:GetService("Players").LocalPlayer.Equipped
+}
+
+game:GetService("ReplicatedStorage").AdminGlitchSpawnEvent:FireServer(unpack(args))
 end)
 serversid:NewButton("SlateSpawn", "", function()
-	spawn(AdminSlateSpawnEvent)
+local args = {
+    [1] = game:GetService("Players").LocalPlayer.Equipped
+}
+
+game:GetService("ReplicatedStorage").AdminSlateSpawnEvent:FireServer(unpack(args))
+
 end)
 -- Credits --
 
