@@ -74,11 +74,13 @@ ToggleBtn.MouseButton1Down:connect(function()
 
 local movemente = Window:NewTab("Movement")
 local clientsided = Window:NewTab("Serversided")
+local spawnsid = Window:NewTab("SpawnSided")
 local credits = Window:NewTab("credits")
 
 -- Section --
 
 local serversec = clientsided:NewSection("Main")
+local spawnsec = spawnsid:NewSection("Main")
 local movesec = movemente:NewSection("Movement")
 movesec:NewToggle("Speed", "", function(callback)
 	if callback then
@@ -103,7 +105,7 @@ local args = {
 
 game:GetService("ReplicatedStorage").AdminGoldenSlappleSpawnEvent:FireServer(unpack(args))
 end
-serversec:NewButton("Slapple", "", function()
+spawnsec:NewButton("Slapple", "", function()
 	slapple()
 	end)
 serversec:NewButton("BrazilGlove", "", function()
@@ -115,17 +117,17 @@ serversec:NewButton("BrazilGlove", "", function()
 	end)
 
 serversec:NewButton("BOBBLE GLOVE", "", function()
-    local args = {
-    [1] = game:GetService("Players").LocalPlayer.Equipped
-}
+	local args = {
+		[1] = game:GetService("Players").LocalPlayer.Equipped
+	}
 
-game:GetService("ReplicatedStorage").BOBBLEEvent:FireServer(unpack(args))
+	game:GetService("ReplicatedStorage").BOBBLEEvent:FireServer(unpack(args))
 
-end)
+	end)
 
 function spawn(wtf)
 local args = {
-    [1] = game:GetService("Players").LocalPlayer.Equipped
+	[1] = game:GetService("Players").LocalPlayer.Equipped
 }
 
 game:GetService("ReplicatedStorage").wtf:FireServer(unpack(args))
@@ -157,7 +159,7 @@ serversec:NewButton("Minecraft", "", function()
 		[1] = game:GetService("Players").LocalPlayer.Equipped
 	}
 
-	game:GetService("ReplicatedStorage").Event:FireServer(unpack(args))
+	game:GetService("ReplicatedStorage").MineCraftEvent:FireServer(unpack(args))
 	end)
 
 function edge()
@@ -189,10 +191,26 @@ local args = {
 game:GetService("ReplicatedStorage").AbiliyEvent:FireServer(unpack(args))
 
 end
+
+serversec:NewButton("DIENT", "", function()
+	spawn(DientEvent)
+end)
+serversec:NewButton("SoldierGlove", "", function()
+	spawn(AdminsoldierEvent)
+end)
 serversec:NewButton("AbilityExploit", "Work at all glove", function()
 	AbilityExploiter()
 	end)
-
+-- SpawnSided --
+spawnsid:NewButton("EyeSpawn", "", function()
+	spawn(AdminEyeSpawnEvent)
+end)
+spawnsid:NewButton("GlitchSpawn", "", function()
+	spawn(AdminGlitchSpawnEvent)
+end)
+serversid:NewButton("SlateSpawn", "", function()
+	spawn(AdminSlateSpawnEvent)
+end)
 -- Credits --
 
 local cre = credits:NewSection("Credit To infinite yield")
