@@ -9,7 +9,6 @@ else
 	shared.injected = true
 end
 
-
 function betterfile(path)
 	local suc, res = pcall(function() return readfile(path) end)
 	return suc and res ~= nil 
@@ -29,5 +28,5 @@ elseif game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox
 elseif readfile("Nightbed/CustomModules/"..game.PlaceId..".lua") then
     loadstring(readfile("Nightbed/CustomModules/"..game.PlaceId..".lua"))()
 else    
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/AnyGame.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/AnyGame.lua", true))()
 end
