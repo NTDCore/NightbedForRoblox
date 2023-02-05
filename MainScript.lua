@@ -1,5 +1,6 @@
 --[[
 Credit to Moerii
+Remake Little bit cuz yes
 --]]
 repeat task.wait() until game:IsLoaded()
 if shared.injected  then
@@ -9,7 +10,12 @@ else
 	shared.injected = true
 end
 
-function betterfile(path)
+local kavo = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Libraries/kavo.lua", true))()
+shared.kavogui = kavo
+local entity = loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/Libraries/entityHandler.lua", true))()
+shared.vapeentity = entity
+
+function betterisfile(path)
 	local suc, res = pcall(function() return readfile(path) end)
 	return suc and res ~= nil 
 end
@@ -21,12 +27,17 @@ game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
     end
 end)
 
-if game.PlaceId == 6872274481 or game.PlaceId == 8560631822 or game.PlaceId == 8444591321 then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/6872274481.lua"))()
+if betterisfile("Nightbed/MainScript.lua") then
+	loadstring(readfile("Nightbed/MainScript.lua"))()
+end
+
+if betterisfile("Nightbed/AnyGame.lua") then
+	loadstring(readfile("Nightbed/AnyGame.lua"))()
+elsek
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/AnyGame.lua", true))()
+end
+if betterisfile("Nightbed/CustomModules/"..game.PlaceId..".lua") then
+    loadstring(readfile("Nightbed/CustomModules/"..game.PlaceId..".lua"))()
 elseif game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua") then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua"))()
-elseif readfile("Nightbed/CustomModules/"..game.PlaceId..".lua") then
-    loadstring(readfile("Nightbed/CustomModules/"..game.PlaceId..".lua"))()
-else    
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/AnyGame.lua", true))()
 end
