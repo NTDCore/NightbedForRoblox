@@ -9,7 +9,8 @@ assert(res ~= "404: Not Found", "File not found")
 return res
 end
 local getasset = getsynasset or getcustomassetfunction or getcustomasset or function(location) return "rbxasset://"..location end
-local kavo = loadstring(GetURL("Libraries/kavo.lua"))()
+local kavo = shared.kavogui --loadstring(GetURL("Libraries/kavo.lua"))()
+local entity = shared.vapeentity
 local window = kavo.CreateLib("Nightbed", "Luna")
 local tabs = function(tabName)
 return NewTab(tabName.."")
