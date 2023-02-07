@@ -3,6 +3,7 @@ Credit to Moerii
 Remake Little bit cuz yes
 --]]
 repeat task.wait() until game:IsLoaded()
+local dev = "Nice try niggas imagine trying to get Dev version" --lol idk why cuz yes XD
 if shared.injected  then
 	error("Nightbed is Already Executed")
 	return
@@ -20,20 +21,32 @@ function betterisfile(path)
 	return suc and res ~= nil 
 end
 
-local queueteleport = syn and syn.queue_on_teleport or queue_on_teleport or fluxus and fluxus.queue_on_teleport
-game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
-    if State == Enum.TeleportState.Started then
-        queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/MainScript.lua'))()")
-    end
-end)
+if isfolder(customdir:gsub("/", "")) == false then
+	makefolder(customdir:gsub("/", ""))
+end
+if isfolder("Nightbed") == false then
+	makefolder("Nightbed")
+end
 
-if betterisfile("Nightbed/MainScript.lua") then
+if isfolder("Nightbed/assets") == false then
+	makefolder("Nightbed/assets")
+end
+
+if isfolder("Nightbed/CustomModules") == false then
+	makefolder("Nightbed/CustomModules")
+end
+
+if shared.NightbedDeveloper and isfolder("Nightbed/Profiles") or isfolder("Nightbed/MainScript.lua") then
+	writefile("Nightbed/Dev.lua", dev)
+end
+
+if betterfile("Nightbed/MainScript.lua") then
 	loadstring(readfile("Nightbed/MainScript.lua"))()
 end
 
 if betterisfile("Nightbed/AnyGame.lua") then
 	loadstring(readfile("Nightbed/AnyGame.lua"))()
-elsek
+else
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/AnyGame.lua", true))()
 end
 if betterisfile("Nightbed/CustomModules/"..game.PlaceId..".lua") then
