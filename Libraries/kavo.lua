@@ -386,7 +386,15 @@
 			end
 		end
 		local Tabs = {}
-
+	function createnotification(Titlez, Textz, Iconz, Dur)
+game.StarterGui:SetCore("SendNotification", {
+    Title = Titlez;
+    Text = Textz;
+    Duration = Dur;
+    Icon = Iconz;
+})
+end
+createnotification("Notification", "Prees RightShift to Toggle Ui ", 5)
 		local first = true
 
 		function Tabs.NewTab(tabName)
@@ -1228,12 +1236,14 @@
 								ImageTransparency = 0
 							}):Play()
 							pcall(callback, toggled)
+							createnotification("Nightbed", argstable["Name"].. " Enabled", 5)
 						else
 							toggled = false
 							game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
 								ImageTransparency = 1
 							}):Play()
 							pcall(callback, toggled)
+							createnotification("Nightbed", argstable["Name"].. " Disabled", 5)
 						end
 					end
 					return TogFunction
