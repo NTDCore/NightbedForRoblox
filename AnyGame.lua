@@ -26,10 +26,10 @@ local Tabs = {
 }
 
 local Sections = {
-	["Infinite Jump"] = Tabs["Blatant"].NewSection("Infinite Jump"),
+	["InfiniteJump"] = Tabs["Blatant"].NewSection("InfiniteJump"),
 	["Speed"] = Tabs["Blatant"].NewSection("Speed"),
 	["Cape"] = Tabs["Render"].NewSection("Cape"),
-	["Toggle Gui"] = Tabs["Settings"].NewSection("Toggle Gui")
+	["ToggleGui"] = Tabs["Settings"].NewSection("Toggle Gui")
 }
 
 function createnotification(Titlez, Textz, Iconz, Dur)
@@ -52,7 +52,7 @@ function runcode(func)
 end)
 
 runcode(function()
-Sections["Infinite Jump"].NewToggle({
+Sections["InfiniteJump"].NewToggle({
 	["Name"] = "InfiniteJump",
 	["Function"] = function(callback)
   if callback then
@@ -178,11 +178,10 @@ runcode(function()
 	})
 end)
 
-Sections["Toggle Gui"].NewKeybind({
+Sections["ToggleGui"].NewKeybind({
 	["Name"] = "Toggle Gui",
+	["InfoText"] = "toggle ui keybind",
 	["Keybind"] = Enum.KeyCode.RightShift,
 	["Function"] = function()
 		kavo:ToggleGui()
-	end,
-	["InfoText"] = "toggle ui keybind"
 })
