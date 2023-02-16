@@ -13,17 +13,15 @@ end
 
 local kavo = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Libraries/kavo.lua", true))()
 shared.kavogui = kavo
-local entity = loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/Libraries/entityHandler.lua", true))()
-shared.vapeentity = entity
+
+local entityLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/Libraries/entityHandler.lua", true))()
+shared.vapeentity = entityLibrary
 
 function betterisfile(path)
 	local suc, res = pcall(function() return readfile(path) end)
 	return suc and res ~= nil 
 end
 
-if isfolder(customdir:gsub("/", "")) == false then
-	makefolder(customdir:gsub("/", ""))
-end
 if isfolder("Nightbed") == false then
 	makefolder("Nightbed")
 end
@@ -36,11 +34,11 @@ if isfolder("Nightbed/CustomModules") == false then
 	makefolder("Nightbed/CustomModules")
 end
 
-if shared.NightbedDeveloper and isfolder("Nightbed/Profiles") or isfolder("Nightbed/MainScript.lua") then
+if shared.NightbedDeveloper and isfolder("Nightbed/Profiles") or betterisfile("Nightbed/MainScript.lua") then
 	writefile("Nightbed/Dev.lua", dev)
 end
 
-if betterfile("Nightbed/MainScript.lua") then
+if betterisfile("Nightbed/MainScript.lua") then
 	loadstring(readfile("Nightbed/MainScript.lua"))()
 end
 
