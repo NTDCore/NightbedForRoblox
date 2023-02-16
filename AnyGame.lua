@@ -9,8 +9,8 @@ assert(res ~= "404: Not Found", "File not found")
 return res
 end
 local getasset = getsynasset or getcustomassetfunction or getcustomasset or function(location) return "rbxasset://"..location end
-local kavo = shared.kavogui --loadstring(GetURL("Libraries/kavo.lua"))()
 local entityLibrary = shared.vapeentity
+local kavo = shared.kavogui
 local win = kavo:creategui({
 	["Title"] = "Nightbed",
 	["Theme"] = "Luna"
@@ -73,7 +73,7 @@ end)
 runcode(function()
 local speed = {["Enabled"] = false}
 local speedval = {["Value"] = 23}
-local speedmode = {["Value"] = "Normal"}
+--local speedmode = {["Value"] = "Normal"}
 Sections["Speed"].NewToggle({
 	["Name"] = "Speed",
 	["Function"] = function(callback)
@@ -184,4 +184,5 @@ Sections["ToggleGui"].NewKeybind({
 	["Keybind"] = Enum.KeyCode.RightShift,
 	["Function"] = function()
 		kavo:ToggleGui()
+	end
 })
