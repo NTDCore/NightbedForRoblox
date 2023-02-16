@@ -1,7 +1,3 @@
---[[
-Testing AnyGame
---]]
-
 repeat task.wait() until game:IsLoaded()
 local function GetURL(scripturl)
 	local res = game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/"..scripturl, true)
@@ -177,12 +173,3 @@ runcode(function()
 ["InfoText"] = "cool cape"
 	})
 end)
-
-Sections["ToggleGui"].NewKeybind({
-	["Name"] = "Toggle Gui",
-	["InfoText"] = "toggle ui keybind",
-	["Keybind"] = Enum.KeyCode.RightShift,
-	["Function"] = function()
-		kavo:ToggleGui()
-	end
-})
