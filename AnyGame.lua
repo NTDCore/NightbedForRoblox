@@ -10,7 +10,7 @@ return res
 end
 local getasset = getsynasset or getcustomassetfunction or getcustomasset or function(location) return "rbxasset://"..location end
 local kavo = shared.kavogui --loadstring(GetURL("Libraries/kavo.lua"))()
-local entity = shared.vapeentity
+local entityLibrary = shared.vapeentity
 local window = kavo.CreateLib("Nightbed", "Luna")
 local tabs = function(tabName)
 return NewTab(tabName.."")
