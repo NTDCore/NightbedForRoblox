@@ -140,7 +140,7 @@
 
 	}
 
-	local Name = "GuiLibraryConfig.JSON"
+	local Name = "kavoConfig.JSON"
 
 	pcall(function()
 
@@ -161,7 +161,7 @@
 		end
 	end
 
-	function kavo:CreateWindow(argstable)
+	function kavo:creategui(argstable)
 		local kavName = argstable["Title"]
 		local themeList = argstable["Theme"]
 		if not themeList then
