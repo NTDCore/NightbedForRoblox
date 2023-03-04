@@ -3,7 +3,6 @@ Credit to Moerii
 Remake Little bit cuz yes
 --]]
 repeat task.wait() until game:IsLoaded()
-local dev = "Nice try niggas imagine trying to get Dev version" --lol idk why cuz yes XD
 if shared.injected  then
 	error("Nightbed is Already Executed")
 	return
@@ -11,16 +10,21 @@ else
 	shared.injected = true
 end
 
-local kavo = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Libraries/kavo.lua", true))()
-shared.kavogui = kavo
-
-local entityLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/Libraries/entityHandler.lua", true))()
-shared.vapeentity = entityLibrary
-
 function betterisfile(path)
 	local suc, res = pcall(function() return readfile(path) end)
 	return suc and res ~= nil 
 end
+
+local kavo
+if betterisfile("Nightbed/Libraries/kavo.lua") then
+   kavo = loadstring(readfile("Nightbed/Libraries/kavo.lua"))()
+else
+   kavo = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Libraries/kavo.lua", true))()
+end
+shared.kavogui = kavo
+
+local entityLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/Libraries/entityHandler.lua", true))()
+shared.vapeentity = entityLibrary
 
 if isfolder("Nightbed") == false then
 	makefolder("Nightbed")
@@ -32,10 +36,6 @@ end
 
 if isfolder("Nightbed/CustomModules") == false then
 	makefolder("Nightbed/CustomModules")
-end
-
-if shared.NightbedDeveloper and isfolder("Nightbed/Profiles") or betterisfile("Nightbed/MainScript.lua") then
-	writefile("Nightbed/Dev.lua", dev)
 end
 
 if betterisfile("Nightbed/MainScript.lua") then
