@@ -13,7 +13,6 @@ local ToggleC = {["Value"] = 0}
 local gui = game:GetService("CoreGui")
 gui = api
 Api["MainGui"] = gui
-Api["MainGui"]["
 
 api["CreateWindow"] = function(argstable)
   local TabName = argstable.Name or argstable["Name"]
