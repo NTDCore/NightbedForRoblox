@@ -11,6 +11,11 @@ And
 Moon NightCore
 ```
 
+# Script
+```
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/MainScript.lua", true))()
+```
+
 # Support Game
 
 ```
