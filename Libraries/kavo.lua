@@ -162,8 +162,8 @@
 	end
 
 	function kavo:creategui(argstable)
-		local kavName = argstable["Title"]
-		local themeList = argstable["Theme"]
+		local kavName = argstable["Title"] or argstable.Title
+		local themeList = argstable["Theme"] or argstable.Theme
 		if not themeList then
 			themeList = themes
 		end
@@ -601,10 +601,10 @@ createnotification("Notification", "Prees RightShift to Toggle Ui ", 5)
 				updateSectionFrame()
 				UpdateSize()
 				local Elements = {}
-				function Elements.NewButton(bname,tipINf, callback, argstable)
-					local bname = argstable["Name"]
-					local tipINf = argstable["InfoText"] or ""
-					local callback = argstable["Function"]
+				function Elements.NewButton(argstable)
+					local bname = argstable["Name"] or argstable.Name
+					local tipINf = argstable["InfoText"] or argstable.InfoText or ""
+					local callback = argstable["Function"] or argstable.Function
 					showLogo = showLogo or true
 					local ButtonFunction = {}
 
@@ -803,9 +803,9 @@ createnotification("Notification", "Prees RightShift to Toggle Ui ", 5)
 				end
 
 				function Elements.NewTextBox(argstable)
-					local tname = argstable["Name"]
-					local tTip = argstable["InfoText"] or ""
-					local callback = argstable["Function"]
+					local tname = argstable["Name"] or argstable.Name
+					local tTip = argstable["InfoText"] or argstable.InfoText or ""
+					local callback = argstable["Function"] or argstable.Function
 					local textboxElement = Instance.new("TextButton")
 					local UICorner = Instance.new("UICorner")
 					local viewInfo = Instance.new("ImageButton")
@@ -999,9 +999,9 @@ createnotification("Notification", "Prees RightShift to Toggle Ui ", 5)
 				end 
 
 				function Elements.NewToggle(argstable)
-					local tname = argstable["Name"]
-					local nTip = argstable["InfoText"] or ""
-					local callback = argstable["Function"]
+					local tname = argstable["Name"] or argstable.Name
+					local nTip = argstable["InfoText"] or argstable.InfoText or ""
+					local callback = argstable["Function"] or argstable.Function
 					local TogFunction = {}
 					local toggled = false
 					table.insert(SettingsT, tname)
@@ -1236,26 +1236,26 @@ createnotification("Notification", "Prees RightShift to Toggle Ui ", 5)
 								ImageTransparency = 0
 							}):Play()
 							pcall(callback, toggled)
-							createnotification("Nightbed", argstable["Name"].. " Enabled", 5)
+							createnotification("Nightbed", (argstable["Name"] or argstable.Name).. " Enabled", 5)
 						else
 							toggled = false
 							game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
 								ImageTransparency = 1
 							}):Play()
 							pcall(callback, toggled)
-							createnotification("Nightbed", argstable["Name"].. " Disabled", 5)
+							createnotification("Nightbed", argstable["Name"] or argstable.Name.. " Disabled", 5)
 						end
 					end
 					return TogFunction
 				end
 
 				function Elements.NewSlider(argstable)
-					local slidInf = argstable["Name"]
-					local slidTip = argstable["InfoText"] or ""
-					local minvalue = argstable["Min"]
-					local maxvalue = argstable["Max"]
-					local defaultvalue = argstable["Default"] or 0
-					local callback = argstable["Function"]
+					local slidInf = argstable["Name"] or argstable.Name
+					local slidTip = argstable["InfoText"] or argstable.InfoText or ""
+					local minvalue = argstable["Min"] or argstable.Min
+					local maxvalue = argstable["Max"] or argstable.Max
+					local defaultvalue = argstable["Default"] or argstable.Default or 0
+					local callback = argstable["Function"] or argstable.Function
 
 					local sliderElement = Instance.new("TextButton")
 					local UICorner = Instance.new("UICorner")
@@ -1494,10 +1494,10 @@ createnotification("Notification", "Prees RightShift to Toggle Ui ", 5)
 				end
 
 				function Elements.NewDropdown(argstable)
-					local dropname = argstable["Name"]
-					local dropinf = argstable["InfoText"] or ""
-					local list = argstable["List"]
-					local callback = argstable["Function"]
+					local dropname = argstable["Name"] or argstable.Name
+					local dropinf = argstable["InfoText"] or argstable.InfoText or ""
+					local list = argstable["List"] or argstable.List
+					local callback = argstable["Function"] or argstable.Function
 					local DropFunction = {}
 
 					local opened = false
@@ -1941,11 +1941,11 @@ createnotification("Notification", "Prees RightShift to Toggle Ui ", 5)
 					end
 					return DropFunction
 				end
-				function Elements.NewKeybind(keytext, keyinf, first, callback, argstable)
-					local keytext = argstable["Name"]
-					local keyinf = argstable["InfoText"] or ""
-					local first = argstable["Keybind"]
-					local callback = argstable["Function"]
+				function Elements.NewKeybind(argstable)
+					local keytext = argstable["Name"] or argstable.Name
+					local keyinf = argstable["InfoText"] or argstable.InfoText or ""
+					local first = argstable["Keybind"] or argstable.Keybind
+					local callback = argstable["Function"] or argstable.Function
 					local oldKey = first.Name
 					local keybindElement = Instance.new("TextButton")
 					local UICorner = Instance.new("UICorner")
@@ -2156,10 +2156,10 @@ createnotification("Notification", "Prees RightShift to Toggle Ui ", 5)
 				end
 
 				function Elements.NewColorPicker(argstable)
-					local colText = argstable["Name"]
-					local colInf = argstable["InfoText"] or ""
-					local defcolor = argstable["Default"]
-					local callback = argstable["Function"]
+					local colText = argstable["Name"] or argstable.Name
+					local colInf = argstable["InfoText"] or argstable.InfoText or ""
+					local defcolor = argstable["Default"] or argstable.Default
+					local callback = argstable["Function"] or argstable.Function
 					local h, s, v = Color3.toHSV(defcolor)
 					local ms = game.Players.LocalPlayer:GetMouse()
 					local colorOpened = false
@@ -2633,7 +2633,7 @@ createnotification("Notification", "Prees RightShift to Toggle Ui ", 5)
 					label.BackgroundColor3 = themeList.SchemeColor
 					label.BorderSizePixel = 0
 					label.ClipsDescendants = true
-					label.Text = argstable["Text"]
+					label.Text = argstable["Text"] or argstable.Text
 					label.Size = UDim2.new(0, 352, 0, 33)
 					label.Font = Enum.Font.Gotham
 					label.Text = "  "..title
