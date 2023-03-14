@@ -38,10 +38,6 @@ if isfolder("Nightbed/CustomModules") == false then
 	makefolder("Nightbed/CustomModules")
 end
 
-if betterisfile("Nightbed/MainScript.lua") then
-	loadstring(readfile("Nightbed/MainScript.lua"))()
-end
-
 if betterisfile("Nightbed/AnyGame.lua") then
 	loadstring(readfile("Nightbed/AnyGame.lua"))()
 else
