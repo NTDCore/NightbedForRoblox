@@ -26,6 +26,14 @@ shared.kavogui = kavo
 local entityLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/Libraries/entityHandler.lua", true))()
 shared.vapeentity = entityLibrary
 
+local queueteleport = queue_on_teleport
+
+local TeleportString = [[
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/MainScript.lua", true))
+]]
+
+queueteleport(TeleportString)
+
 if isfolder("Nightbed") == false then
 	makefolder("Nightbed")
 end
@@ -38,13 +46,10 @@ if isfolder("Nightbed/CustomModules") == false then
 	makefolder("Nightbed/CustomModules")
 end
 
-if betterisfile("Nightbed/AnyGame.lua") then
-	loadstring(readfile("Nightbed/AnyGame.lua"))()
-else
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/AnyGame.lua", true))()
-end
 if betterisfile("Nightbed/CustomModules/"..game.PlaceId..".lua") then
     loadstring(readfile("Nightbed/CustomModules/"..game.PlaceId..".lua"))()
 elseif game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua") then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua"))()
+else
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/AnyGame.lua", true))()
 end
