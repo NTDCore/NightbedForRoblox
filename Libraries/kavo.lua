@@ -386,15 +386,6 @@ function kavo.CreateGui(argstable)
 		end
 	end
 	local Tabs = {}
-    function createnotification(Titlez, Textz, Iconz, Dur)
-      game.StarterGui:SetCore("SendNotification", {
-        Title = Titlez;
-        Text = Textz;
-        Duration = Dur;
-        Icon = Iconz;
-      })
-    end
-createnotification("Notification", "Prees RightShift to Toggle Ui ", 5)
 	local first = true
 
 	function Tabs.CreateTab(tabName)
