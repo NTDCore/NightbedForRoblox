@@ -1217,7 +1217,7 @@
 							viewDe = false
 						end
 					end)
-					function TogFunction:UpdateToggle(newText, isTogOn)
+					function TogFunction.ToggleButton(newText, isTogOn)
 						isTogOn = isTogOn or toggle
 						if newText ~= nil then 
 							togName.Text = newText
@@ -1944,6 +1944,7 @@
 					local touch = Instance.new("ImageLabel")
 					local Sample = Instance.new("ImageLabel")
 					local togName_2 = Instance.new("TextLabel")
+					local toggled = false
 
 					local ms = game.Players.LocalPlayer:GetMouse()
 					local uis = game:GetService("UserInputService")
