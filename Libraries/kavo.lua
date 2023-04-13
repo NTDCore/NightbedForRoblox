@@ -1217,11 +1217,8 @@
 							viewDe = false
 						end
 					end)
-					function TogFunction.ToggleButton(newText, isTogOn)
+					function TogFunction.ToggleButton(isTogOn)
 						isTogOn = isTogOn or toggle
-						if newText ~= nil then 
-							togName.Text = newText
-						end
 						if isTogOn then
 							toggled = true
 							game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
@@ -1944,7 +1941,6 @@
 					local touch = Instance.new("ImageLabel")
 					local Sample = Instance.new("ImageLabel")
 					local togName_2 = Instance.new("TextLabel")
-					local toggled = false
 
 					local ms = game.Players.LocalPlayer:GetMouse()
 					local uis = game:GetService("UserInputService")
