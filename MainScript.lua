@@ -25,6 +25,8 @@ shared.kavogui = kavo
 
 local entityLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/Libraries/entityHandler.lua", true))()
 shared.vapeentity = entityLibrary
+local FunctionsLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Libraries/Functions.lua", true))()
+shared.functionshandler = FunctionsLibrary
 
 local queueteleport = queue_on_teleport
 
