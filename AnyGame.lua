@@ -7,25 +7,25 @@ end
 local getasset = getsynasset or getcustomassetfunction or getcustomasset or function(location) return "rbxasset://"..location end
 local entityLibrary = shared.vapeentity
 local kavo = shared.kavogui
-local win = kavo:creategui({
+local FunctionsLibrary = shared.funcslib
+local win = kavo:CreateWindow({
 	["Title"] = "Nightbed",
 	["Theme"] = "Luna"
 })
 
 local Tabs = {
-	["Combat"] = win.NewTab("Combat"),
-	["Blatant"] = win.NewTab("Blatant"),
-	["Render"] = win.NewTab("Render"),
-	["Utility"] = win.NewTab("Utility"),
-	["World"] = win.NewTab("World"),
-	["Settings"] = win.NewTab("Settings")
+	["Combat"] = win.CreateTab("Combat"),
+	["Blatant"] = win.CreateTab("Blatant"),
+	["Render"] = win.CreateTab("Render"),
+	["Utility"] = win.CreateTab("Utility"),
+	["World"] = win.CreateTab("World"),
+	["Settings"] = win.CreateTab("Settings")
 }
 
 local Sections = {
-	["InfiniteJump"] = Tabs["Blatant"].NewSection("InfiniteJump"),
-	["Speed"] = Tabs["Blatant"].NewSection("Speed"),
-	["Cape"] = Tabs["Render"].NewSection("Cape"),
-	["ToggleGui"] = Tabs["Settings"].NewSection("Toggle Gui")
+	["InfiniteJump"] = Tabs["Blatant"].CreateSection("InfiniteJump"),
+	["Speed"] = Tabs["Blatant"].CreateSection("Speed"),
+	["Cape"] = Tabs["Render"].CreateSection("Cape")
 }
 
 function createnotification(Titlez, Textz, Iconz, Dur)
@@ -36,54 +36,50 @@ game.StarterGui:SetCore("SendNotification", {
     Duration = Dur;
 })
 end
-local connectioninfjump
-local players = game:GetService("Players")
-local lplr = players.LocalPlayer
+local InfiniteJumpConnection
+local playersService = game:GetService("Players")
+local lplr = playersService.LocalPlayer
 local oldchar = lplr.Character
-local cam = workspace.CurrentCamera
-local uis = game:GetService("UserInputService")
+local gameCamera = workspace.CurrentCamera
+local InputService = game:GetService("UserInputService")
 
-function runcode(func)
-	func()
-end)
-
-runcode(function()
-Sections["InfiniteJump"].NewToggle({
-	["Name"] = "InfiniteJump",
-	["Function"] = function(callback)
-  if callback then
-    local InfJump = {["Enabled"] = true}
-		connectioninfjump = uis.JumpRequest:connect(function(jump)
-			if InfJump["Enabled"] then
-				lplr.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+FunctionsLibrary.runFunction(function()
+	local InfiniteJump = {Enabled = false}
+	local InfJump = true
+	InfiniteJump = Sections["InfiniteJump"].CreateToggle({
+		Name = "InfiniteJump",
+		Function = function(callback)
+	  	if callback then
+				InfiniteJumpConnection = InputService.JumpRequest:connect(function(jump)
+				if InfJump then
+						oldchar:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+					end
+				end)
+			else
+				InfiniteJumpConnection:Disconnect()
 			end
-		end)
-	else
-		connectioninfjump:Disconnect()
-	end
-end,
- ["InfoText"] = "Make you can jump any place",
-})
+		end,
+		HoverText = "Make you can jump any place",
+	})
 end)
 
-runcode(function()
-local speed = {["Enabled"] = false}
-local speedval = {["Value"] = 23}
---local speedmode = {["Value"] = "Normal"}
-Sections["Speed"].NewToggle({
-	["Name"] = "Speed",
-	["Function"] = function(callback)
-	speed["Enabled"] = callback
-  if speed["Enabled"] then
-    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = speedval["Value"]
-  else
-    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
-	end
-end,
-["InfoText"] = "Make you Faster"
+FunctionsLibrary.runFunction(function()
+	local Speed = {Enabled = false}
+	local speedval = {Value = 23}
+	Speed = Sections["Speed"].CreateToggle({
+		Name = "Speed",
+		Function = function(callback)
+			  if callback then
+			    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = speedval.Value
+			  else
+			    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+				end
+			end,
+		HoverText = "Make you Faster"
+	})
 end)
 
-runcode(function()
+FunctionsLibrary.runFunction(function()
 	function Cape(char, texture)
         for i,v in pairs(char:GetDescendants()) do
             if v.Name == "Cape" then
@@ -140,36 +136,36 @@ runcode(function()
             end
         until not p or p.Parent ~= torso.Parent
     end
-	local Cape {["Enabled"] = false}
-	Sections["Cape"].NewToggle({
-		["Name"] = "Cape",
-		["Function"] = function(callback)
-			Cape["Enabled"] = callback
-			if Cape["Enabled"] then
-				lplr.CharacterAdded:Connect(function(char)
-					spawn(function()
-						pcall(function() 
-							Cape(char, ("rbxthumb://type=Asset&id=" .. 11121170269 .. "&w=420&h=420"))
+	local Cape {Enabled = false}
+	Cape = Sections["Cape"].CreateToggle({
+		Name = "Cape",
+		Function = function(callback)
+			Cape.Enabled = callback
+				if Cape.Enabled then
+					lplr.CharacterAdded:Connect(function(char)
+						spawn(function()
+							pcall(function() 
+								Cape(char, ("rbxthumb://type=Asset&id=" .. 11121170269 .. "&w=420&h=420"))
+							end)
 						end)
 					end)
-				end)
-				if lplr.Character then
-					spawn(function()
-						pcall(function() 
-							Cape(lplr.Character, ("rbxthumb://type=Asset&id=" .. 11121170269 .. "&w=420&h=420"))
+					if lplr.Character then
+						spawn(function()
+							pcall(function() 
+								Cape(lplr.Character, ("rbxthumb://type=Asset&id=" .. 11121170269 .. "&w=420&h=420"))
+							end)
 						end)
-					end)
-				end
-			else
-				if lplr.Character then
-				 for i,v in pairs(lplr.Character:GetDescendants()) do
-					if v.Name == "Cape" then
-						v:Remove()
+					end
+				else
+					if lplr.Character then
+					for i,v in pairs(lplr.Character:GetDescendants()) do
+						if v.Name == "Cape" then
+							v:Remove()
+						end
 					end
 				end
 			end
-		end
-	end,
-["InfoText"] = "cool cape"
+		end,
+		HoverText = "cool cape"
 	})
 end)
