@@ -1,15 +1,4 @@
---[[
-Credit to Moerii
-Remake Little bit cuz yes
---]]
 repeat task.wait() until game:IsLoaded()
-if shared.injected  then
-	error("Nightbed is Already Executed")
-	return
-else
-	shared.injected = true
-end
-
 function betterisfile(path)
 	local suc, res = pcall(function() return readfile(path) end)
 	return suc and res ~= nil 
@@ -25,8 +14,8 @@ shared.kavogui = kavo
 
 local entityLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/Libraries/entityHandler.lua", true))()
 shared.vapeentity = entityLibrary
-local FunctionsLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Libraries/Functions.lua", true))()
-shared.functionshandler = FunctionsLibrary
+local FunctionsLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Libraries/FunctionsHandler.lua", true))()
+shared.funcslib = FunctionsLibrary
 
 local queueteleport = queue_on_teleport
 
@@ -48,10 +37,13 @@ if isfolder("Nightbed/CustomModules") == false then
 	makefolder("Nightbed/CustomModules")
 end
 
-if betterisfile("Nightbed/CustomModules/"..game.PlaceId..".lua") then
-    loadstring(readfile("Nightbed/CustomModules/"..game.PlaceId..".lua"))()
-elseif game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua") then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua"))()
-else
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/AnyGame.lua", true))()
+local loadNightbed = function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/AnyGame.lua"))()
+	if betterisfile("Nightbed/CustomModules/"..game.PlaceId..".lua") then
+			loadstring(readfile("Nightbed/CustomModules/"..game.PlaceId..".lua"))()
+		else
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules"..game.PlaceId..".lua"))()
+		end
 end
+
+loadNightbed()
