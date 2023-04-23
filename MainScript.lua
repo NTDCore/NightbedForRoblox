@@ -33,15 +33,12 @@ if isfolder("Nightbed/CustomModules") == false then
 	makefolder("Nightbed/CustomModules")
 end
 
-local somethingload = function()
-	if betterisfile("Nightbed/CustomModules/"..game.PlaceId..".lua") then
-			loadstring(readfile("Nightbed/CustomModules/"..game.PlaceId..".lua"))()
-		else
-			loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua"))()
-	end
-	if not game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua") then
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/AnyGame.lua"))()
-	end
+if not game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua") then
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/AnyGame.lua"))()
+else
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua"))()
+elseif betterisfile("Nightbed/CustomModules/"..game.PlaceId..".lua") and game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua") then
+	loadstring(readfile("Nightbed/CustomModules/"..game.PlaceId..".lua"))()
+elseif betterisfile("Nightbed/AnyGame.lua") and not game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua") then
+	loadstring(readfile("Nightbed/AnyGame.lua"))()
 end
-
-somethingload()
