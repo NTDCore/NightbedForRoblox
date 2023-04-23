@@ -41,9 +41,9 @@ local somethingload = function()
 	if betterisfile("Nightbed/CustomModules/"..game.PlaceId..".lua") then
 			loadstring(readfile("Nightbed/CustomModules/"..game.PlaceId..".lua"))()
 		else
-			loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules"..game.PlaceId..".lua"))()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua"))()
 	end
-	if not game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules"..game.PlaceId..".lua") then
+	if not game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua") then
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/AnyGame.lua"))()
 	end
 end
