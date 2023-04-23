@@ -2,15 +2,6 @@
 
 Script For Roblox And using anygame
 
-# Made By
-
-```
-NTDCore
-Vamp
-And 
-Moon NightCore
-```
-
 # Script
 ```
 loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/MainScript.lua", true))()
@@ -37,5 +28,4 @@ GuiLibrary ( soon )
 
 ```
 Discord : Monia#9266
-Discord Server : https://discord.gg/xT3XZjZ3HZ
 ```
