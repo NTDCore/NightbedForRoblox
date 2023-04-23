@@ -28,11 +28,10 @@ local Sections = {
 	["Cape"] = Tabs["Render"].CreateSection("Cape")
 }
 
-function createnotification(Titlez, Textz, Iconz, Dur)
+function createnotification(Titlez, Textz, Dur)
 game.StarterGui:SetCore("SendNotification", {
     Title = Titlez;
     Text = Textz;
-    Icon = Iconz;
     Duration = Dur;
 })
 end
