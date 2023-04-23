@@ -19,7 +19,7 @@ local function getremote(tab)
 	return ""
 end
 
-FunctionsLibrary.runcode(function()
+FunctionsLibrary["runFunction"](function()
     local flaggedremotes = {"SelfReport"}
         local Flamework = require(repstorage["rbxts_include"]["node_modules"]["@flamework"].core.out).Flamework
 				repeat task.wait() until Flamework.isInitialized
@@ -66,7 +66,7 @@ local Sections = {
 	["AutoQueue"] = Tabs["Blatant"].CreateSection("AutoQueue")
 }
 
-FunctionsLibrary.runcode(function()
+FunctionsLibrary.runFunction(function()
 	local Sprint = {["Enabled"] = false}
 	Sprint = Sections["Sprint"].CreateToggle({
 		["Name"] = "Sprint",
@@ -89,7 +89,7 @@ FunctionsLibrary.runcode(function()
 	})
 end)
 
-FunctionsLibrary.runcode(function()
+FunctionsLibrary.runFunction(function()
 local function findfrom(name)
 	for i,v in pairs(bedwars.QueueMeta) do 
 		if v.title == name and i:find("voice") == nil then
@@ -156,7 +156,6 @@ end
 		["HoverText"] = "Mode queue that you want.",
 		["List"] = QueueTypes,
 		["Function"] = function(val)
-		AutoQueueMode["Value"] = val
 		if AutoQueue["Enabled"] and QueueStart == false then
 			AutoQueue.ToggleButton(false)
 			AutoQueue.ToggleButton(true)
