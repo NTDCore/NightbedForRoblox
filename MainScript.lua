@@ -5,11 +5,7 @@ function betterisfile(path)
 end
 
 local kavo
-if betterisfile("Nightbed/Libraries/kavo.lua") then
-   kavo = loadstring(readfile("Nightbed/Libraries/kavo.lua"))()
-else
-   kavo = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Libraries/kavo.lua", true))()
-end
+kavo = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Libraries/kavo.lua", true))()
 shared.kavogui = kavo
 
 local entityLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/Libraries/entityHandler.lua", true))()
