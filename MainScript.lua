@@ -37,13 +37,15 @@ if isfolder("Nightbed/CustomModules") == false then
 	makefolder("Nightbed/CustomModules")
 end
 
-local loadNightbed = function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/AnyGame.lua"))()
+local somethingload = function()
 	if betterisfile("Nightbed/CustomModules/"..game.PlaceId..".lua") then
 			loadstring(readfile("Nightbed/CustomModules/"..game.PlaceId..".lua"))()
 		else
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules"..game.PlaceId..".lua"))()
-		end
+	end
+	if not game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules"..game.PlaceId..".lua") then
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/AnyGame.lua"))()
+	end
 end
 
-loadNightbed()
+somethingload()
