@@ -22,24 +22,24 @@ end
 FunctionsLibrary.runcode(function()
     local flaggedremotes = {"SelfReport"}
         local Flamework = require(repstorage["rbxts_include"]["node_modules"]["@flamework"].core.out).Flamework
-		repeat task.wait() until Flamework.isInitialized
+				repeat task.wait() until Flamework.isInitialized
         local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
         local Client = require(repstorage.TS.remotes).default.Client
         local OldClientGet = getmetatable(Client).Get
-		local OldClientWaitFor = getmetatable(Client).WaitFor
+				local OldClientWaitFor = getmetatable(Client).WaitFor
         bedwars = {
-			BedwarsKits = require(repstorage.TS.games.bedwars.kit["bedwars-kit-shop"]).BedwarsKitShop,
-            ClientHandler = Client,
-            ClientStoreHandler = require(lplr.PlayerScripts.TS.ui.store).ClientStore,
-			EmoteMeta = require(repstorage.TS.locker.emote["emote-meta"]).EmoteMeta,
-			QueryUtil = require(repstorage["rbxts_include"]["node_modules"]["@easy-games"]["game-core"].out).GameQueryUtil,
-			KitMeta = require(repstorage.TS.games.bedwars.kit["bedwars-kit-meta"]).BedwarsKitMeta,
-			LobbyClientEvents = KnitClient.Controllers.QueueController,
-       SprintTable = KnitClient.Controllers.SprintController,
-			WeldTable = require(repstorage.TS.util["weld-util"]).WeldUtil,
-			QueueMeta = require(repstorage.TS.game["queue-meta"]).QueueMeta,
-			getEntityTable = require(repstorage.TS.entity["entity-util"]).EntityUtil,
-   }
+					BedwarsKits = require(repstorage.TS.games.bedwars.kit["bedwars-kit-shop"]).BedwarsKitShop,
+					ClientHandler = Client,
+					ClientStoreHandler = require(lplr.PlayerScripts.TS.ui.store).ClientStore,
+					EmoteMeta = require(repstorage.TS.locker.emote["emote-meta"]).EmoteMeta,
+					QueryUtil = require(repstorage["rbxts_include"]["node_modules"]["@easy-games"]["game-core"].out).GameQueryUtil,
+					KitMeta = require(repstorage.TS.games.bedwars.kit["bedwars-kit-meta"]).BedwarsKitMeta,
+					LobbyClientEvents = KnitClient.Controllers.QueueController,
+					sprintTable = KnitClient.Controllers.SprintController,
+					WeldTable = require(repstorage.TS.util["weld-util"]).WeldUtil,
+					QueueMeta = require(repstorage.TS.game["queue-meta"]).QueueMeta,
+					getEntityTable = require(repstorage.TS.entity["entity-util"]).EntityUtil,
+  			}
 end)
 
 local isAlive = function(plr, alivecheck)
@@ -68,7 +68,7 @@ local Sections = {
 
 FunctionsLibrary.runcode(function()
 	local Sprint = {["Enabled"] = false}
-	Sections["Sprint"].CreateToggle({
+	Sprint = Sections["Sprint"].CreateToggle({
 		["Name"] = "Sprint",
 		["Function"] = function(callback)
 			Sprint["Enabled"] = callback
@@ -76,13 +76,13 @@ FunctionsLibrary.runcode(function()
 			task.spawn(function()
 				repeat
 					task.wait()
-					if (not bedwars.SprintTable.sprinting) then
-						bedwars.SprintTable:startSprinting()
+					if (not bedwars.sprintTable.sprinting) then
+						bedwars.sprintTable:startSprinting()
 					end
 				until (not Sprint["Enabled"])
 			end)
 	else
-				bedwars.SprintCont:stopSprinting()
+				bedwars.sprintTable:stopSprinting()
 			end
 		end,
 		["HoverText"] = "Automatic Sprint."
@@ -91,7 +91,7 @@ end)
 
 FunctionsLibrary.runcode(function()
 local function findfrom(name)
-	for i,v in pairs(bedwars["QueueMeta"]) do 
+	for i,v in pairs(bedwars.QueueMeta) do 
 		if v.title == name and i:find("voice") == nil then
 			return i
 		end
