@@ -6,18 +6,17 @@ local errorPopupShown = false
 local setidentity = syn and syn.set_thread_identity or set_thread_identity or setidentity or setthreadidentity or function() end
 local getidentity = syn and syn.get_thread_identity or get_thread_identity or getidentity or getthreadidentity or function() return 0 end
 
-Functions = {
-	["runcode"] = function(func)
-			func()
-	end,
-	["runFunction"] = function(func)
-			func()
-	end,
-	["executor"] = identifyexecutor(),
-	["Kick"] = function(title, text)
-			lplr:Kick(title, text)
-	end,
-	["displayErrorPopup"] = function(title, text, button, fuclist)
+Functions.runcode = function(func)
+		func()
+end
+Functions.runFunction = function(func)
+		func()
+end
+Functions.executor = identifyexecutor()
+Functions.Kick = function(title, text)
+		lplr:Kick(title, text)
+end,
+Functions.displayErrorPopup = function(title, text, button, fuclist)
 		local oldidentity = getidentity()
 		setidentity(8)
 		local ErrorPrompt = getrenv().require(game:GetService("CoreGui").RobloxGui.Modules.ErrorPrompt)
@@ -49,7 +48,6 @@ Functions = {
 		prompt:_open(text)
 		setidentity(oldidentity)
 	end
-}
 
 if Functions.executor:find("Arceus") then
 		Functions.displayErrorPopup("Detected", "Your Executor not Support our Functions You Will Shutdown in 5s\n Executor : Arceus", "OK")
