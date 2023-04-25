@@ -1,9 +1,11 @@
+--[[
+	Credits
+	Infinite Yield - InfJump
+	engospy - RemoteEvent
+	Kavo Owner - kavo ui
+	7GrandDadPGN (xylex) - Vape Entity
+--]]
 repeat task.wait() until game:IsLoaded()
-local function GetURL(scripturl)
-	local res = game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/"..scripturl, true)
-assert(res ~= "404: Not Found", "File not found")
-return res
-end
 local getasset = getsynasset or getcustomassetfunction or getcustomasset or function(location) return "rbxasset://"..location end
 local entityLibrary = shared.vapeentity
 local kavo = shared.kavogui
@@ -58,13 +60,13 @@ FunctionsLibrary.runFunction(function()
 				InfiniteJumpConnection:Disconnect()
 			end
 		end,
-		HoverText = "Make you can jump any place",
+		HoverText = "Make you can jump any place"
 	})
 end)
 
 FunctionsLibrary.runFunction(function()
 	local Speed = {Enabled = false}
-	local speedval = {Value = 23}
+	local speedval = {Value = 100}
 	Speed = Sections["Speed"].CreateToggle({
 		Name = "Speed",
 		Function = function(callback)
