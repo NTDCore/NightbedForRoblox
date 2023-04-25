@@ -15,6 +15,14 @@ end
 Functions = {
 	executor = identifyexecutor()
 }
+Functions.RobloxNotification(first, second, timewa)
+	game.StarterGui:SetCore("SendNotification", {
+    Title = first;
+    Text = second;
+    Duration = timewa;
+})
+end
+--[[
 Functions.displayErrorPopup = function(title, text, textbutton, funclist)
 	local oldidentity = getidentity()
 	setidentity(8)
@@ -47,14 +55,10 @@ Functions.displayErrorPopup = function(title, text, textbutton, funclist)
 	prompt:_open(text)
 	setidentity(oldidentity)
 end
+--]]
 
 if Functions.executor:find("Arceus") then
-		Functions.displayErrorPopup("Detected", "Your Executor not Support our Functions You Will Shutdown in 5s\n Executor : Arceus", "OK")
+		Functions.RobloxNotification("Detected", "you executor not support for FunctionsHandler game will shutdown in 5s\n Executor : Arceus", 5)
 		wait(5)
 		game:Shutdown()
-end
-
-if Functions.executor:find("Fluxus") then
-	Functions.displayErrorPopup("Test", "Test", "test")
-	print("test work")
 end
