@@ -15,7 +15,7 @@ end
 Functions.executor = identifyexecutor()
 Functions.Kick = function(title, text)
 		lplr:Kick(title, text)
-end,
+end
 Functions.displayErrorPopup = function(title, text, button, fuclist)
 		local oldidentity = getidentity()
 		setidentity(8)
