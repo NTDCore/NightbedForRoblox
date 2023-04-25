@@ -37,11 +37,13 @@ if not game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/AnyGame.lua"))()
 else
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua"))()
-elseif betterisfile("Nightbed/CustomModules/"..game.PlaceId..".lua") and game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua") then
+elseif betterisfile("Nightbed/CustomModules/"..game.PlaceId..".lua") then
 	loadstring(readfile("Nightbed/CustomModules/"..game.PlaceId..".lua"))()
-elseif betterisfile("Nightbed/AnyGame.lua") and not game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua") then
+else
 	loadstring(readfile("Nightbed/AnyGame.lua"))()
 end
+
+--am so suffer at mainscript error for no reason
 
 if not shared.FuncsConnect then
 	repeat
