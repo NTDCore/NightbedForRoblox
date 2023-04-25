@@ -42,3 +42,9 @@ elseif betterisfile("Nightbed/CustomModules/"..game.PlaceId..".lua") and game:Ht
 elseif betterisfile("Nightbed/AnyGame.lua") and not game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua") then
 	loadstring(readfile("Nightbed/AnyGame.lua"))()
 end
+
+if not shared.FuncsConnect then
+	repeat
+		shared.FuncsConnect = true
+	until shared.FuncsConnect
+end
