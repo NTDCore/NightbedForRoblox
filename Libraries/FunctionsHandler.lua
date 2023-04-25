@@ -15,41 +15,46 @@ end
 Functions = {
 	executor = identifyexecutor()
 }
-Functions.displayErrorPopup = function(title, text, button, funclist)
-		local oldidentity = getidentity()
-		setidentity(8)
-		local ErrorPrompt = getrenv().require(game:GetService("CoreGui").RobloxGui.Modules.ErrorPrompt)
-		local prompt = ErrorPrompt.new("Default")
-		prompt._hideErrorCode = true
-		local gui = Instance.new("ScreenGui", game:GetService("CoreGui"))
-		prompt:setErrorTitle(title)
-		local funcs = {}
-		local num = 0
-		for i,v in pairs(funclist) do 
-			num = num + 1
-			table.insert(funcs, {
-				Text = i,
-				Callback = function() 
-					prompt:_close() 
-					v()
-				end,
-				Primary = num == #funclist
-			})
-		end
-		prompt:updateButtons(funcs or {{
-			Text = button,
+Functions.displayErrorPopup = function(title, text, textbutton, funclist)
+	local oldidentity = getidentity()
+	setidentity(8)
+	local ErrorPrompt = getrenv().require(game:GetService("CoreGui").RobloxGui.Modules.ErrorPrompt)
+	local prompt = ErrorPrompt.new("Default")
+	prompt._hideErrorCode = true
+	local gui = Instance.new("ScreenGui", game:GetService("CoreGui"))
+	prompt:setErrorTitle(title)
+	local funcs = {}
+	local num = 0
+	for i,v in pairs(funclist) do 
+		num = num + 1
+		table.insert(funcs, {
+			Text = i,
 			Callback = function() 
 				prompt:_close() 
+				v()
 			end,
-			Primary = true
-		}}, 'Default')
-		prompt:setParent(gui)
-		prompt:_open(text)
-		setidentity(oldidentity)
+			Primary = num == #funclist
+		})
 	end
+	prompt:updateButtons(funcs or {{
+		Text = textbutton,
+		Callback = function() 
+			prompt:_close() 
+		end,
+		Primary = true
+	}}, 'Default')
+	prompt:setParent(gui)
+	prompt:_open(text)
+	setidentity(oldidentity)
+end
 
 if Functions.executor:find("Arceus") then
 		Functions.displayErrorPopup("Detected", "Your Executor not Support our Functions You Will Shutdown in 5s\n Executor : Arceus", "OK")
 		wait(5)
 		game:Shutdown()
+end
+
+if Functions.executor:find("Fluxus") then
+	Functions.displayErrorPopup("Test", "Test", "test")
+	print("test work")
 end
