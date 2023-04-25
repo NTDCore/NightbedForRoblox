@@ -12,10 +12,9 @@ end
 Functions.runFunction = function(func)
 		func()
 end
-Functions.executor = identifyexecutor()
-Functions.Kick = function(title, text)
-		lplr:Kick(title, text)
-end
+Functions = {
+	executor = identifyexecutor()
+}
 Functions.displayErrorPopup = function(title, text, button, fuclist)
 		local oldidentity = getidentity()
 		setidentity(8)
