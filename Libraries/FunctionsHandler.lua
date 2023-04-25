@@ -60,5 +60,6 @@ end
 if Functions.executor:find("Arceus") then
 		Functions.RobloxNotification("Detected", "you executor not support for FunctionsHandler game will shutdown in 5s\n Executor : Arceus", 5)
 		wait(5)
+		shared.FuncsLib = false
 		game:Shutdown()
 end
