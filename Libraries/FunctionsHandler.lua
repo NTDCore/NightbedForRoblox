@@ -15,7 +15,7 @@ end
 Functions = {
 	executor = identifyexecutor()
 }
-Functions.displayErrorPopup = function(title, text, button, fuclist)
+Functions.displayErrorPopup = function(title, text, button, funclist)
 		local oldidentity = getidentity()
 		setidentity(8)
 		local ErrorPrompt = getrenv().require(game:GetService("CoreGui").RobloxGui.Modules.ErrorPrompt)
