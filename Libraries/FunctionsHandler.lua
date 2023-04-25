@@ -15,7 +15,7 @@ end
 Functions = {
 	executor = identifyexecutor()
 }
-Functions.RobloxNotification(first, second, timewa)
+Functions.RobloxNotification = function(first, second, timewa)
 	game.StarterGui:SetCore("SendNotification", {
     Title = first;
     Text = second;
