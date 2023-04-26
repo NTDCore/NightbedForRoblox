@@ -1410,7 +1410,7 @@ function Library:toggle(options)
 		task.spawn(function() options.Function(toggled) end)
 	end
 
-	if options.Default then methods:SetState(true) end
+	if options.Default then methods:ToggleButton(true) end
 
 	return methods
 end
