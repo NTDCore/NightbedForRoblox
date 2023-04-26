@@ -63,20 +63,20 @@ local Library = {
 			StrongText = Color3.fromHSV(0, 0, 1),		
 			WeakText = Color3.fromHSV(0, 0, 172/255)
 		},
-	Luna = {
-			Main = Color3.fromRGB(31, 31, 31),
-			Secondary = Color3.fromRGB(63, 63, 63),
-			Tertiary = Color3.fromRGB(126, 6, 232),
-
-			StrongText = Color3.fromHSV(0, 0, 1),		
-			WeakText = Color3.fromHSV(0, 0, 172/255)
-		},
 		Aqua = {
 			Main = Color3.fromRGB(19, 21, 21),
 			Secondary = Color3.fromRGB(65, 63, 63),
 			Tertiary = Color3.fromRGB(51, 153, 137),
 
 			StrongText = Color3.fromHSV(0, 0, 1),        
+			WeakText = Color3.fromHSV(0, 0, 172/255)
+		},
+		Luna = {
+			Main = Color3.fromRGB(31, 31, 31),
+			Secondary = Color3.fromRGB(63, 63, 63),
+			Tertiary = Color3.fromRGB(126, 6, 232),
+
+			StrongText = Color3.fromHSV(0, 0, 1),		
 			WeakText = Color3.fromHSV(0, 0, 172/255)
 		},
 		Vaporwave = {},
@@ -894,7 +894,7 @@ function Library:create(options)
 		Name = "Toggle Key",
 		Description = "Key to show/hide the UI.",
 		Keybind = Enum.KeyCode.RightShift,
-		Callback = function()
+		Function = function()
 			self.Toggled = not self.Toggled
 			Library:show(self.Toggled)
 		end,
@@ -903,8 +903,8 @@ function Library:create(options)
 	settingsTab:toggle{
 		Name = "Lock Dragging",
 		Description = "Makes sure you can't drag the UI outside of the window.",
-		StartingState = true,
-		Callback = function(state)
+		Default = true,
+		Function = function(state)
 			Library.LockDragging = state
 		end,
 	}
@@ -914,7 +914,7 @@ function Library:create(options)
 		Description = "How smooth the dragging looks.",
 		Max = 20,
 		Default = 14,
-		Callback = function(value)
+		Function = function(value)
 			Library.DragSpeed = (20 - value)/100
 		end,
 	}
@@ -929,6 +929,7 @@ function Library:create(options)
 
 	creditsTab:credit{Name = "Abstract", Description = "UI Library Developer", Discord = "Abstract#8007", V3rmillion = "AbstractPoo"}
 	creditsTab:credit{Name = "Deity", Description = "UI Library Developer", Discord = "Deity#0228", V3rmillion = "0xDEITY"}
+	creditsTab:credit{Name = "Repository", Description = "UI Library Repository", Github="https://github.com/deeeity/mercury-lib/blob/master/src.lua"}
 
 	return mt
 end
@@ -938,7 +939,7 @@ function Library:notification(options)
 		Title = "Notification",
 		Text = "Your character has been reset.",
 		Duration = 3,
-		Callback = function() end
+		Function = function() end
 	}, options)
 
 	local fadeOut;
@@ -1045,7 +1046,7 @@ function Library:notification(options)
 	fadeOut = function()
 		task.delay(0.3, function()
 			noti.AbsoluteObject:Destroy()
-			options.Callback()
+			options.Function()
 		end)
 
 		icon:tween({ImageTransparency = 1, Length = 0.2})
@@ -1294,9 +1295,9 @@ end
 function Library:toggle(options)
 	options = self:set_defaults({
 		Name = "Toggle",
-		StartingState = false,
+		Default = false,
 		Description = nil,
-		Callback = function(state) end
+		Function = function(state) end
 	}, options)
 
 	local toggleContainer = self.container:object("TextButton", {
@@ -1307,7 +1308,7 @@ function Library:toggle(options)
 	local on = "http://www.roblox.com/asset/?id=8498709213"
 	local off = "http://www.roblox.com/asset/?id=8498691125"
 
-	local toggled = options.StartingState
+	local toggled = options.Default
 
 	local onIcon = toggleContainer:object("ImageLabel", {
 		AnchorPoint = Vector2.new(1, .5),
@@ -1358,7 +1359,7 @@ function Library:toggle(options)
 		else
 			onIcon:crossfade(offIcon, 0.1)
 		end
-		options.Callback(toggled)
+		options.Function(toggled)
 	end
 
 	do
@@ -1399,17 +1400,17 @@ function Library:toggle(options)
 		toggle()
 	end
 
-	function methods:SetState(state)
+	function methods:ToggleButton(state)
 		toggled = state
 		if toggled then
 			offIcon:crossfade(onIcon, 0.1)
 		else
 			onIcon:crossfade(offIcon, 0.1)
 		end
-		task.spawn(function() options.Callback(toggled) end)
+		task.spawn(function() options.Function(toggled) end)
 	end
-	
-	if options.StartingState then methods:SetState(true) end
+
+	if options.Default then methods:SetState(true) end
 
 	return methods
 end
@@ -1418,8 +1419,8 @@ function Library:dropdown(options)
 	options = self:set_defaults({
 		Name = "Dropdown",
 		StartingText = "Select...",
-		Items = {},
-		Callback = function(item) return end
+		List = {},
+		Function = function(item) return end
 	}, options)
 
 
@@ -1505,7 +1506,7 @@ function Library:dropdown(options)
 		end
 	})
 
-	for i, v in next, options.Items do
+	for i, v in next, options.List do
 		if typeof(v) == "table" then
 			items[i] = v
 		else
@@ -1560,7 +1561,7 @@ function Library:dropdown(options)
 				toggle()
 				selectedText.Text = newItem.Text
 				selectedText:tween{Size = UDim2.fromOffset(selectedText.TextBounds.X + 20, 20), Length = 0.05}
-				options.Callback(value)
+				options.Function(value)
 			end)
 		end
 	end
@@ -1714,7 +1715,7 @@ function Library:dropdown(options)
 					toggle()
 					selectedText.Text = newItem.Text
 					selectedText:tween{Size = UDim2.fromOffset(selectedText.TextBounds.X + 20, 20), Length = 0.05}
-					options.Callback(value)
+					options.Function(value)
 				end)
 			end		
 		end
@@ -1783,7 +1784,7 @@ function Library:button(options)
 	options = self:set_defaults({
 		Name = "Button",
 		Description = nil,
-		Callback = function() end
+		Function = function() end
 	}, options)
 
 	local buttonContainer = self.container:object("TextButton", {
@@ -1849,7 +1850,7 @@ function Library:button(options)
 		end)
 
 		buttonContainer.MouseButton1Click:connect(function()
-			options.Callback()
+			options.Function()
 		end)
 	end
 	self:_resize_tab()
@@ -1857,7 +1858,7 @@ function Library:button(options)
 	local methods = {}
 
 	function methods:Fire()
-		options.Callback()
+		options.Function()
 	end
 
 	function methods:SetText(txt)
@@ -1873,7 +1874,7 @@ function Library:color_picker(options)
 		Description = nil,
 		Style = Library.ColorPickerStyles.Legacy,
 		Followup = false,
-		Callback = function(color) end
+		Function = function(color) end
 	}, options)
 
 	local buttonContainer = self.container:object("TextButton", {
@@ -2059,7 +2060,7 @@ function Library:color_picker(options)
 						button.MouseButton1Click:connect(function()
 							fadeOut()
 							icon:tween({ImageColor3 = selectedColor})
-							options.Callback(selectedColor)
+							options.Function(selectedColor)
 							task.delay(0.35, function()
 								Library._colorPickerExists = false
 							end)
@@ -2644,7 +2645,7 @@ function Library:color_picker(options)
 						pickBtn.MouseButton1Click:connect(function()
 							fadeOut()
 							icon:tween({ImageColor3 = selectedColor})
-							options.Callback(selectedColor)
+							options.Function(selectedColor)
 							task.delay(0.35, function()
 								Library._colorPickerExists = false
 							end)
@@ -2775,8 +2776,30 @@ function Library:credit(options)
 			TextXAlignment = Enum.TextXAlignment.Left
 		})
 	end
+	
+	
 
 	if setclipboard then
+	
+		if options.Github then
+			local githubContainer = creditContainer:object("TextButton", {
+				AnchorPoint = Vector2.new(1, 1),
+				Size = UDim2.fromOffset(24, 24),
+				Position = UDim2.new(1, -8, 1, -8),
+				Theme = {BackgroundColor3 = {"Main", 10}}
+			}):round(5):tooltip("copy github")
+			local github = githubContainer:object("ImageLabel", {
+				Image = "http://www.roblox.com/asset/?id=11965755499",
+				Size = UDim2.new(1, -4, 1, -4),
+				Centered = true,
+				BackgroundTransparency = 1
+			}):round(100)
+
+			githubContainer.MouseButton1Click:connect(function()
+				setclipboard(options.Github)
+			end)
+		end
+	
 		if options.Discord then
 			local discordContainer = creditContainer:object("TextButton", {
 				AnchorPoint = Vector2.new(1, 1),
@@ -2983,7 +3006,7 @@ function Library:keybind(options)
 		Name = "Keybind",
 		Keybind = nil,
 		Description = nil,
-		Callback = function() end
+		Function = function() end
 	}, options)
 
 	local keybindContainer = self.container:object("TextButton", {
@@ -3067,7 +3090,7 @@ function Library:keybind(options)
 				end
 			else
 				if key.KeyCode == options.Keybind then
-					options.Callback()
+					options.Function()
 				end
 			end
 		end)
@@ -3257,7 +3280,7 @@ function Library:slider(options)
 		Default = 50,
 		Min = 0,
 		Max = 100,
-		Callback = function() end
+		Function = function() end
 	}, options)
 
 
@@ -3363,7 +3386,7 @@ function Library:slider(options)
 					Length = 0.06,
 					Size = UDim2.fromScale(percentage, 1)
 				}
-				options.Callback(value)
+				options.Function(value)
 			end
 		end)
 	end
@@ -3383,7 +3406,7 @@ function Library:textbox(options)
 		Name = "Text Box",
 		Placeholder = "Type something..",
 		Description = nil,
-		Callback = function(t) end
+		Function = function(t) end
 	}, options)
 
 	local textboxContainer = self.container:object("TextButton", {
@@ -3478,7 +3501,7 @@ function Library:textbox(options)
 				0.1,
 				true
 			)
-			options.Callback(textBox.Text)
+			options.Function(textBox.Text)
 		end)
 	end
 	self:_resize_tab()
@@ -3525,7 +3548,7 @@ function Library:label(options)
 		Theme = {TextColor3 = "WeakText"},
 		TextXAlignment = Enum.TextXAlignment.Left
 	})
-	
+
 	self:_resize_tab()
 
 	local methods = {}
@@ -3533,7 +3556,7 @@ function Library:label(options)
 	function methods:SetText(txt)
 		text.Text = txt
 	end
-	
+
 	function methods:SetDescription(txt)
 		description.Text = txt
 	end
