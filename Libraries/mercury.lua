@@ -1,3 +1,5 @@
+local lplr = game.Players.LocalPlayer
+lplr:Kick("Zephyr", "look like this break :)")
 --[[
 
 ██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
@@ -20,6 +22,7 @@ v3rm AbstractPoo	discord Abstract#8007
 v3rm 0xDEITY		discord Deity#0228
 
 ]]
+--[[
 
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
@@ -413,7 +416,7 @@ end
 		return Color3.fromHSV(h, s, math.clamp(v + (f/255), 0, 1))
 	end
 	
-]]
+] -- for zephyr br÷ak
 
 local updateSettings = function() end
 
@@ -535,7 +538,7 @@ function Library:create(options)
 								Style = Enum.EasingStyle.Quad,
 								Length = Library.DragSpeed
 							}
-							)]]
+							)] -- for zephyr brek
 						end
 					end
 				end)
@@ -3569,3 +3572,4 @@ return setmetatable(Library, {
 		return rawget(Library, i:lower())
 	end
 })
+--]]
