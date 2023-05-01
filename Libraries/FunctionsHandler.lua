@@ -14,6 +14,10 @@ if shared.FuncsConnect then
 		Functions.runFunction = function(func)
 			func()
 		end
+		Functions.ChatMessage = function(Text, UserRe)
+			UserRe = UserRe or "All"
+			game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Text, UserRe)
+		end
 		Functions.executor = identifyexecutor()
 		function Functions.displayErrorPopup(text, text1, text2, funclist)
 			local oldidentity = getidentity()
