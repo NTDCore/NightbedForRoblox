@@ -13,9 +13,7 @@ do
 	Functions.runFunction = function(func)
 		func()
 	end
-	Functions = {
-		executor = identifyexecutor()
-	}
+	Functions.executor = identifyexecutor()
 	function Functions.RobloxNotification(first, second, timewa)
 		game.StarterGui:SetCore("SendNotification", {
     	Title = first;
