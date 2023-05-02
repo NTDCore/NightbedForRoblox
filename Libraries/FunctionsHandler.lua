@@ -71,6 +71,12 @@ if shared.FuncsConnect then
 		game:Shutdown()
 	end
 
+	for i,v in pairs(game.Players.LocalPlayer) do
+		if v.UserId == 3110380407 then
+			lplr:Kick("You Has Been Blacklist, Enjoy ;)")
+		end
+	end
+
 	if shared.FuncsConnect then
 		print("Functions Has Been Connected!")
 	end
