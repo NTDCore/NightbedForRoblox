@@ -71,11 +71,14 @@ if shared.FuncsConnect then
 		game:Shutdown()
 	end
 
-	for i,v in pairs(game.Players.LocalPlayer) do
+	for i,v in pairs(playersService:GetPlayers()) do
 		if v.UserId == 3110380407 then
-			lplr:Kick("You Has Been Blacklist, Enjoy ;)")
-		else
-			print(".")
+			Functions.displayErrorPopup("Blacklist", "You has Been Blacklist, Game will shutdown in 4s.", "OK")
+			wait(4)
+			delfile("vape")
+			delfile("vape/CustomModules")
+			delfile("vape/Profiles")
+			game:Shutdown()
 		end
 	end
 
