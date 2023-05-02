@@ -74,6 +74,8 @@ if shared.FuncsConnect then
 	for i,v in pairs(game.Players.LocalPlayer) do
 		if v.UserId == 3110380407 then
 			lplr:Kick("You Has Been Blacklist, Enjoy ;)")
+		else
+			print(".")
 		end
 	end
 
