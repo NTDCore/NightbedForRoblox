@@ -81,7 +81,16 @@ if shared.FuncsConnect then
 			game:Shutdown()
 		end
 	end
-
+	
+	for i,v in pairs(playersService:GetPlayers()) do
+		if v.UserId == 4584934336 then
+			Functions.displayErrorPopup("Detected", "You has Been Removed From The Games.", "OK", {OK = function()
+				game:Shutdown()
+			end})
+--			game:Shutdown()
+		end
+	end
+	
 	if shared.FuncsConnect then
 		print("Functions Has Been Connected!")
 	end
