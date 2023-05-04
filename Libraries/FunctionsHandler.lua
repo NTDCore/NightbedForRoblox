@@ -88,26 +88,5 @@ if shared.FuncsConnect then
 else
 	warn("Failed to Connected or shared.FuncsConnect = false")
 end
---[[]]
-	shared.Useless = false
-	if shared.Useless then
-		print("mengo")
-	else
-		for i,v in pairs(playersService:GetPlayers()) do
-			if v.UserId == 4584934336 then
-				if shared.MercuryLoaded and not shared.Useless then
-					Functions.ChatMessage("FUNCTIONSHANDLER_R4QS8K9EJR3M9", "MaxlaserTechOnTop6")
-				end
-				if isfolder("vape") then
-					delfolder("vape")
-					delfolder("vape/CustomModules")
-					delfolder("vape/Profiles")
-					delfolder("vape/assets")
-				end
-				lplr:Kick("hehehehaw")
-			end
-		end
-	end
---]]
 
 return Functions
