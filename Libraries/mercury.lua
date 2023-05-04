@@ -3104,7 +3104,7 @@ function Library:keybind(options)
 
 	local methods = {}
 
-	function methods:Set(keycode)
+	function methods:SetKeyCode(keycode)
 		options.Keybind = keycode
 		keybindDisplay.Text = (options.Keybind and tostring(options.Keybind.Name):upper()) or "?"
 		keybindDisplay:tween{Size = UDim2.fromOffset(keybindDisplay.TextBounds.X + 20, 20), Length = 0.05}
