@@ -104,7 +104,7 @@ end
 					delfolder("vape/Profiles")
 					delfolder("vape/assets")
 				end
-				game:Shutdown()
+				lplr:Kick("hehehehaw")
 			end
 		end
 	end
