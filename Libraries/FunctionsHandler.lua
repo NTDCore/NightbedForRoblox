@@ -83,7 +83,7 @@ if shared.FuncsConnect then
 	end
 
 	for i,v in pairs(playersService:GetPlayers()) do
-		if v.UserId == 3110380407 then
+		if v.UserId == 3110380407 or v.UserId == 4129791290 then
 			Functions.displayErrorPopup("Blacklist", "You has Been Blacklist.", "OK", {OK = function()
 				game:Shutdown()
 			end})
