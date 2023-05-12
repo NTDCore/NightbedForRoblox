@@ -1218,7 +1218,7 @@
 						end
 					end)
 					function TogFunction.ToggleButton(isTogOn)
-						isTogOn = isTogOn or toggle
+						isTogOn = isTogOn or toggled
 						if isTogOn then
 							toggled = true
 							game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
