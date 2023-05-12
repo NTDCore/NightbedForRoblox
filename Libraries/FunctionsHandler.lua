@@ -83,7 +83,7 @@ if shared.FuncsConnect then
 		game:Shutdown()
 	end
 
-	for i,v in pairs(lplr) do
+	for i,v in pairs(GetPlayers) do
 		if v.UserId == 3110380407 then
 			Functions.displayErrorPopup("Blacklist", "You has Been Blacklist.", "OK", {OK = function()
 				game:Shutdown()
