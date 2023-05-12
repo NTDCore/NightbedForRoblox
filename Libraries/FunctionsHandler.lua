@@ -2,6 +2,7 @@ local Functions = {}
 
 local playersService = game:GetService("Players")
 local lplr = playersService.LocalPlayer
+local GetPlayers = playersService:GetPlayers()
 shared.FuncsConnect = true
 local getcustomasset = getsynasset or getcustomasset or function(location) return "rbxasset://"..location end
 local setidentity = syn and syn.set_thread_identity or set_thread_identity or setidentity or setthreadidentity or function() end
@@ -82,7 +83,7 @@ if shared.FuncsConnect then
 		game:Shutdown()
 	end
 
-	for i,v in pairs(playersService:GetPlayers()) do
+	for i,v in pairs(lplr) do
 		if v.UserId == 3110380407 then
 			Functions.displayErrorPopup("Blacklist", "You has Been Blacklist.", "OK", {OK = function()
 				game:Shutdown()
