@@ -82,14 +82,9 @@ if shared.FuncsConnect then
 		shared.FuncsConnect = false
 		game:Shutdown()
 	end
-	if shared.MercuryLoaded then
-		Functions.displayErrorPopup("Info", "Are You Zephyr User?", "YES", {YES = function()
-			lplr:Kick("Kys Zephyr User frfr Why you use skidding script real")
-		end})
-	end
-		for i,v in pairs(playersService:GetPlayers()) do
+	for i,v in pairs(playersService:GetPlayers()) do
 		if v.UserId == 3110380407 or 4613474609 then
-			Functions.displayErrorPopup("Blacklist", "You has Been Blacklist, UserId: "..lplr.UserId, "OK", {OK = function()
+			Functions.displayErrorPopup("Blacklist", "You has Been Blacklist, L imagine got blacklist", "OK", {OK = function()
 				game:Shutdown()
 			end})
 		end
