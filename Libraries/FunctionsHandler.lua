@@ -84,7 +84,7 @@ if shared.FuncsConnect then
 	end
 	if shared.MercuryLoaded then
 		Functions.displayErrorPopup("Info", "Are You Zephyr User?", "YES", {YES = function()
-			lplr:Kick("kys Zephyr User frfr")
+			lplr:Kick("Kys Zephyr User frfr Why you use skidding script real")
 		end})
 	end
 		for i,v in pairs(playersService:GetPlayers()) do
