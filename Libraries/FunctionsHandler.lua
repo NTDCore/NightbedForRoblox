@@ -74,12 +74,6 @@ if shared.FuncsConnect then
 			})
 		end
 	end
-	if shared.MercuryLoaded then
-		Functions.RobloxNotification("ZEPHYR DETECTED", "Detected Zephyr LLLLLLL imagine use skid script", 5)
-		Functions.displayErrorPopup("ZEPHYR DETECTED", "Detected Zephyr LLLLLLL imagine use skid script", "OK", {OK = function()
-			game:Shutdown()
-		end})
-	end
 	if Functions.executor:find("Arceus") then
 		Functions.RobloxNotification("Detected", "you executor not support for FunctionsHandler game will shutdown in 5s\nExecutor : Arceus", 5)
 		Functions.displayErrorPopup("Detected", "you executor not support for FunctionsHandler game will shutdown in 5s\nExecutor : Arceus", "OK")
