@@ -153,7 +153,7 @@ end
 		end
 	end
 	})
-	AutoQueueMode = Sections["AutoQueue"].CreateDropDowm({
+	AutoQueueMode = Sections["AutoQueue"].CreateDropDown({
 		["Name"] = "Mode",
 		["HoverText"] = "Mode queue that you want.",
 		["List"] = QueueTypes,
