@@ -15,6 +15,8 @@ local win = kavo:CreateWindow({
 	["Theme"] = "Luna"
 })
 
+local runFunction = function(func) func() end
+
 local Tabs = {
 	["Combat"] = win.CreateTab("Combat"),
 	["Blatant"] = win.CreateTab("Blatant"),
@@ -44,15 +46,16 @@ local oldchar = lplr.Character
 local gameCamera = workspace.CurrentCamera
 local InputService = game:GetService("UserInputService")
 
-FunctionsLibrary.runFunction(function()
+runFunction(function()
 	local InfiniteJump = {Enabled = false}
 	local InfJump = true
 	InfiniteJump = Sections["InfiniteJump"].CreateToggle({
 		Name = "InfiniteJump",
 		Function = function(callback)
-	  	if callback then
+			InfiniteJump.Enabled = callback
+	  	if InfiniteJump.Enabled then
 				InfiniteJumpConnection = InputService.JumpRequest:connect(function(jump)
-				if InfJump then
+					if InfJump then
 						oldchar:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
 					end
 				end)
@@ -64,13 +67,14 @@ FunctionsLibrary.runFunction(function()
 	})
 end)
 
-FunctionsLibrary.runFunction(function()
+runFunction(function()
 	local Speed = {Enabled = false}
 	local speedval = {Value = 100}
 	Speed = Sections["Speed"].CreateToggle({
 		Name = "Speed",
 		Function = function(callback)
-			  if callback then
+			Speed.Enabled = callback
+			  if Speed.Enabled then
 			    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = speedval.Value
 			  else
 			    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
@@ -80,7 +84,7 @@ FunctionsLibrary.runFunction(function()
 	})
 end)
 
-FunctionsLibrary.runFunction(function()
+runFunction(function()
 	function Cape(char, texture)
         for i,v in pairs(char:GetDescendants()) do
             if v.Name == "Cape" then
