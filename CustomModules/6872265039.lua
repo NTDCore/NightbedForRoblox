@@ -116,7 +116,7 @@ end
 		Function = function(callback)
 			AutoQueue["Enabled"] = callback
 			if AutoQueue["Enabled"] then
-			spawn(function()
+			task.spawn(function()
 				repeat
 					print("Teleported 1")
 					task.wait(AutoQueueDelay["Value"])
@@ -153,7 +153,7 @@ end
 		end
 	end
 	})
-	AutoQueueMode = Sections["AutoQueue"].CreateDropDown({
+	AutoQueueMode = Sections["AutoQueue"].CreateDropdown({
 		["Name"] = "Mode",
 		["HoverText"] = "Mode queue that you want.",
 		["List"] = QueueTypes,
