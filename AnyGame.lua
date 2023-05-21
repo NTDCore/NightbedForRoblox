@@ -141,7 +141,7 @@ runFunction(function()
             end
         until not p or p.Parent ~= torso.Parent
     end
-	local Cape {Enabled = false}
+	local Cape = {Enabled = false}
 	Cape = Sections["Cape"].CreateToggle({
 		Name = "Cape",
 		Function = function(callback)
