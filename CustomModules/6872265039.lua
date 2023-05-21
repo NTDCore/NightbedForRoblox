@@ -119,7 +119,7 @@ end
 			task.spawn(function()
 				repeat
 					print("Teleported 1")
-					task.wait(AutoQueueDelay["Value"])
+					task.wait(AutoQueueMode["Value"])
 					QueueStart = false
 					if bedwars.ClientStoreHandler:getState().Party then
 						repeat task.wait() until #bedwars.ClientStoreHandler:getState().Party.members >= AutoQueue["Enabled"] == false
