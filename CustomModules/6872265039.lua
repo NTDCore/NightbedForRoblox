@@ -3,6 +3,8 @@ local kavo = shared.kavogui
 local entityLibrary = shared.vapeentity
 local FunctionsLibrary = shared.funcslib
 
+local runFunction = function(func) func() end
+
 local players = game:GetService("Players")
 local lplr = players.LocalPlayer
 local repstorage = game:GetService("ReplicatedStorage")
@@ -19,7 +21,7 @@ local function getremote(tab)
 	return ""
 end
 
-FunctionsLibrary["runFunction"](function()
+runFunction(function()
     local flaggedremotes = {"SelfReport"}
         local Flamework = require(repstorage["rbxts_include"]["node_modules"]["@flamework"].core.out).Flamework
 				repeat task.wait() until Flamework.isInitialized
@@ -66,7 +68,7 @@ local Sections = {
 	["AutoQueue"] = Tabs["Blatant"].CreateSection("AutoQueue")
 }
 
-FunctionsLibrary.runFunction(function()
+runFunction(function()
 	local Sprint = {["Enabled"] = false}
 	Sprint = Sections["Sprint"].CreateToggle({
 		["Name"] = "Sprint",
@@ -89,7 +91,7 @@ FunctionsLibrary.runFunction(function()
 	})
 end)
 
-FunctionsLibrary.runFunction(function()
+runFunction(function()
 local function findfrom(name)
 	for i,v in pairs(bedwars.QueueMeta) do 
 		if v.title == name and i:find("voice") == nil then
