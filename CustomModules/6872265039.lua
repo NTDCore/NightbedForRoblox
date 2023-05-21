@@ -118,8 +118,8 @@ end
 			if AutoQueue["Enabled"] then
 			task.spawn(function()
 				repeat
-					print("Teleported 1")
-					task.wait(AutoQueueMode["Value"])
+					--print("Teleported 1")
+					task.wait(AutoQueueDelay["Value"])
 					QueueStart = false
 					if bedwars.ClientStoreHandler:getState().Party then
 						repeat task.wait() until #bedwars.ClientStoreHandler:getState().Party.members >= AutoQueue["Enabled"] == false
@@ -158,17 +158,20 @@ end
 		["HoverText"] = "Mode queue that you want.",
 		["List"] = QueueTypes,
 		["Function"] = function(val)
-		if AutoQueue["Enabled"] and QueueStart == false then
-			AutoQueue.ToggleButton(false)
-			AutoQueue.ToggleButton(true)
+			AutoQueueMode["Value"] = val
+			if AutoQueue["Enabled"] and QueueStart == false then
+				AutoQueue.ToggleButton(false)
+				AutoQueue.ToggleButton(true)
+			end
 		end
-	end
 	})
 	AutoQueueDelay = Sections["AutoQueue"].CreateSlider({
 		["Name"] = "Delay",
 		["Min"] = 1,
 		["Max"] = 10,
 		["Default"] = 1,
-		["Function"] = function(val) end
+		["Function"] = function(val) 
+			AutoQueueDelay["Value"] = val
+		end
 	})
 end)
