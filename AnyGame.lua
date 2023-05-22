@@ -27,7 +27,7 @@ local Tabs = {
 	["World"] = win.CreateTab("World"),
 	["Settings"] = win.CreateTab("Settings")
 }
-,local Sections = {
+local Sections = {
 	["InfiniteJump"] = Tabs["Blatant"].CreateSection("InfiniteJump"),
 	["Speed"] = Tabs["Blatant"].CreateSection("Speed"),
 	["Cape"] = Tabs["Render"].CreateSection("Cape")
