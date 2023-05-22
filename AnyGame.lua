@@ -15,6 +15,8 @@ local win = kavo:CreateWindow({
 	["Theme"] = "Luna"
 })
 
+local Settings = shared.Settings
+
 local runFunction = function(func) func() end
 
 local Tabs = {
