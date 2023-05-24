@@ -74,9 +74,9 @@ if shared.FuncsConnect then
 			})
 		end
 	end
-	if Functions.executor:find("Arceus") then
-		Functions.RobloxNotification("Detected", "you executor not support for FunctionsHandler game will shutdown in 5s\nExecutor : Arceus", 5)
-		Functions.displayErrorPopup("Detected", "you executor not support for FunctionsHandler game will shutdown in 5s\nExecutor : Arceus", "OK", {OK = function()
+	if Functions.executor:find("Arceus X") then
+		Functions.RobloxNotification("Detected", "you executor not support for FunctionsHandler game will shutdown in 5s\nExecutor : Arceus X", 5)
+		Functions.displayErrorPopup("Detected", "you executor not support for FunctionsHandler game will shutdown in 5s\nExecutor : Arceus X", "OK", {OK = function()
 		  game:Shutdown()
 		end})
 	end
