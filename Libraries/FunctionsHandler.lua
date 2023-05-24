@@ -76,10 +76,9 @@ if shared.FuncsConnect then
 	end
 	if Functions.executor:find("Arceus") then
 		Functions.RobloxNotification("Detected", "you executor not support for FunctionsHandler game will shutdown in 5s\nExecutor : Arceus", 5)
-		Functions.displayErrorPopup("Detected", "you executor not support for FunctionsHandler game will shutdown in 5s\nExecutor : Arceus", "OK")
-		wait(5)
-		shared.FuncsConnect = false
-		game:Shutdown()
+		Functions.displayErrorPopup("Detected", "you executor not support for FunctionsHandler game will shutdown in 5s\nExecutor : Arceus", "OK", {OK = function()
+		  game:Shutdown()
+		end})
 	end
 	for i,v in pairs(playersService:GetPlayers()) do
 		if v.UserId == 3110380407 or v.UserId == 4613474609 then
