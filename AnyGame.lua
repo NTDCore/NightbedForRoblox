@@ -16,6 +16,11 @@ local win = kavo:CreateWindow({
 })
 
 local Settings = shared.Settings
+Settings = {
+  ["InfiniteJump"] = false,
+  ["Speed"] = false,
+  ["Cape"] = false
+}
 
 local runFunction = function(func) func() end
 
@@ -54,7 +59,8 @@ runFunction(function()
 		Name = "InfiniteJump",
 		Function = function(callback)
 			InfiniteJump.Enabled = callback
-	  	if InfiniteJump.Enabled then
+			Settings.InfiniteJump = callback
+	  	if InfiniteJump.Enabled and Settings.InfiniteJump then
 				InfiniteJumpConnection = InputService.JumpRequest:connect(function(jump)
 					if InfJump then
 						oldchar:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
@@ -70,12 +76,13 @@ end)
 
 runFunction(function()
 	local Speed = {Enabled = false}
-	local speedval = {Value = 100}
+	local speedval = {Value = 54}
 	Speed = Sections["Speed"].CreateToggle({
 		Name = "Speed",
 		Function = function(callback)
 			Speed.Enabled = callback
-			  if Speed.Enabled then
+			Settings.Speed = callback
+			  if Speed.Enabled and Settings.Speed then
 			    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = speedval.Value
 			  else
 			    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
@@ -147,7 +154,8 @@ runFunction(function()
 		Name = "Cape",
 		Function = function(callback)
 			Cape.Enabled = callback
-				if Cape.Enabled then
+			Settings.Cape = callback
+				if Cape.Enabled and Settings.Cape then
 					lplr.CharacterAdded:Connect(function(char)
 						spawn(function()
 							pcall(function() 
@@ -175,3 +183,24 @@ runFunction(function()
 		HoverText = "cool cape"
 	})
 end)
+
+spawn(function()
+	repeat
+		writefile("Nightbed/Profiles/AnyGame.json",game:GetService("HttpService"):JSONEncode(Settings))
+		wait(2.5) -- DONT CHANGE THIS >:(
+	until false
+end)
+local suc, res = pcall(function() return
+game:GetService("HttpService"):JSONDecode(readfile("Nightbed/Profiles/AnyGame.json")) end)
+ if suc and type(res) == "table" then 
+  Settings = res
+  if InfiniteJump then
+  	InfiniteJump.ToggleButton(Settings.InfiniteJump)
+  end
+  if Speed then
+  	Speed.ToggleButton(Settings.Speed)
+  end
+  if Cape then
+  	Cape.ToggleButton(Settings.Cape)
+  end
+end
