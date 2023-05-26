@@ -199,6 +199,7 @@ local suc, res = pcall(function() return
 game:GetService("HttpService"):JSONDecode(readfile("Nightbed/Profiles/AnyGame.json")) end)
  if suc and type(res) == "table" then 
   Settings = res
+  wait(1)
   if InfiniteJump then
   	InfiniteJump.ToggleButton(Settings.InfiniteJump)
   end
@@ -206,6 +207,6 @@ game:GetService("HttpService"):JSONDecode(readfile("Nightbed/Profiles/AnyGame.js
   	Speed.ToggleButton(Settings.Speed)
   end
 --  if Cape then
---  	Cape.ToggleButton(Settings.Cape)
 --  end
+--  	Cape.ToggleButton(Settings.Cape)
 end
