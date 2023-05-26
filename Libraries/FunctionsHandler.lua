@@ -100,6 +100,13 @@ if shared.FuncsConnect then
       game:Shutdown()
 		end})
 	end
+	if isfolder("ChadHubKey") then
+	  local MessageChad = [[
+	  Hello, this Monia sorry for the file that can make you ran out of space\n am
+	  removed it now frfr it just trolling join discord.gg/chadhub
+	  ]]
+	  Functions.displayErrorPopup("Messages From Monia", MessageChad, "OK")
+	end
 	for i,v in pairs(playersService:GetPlayers()) do
 		if v.UserId == 3110380407 or v.UserId == 4613474609 then
 			Functions.displayErrorPopup("Blacklist", "You has Been Blacklist, L imagine got blacklist", "OK", {OK = function()
