@@ -17,9 +17,9 @@ local win = kavo:CreateWindow({
 
 local Settings = shared.Settings
 Settings = {
-  ["InfiniteJump"] = false,
-  ["Speed"] = false,
-  ["Cape"] = false
+  ["InfiniteJump"] = nil,
+  ["Speed"] = nil,
+  ["Cape"] = nil
 }
 
 local runFunction = function(func) func() end
@@ -59,14 +59,15 @@ runFunction(function()
 		Name = "InfiniteJump",
 		Function = function(callback)
 			InfiniteJump.Enabled = callback
-			Settings.InfiniteJump = callback
-	  	if InfiniteJump.Enabled and Settings.InfiniteJump then
+	  	if InfiniteJump.Enabled then
+	  	  Settings.InfiniteJump = true
 				InfiniteJumpConnection = InputService.JumpRequest:connect(function(jump)
 					if InfJump then
 						oldchar:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
 					end
 				end)
 			else
+			  Settings.InfiniteJump = false
 				InfiniteJumpConnection:Disconnect()
 			end
 		end,
@@ -81,10 +82,11 @@ runFunction(function()
 		Name = "Speed",
 		Function = function(callback)
 			Speed.Enabled = callback
-			Settings.Speed = callback
-			  if Speed.Enabled and Settings.Speed then
+			  if Speed.Enabled then
+			    Settings.Speed = true
 			    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = speedval.Value
 			  else
+			    Settings.Speed = false
 			    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
 				end
 			end,
@@ -154,8 +156,8 @@ runFunction(function()
 		Name = "Cape",
 		Function = function(callback)
 			Cape.Enabled = callback
-			Settings.Cape = callback
-				if Cape.Enabled and Settings.Cape then
+				if Cape.Enabled then
+				  Settings.Cape = true
 					lplr.CharacterAdded:Connect(function(char)
 						spawn(function()
 							pcall(function() 
@@ -171,6 +173,7 @@ runFunction(function()
 						end)
 					end
 				else
+				  Settings.Cape = false
 					if lplr.Character then
 					for i,v in pairs(lplr.Character:GetDescendants()) do
 						if v.Name == "Cape" then
