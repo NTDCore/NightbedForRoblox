@@ -18,8 +18,8 @@ local win = kavo:CreateWindow({
 local Settings = shared.Settings
 Settings = {
   ["InfiniteJump"] = nil,
-  ["Speed"] = nil,
-  ["Cape"] = nil
+  ["Speed"] = nil
+  --["Cape"] = nil
 }
 
 local runFunction = function(func) func() end
@@ -34,8 +34,8 @@ local Tabs = {
 }
 local Sections = {
 	["InfiniteJump"] = Tabs["Blatant"].CreateSection("InfiniteJump"),
-	["Speed"] = Tabs["Blatant"].CreateSection("Speed"),
-	["Cape"] = Tabs["Render"].CreateSection("Cape")
+	["Speed"] = Tabs["Blatant"].CreateSection("Speed")
+--	["Cape"] = Tabs["Render"].CreateSection("Cape")
 }
 
 function createnotification(Titlez, Textz, Dur)
@@ -94,6 +94,7 @@ runFunction(function()
 	})
 end)
 
+--[[
 runFunction(function()
 	function Cape(char, texture)
         for i,v in pairs(char:GetDescendants()) do
@@ -186,11 +187,12 @@ runFunction(function()
 		HoverText = "cool cape"
 	})
 end)
+--]]
 
 spawn(function()
 	repeat
 		writefile("Nightbed/Profiles/AnyGame.json",game:GetService("HttpService"):JSONEncode(Settings))
-		wait(2.5) -- DONT CHANGE THIS >:(
+		wait(1) -- DONT CHANGE THIS >:(
 	until false
 end)
 local suc, res = pcall(function() return
@@ -203,7 +205,7 @@ game:GetService("HttpService"):JSONDecode(readfile("Nightbed/Profiles/AnyGame.js
   if Speed then
   	Speed.ToggleButton(Settings.Speed)
   end
-  if Cape then
-  	Cape.ToggleButton(Settings.Cape)
-  end
+--  if Cape then
+--  	Cape.ToggleButton(Settings.Cape)
+--  end
 end
