@@ -29,10 +29,10 @@ local Tabs = {
 	["Blatant"] = win.CreateTab("Blatant"),
 	["Render"] = win.CreateTab("Render"),
 	["Utility"] = win.CreateTab("Utility"),
-	["World"] = win.CreateTab("World"),
-	["Settings"] = win.CreateTab("Settings")
+	["World"] = win.CreateTab("World")
 }
-local Sections = {
+local Sections = shared.SectionsLoaded
+Sections = {
 	["InfiniteJump"] = Tabs["Blatant"].CreateSection("InfiniteJump"),
 	["Speed"] = Tabs["Blatant"].CreateSection("Speed")
 --	["Cape"] = Tabs["Render"].CreateSection("Cape")
