@@ -15,14 +15,12 @@ local win = kavo:CreateWindow({
 	["Theme"] = "Luna"
 })
 
-local Settings = shared.Settings
-Settings = {
+local Settings = {
   ["InfiniteJump"] = nil,
   ["Speed"] = {
     ["Enabled"] = nil,
     ["SpeedVal"] = 54
   }
-  --["Cape"] = nil
 }
 
 local runFunction = function(func) func() end
@@ -195,14 +193,14 @@ end)
 spawn(function()
 	repeat
 		writefile("Nightbed/Profiles/AnyGame.json",game:GetService("HttpService"):JSONEncode(Settings))
-		wait(1) -- DONT CHANGE THIS >:(
+		wait(1.5) -- DONT CHANGE THIS >:(
 	until false
 end)
 local suc, res = pcall(function() return
 game:GetService("HttpService"):JSONDecode(readfile("Nightbed/Profiles/AnyGame.json")) end)
  if suc and type(res) == "table" then 
   Settings = res
-  wait(1)
+  wait()
   if InfiniteJump then
   	InfiniteJump.ToggleButton(Settings["InfiniteJump"])
   end
