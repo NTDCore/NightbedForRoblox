@@ -1,5 +1,5 @@
 	local kavo = {}
-
+	
 	local tween = game:GetService("TweenService")
 	local tweeninfo = TweenInfo.new
 	local input = game:GetService("UserInputService")
@@ -47,7 +47,7 @@
 		tween:Create(obj, tweeninfo(duration, ...), properties):Play()
 	end
 
-
+  shared.KavoLoaded = true
 	local themes = {
 		SchemeColor = Color3.fromRGB(74, 99, 135),
 		Background = Color3.fromRGB(36, 37, 43),
@@ -308,6 +308,7 @@
 				Position = UDim2.new(0, Main.AbsolutePosition.X + (Main.AbsoluteSize.X / 2), 0, Main.AbsolutePosition.Y + (Main.AbsoluteSize.Y / 2))
 			}):Play()
 			wait(1)
+			shared.KavoLoaded = false
 			ScreenGui:Destroy()
 		end)
 
