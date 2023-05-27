@@ -18,7 +18,10 @@ local win = kavo:CreateWindow({
 local Settings = shared.Settings
 Settings = {
   ["InfiniteJump"] = nil,
-  ["Speed"] = nil
+  ["Speed"] = {
+    ["Enabled"] = nil,
+    ["SpeedVal"] = 54
+  }
   --["Cape"] = nil
 }
 
@@ -60,14 +63,14 @@ runFunction(function()
 		Function = function(callback)
 			InfiniteJump.Enabled = callback
 	  	if InfiniteJump.Enabled then
-	  	  Settings.InfiniteJump = true
+	  	  Settings["InfiniteJump"] = true
 				InfiniteJumpConnection = InputService.JumpRequest:connect(function(jump)
 					if InfJump then
 						oldchar:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
 					end
 				end)
 			else
-			  Settings.InfiniteJump = false
+			  Settings["InfiniteJump"] = false
 				InfiniteJumpConnection:Disconnect()
 			end
 		end,
@@ -83,10 +86,10 @@ runFunction(function()
 		Function = function(callback)
 			Speed.Enabled = callback
 			  if Speed.Enabled then
-			    Settings.Speed = true
+			    Settings["Speed"]["Enabled"] = true
 			    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = speedval.Value
 			  else
-			    Settings.Speed = false
+			    Settings["Speed"]["Enabled"] = false
 			    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
 				end
 			end,
@@ -201,10 +204,10 @@ game:GetService("HttpService"):JSONDecode(readfile("Nightbed/Profiles/AnyGame.js
   Settings = res
   wait(1)
   if InfiniteJump then
-  	InfiniteJump.ToggleButton(Settings.InfiniteJump)
+  	InfiniteJump.ToggleButton(Settings["InfiniteJump"])
   end
   if Speed then
-  	Speed.ToggleButton(Settings.Speed)
+  	Speed.ToggleButton(Settings["Speed"]["Enabled"])
   end
 --  if Cape then
 --  end
