@@ -1243,6 +1243,7 @@
 					local maxvalue = argstable["Max"]
 					local defaultvalue = argstable["Default"] or 0
 					local callback = argstable["Function"]
+			    local SliderFunction = {}
 
 					local sliderElement = Instance.new("TextButton")
 					local UICorner = Instance.new("UICorner")
@@ -1477,7 +1478,22 @@
 							wait(0)
 							viewDe = false
 						end
-					end)        
+					end)
+					function SliderFunction.SetSlider(val2)
+					  Value = val2
+					  pcall(function()
+					    callback(Value)
+					  end)
+					  val.Text = Value
+					  game.TweenService:Create(val, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+										TextTransparency = 1
+									}):Play()
+						sliderDrag:TweenSize(UDim2.new(0, math.clamp(mouse.X -
+						sliderDrag.AbsolutePosition.X or (val2 / maxvalue), 0, 149), 0, 6), "InOut", "Linear", 0.05,
+						true)
+						moveconnection:Disconnect()
+						releaseconnection:Disconnect()
+					end
 				end
 
 				function Elements.CreateDropdown(argstable)
