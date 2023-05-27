@@ -19,7 +19,7 @@ local Settings = {
   ["InfiniteJump"] = nil,
   ["Speed"] = {
     ["Enabled"] = nil,
-    ["SpeedVal"] = 54
+    ["Value"] = 54
   }
 }
 
@@ -198,7 +198,7 @@ spawn(function()
 end)
 local suc, res = pcall(function() return
 game:GetService("HttpService"):JSONDecode(readfile("Nightbed/Profiles/AnyGame.json")) end)
- if suc and type(res) == "table" then 
+if suc and type(res) == "table" then 
   Settings = res
   wait()
   if InfiniteJump then
@@ -206,6 +206,7 @@ game:GetService("HttpService"):JSONDecode(readfile("Nightbed/Profiles/AnyGame.js
   end
   if Speed then
   	Speed.ToggleButton(Settings["Speed"]["Enabled"])
+    speedval.Value = Settings["Speed"]["Value"]
   end
 --  if Cape then
 --  end
