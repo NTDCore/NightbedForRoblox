@@ -11,7 +11,10 @@ shared.kavogui = kavo
 local Sections = {}
 shared.SectionsLoaded = Sections
 
-local entityLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/Libraries/entityHandler.lua", true))()
+local entityLibrary =
+loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/Libraries/entityHandler.lua",
+true))()
+shared.vapeentity = entityLibrary
 local FunctionsLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Libraries/FunctionsHandler.lua", true))()
 shared.funcslib = FunctionsLibrary
 
