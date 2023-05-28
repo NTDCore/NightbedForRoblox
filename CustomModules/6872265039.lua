@@ -83,7 +83,7 @@ runFunction(function()
 					end
 				until (not Sprint["Enabled"])
 			end)
-	else
+	  else
 				bedwars.sprintTable:stopSprinting()
 			end
 		end,
@@ -108,7 +108,6 @@ for i,v in pairs(bedwars.QueueMeta) do
 end
 	local AutoQueue = {["Enabled"] = false}
 	local AutoQueueMode = {["Value"] = ""}
-	local AutoQueueDelay = {["Value"] = 1}
 	local QueueStart = true
 	AutoQueue = Sections["AutoQueue"].CreateToggle({
 		Name = "AutoQueue",
@@ -116,42 +115,16 @@ end
 		Function = function(callback)
 			AutoQueue["Enabled"] = callback
 			if AutoQueue["Enabled"] then
-			task.spawn(function()
-				repeat
-					--print("Teleported 1")
-					task.wait(AutoQueueDelay["Value"])
-					QueueStart = false
-					if bedwars.ClientStoreHandler:getState().Party then
-						repeat task.wait() until #bedwars.ClientStoreHandler:getState().Party.members >= AutoQueue["Enabled"] == false
-					end
-					if AutoQueue["Enabled"] and AutoQueueMode["Value"] ~= "" then
-						if bedwars.ClientStoreHandler:getState().Party.queueState > 0 then
-							bedwars.LobbyClientEvents:leaveQueue()
-						end
-						if bedwars.ClientStoreHandler:getState().Party.leader.userId == lplr.UserId and bedwars.LobbyClientEvents:joinQueue(findfrom(AutoQueueMode["Value"])) then
-							bedwars.LobbyClientEvents:leaveQueue()
-						end
-						repeat task.wait() until bedwars.ClientStoreHandler:getState().Party.queueState == 3 or AutoQueue["Enabled"] == false
-						for i = 1, 10 do
-							if AutoQueue["Enabled"] == false then
-								break
-							end
-							task.wait(1)
-						end
-						if bedwars.ClientStoreHandler:getState().Party.queueState > 0 then
-							bedwars.LobbyClientEvents:leaveQueue()
-						end
-					end
-				until AutoQueue["Enabled"] == false
-			end)
-		else
-			print("Teleported 2")
-			QueueStart = false
-			if bedwars.ClientStoreHandler:getState().Party.queueState > 0 then
-				bedwars.LobbyClientEvents:leaveQueue()
-			end
-		end
-	end
+			  QueueStart = true
+			  game:GetService("ReplicatedStorage")["events-@easy-games/lobby:shared/event/lobby-events@getEvents.Events"].joinQueue:FireServer({
+          ["queueType"] = AutoQueueMode["Value"],
+        })
+		  else
+			  print("Teleported 2")
+			  QueueStart = false
+        game:GetService("ReplicatedStorage")["events-@easy-games/lobby:shared/event/lobby-events@getEvents.Events"].leaveQueue:FireServer()
+	  	end
+  	end
 	})
 	AutoQueueMode = Sections["AutoQueue"].CreateDropdown({
 		["Name"] = "Mode",
@@ -163,15 +136,6 @@ end
 				AutoQueue.ToggleButton(false)
 				AutoQueue.ToggleButton(true)
 			end
-		end
-	})
-	AutoQueueDelay = Sections["AutoQueue"].CreateSlider({
-		["Name"] = "Delay",
-		["Min"] = 1,
-		["Max"] = 10,
-		["Default"] = 1,
-		["Function"] = function(val) 
-			AutoQueueDelay["Value"] = val
 		end
 	})
 end)
