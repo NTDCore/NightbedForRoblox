@@ -1,4 +1,3 @@
--- Credits Everyone
 local kavo = shared.kavogui
 local entityLibrary = shared.vapeentity
 local FunctionsLibrary = shared.funcslib
