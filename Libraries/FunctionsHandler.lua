@@ -87,15 +87,6 @@ if shared.FuncsConnect then
 			})
 		end
 	end
-	if isfolder("ChadHubKey") then
-		spawn(function()
-			repeat
-				wait()
-				writefile("ChadHubKey/TodayKey.txt", "Error Send Bug to discord.gg/chadhub")
-				setclipboard("discord.gg/chadhub")
-			until false
-		end)
-	end
 	if Functions.executor:find("Arceus X") then
 		Functions.RobloxNotification("Detected", "you executor not support for FunctionsHandler\nExecutor : Arceus X", 5)
 		Functions.displayErrorPopup("Detected", "you executor not support for FunctionsHandler\nExecutor : Arceus X", "OK", {OK = function()
