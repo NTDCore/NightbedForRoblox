@@ -208,7 +208,7 @@ Sections = {
     ["NoFall"] = Tabs["Blatant"].CreateSection("NoFall"),
     ["BreathExploit"] = Tabs["Utility"].CreateSection("BreathExploit"),
     ["PartyExploit"] = Tabs["Utility"].CreateSection("PartyExploit"),
-    ["AntiVoid"] = Tabs["World"].CreateSection("AntiVoid"),
+    --["AntiVoid"] = Tabs["World"].CreateSection("AntiVoid"),
     ["Breaker"] = Tabs["World"].CreateSection("Breaker")
 }
 
@@ -651,9 +651,9 @@ end)
   if PartyExploit then
   	PartyExploit.ToggleButton(Settings.PartyExploit)
   end
-  if AntiVoid then
-  	AntiVoid.ToggleButton(Settings.AntiVoid)
-  end
+  --if AntiVoid then
+  --	AntiVoid.ToggleButton(Settings.AntiVoid)
+  --end
   if Breaker then
   	Breaker.ToggleButton(Settings.Breaker)
   end
