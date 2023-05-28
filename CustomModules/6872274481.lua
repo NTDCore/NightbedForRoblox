@@ -1,4 +1,9 @@
-local kavo = shared.kavogui
+local kavo
+if isfile("Nightbed/Libraries/kavo.lua") then
+  kavo = loadstring(readfile("Nightbed/Libraries/kavo.lua"))()
+else
+  kavo = shared.kavogui
+end
 local entityLibrary = shared.vapeentity
 local FunctionsLibrary = shared.funcslib
 
@@ -217,7 +222,7 @@ local Settings = {
 	  Range = 23,
 	  NoSwing = false,
 	  NoSound = false
-	}
+	},
 	NoFall = false,
 	BreathExploit = false,
 	PartyExploit = false,
