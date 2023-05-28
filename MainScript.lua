@@ -1,4 +1,3 @@
--- Thanks For KenzuX for helping me about the fucking fix frfr
 repeat task.wait() until game:IsLoaded()
 local isfile = isfile or function(path)
 	local suc, res = pcall(function() return readfile(path) end)
