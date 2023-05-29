@@ -20,7 +20,8 @@ local Settings = {
   ["Speed"] = {
     ["Enabled"] = nil,
     ["Value"] = 54
-  }
+  },
+  ["Cape"] = nil
 }
 
 local runFunction = function(func) func() end
@@ -35,8 +36,8 @@ local Tabs = {
 local Sections = shared.SectionsLoaded
 Sections = {
 	["InfiniteJump"] = Tabs["Blatant"].CreateSection("InfiniteJump"),
-	["Speed"] = Tabs["Blatant"].CreateSection("Speed")
---	["Cape"] = Tabs["Render"].CreateSection("Cape")
+	["Speed"] = Tabs["Blatant"].CreateSection("Speed"),
+	["Cape"] = Tabs["Render"].CreateSection("Cape")
 }
 
 function createnotification(Titlez, Textz, Dur)
@@ -95,7 +96,7 @@ runFunction(function()
 	})
 end)
 
---[[
+--
 runFunction(function()
 	function Cape(char, texture)
         for i,v in pairs(char:GetDescendants()) do
@@ -159,23 +160,23 @@ runFunction(function()
 		Function = function(callback)
 			Cape.Enabled = callback
 				if Cape.Enabled then
-				  Settings.Cape = true
+				  Settings["Cape"] = true
 					lplr.CharacterAdded:Connect(function(char)
 						spawn(function()
 							pcall(function() 
-								Cape(char, ("rbxthumb://type=Asset&id=" .. 11121170269 .. "&w=420&h=420"))
+								Cape(char, ("rbxthumb://type=Asset&id=" .. 13587951030 .. "&w=420&h=420"))
 							end)
 						end)
 					end)
 					if lplr.Character then
 						spawn(function()
 							pcall(function() 
-								Cape(lplr.Character, ("rbxthumb://type=Asset&id=" .. 11121170269 .. "&w=420&h=420"))
+								Cape(lplr.Character, ("rbxthumb://type=Asset&id=" .. 13587951030 .. "&w=420&h=420"))
 							end)
 						end)
 					end
 				else
-				  Settings.Cape = false
+				  Settings["Cape"] = false
 					if lplr.Character then
 					for i,v in pairs(lplr.Character:GetDescendants()) do
 						if v.Name == "Cape" then
@@ -213,7 +214,7 @@ if suc and type(res) == "table" then
   	Speed.ToggleButton(Settings["Speed"]["Enabled"])
     speedval.Value = Settings["Speed"]["Value"]
   end
---  if Cape then
---  end
---  	Cape.ToggleButton(Settings.Cape)
+  if Cape then
+    Cape.ToggleButton(Settings["Cape"])
+  end
 end
