@@ -117,7 +117,7 @@ end
 			if AutoQueue["Enabled"] then
 			  QueueStart = true
 			  game:GetService("ReplicatedStorage")["events-@easy-games/lobby:shared/event/lobby-events@getEvents.Events"].joinQueue:FireServer({
-          ["queueType"] = AutoQueueMode["Value"],
+          ["queueType"] = findfrom(AutoQueueMode["Value"]),
         })
 		  else
 			  print("Teleported 2")
