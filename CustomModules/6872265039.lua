@@ -75,15 +75,15 @@ runFunction(function()
 		["Function"] = function(callback)
 			Sprint["Enabled"] = callback
 			if Sprint["Enabled"] then
-			task.spawn(function()
-				repeat
-					task.wait()
-					if (not bedwars.sprintTable.sprinting) then
-						bedwars.sprintTable:startSprinting()
-					end
-				until (not Sprint["Enabled"])
-			end)
-	  else
+		  	task.spawn(function()
+  				repeat
+			  		task.wait()
+  					if (not bedwars.sprintTable.sprinting) then
+  						bedwars.sprintTable:startSprinting()
+		  			end
+  				until (not Sprint["Enabled"])
+  			end)
+  	  else
 				bedwars.sprintTable:stopSprinting()
 			end
 		end,
@@ -92,20 +92,20 @@ runFunction(function()
 end)
 
 runFunction(function()
-local function findfrom(name)
-	for i,v in pairs(bedwars.QueueMeta) do 
-		if v.title == name and i:find("voice") == nil then
-			return i
-		end
-	end
-	return "bedwars_to1"
-end
-local QueueTypes = {}
-for i,v in pairs(bedwars.QueueMeta) do 
-	if v.title:find("Test") == nil then
-		table.insert(QueueTypes, v.title..(i:find("voice") and " (VOICE)" or "")) 
-	end
-end
+  local function findfrom(name)
+  	for i,v in pairs(bedwars.QueueMeta) do 
+  		if v.title == name and i:find("voice") == nil then
+  			return i
+  		end
+  	end
+  	return "bedwars_to1"
+  end
+  local QueueTypes = {}
+  for i,v in pairs(bedwars.QueueMeta) do 
+  	if v.title:find("Test") == nil then
+  		table.insert(QueueTypes, v.title..(i:find("voice") and " (VOICE)" or "")) 
+  	end
+  end
 	local AutoQueue = {["Enabled"] = false}
 	local AutoQueueMode = {["Value"] = ""}
 	local QueueStart = true
