@@ -16,12 +16,12 @@ local win = kavo:CreateWindow({
 })
 
 local Settings = {
-  ["InfiniteJump"] = nil,
+  ["InfiniteJump"] = false,
   ["Speed"] = {
-    ["Enabled"] = nil,
-    ["Value"] = 54
+    ["Enabled"] = false,
+    ["Value"] = 54,
   },
-  ["Cape"] = nil
+  ["Cape"] = false
 }
 
 local runFunction = function(func) func() end
@@ -164,14 +164,14 @@ runFunction(function()
 					lplr.CharacterAdded:Connect(function(char)
 						spawn(function()
 							pcall(function() 
-								Cape(char, ("rbxthumb://type=Asset&id=" .. 13587951030 .. "&w=420&h=420"))
+								Cape(char, "rbxassetid://13587951030")--("rbxthumb://type=Asset&id=" .. 13587951030 .. "&w=420&h=420"))
 							end)
 						end)
 					end)
 					if lplr.Character then
 						spawn(function()
 							pcall(function() 
-								Cape(lplr.Character, ("rbxthumb://type=Asset&id=" .. 13587951030 .. "&w=420&h=420"))
+								Cape(lplr.Character, "rbxassetid://13587951030") --("rbxthumb://type=Asset&id=" .. 13587951030 .. "&w=420&h=420"))
 							end)
 						end)
 					end
