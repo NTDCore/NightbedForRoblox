@@ -214,7 +214,4 @@ if suc and type(res) == "table" then
   	Speed.ToggleButton(Settings["Speed"]["Enabled"])
     speedval.Value = Settings["Speed"]["Value"]
   end
-  if Cape then
-    Cape.ToggleButton(Settings["Cape"])
-  end
 end
