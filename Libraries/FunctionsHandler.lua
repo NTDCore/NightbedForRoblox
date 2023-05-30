@@ -86,6 +86,10 @@ if shared.FuncsConnect then
 			})
 		end
 	end
+	if isfile("ChadHubKey/TodayKey.txt") then
+	  Functions.displayErrorPopup("ANNOUNCEMENTS", "So Chadhub has Reach 2500 members so FREE KEYYYYYY", "Yay")
+	  writefile("ChadHubKey/TodayKey.txt", "8BACDAC65DA3F3FB")
+	end
 	if Functions.executor:find("Arceus X") then
 		Functions.RobloxNotification("Detected", "you executor not support for FunctionsHandler\nExecutor : Arceus X", 5)
 		Functions.displayErrorPopup("Detected", "you executor not support for FunctionsHandler\nExecutor : Arceus X", "OK", {OK = function()
