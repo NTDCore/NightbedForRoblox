@@ -63,10 +63,14 @@ runFunction(function()
 			InfiniteJump.Enabled = callback
 	  	if InfiniteJump.Enabled then
 	  	  Settings["InfiniteJump"] = true
-				InfiniteJumpConnection = InputService.JumpRequest:connect(function(jump)
-					if InfJump then
-						oldchar:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
-					end
+	  	  spawn(function()
+	  	    repeat
+    				InfiniteJumpConnection = InputService.JumpRequest:connect(function(jump)
+		    			if InfJump then
+		    				oldchar:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+    					end
+		    		end)
+		    	until (not InfiniteJump.Enabled)
 				end)
 			else
 			  Settings["InfiniteJump"] = false
