@@ -18,6 +18,9 @@ if shared.FuncsConnect then
 		Functions.runFunction = function(func)
 			func()
 		end
+		Functions.randomGUID = function(state)
+		  game:GetService("HttpService"):GenerateGUID(state)
+		end
 		Functions.ChatMessage = function(Text, UserRe)
 			UserRe = UserRe or "All"
 			game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Text, UserRe)
