@@ -73,11 +73,9 @@ function MainLoaded()
 end
 --]]
 
-if not shared.NightbedLoaded then
+task.spawn(function()
   MainLoaded()
-  task.wait(0.1)
-  shared.NightbedLoaded = true
-end
+end)
 
 if not shared.FuncsConnect then
 	repeat
