@@ -612,8 +612,8 @@ runcode(function()
 end)
 spawn(function()
 	repeat
+	  wait(0.5)
 		writefile("Nightbed/Profiles/6872274481.json",game:GetService("HttpService"):JSONEncode(Settings))
-		wait(1)
 	until false
 end)
 local suc, res = pcall(function()
