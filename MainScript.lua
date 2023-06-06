@@ -5,7 +5,12 @@ local isfile = isfile or function(path)
 end
 
 local kavo
-kavo = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Libraries/kavo.lua", true))()
+
+if isfile("Nightbed/Libraries/kavo.lua") then
+	kavo = loadstring(readfile("Nightbed/Libraries/kavo.lua"))()
+else
+	kavo = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Libraries/kavo.lua", true))()
+end
 shared.kavogui = kavo
 local Sections = {}
 shared.SectionsLoaded = Sections
