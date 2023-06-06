@@ -134,6 +134,7 @@ runFunction(function()
 			AutoQueueMode["Value"] = val
 			if AutoQueue["Enabled"] and QueueStart == false then
 				AutoQueue.ToggleButton(false)
+				task.wait()
 				AutoQueue.ToggleButton(true)
 			end
 		end
