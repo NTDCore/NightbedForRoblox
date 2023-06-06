@@ -1,9 +1,4 @@
-local kavo
-if isfile("Nightbed/Libraries/kavo.lua") then
-  kavo = loadstring(readfile("Nightbed/Libraries/kavo.lua"))()
-else
-  kavo = shared.kavogui
-end
+local kavo = shared.kavogui
 local entityLibrary = shared.vapeentity
 local FunctionsLibrary = shared.funcslib
 
