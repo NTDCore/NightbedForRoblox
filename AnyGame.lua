@@ -61,7 +61,7 @@ runFunction(function()
 		Name = "InfiniteJump",
 		Function = function(callback)
 			InfiniteJump.Enabled = callback
-			Settings["InfiniteJump"] = callback
+			Settings["InfiniteJump"] = InfiniteJump.Enabled
 	  	if InfiniteJump.Enabled then
 	  	  Settings["InfiniteJump"] = true
 	  	  spawn(function()
@@ -197,6 +197,10 @@ runFunction(function()
 end)
 --]]
 
+function SaveSettings()
+  writefile("Nightbed/Profiles/AnyGame.txt", game:GetService("HttpService"):JSONEncode(Settings))
+end
+
 if not shared.KavoLoaded then
   lplr.Character.Humanoid.WalkSpeed = 16
   InfiniteJumpConnection:Disconnect()
@@ -204,7 +208,8 @@ end
 
 spawn(function()
 	repeat
-		writefile("Nightbed/Profiles/AnyGame.json",game:GetService("HttpService"):JSONEncode(Settings))
+	  	--writefile("Nightbed/Profiles/AnyGame.json",game:GetService("HttpService"):JSONEncode(Settings))
+		  SaveSettings()
 		wait(2.5) -- DONT CHANGE THIS >:(
 	until false
 end)
