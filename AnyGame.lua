@@ -64,13 +64,11 @@ runFunction(function()
 	  	if InfiniteJump.Enabled then
 	  	  Settings["InfiniteJump"] = true
 	  	  spawn(function()
-	  	    repeat
-    				InfiniteJumpConnection = InputService.JumpRequest:connect(function(jump)
-		    			if InfJump then
-		    				oldchar:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
-    					end
-		    		end)
-		    	until (not InfiniteJump.Enabled)
+    			InfiniteJumpConnection = InputService.JumpRequest:connect(function(jump)
+		    		if InfJump then
+		    			oldchar:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+    				end
+		    	end)
 				end)
 			else
 			  Settings["InfiniteJump"] = false
@@ -197,7 +195,7 @@ end)
 --]]
 
 function SaveSettings()
-  writefile("Nightbed/Profiles/AnyGame.json", game:GetService("HttpService"):JSONEncode(Settings))
+  writefile("Nightbed/Profiles/AnyGame.json",game:GetService("HttpService"):JSONEncode(Settings))
 end
 
 if not shared.KavoLoaded then
@@ -209,7 +207,7 @@ spawn(function()
 	repeat
 	  --writefile("Nightbed/Profiles/AnyGame.json",game:GetService("HttpService"):JSONEncode(Settings))
 		SaveSettings()
-		wait(2.5) -- DONT CHANGE THIS >:(
+		wait(1.5) -- DONT CHANGE THIS >:(
 	until false
 end)
 local suc, res = pcall(function() return
