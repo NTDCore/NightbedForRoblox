@@ -61,6 +61,7 @@ runFunction(function()
 		Name = "InfiniteJump",
 		Function = function(callback)
 			InfiniteJump.Enabled = callback
+			Settings["InfiniteJump"] = callback
 	  	if InfiniteJump.Enabled then
 	  	  Settings["InfiniteJump"] = true
 	  	  spawn(function()
@@ -88,6 +89,7 @@ runFunction(function()
 		Name = "Speed",
 		Function = function(callback)
 			Speed.Enabled = callback
+			Settings["Speed"]["Enabled"] = callback
 			  if Speed.Enabled then
 			    Settings["Speed"]["Enabled"] = true
 			    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = speedval.Value
