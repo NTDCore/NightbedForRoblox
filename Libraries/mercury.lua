@@ -549,7 +549,7 @@ function Library:create(options)
 				UserInputService.Changed:Connect(function()
 					if UserInputService.UserInputState == Enum.UserInputState.End then
 						Input:disconnect()
-						Leace:disconnect()
+						Leave:disconnect()
 					end
 				end)
 			end)
