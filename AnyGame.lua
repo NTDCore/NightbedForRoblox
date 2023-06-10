@@ -205,7 +205,7 @@ end
 spawn(function()
 	repeat
 		writefile("Nightbed/Profiles/AnyGame.json",game:GetService("HttpService"):JSONEncode(Settings))
-		wait(1.5) -- DONT CHANGE THIS >:(
+		wait(2.5) -- DONT CHANGE THIS >:(
 	until false
 end)
 local suc, res = pcall(function() return
@@ -213,10 +213,10 @@ game:GetService("HttpService"):JSONDecode(readfile("Nightbed/Profiles/AnyGame.js
 if suc and type(res) == "table" then 
   Settings = res
   wait()
-  if InfiniteJump then
+  if InfiniteJump.Enabled then
   	InfiniteJump.ToggleButton(Settings["InfiniteJump"])
   end
-  if Speed then
+  if Speed.Enabled then
   	Speed.ToggleButton(Settings["Speed"]["Enabled"])
     speedval.Value = Settings["Speed"]["Value"]
   end
