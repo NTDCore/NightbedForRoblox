@@ -207,9 +207,9 @@ end
 
 spawn(function()
 	repeat
-	  	--writefile("Nightbed/Profiles/AnyGame.json",game:GetService("HttpService"):JSONEncode(Settings))
-		  SaveSettings()
-		wait(2.5) -- DONT CHANGE THIS >:(
+	  --writefile("Nightbed/Profiles/AnyGame.json",game:GetService("HttpService"):JSONEncode(Settings))
+		SaveSettings()
+		wait(1.5) -- DONT CHANGE THIS >:(
 	until false
 end)
 local suc, res = pcall(function() return
