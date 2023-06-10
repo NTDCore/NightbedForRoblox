@@ -210,6 +210,7 @@ Sections = {
     ["NoClickDelay"] = Tabs["Combat"].CreateSection("NoClickDelay"),
     ["Sprint"] = Tabs["Combat"].CreateSection("Sprint"),
     ["Velocity"] = Tabs["Combat"].CreateSection("Velocity"),
+    ["InfiniteJump"] = Tabs["Blatant"].CreateSection("InfiniteJump"),
     ["Killaura"] = Tabs["Blatant"].CreateSection("Killaura"),
     ["NoFall"] = Tabs["Blatant"].CreateSection("NoFall"),
     ["BreathExploit"] = Tabs["Utility"].CreateSection("BreathExploit"),
@@ -223,6 +224,7 @@ local Settings = {
 	HitFix = false,
 	NoClickDelay = false,
 	Sprint = false,
+	["InfiniteJump"] = false,
 	Killaura = {
 	  Enabled = false,
 	  Range = 23,
@@ -325,6 +327,32 @@ runcode(function()
 			end
 		end,
 		HoverText = "Set sprint to true."
+	})
+end)
+
+runFunction(function()
+  local InfiniteJumpConnection
+	local InfiniteJump = {Enabled = false}
+	local InfJump = true
+	InfiniteJump = Sections["InfiniteJump"].CreateToggle({
+		Name = "InfiniteJump",
+		Function = function(callback)
+			InfiniteJump.Enabled = callback
+	  	if InfiniteJump.Enabled then
+	  	  Settings["InfiniteJump"] = true
+	  	  spawn(function()
+    			InfiniteJumpConnection = InputService.JumpRequest:connect(function(jump)
+		    		if InfJump then
+		    			lplr.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+    				end
+		    	end)
+				end)
+			else
+			  Settings["InfiniteJump"] = false
+				InfiniteJumpConnection:Disconnect()
+			end
+		end,
+		HoverText = "Make you can jump any place"
 	})
 end)
 
