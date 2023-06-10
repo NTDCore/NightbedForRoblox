@@ -197,7 +197,7 @@ end)
 --]]
 
 function SaveSettings()
-  writefile("Nightbed/Profiles/AnyGame.txt", game:GetService("HttpService"):JSONEncode(Settings))
+  writefile("Nightbed/Profiles/AnyGame.json", game:GetService("HttpService"):JSONEncode(Settings))
 end
 
 if not shared.KavoLoaded then
@@ -209,7 +209,7 @@ spawn(function()
 	repeat
 	  --writefile("Nightbed/Profiles/AnyGame.json",game:GetService("HttpService"):JSONEncode(Settings))
 		SaveSettings()
-		wait(1.5) -- DONT CHANGE THIS >:(
+		wait(2.5) -- DONT CHANGE THIS >:(
 	until false
 end)
 local suc, res = pcall(function() return
