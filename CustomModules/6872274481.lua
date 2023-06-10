@@ -1,23 +1,7 @@
 local kavo = shared.kavogui
 local entityLibrary = shared.vapeentity
 local FunctionsLibrary = shared.funcslib
-local Settings = {
-	Velocity = false,
-	HitFix = false,
-	NoClickDelay = false,
-	Sprint = false,
-	Killaura = {
-	  Enabled = false,
-	  Range = 23,
-	  NoSwing = false,
-	  NoSound = false
-	},
-	NoFall = false,
-	BreathExploit = false,
-	PartyExploit = false,
-	AntiVoid = false,
-	Breaker = false
-}
+
 local runcode = function(func)
   func()
 end
@@ -207,492 +191,21 @@ local function getCurrentSword()
 	return sword, swordslot
 end
 
-if shared.MercuryEdition then
-	local Mercury = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Libraries/mercury.lua"))()
-	local GUI = Mercury:Create{
-		Name = "Nightbed"..(shared.NightbedPrivate and " PRIVATE" or ""),
-		Size = UDim2.fromOffset(600, 400),
-		Theme = Mercury.Themes.Luna,
-		Link = "https://github.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId
-	}
-	local Combat = GUI:Tab{
-    Name = "Combat",
-    Icon = "rbxassetid://8569322835"
-	}
-	local Blatant = GUI:Tab{
-    Name = "Blatant",
-    Icon = "rbxassetid://8569322835"
-	}
-	local Render = GUI:Tab{
-    Name = "Render",
-    Icon = "rbxassetid://8569322835"
-	}
-	local Utility = GUI:Tab{
-    Name = "Utility",
-    Icon = "rbxassetid://8569322835"
-	}
-	local World = GUI:Tab{
-    Name = "World",
-    Icon = "rbxassetid://8569322835"
-	}
-	runFunction(function()
-		local func
-		local func2
-		local Velocity = {Enabled = false}
-		Velocity = Combat:Toggle{
-			Name = "Velocity",
-			Description = "Remove Knockback."
-			Default = false,
-			Function = function(callback)
-				Velocity.Enabled = callback
-				if Velocity.Enabled then
-					Settings.Velocity = true
-					func = bedwars.KnockbackUtil.applyKnockbackDirection
-					func2 = bedwars.KnockbackUtil.applyKnockback
-					bedwars.KnockbackUtil.applyKnockbackDirection = function(...) end
-					bedwars.KnockbackUtil.applyKnockback = function(...) end
-				else
-					Settings.Velocity = false
-					bedwars.KnockbackUtil.applyKnockbackDirection = func
-					bedwars.KnockbackUtil.applyKnockback = func2
-				end
-			end
-		}
-	end)
-	
-	runcode(function()
-		local HitFix = {Enabled = false}
-		HitFix = Combat:Toggle{
-			Name = "HitFix",
-			Description = "Fixes the raycast function used for extra reach",
-			Default = false,
-			Function = function(callback)
-				HitFix.Enabled = callback
-				if HitFix.Enabled then
-					Settings.HitFix = true
-					debug.setconstant(bedwars.SwordController.swingSwordAtMouse, 27, "raycast")
-					debug.setupvalue(bedwars.SwordController.swingSwordAtMouse, 4, bedwars.QueryUtil)
-				else
-					Settings.HitFix = false
-					debug.setconstant(bedwars.QueueCard.render, 9, 0.01)
-					debug.setconstant(bedwars.SwordController.swingSwordAtMouse, 27, "Raycast")
-				end
-			end
-		}
-	end)
-
-	runcode(function()
-		local func
-		local NoClickDelay = {Enabled = false}
-		NoClickDelay = Combat:Toggle{
-			Name = "NoClickDelay",
-			Description = "Bypass cps limit.",
-			Default = false,
-			Function = function(callback)
-				NoClickDelay.Enabled = callback
-				if NoClickDelay.Enabled then
-					Settings.NoClickDelay = true
-					func = bedwars.SwordController.isClickingTooFast
-					bedwars.SwordController.isClickingTooFast = function(self)
-						self.lastSwing = tick()
-						return false
-					end
-				else
-					Settings.NoClickDelay = false
-					bedwars.SwordController.isClickingTooFast = func
-				end
-			end
-			Description = "Bypass cps limit."
-		}
-	end)
-
-	runcode(function()
-		local Sprint = {Enabled = false}
-		Sprint = Combat:Toggle{
-			Name = "Sprint",
-			Description = "Set sprint to true.",
-			Default = false,
-			Function = function(callback)
-				Sprint.Enabled = callback
-				if Sprint.Enabled then
-					Settings.Sprint = true
-					task.spawn(function()
-						repeat
-							task.wait()
-							if (not bedwars.SprintCont.sprinting) then
-								bedwars.SprintCont:startSprinting()
-							end
-						until (not Sprint.Enabled)
-					end)
-				else
-					Settings.Sprint = false
-					bedwars.SprintCont:stopSprinting()
-				end
-			end
-			}
-	end)
-
-	runcode(function()
-		local KillauraNoSwing = {Enabled = false}
-		local KillauraNoSound = {Enabled = false}
-		local killaurarange = {Value = 23}
-		local Killaura = {Enabled = false}
-		local killauraremote = bedwars.ClientHandler:Get(bedwars.AttackRemote)
-		local function attackEntity(plr)
-			local root = plr.Character.HumanoidRootPart
-			if not root then
-				return nil
-			end
-			local selfrootpos = lplr.Character.HumanoidRootPart.Position
-			local selfpos = selfrootpos + (killaurarange.Value > 14 and (selfrootpos - root.Position).magnitude > 14 and (CFrame.lookAt(selfrootpos, root.Position).lookVector * 4) or Vector3.zero)
-			local sword = getCurrentSword()
-			killauraremote:SendToServer{
-				["weapon"] = sword ~= nil and sword.tool,
-				["entityInstance"] = plr.Character,
-				["validate"] = {
-					["raycast"] = {
-						["cameraPosition"] = hashvec(cam.CFrame.Position),
-						["cursorDirection"] = hashvec(Ray.new(cam.CFrame.Position, root.CFrame.Position).Unit.Direction)
-					},
-					["targetPosition"] = hashvec(root.CFrame.Position),
-					["selfPosition"] = hashvec(selfpos)
-				},
-				["chargedAttack"] = {
-					["chargeRatio"] = 0}
-			}
-			if not KillauraNoSwing.Enabled then
-				if Killaura.Enabled then
-					playAnimation("rbxassetid://4947108314")
-				end
-			end
-			if not KillauraNoSound.Enabled then
-				if Killaura.Enabled then
-					playSound("rbxassetid://6760544639", 0.5)
-				end
-			end
-		end
-		Killaura = Blatant:Toggle{
-			Name = "Killaura",
-			Description = "Attack players/enemies that are near.",
-			Default = false,
-			Function = function(callback)
-				Killaura.Enabled = callback
-				if Killaura.Enabled then
-					Settings.Killaura.Enabled = true
-					RunLoops:BindToHeartbeat("Killaura", 1, function()
-						local plrs = GetAllNearestHumanoidToPosition(killaurarange.Value - 0.0001, 1)
-						for i,plr in pairs(plrs) do
-							task.spawn(attackEntity, plr)
-						end
-					end)
-				else
-					Settings.Killaura.Enabled = false
-					RunLoops:UnbindFromHeartbeat("Killaura")
-				end
-			end
-		}
-		KillauraNoSound = Blatant:Toggle{
-			Name = "No Sound",
-			Description = "Removes the swinging sound.",
-			Default = false,
-			Function = function(val)
-				Settings.Killaura.NoSound = val
-				KillauraNoSound.Enabled = val
-			end
-		}
-		KillauraNoSwing = Blatant:Toggle{
-			Name = "No Swing",
-			Description = "Removes the swinging animation.",
-			Default = false,
-			Function = function(val)
-				Settings.Killaura.NoSwing = val
-				KillauraNoSwing.Enabled = val
-			end
-		}
-	end)
-
-	runcode(function()
-		local NoFall = {Enabled = false}
-		NoFall = Blatant:Toggle{
-			Name = "NoFall",
-			Description = "Prevents taking fall damage.",
-			Default = false,
-			Function = function(callback)
-				NoFall.Enabled = callback
-				if NoFall.Enabled then
-					Settings.NoFall = true
-⁰					task.spawn(function()
-						repeat
-							task.wait()
-							game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.GroundHit:FireServer()
-						until (not NoFall.Enabled)
-					end)
-				else
-					Settings.NoFall = false
-				end
-			end
-		}
-	end)
-
---[[
-runFunction(function()
-	local SomethingWeird = {SecretEnabled = false}
-	SomethingWeird = Sections["???"].CreateButton{
-		Name = "???",
-		Function = function()
-			
-		end
-	}
-end)
---]]
-
-	runFunction(function()
-	  local BreathExploit = {Enabled = false}
-	  BreathExploit = Utility:Toggle{
-			Name = "BreathExploit",
-			Description = "rahhhh",
-			Default = false,
-			Function = function(callback)
-				BreathExploit.Enabled = callback
-				if BreathExploit.Enabled then
-					Settings.BreathExploit = true
-					spawn(function()
-						repeat
-							wait(0.5)
-							game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged.DragonBreath:FireServer{
-								["player"] = lplr
-							}
-						until (not BreathExploit.Enabled)
-					end)
-				else
-					Settings.BreathExploit = false
-				end
-			end
-		}
-	end)
-
-	runcode(function()
-		local PartyExploit = {Enabled = false}
-	  PartyExploit = Utility:Toggle{
-			Name = "PartyExploit",
-			Description = "Party!",
-			Default = false,
-			Function = function(callback)
-				PartyExploit.Enabled = callback
-		--	Settings.PartyExploit = callback
-				if PartyExploit.Enabled then
-					Settings.PartyExploit = true
-					task.spawn(function()
-						repeat
-							task.wait(0.5)
-							game:GetService("ReplicatedStorage")["events-@easy-games/game-core:shared/game-core-networking@getEvents.Events"].useAbility:FireServer("PARTY_POPPER")
-						until (not PartyExploit.Enabled)
-					end)
-				else
-					Settings.BreathExploit = false
-				end
-			end
-		}
-	end)
-
---[[
-runcode(function()
-	local antivoidpart
-	local antivoidconnection
-	local antivoiding = false
-	local antitransparent = {Value = 50}
-	local anticolor = {["Hue"] = 0.44, ["Sat"] = 1, ["Value"] = 1}
-	local AntiVoid = {Enabled = false}
-	AntiVoid = Sections["AntiVoid"]:Toggle{
-		Name = "AntiVoid",
-		Function = function(callback)
-			AntiVoid.Enabled = callback
-			if AntiVoid.Enabled then
-				task.spawn(function()
-					Settings.AntiVoid = true
-					antivoidpart = Instance.new("Part")
-					antivoidpart.CanCollide = false
-					antivoidpart.Size = Vector3.new(10000, 1, 10000)
-					antivoidpart.Anchored = true
-					antivoidpart.Material = Enum.Material.Neon
-					antivoidpart.Color = Color3.fromHSV(anticolor["Hue"], anticolor["Sat"], anticolor["Value"])
-					antivoidpart.Transparency = 1 - (antitransparent.Value / 100)
-					antivoidpart.Position = lplr.Character.HumanoidRootPart.Position - Vector3.new(0, 21, 0)
-					antivoidpart.Parent = workspace
-					antivoidconnection = antivoidpart.Touched:Connect(function(touched)
-						if touched.Parent == lplr.Character and isAlive(lplr) then
-							if (not antivoiding) and lplr.Character.Humanoid.Health > 0 then
-								antivoiding = true
-								lplr.Character.HumanoidRootPart.Velocity = Vector3.new(0, 150, 0)
-								antivoiding = false
-							end
-						end
-					end)
-				end)
-			else
-				Settings.AntiVoid = false
-				if antivoidconnection then antivoidconnection:Disconnect() end
-					if antivoidpart then
-						antivoidpart:Remove()
-					end
-				end
-			end
-		Description = "Prevents falling in void\nit will create the part."
-	}
-	antitransparent = Sections["AntiVoid"].CreateSlider{
-		Name = "Transparency",
-		Min = 1,
-		Max = 100,
-		Default = 50,
-		Function = function(val)
-			antitransparent.Value = val
-			if antivoidpart then
-				antivoidpart.Transparency = 1 - (antitransparent.Value / 100)
-			end
-		end
-	}
-	anticolor = Sections["AntiVoid"].CreateColorPicker{
-		Name = "Color",
-		Default = Color3.fromHSV(anticolor["Hue"], anticolor["Sat"], anticolor["Value"]),
-		Function = function(col)
-			if antivoidpart then
-				antivoidpart.Color = col
-			end
-		end
-	}
-end)
---]]
-
-	runcode(function()
-    local BreakingMsg = false
-    local params = RaycastParams.new()
-    params.IgnoreWater = true
-    function BreakFunction(part)
-      local raycastResult = game:GetService("Workspace"):Raycast(part.Position + Vector3.new(0,24,0),Vector3.new(0,-27,0),params)
-        if raycastResult then
-          local targetblock = raycastResult.Instance
-          for i,v in pairs(targetblock:GetChildren()) do
-            if v:IsA("Texture") then
-              v:Destroy()
-            end
-          end
-          game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged.DamageBlock:InvokeServer{
-            ["blockRef"] = {
-          	["blockPosition"] = Vector3.new(math.round(targetblock.Position.X/3),math.round(targetblock.Position.Y/3),math.round(targetblock.Position.Z/3))
-          },
-          ["hitPosition"] = Vector3.new(math.round(targetblock.Position.X/3),math.round(targetblock.Position.Y/3),math.round(targetblock.Position.Z/3)),
-          ["hitNormal"] = Vector3.new(math.round(targetblock.Position.X/3),math.round(targetblock.Position.Y/3),math.round(targetblock.Position.Z/3))
-        }
-      end
-    end
-    function GetBeds()
-      local beds = {}
-      	for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
-          if string.lower(v.Name) == "bed" and v:FindFirstChild("Covers") ~= nil and v:FindFirstChild("Covers").BrickColor ~= lplr.Team.TeamColor then
-            table.insert(beds,v)
-          end
-      	end
-      return beds
-    end
-    local BreakRange = {Value = 30}
-    local Breaker = {Enabled = false}
-		Breaker = Utility:Toggle{
-		Name = "Breaker",
-		Description = "Automatic Break The Bed",
-		Default = false,
-		Function = function(callback)
-		Breaker.Enabled = callback
-		if Breaker.Enabled then
-			spawn(function()
-				while task.wait(0.1) do
-					if not Breaker.Enabled then return end
-							spawn(function()
-								if lplr:GetAttribute("DenyBlockBreak") == true then
-									lplr:SetAttribute("DenyBlockBreak",nil)
-								end
-							end)
-							if isAlive(lplr) then
-								local beds = GetBeds()
-								for i,v in pairs(beds) do
-									local mag = (v.Position - lplr.Character.PrimaryPart.Position).Magnitude
-									if mag < BreakRange.Value then
-										BreakFunction(v)
-									end
-								end
-              end
-            end
-          end)
-        else
-          Settings.Breaker = false
-        end
-      end
-    }
-	end)
-	
-	spawn(function()
-		repeat
-		  wait(0.5)
-			writefile("Nightbed/Profiles/6872274481.json",game:GetService("HttpService"):JSONEncode(Settings))
-		until false
-	end)
-	local suc, res = pcall(function()
-		return game:GetService("HttpService"):JSONDecode(readfile("Nightbed/Profiles/6872274481.json"))
-	end)
-	if suc and type(res) == "table" then 
-	  Settings = res
-	  if Velocity then
-	  	Velocity.ToggleButton(Settings.Velocity)
-	  end
-	  if HitFix then
-	  	HitFix.ToggleButton(Settings.HitFix)
-	  end
-	  if NoClickDelay then
-	  	NoClickDelay.ToggleButton(Settings.NoClickDelay)
-	  end
-	  if Sprint then
-	  	Sprint.ToggleButton(Settings.Sprint)
-	  end
-	  if Killaura then
-	  	Killaura.ToggleButton(Settings.Killaura.Enabled)
-	  end
-	  if KillauraNoSound then
-	  	KillauraNoSound.ToggleButton(Settings.Killaura.NoSound)
-	  end
-	  if KillauraNoSwing then
-	  	KillauraNoSwing.ToggleButton(Settings.Killaura.NoSwing)
-	  end
-	  if NoFall then
-	  	NoFall.ToggleButton(Settings.NoFall)
-	  end
-	  if BreathExploit then
-	  	BreathExploit.ToggleButton(Settings.BreathExploit)
-	  end
-	  if PartyExploit then
-	  	PartyExploit.ToggleButton(Settings.PartyExploit)
-	  end
-  --if AntiVoid then
-  --	AntiVoid.ToggleButton(Settings.AntiVoid)
-  --end
-	  if Breaker then
-	  	Breaker.ToggleButton(Settings.Breaker)
-	  end
-	end
-else
-	local win = kavo:CreateWindow({
+local win = kavo:CreateWindow({
     ["Title"] = "Nightbed"..(shared.NightbedPrivate and " PRIVATE" or ""),
     ["Theme"] = "Luna"
-	})
+})
 
-	local Tabs = {
+local Tabs = {
     ["Combat"] = win.CreateTab("Combat"),
     ["Blatant"] = win.CreateTab("Blatant"),
     ["Render"] = win.CreateTab("Render"),
     ["Utility"] = win.CreateTab("Utility"),
     ["World"] = win.CreateTab("World")
-	}
+}
 
-	local Sections = shared.SectionsLoaded
-	Sections = {
+local Sections = shared.SectionsLoaded
+Sections = {
 		["HitFix"] = Tabs["Combat"].CreateSection("HitFix"),
     ["NoClickDelay"] = Tabs["Combat"].CreateSection("NoClickDelay"),
     ["Sprint"] = Tabs["Combat"].CreateSection("Sprint"),
@@ -703,197 +216,215 @@ else
     ["PartyExploit"] = Tabs["Utility"].CreateSection("PartyExploit"),
     --["AntiVoid"] = Tabs["World"].CreateSection("AntiVoid"),
     ["Breaker"] = Tabs["World"].CreateSection("Breaker")
-	}
+}
 
-	runcode(function()
-		local func
-		local func2
-		local Velocity = {Enabled = false}
-		Velocity = Sections["Velocity"].CreateToggle({
-			Name = "Velocity",
-			Function = function(callback)
-				Velocity.Enabled = callback
-				if Velocity.Enabled then
-					Settings.Velocity = true
-					func = bedwars.KnockbackUtil.applyKnockbackDirection
-					func2 = bedwars.KnockbackUtil.applyKnockback
-					bedwars.KnockbackUtil.applyKnockbackDirection = function(...) end
-					bedwars.KnockbackUtil.applyKnockback = function(...) end
-				else
-					Settings.Velocity = false
-					bedwars.KnockbackUtil.applyKnockbackDirection = func
-					bedwars.KnockbackUtil.applyKnockback = func2
-				end
-			end,
-			HoverText = "Remove knockbacks."
-		})
-	end)
+local Settings = {
+	Velocity = false,
+	HitFix = false,
+	NoClickDelay = false,
+	Sprint = false,
+	Killaura = {
+	  Enabled = false,
+	  Range = 23,
+	  NoSwing = false,
+	  NoSound = false
+	},
+	NoFall = false,
+	BreathExploit = false,
+	PartyExploit = false,
+	AntiVoid = false,
+	Breaker = false
+}
 
-	runcode(function()
-		local HitFix = {Enabled = false}
-		HitFix = Sections["HitFix"].CreateToggle({
-			Name = "HitFix",
-			HoverText = "Fixes the raycast function used for extra reach",
-			Function = function(callback)
-				HitFix.Enabled = callback
-				if HitFix.Enabled then
-					Settings.HitFix = true
-					debug.setconstant(bedwars.SwordController.swingSwordAtMouse, 27, "raycast")
-					debug.setupvalue(bedwars.SwordController.swingSwordAtMouse, 4, bedwars.QueryUtil)
-				else
-					Settings.HitFix = false
-					debug.setconstant(bedwars.QueueCard.render, 9, 0.01)
-					debug.setconstant(bedwars.SwordController.swingSwordAtMouse, 27, "Raycast")
-				end
+runcode(function()
+	local func
+	local func2
+	local Velocity = {Enabled = false}
+	Velocity = Sections["Velocity"].CreateToggle({
+		Name = "Velocity",
+		Function = function(callback)
+			Velocity.Enabled = callback
+			if Velocity.Enabled then
+				Settings.Velocity = true
+				func = bedwars.KnockbackUtil.applyKnockbackDirection
+				func2 = bedwars.KnockbackUtil.applyKnockback
+				bedwars.KnockbackUtil.applyKnockbackDirection = function(...) end
+				bedwars.KnockbackUtil.applyKnockback = function(...) end
+			else
+				Settings.Velocity = false
+				bedwars.KnockbackUtil.applyKnockbackDirection = func
+				bedwars.KnockbackUtil.applyKnockback = func2
 			end
-		})
-	end)
+		end,
+		HoverText = "Remove knockbacks."
+	})
+end)
 
-	runcode(function()
-		local func
-		local NoClickDelay = {Enabled = false}
-		NoClickDelay = Sections["NoClickDelay"].CreateToggle({
-			Name = "NoClickDelay",
-			Function = function(callback)
-				NoClickDelay.Enabled = callback
-				if NoClickDelay.Enabled then
-					Settings.NoClickDelay = true
-					func = bedwars.SwordController.isClickingTooFast
-					bedwars.SwordController.isClickingTooFast = function(self)
-						self.lastSwing = tick()
-						return false
-					end
-				else
-					Settings.NoClickDelay = false
-					bedwars.SwordController.isClickingTooFast = func
-				end
-			end,
-			HoverText = "Bypass cps limit."
-		})
-	end)
-
-	runcode(function()
-		local Sprint = {Enabled = false}
-		Sprint = Sections["Sprint"].CreateToggle({
-			Name = "Sprint",
-			Function = function(callback)
-				Sprint.Enabled = callback
-				if Sprint.Enabled then
-					Settings.Sprint = true
-					task.spawn(function()
-						repeat
-							task.wait()
-							if (not bedwars.SprintCont.sprinting) then
-								bedwars.SprintCont:startSprinting()
-							end
-						until (not Sprint.Enabled)
-					end)
-				else
-					Settings.Sprint = false
-					bedwars.SprintCont:stopSprinting()
-				end
-			end,
-			HoverText = "Set sprint to true."
-		})
-	end)
-
-	runcode(function()
-		local KillauraNoSwing = {Enabled = false}
-		local KillauraNoSound = {Enabled = false}
-		local killaurarange = {Value = 23}
-		local Killaura = {Enabled = false}
-		local killauraremote = bedwars.ClientHandler:Get(bedwars.AttackRemote)
-		local function attackEntity(plr)
-			local root = plr.Character.HumanoidRootPart
-			if not root then
-				return nil
-			end
-			local selfrootpos = lplr.Character.HumanoidRootPart.Position
-			local selfpos = selfrootpos + (killaurarange.Value > 14 and (selfrootpos - root.Position).magnitude > 14 and (CFrame.lookAt(selfrootpos, root.Position).lookVector * 4) or Vector3.zero)
-			local sword = getCurrentSword()
-			killauraremote:SendToServer({
-				["weapon"] = sword ~= nil and sword.tool,
-				["entityInstance"] = plr.Character,
-				["validate"] = {
-					["raycast"] = {
-						["cameraPosition"] = hashvec(cam.CFrame.Position),
-						["cursorDirection"] = hashvec(Ray.new(cam.CFrame.Position, root.CFrame.Position).Unit.Direction)
-					},
-					["targetPosition"] = hashvec(root.CFrame.Position),
-					["selfPosition"] = hashvec(selfpos)
-				},
-				["chargedAttack"] = {
-					["chargeRatio"] = 0}
-			})
-			if not KillauraNoSwing.Enabled then
-				if Killaura.Enabled then
-					playAnimation("rbxassetid://4947108314")
-				end
-			end
-			if not KillauraNoSound.Enabled then
-				if Killaura.Enabled then
-					playSound("rbxassetid://6760544639", 0.5)
-				end
+runcode(function()
+	local HitFix = {Enabled = false}
+	HitFix = Sections["HitFix"].CreateToggle({
+		Name = "HitFix",
+		HoverText = "Fixes the raycast function used for extra reach",
+		Function = function(callback)
+			HitFix.Enabled = callback
+			if HitFix.Enabled then
+				Settings.HitFix = true
+				debug.setconstant(bedwars.SwordController.swingSwordAtMouse, 27, "raycast")
+				debug.setupvalue(bedwars.SwordController.swingSwordAtMouse, 4, bedwars.QueryUtil)
+			else
+				Settings.HitFix = false
+				debug.setconstant(bedwars.QueueCard.render, 9, 0.01)
+				debug.setconstant(bedwars.SwordController.swingSwordAtMouse, 27, "Raycast")
 			end
 		end
-		Killaura = Sections["Killaura"].CreateToggle({
-			Name = "Killaura",
-			Function = function(callback)
-				Killaura.Enabled = callback
-				if Killaura.Enabled then
-					Settings.Killaura.Enabled = true
-					RunLoops:BindToHeartbeat("Killaura", 1, function()
-						local plrs = GetAllNearestHumanoidToPosition(killaurarange.Value - 0.0001, 1)
-						for i,plr in pairs(plrs) do
-							task.spawn(attackEntity, plr)
-						end
-					end)
-				else
-					Settings.Killaura.Enabled = false
-					RunLoops:UnbindFromHeartbeat("Killaura")
-				end
-			end,
-			HoverText = "Attack players/enemies that are near."
-		})
-		KillauraNoSound = Sections["Killaura"].CreateToggle({
-			Name = "No Sound",
-			Function = function(val)
-				Settings.Killaura.NoSound = val
-				KillauraNoSound.Enabled = val
-			end,
-			HoverText = "Removes the swinging sound."
-		})
-		KillauraNoSwing = Sections["Killaura"].CreateToggle({
-			Name = "No Swing",
-			Function = function(val)
-				Settings.Killaura.NoSwing = val
-				KillauraNoSwing.Enabled = val
-			end,
-			HoverText = "Removes the swinging animation."
-		})
-	end)
+	})
+end)
 
-	runcode(function()
-		local NoFall = {Enabled = false}
-		NoFall = Sections["NoFall"].CreateToggle({
-			Name = "NoFall",
-			Function = function(callback)
-				NoFall.Enabled = callback
-				if NoFall.Enabled then
-					Settings.NoFall = true
-					task.spawn(function()
-						repeat
-							task.wait()
-							game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.GroundHit:FireServer()
-						until (not NoFall.Enabled)
-					end)
-				else
-					Settings.NoFall = false
+runcode(function()
+	local func
+	local NoClickDelay = {Enabled = false}
+	NoClickDelay = Sections["NoClickDelay"].CreateToggle({
+		Name = "NoClickDelay",
+		Function = function(callback)
+			NoClickDelay.Enabled = callback
+			if NoClickDelay.Enabled then
+				Settings.NoClickDelay = true
+				func = bedwars.SwordController.isClickingTooFast
+				bedwars.SwordController.isClickingTooFast = function(self)
+					self.lastSwing = tick()
+					return false
 				end
-			end,
-			HoverText = "Prevents taking fall damage."
+			else
+				Settings.NoClickDelay = false
+				bedwars.SwordController.isClickingTooFast = func
+			end
+		end,
+		HoverText = "Bypass cps limit."
+	})
+end)
+
+runcode(function()
+	local Sprint = {Enabled = false}
+	Sprint = Sections["Sprint"].CreateToggle({
+		Name = "Sprint",
+		Function = function(callback)
+			Sprint.Enabled = callback
+			if Sprint.Enabled then
+				Settings.Sprint = true
+				task.spawn(function()
+					repeat
+						task.wait()
+						if (not bedwars.SprintCont.sprinting) then
+							bedwars.SprintCont:startSprinting()
+						end
+					until (not Sprint.Enabled)
+				end)
+			else
+				Settings.Sprint = false
+				bedwars.SprintCont:stopSprinting()
+			end
+		end,
+		HoverText = "Set sprint to true."
+	})
+end)
+
+runcode(function()
+	local KillauraNoSwing = {Enabled = false}
+	local KillauraNoSound = {Enabled = false}
+	local killaurarange = {Value = 23}
+	local Killaura = {Enabled = false}
+	local killauraremote = bedwars.ClientHandler:Get(bedwars.AttackRemote)
+	local function attackEntity(plr)
+		local root = plr.Character.HumanoidRootPart
+		if not root then
+			return nil
+		end
+		local selfrootpos = lplr.Character.HumanoidRootPart.Position
+		local selfpos = selfrootpos + (killaurarange.Value > 14 and (selfrootpos - root.Position).magnitude > 14 and (CFrame.lookAt(selfrootpos, root.Position).lookVector * 4) or Vector3.zero)
+		local sword = getCurrentSword()
+		killauraremote:SendToServer({
+			["weapon"] = sword ~= nil and sword.tool,
+			["entityInstance"] = plr.Character,
+			["validate"] = {
+				["raycast"] = {
+					["cameraPosition"] = hashvec(cam.CFrame.Position),
+					["cursorDirection"] = hashvec(Ray.new(cam.CFrame.Position, root.CFrame.Position).Unit.Direction)
+				},
+				["targetPosition"] = hashvec(root.CFrame.Position),
+				["selfPosition"] = hashvec(selfpos)
+			},
+			["chargedAttack"] = {
+				["chargeRatio"] = 0}
 		})
-	end)
+		if not KillauraNoSwing.Enabled then
+			if Killaura.Enabled then
+				playAnimation("rbxassetid://4947108314")
+			end
+		end
+		if not KillauraNoSound.Enabled then
+			if Killaura.Enabled then
+				playSound("rbxassetid://6760544639", 0.5)
+			end
+		end
+	end
+	Killaura = Sections["Killaura"].CreateToggle({
+		Name = "Killaura",
+		Function = function(callback)
+			Killaura.Enabled = callback
+			if Killaura.Enabled then
+				Settings.Killaura.Enabled = true
+				RunLoops:BindToHeartbeat("Killaura", 1, function()
+					local plrs = GetAllNearestHumanoidToPosition(killaurarange.Value - 0.0001, 1)
+					for i,plr in pairs(plrs) do
+						task.spawn(attackEntity, plr)
+					end
+				end)
+			else
+				Settings.Killaura.Enabled = false
+				RunLoops:UnbindFromHeartbeat("Killaura")
+			end
+		end,
+		HoverText = "Attack players/enemies that are near."
+	})
+	KillauraNoSound = Sections["Killaura"].CreateToggle({
+		Name = "No Sound",
+		Function = function(val)
+			Settings.Killaura.NoSound = val
+			KillauraNoSound.Enabled = val
+		end,
+		HoverText = "Removes the swinging sound."
+	})
+	KillauraNoSwing = Sections["Killaura"].CreateToggle({
+		Name = "No Swing",
+		Function = function(val)
+			Settings.Killaura.NoSwing = val
+			KillauraNoSwing.Enabled = val
+		end,
+		HoverText = "Removes the swinging animation."
+	})
+end)
+
+runcode(function()
+	local NoFall = {Enabled = false}
+	NoFall = Sections["NoFall"].CreateToggle({
+		Name = "NoFall",
+		Function = function(callback)
+			NoFall.Enabled = callback
+			if NoFall.Enabled then
+				Settings.NoFall = true
+				task.spawn(function()
+					repeat
+						task.wait()
+						game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.GroundHit:FireServer()
+					until (not NoFall.Enabled)
+				end)
+			else
+				Settings.NoFall = false
+			end
+		end,
+		HoverText = "Prevents taking fall damage."
+	})
+end)
 
 --[[
 runFunction(function()
@@ -907,52 +438,52 @@ runFunction(function()
 end)
 --]]
 
-	runFunction(function()
-	  local BreathExploit = {Enabled = false}
-	  BreathExploit = Sections["BreathExploit"].CreateToggle({
-			Name = "BreathExploit",
-			Function = function(callback)
-				BreathExploit.Enabled = callback
-				if BreathExploit.Enabled then
-					Settings.BreathExploit = true
-					spawn(function()
-						repeat
-							wait(0.5)
-							game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged.DragonBreath:FireServer({
-								["player"] = lplr
-							})
-						until (not BreathExploit.Enabled)
-					end)
-				else
-					Settings.BreathExploit = false
-				end
-			end,
-			HoverText = "Prevents taking fall damage."
-		})
-	end)
+runFunction(function()
+  local BreathExploit = {Enabled = false}
+  BreathExploit = Sections["BreathExploit"].CreateToggle({
+		Name = "BreathExploit",
+		Function = function(callback)
+			BreathExploit.Enabled = callback
+			if BreathExploit.Enabled then
+				Settings.BreathExploit = true
+				spawn(function()
+					repeat
+						wait(0.5)
+						game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged.DragonBreath:FireServer({
+							["player"] = lplr
+						})
+					until (not BreathExploit.Enabled)
+				end)
+			else
+				Settings.BreathExploit = false
+			end
+		end,
+		HoverText = "Prevents taking fall damage."
+	})
+end)
 
-	runcode(function()
-		local PartyExploit = {Enabled = false}
-	  PartyExploit = Sections["PartyExploit"].CreateToggle({
-			Name = "PartyExploit",
-			Function = function(callback)
-				PartyExploit.Enabled = callback
+runcode(function()
+	local PartyExploit = {Enabled = false}
+  PartyExploit = Sections["PartyExploit"].CreateToggle({
+		Name = "PartyExploit",
+		Function = function(callback)
+			PartyExploit.Enabled = callback
 		--	Settings.PartyExploit = callback
-				if PartyExploit.Enabled then
-					Settings.PartyExploit = true
-					task.spawn(function()
-						repeat
-							task.wait(0.5)
-							game:GetService("ReplicatedStorage")["events-@easy-games/game-core:shared/game-core-networking@getEvents.Events"].useAbility:FireServer("PARTY_POPPER")
-						until (not PartyExploit.Enabled)
-					end)
-				else
-					Settings.BreathExploit = false
-				end
-			end,
-			HoverText = "Prevents taking fall damage."
-		})
-	end)
+			if PartyExploit.Enabled then
+				Settings.PartyExploit = true
+				task.spawn(function()
+					repeat
+						task.wait(0.5)
+						game:GetService("ReplicatedStorage")["events-@easy-games/game-core:shared/game-core-networking@getEvents.Events"].useAbility:FireServer("PARTY_POPPER")
+					until (not PartyExploit.Enabled)
+				end)
+			else
+				Settings.BreathExploit = false
+			end
+		end,
+		HoverText = "Prevents taking fall damage."
+	})
+end)
 
 --[[
 runcode(function()
@@ -1022,115 +553,114 @@ runcode(function()
 end)
 --]]
 
-	runcode(function()
+runcode(function()
     local BreakingMsg = false
     local params = RaycastParams.new()
     params.IgnoreWater = true
     function BreakFunction(part)
-      local raycastResult = game:GetService("Workspace"):Raycast(part.Position + Vector3.new(0,24,0),Vector3.new(0,-27,0),params)
+        local raycastResult = game:GetService("Workspace"):Raycast(part.Position + Vector3.new(0,24,0),Vector3.new(0,-27,0),params)
         if raycastResult then
-          local targetblock = raycastResult.Instance
-          for i,v in pairs(targetblock:GetChildren()) do
-            if v:IsA("Texture") then
-              v:Destroy()
+            local targetblock = raycastResult.Instance
+            for i,v in pairs(targetblock:GetChildren()) do
+                if v:IsA("Texture") then
+                    v:Destroy()
+                end
             end
-          end
-          game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged.DamageBlock:InvokeServer({
-            ["blockRef"] = {
-          	["blockPosition"] = Vector3.new(math.round(targetblock.Position.X/3),math.round(targetblock.Position.Y/3),math.round(targetblock.Position.Z/3))
-          },
-          ["hitPosition"] = Vector3.new(math.round(targetblock.Position.X/3),math.round(targetblock.Position.Y/3),math.round(targetblock.Position.Z/3)),
-          ["hitNormal"] = Vector3.new(math.round(targetblock.Position.X/3),math.round(targetblock.Position.Y/3),math.round(targetblock.Position.Z/3))
-        })
-      end
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged.DamageBlock:InvokeServer({
+                ["blockRef"] = {
+                    ["blockPosition"] = Vector3.new(math.round(targetblock.Position.X/3),math.round(targetblock.Position.Y/3),math.round(targetblock.Position.Z/3))
+                },
+                ["hitPosition"] = Vector3.new(math.round(targetblock.Position.X/3),math.round(targetblock.Position.Y/3),math.round(targetblock.Position.Z/3)),
+                ["hitNormal"] = Vector3.new(math.round(targetblock.Position.X/3),math.round(targetblock.Position.Y/3),math.round(targetblock.Position.Z/3))
+            })
+        end
     end
     function GetBeds()
-      local beds = {}
-      for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
-          if string.lower(v.Name) == "bed" and v:FindFirstChild("Covers") ~= nil and v:FindFirstChild("Covers").BrickColor ~= lplr.Team.TeamColor then
-            table.insert(beds,v)
-          end
-      	end
-      return beds
-    end
-    local BreakRange = {Value = 30}
-    local Breaker = {Enabled = false}
-		Breaker = Sections["Breaker"].CreateToggle({
-		Name = "Breaker",
-		Function = function(callback)
-		Breaker.Enabled = callback
-		if Breaker.Enabled then
-			spawn(function()
-				while task.wait(0.1) do
-					if not Breaker.Enabled then return end
-							spawn(function()
-								if lplr:GetAttribute("DenyBlockBreak") == true then
-									lplr:SetAttribute("DenyBlockBreak",nil)
-								end
-							end)
-							if isAlive(lplr) then
-								local beds = GetBeds()
-								for i,v in pairs(beds) do
-									local mag = (v.Position - lplr.Character.PrimaryPart.Position).Magnitude
-									if mag < BreakRange.Value then
-										BreakFunction(v)
-									end
-								end
-              end
+        local beds = {}
+        for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+            if string.lower(v.Name) == "bed" and v:FindFirstChild("Covers") ~= nil and v:FindFirstChild("Covers").BrickColor ~= lplr.Team.TeamColor then
+                table.insert(beds,v)
             end
-          end)
-        else
-          Settings.Breaker = false
         end
-      end
+        return beds
+    end
+    local Distance = {Value = 30}
+    local Breaker = {Enabled = false}
+    Breaker = Sections["Breaker"].CreateToggle({
+        Name = "Breaker",
+        Function = function(Callback)
+            Breaker.Enabled = Callback
+            if Breaker.Enabled then
+                spawn(function()
+                    while task.wait(0.1) do
+                        if not Breaker.Enabled then return end
+                        spawn(function()
+                            if lplr:GetAttribute("DenyBlockBreak") == true then
+                                lplr:SetAttribute("DenyBlockBreak",nil)
+                            end
+                        end)
+                        if isAlive(lplr) then
+                            local beds = GetBeds()
+                            for i,v in pairs(beds) do
+                                local mag = (v.Position - lplr.Character.PrimaryPart.Position).Magnitude
+                                if mag < Distance.Value then
+                                    BreakFunction(v)
+                                end
+                            end
+                        end
+                    end
+                end)
+            else
+            	Settings.Breaker = false
+            end
+        end
     })
-	end)
-	spawn(function()
-		repeat
-		  wait(0.5)
-			writefile("Nightbed/Profiles/6872274481.json",game:GetService("HttpService"):JSONEncode(Settings))
-		until false
-	end)
-	local suc, res = pcall(function()
-		return game:GetService("HttpService"):JSONDecode(readfile("Nightbed/Profiles/6872274481.json"))
-	end)
-	if suc and type(res) == "table" then 
-	  Settings = res
-	  if Velocity then
-	  	Velocity.ToggleButton(Settings.Velocity)
-	  end
-	  if HitFix then
-	  	HitFix.ToggleButton(Settings.HitFix)
-	  end
-	  if NoClickDelay then
-	  	NoClickDelay.ToggleButton(Settings.NoClickDelay)
-	  end
-	  if Sprint then
-	  	Sprint.ToggleButton(Settings.Sprint)
-	  end
-	  if Killaura then
-	  	Killaura.ToggleButton(Settings.Killaura.Enabled)
-	  end
-	  if KillauraNoSound then
-	  	KillauraNoSound.ToggleButton(Settings.Killaura.NoSound)
-	  end
-	  if KillauraNoSwing then
-	  	KillauraNoSwing.ToggleButton(Settings.Killaura.NoSwing)
-	  end
-	  if NoFall then
-	  	NoFall.ToggleButton(Settings.NoFall)
-	  end
-	  if BreathExploit then
-	  	BreathExploit.ToggleButton(Settings.BreathExploit)
-	  end
-	  if PartyExploit then
-	  	PartyExploit.ToggleButton(Settings.PartyExploit)
-	  end
+end)
+spawn(function()
+	repeat
+	  wait(0.5)
+		writefile("Nightbed/Profiles/6872274481.json",game:GetService("HttpService"):JSONEncode(Settings))
+	until false
+end)
+local suc, res = pcall(function()
+	return game:GetService("HttpService"):JSONDecode(readfile("Nightbed/Profiles/6872274481.json"))
+end)
+ if suc and type(res) == "table" then 
+  Settings = res
+  if Velocity then
+  	Velocity.ToggleButton(Settings.Velocity)
+  end
+  if HitFix then
+  	HitFix.ToggleButton(Settings.HitFix)
+  end
+  if NoClickDelay then
+  	NoClickDelay.ToggleButton(Settings.NoClickDelay)
+  end
+  if Sprint then
+  	Sprint.ToggleButton(Settings.Sprint)
+  end
+  if Killaura then
+  	Killaura.ToggleButton(Settings.Killaura.Enabled)
+  end
+  if KillauraNoSound then
+  	KillauraNoSound.ToggleButton(Settings.Killaura.NoSound)
+  end
+  if KillauraNoSwing then
+  	KillauraNoSwing.ToggleButton(Settings.Killaura.NoSwing)
+  end
+  if NoFall then
+  	NoFall.ToggleButton(Settings.NoFall)
+  end
+  if BreathExploit then
+  	BreathExploit.ToggleButton(Settings.BreathExploit)
+  end
+  if PartyExploit then
+  	PartyExploit.ToggleButton(Settings.PartyExploit)
+  end
   --if AntiVoid then
   --	AntiVoid.ToggleButton(Settings.AntiVoid)
   --end
-	  if Breaker then
-	  	Breaker.ToggleButton(Settings.Breaker)
-	  end
-	end
+  if Breaker then
+  	Breaker.ToggleButton(Settings.Breaker)
+  end
 end
