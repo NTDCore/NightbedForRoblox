@@ -1401,7 +1401,7 @@ function Library:toggle(options)
 		toggle()
 	end
 
-	function methods:ToggleButton(state)
+	function methods.ToggleButton(state)
 		toggled = state
 		if toggled then
 			offIcon:crossfade(onIcon, 0.1)
@@ -1411,7 +1411,7 @@ function Library:toggle(options)
 		task.spawn(function() options.Function(toggled) end)
 	end
 
-	if options.Default then methods:ToggleButton(true) end
+	if options.Default then methods.ToggleButton(true) end
 
 	return methods
 end
