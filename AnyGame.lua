@@ -61,7 +61,6 @@ runFunction(function()
 		Name = "InfiniteJump",
 		Function = function(callback)
 			InfiniteJump.Enabled = callback
-			Settings["InfiniteJump"] = InfiniteJump.Enabled
 	  	if InfiniteJump.Enabled then
 	  	  Settings["InfiniteJump"] = true
 	  	  spawn(function()
@@ -217,7 +216,7 @@ local suc, res = pcall(function() return
 game:GetService("HttpService"):JSONDecode(readfile("Nightbed/Profiles/AnyGame.json")) end)
 if suc and type(res) == "table" then 
   Settings = res
-  wait()
+  task.wait()
   if InfiniteJump.Enabled then
   	InfiniteJump.ToggleButton(Settings["InfiniteJump"])
   end
