@@ -100,7 +100,7 @@ local Library = {
 	WelcomeText = nil,
 	DisplayName = nil,
 	DragSpeed = 0.06,
-	LockDragging = false,
+	Lock = false,
 	ToggleKey = Enum.KeyCode.Home,
 	UrlLabel = nil,
 	Url = nil
@@ -506,11 +506,12 @@ function Library:create(options)
 
 			Event:connect(function()
 				local Input = core.InputBegan:connect(function(Key)
-					if Key.UserInputType == Enum.UserInputType.MouseButton1 then
+					if Key.UserInputType == Enum.UserInputType.MouseButton1 or Key.UserInputType == Enum.UserInputType.Touch then
+					  
 						local ObjectPosition = Vector2.new(Mouse.X - core.AbsolutePosition.X, Mouse.Y - core.AbsolutePosition.Y)
 						while RunService.RenderStepped:wait() and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
 
-							if Library.LockDragging then
+							if Library.Lock then
 								local FrameX, FrameY = math.clamp(Mouse.X - ObjectPosition.X, 0, gui.AbsoluteSize.X - core.AbsoluteSize.X), math.clamp(Mouse.Y - ObjectPosition.Y, 0, gui.AbsoluteSize.Y - core.AbsoluteSize.Y)
 								core:tween{
 									Position = UDim2.fromOffset(FrameX + (core.Size.X.Offset * core.AnchorPoint.X), FrameY + (core.Size.Y.Offset * core.AnchorPoint.Y)),
@@ -539,12 +540,17 @@ function Library:create(options)
 							)]]
 						end
 					end
-				end)
 
 				local Leave
-				Leave = core.MouseLeave:connect(function()
-					Input:disconnect()
-					Leave:disconnect()
+				--Leave = core.MouseLeave:connect(function()
+					--Input:disconnect()
+					--Leave:disconnect()
+				--end)
+				UserInputService.Changed:Connect(function()
+					if UserInputService.UserInputState == Enum.UserInputState.End then
+						Input:disconnect()
+						Leace:disconnect()
+					end
 				end)
 			end)
 		end
@@ -902,17 +908,17 @@ function Library:create(options)
 	}
 
 	settingsTab:toggle{
-		Name = "Lock Dragging",
+		Name = "Lock ",
 		Description = "Makes sure you can't drag the UI outside of the window.",
 		Default = true,
 		Function = function(state)
-			Library.LockDragging = state
+			Library.Lock = state
 		end,
 	}
 
 	settingsTab:slider{
 		Name = "UI Drag Speed",
-		Description = "How smooth the dragging looks.",
+		Description = "How smooth the  looks.",
 		Max = 20,
 		Default = 14,
 		Function = function(value)
