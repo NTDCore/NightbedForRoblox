@@ -12,8 +12,10 @@ else
 	kavo = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Libraries/kavo.lua", true))()
 end
 shared.kavogui = kavo
-local ScriptVersion = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/version.lua", true))()
-shared.Version = ScriptVersion
+local ScriptVersion = function()
+  return game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/version.lua")
+end
+shared.Version = ScriptVersion()
 local Sections = {}
 shared.SectionsLoaded = Sections
 
