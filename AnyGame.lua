@@ -9,10 +9,9 @@ repeat task.wait() until game:IsLoaded()
 local getasset = getsynasset or getcustomassetfunction or getcustomasset or function(location) return "rbxasset://"..location end
 local entityLibrary = shared.vapeentity
 local kavo = shared.kavogui
-local ScriptVersion = shared.Version
 local FunctionsLibrary = shared.funcslib
 local win = kavo:CreateWindow({
-	["Title"] = "Nightbed v"..(ScriptVersion),
+	["Title"] = "Nightbed",
 	["Theme"] = "Luna"
 })
 
