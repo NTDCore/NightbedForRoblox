@@ -478,9 +478,9 @@ runFunction(function()
 			BreathExploit.Enabled = callback
 			if BreathExploit.Enabled then
 				Settings.BreathExploit = true
-				spawn(function()
+				task.spawn(function()
 					repeat
-						wait(0.5)
+						task.wait()
 						game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged.DragonBreath:FireServer({
 							["player"] = lplr
 						})
@@ -505,7 +505,7 @@ runcode(function()
 				Settings.PartyExploit = true
 				task.spawn(function()
 					repeat
-						task.wait(0.5)
+						task.wait()
 						game:GetService("ReplicatedStorage")["events-@easy-games/game-core:shared/game-core-networking@getEvents.Events"].useAbility:FireServer("PARTY_POPPER")
 					until (not PartyExploit.Enabled)
 				end)
