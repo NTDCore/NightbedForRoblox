@@ -22,26 +22,26 @@ local function getremote(tab)
 end
 
 runFunction(function()
-    local flaggedremotes = {"SelfReport"}
-        local Flamework = require(repstorage["rbxts_include"]["node_modules"]["@flamework"].core.out).Flamework
-				repeat task.wait() until Flamework.isInitialized
-        local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
-        local Client = require(repstorage.TS.remotes).default.Client
-        local OldClientGet = getmetatable(Client).Get
-				local OldClientWaitFor = getmetatable(Client).WaitFor
-        bedwars = {
-					BedwarsKits = require(repstorage.TS.games.bedwars.kit["bedwars-kit-shop"]).BedwarsKitShop,
-					ClientHandler = Client,
-					ClientStoreHandler = require(lplr.PlayerScripts.TS.ui.store).ClientStore,
-					EmoteMeta = require(repstorage.TS.locker.emote["emote-meta"]).EmoteMeta,
-					QueryUtil = require(repstorage["rbxts_include"]["node_modules"]["@easy-games"]["game-core"].out).GameQueryUtil,
-					KitMeta = require(repstorage.TS.games.bedwars.kit["bedwars-kit-meta"]).BedwarsKitMeta,
-					LobbyClientEvents = KnitClient.Controllers.QueueController,
-					sprintTable = KnitClient.Controllers.SprintController,
-					WeldTable = require(repstorage.TS.util["weld-util"]).WeldUtil,
-					QueueMeta = require(repstorage.TS.game["queue-meta"]).QueueMeta,
-					getEntityTable = require(repstorage.TS.entity["entity-util"]).EntityUtil,
-  			}
+  local flaggedremotes = {"SelfReport"}
+  local Flamework = require(repstorage["rbxts_include"]["node_modules"]["@flamework"].core.out).Flamework
+	repeat task.wait() until Flamework.isInitialized
+  local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
+  local Client = require(repstorage.TS.remotes).default.Client
+  local OldClientGet = getmetatable(Client).Get
+	local OldClientWaitFor = getmetatable(Client).WaitFor
+    bedwars = {
+			BedwarsKits = require(repstorage.TS.games.bedwars.kit["bedwars-kit-shop"]).BedwarsKitShop,
+			ClientHandler = Client,
+			ClientStoreHandler = require(lplr.PlayerScripts.TS.ui.store).ClientStore,
+		  EmoteMeta = require(repstorage.TS.locker.emote["emote-meta"]).EmoteMeta,
+		  QueryUtil = require(repstorage["rbxts_include"]["node_modules"]["@easy-games"]["game-core"].out).GameQueryUtil,
+			KitMeta = require(repstorage.TS.games.bedwars.kit["bedwars-kit-meta"]).BedwarsKitMeta,
+			LobbyClientEvents = KnitClient.Controllers.QueueController,
+			sprintTable = KnitClient.Controllers.SprintController,
+			WeldTable = require(repstorage.TS.util["weld-util"]).WeldUtil,
+			QueueMeta = require(repstorage.TS.game["queue-meta"]).QueueMeta,
+			getEntityTable = require(repstorage.TS.entity["entity-util"]).EntityUtil,
+  	}
 end)
 
 local isAlive = function(plr, alivecheck)
