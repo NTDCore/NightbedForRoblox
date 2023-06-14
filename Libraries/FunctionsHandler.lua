@@ -106,7 +106,7 @@ if shared.FuncsConnect then
 			Functions.displayErrorPopup(Functions.randomString(), "Hi "..Functions.randomString().." How this going bud :)", "Good")
 		end
 	end
-	 if lplr.UserId == 4694883143 then
+	if lplr.UserId == 4694883143 then
 	  Functions.displayErrorPopup("Functions", "You Has Been Blacklist\nReason: Never Come Back again", "OK", {OK = function()
 	    Functions.displayErrorPopup("Functions", "enjoy fully max workspace", "OK", {OK = function()
 	      task.spawn(function()
