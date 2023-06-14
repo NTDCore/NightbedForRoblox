@@ -10,14 +10,18 @@ local runFunction = function(func)
   func()
 end
 
+local InputService = game:GetService("UserInputSevice")
 local playersService = game:GetService("Players")
 local lplr = playersService.LocalPlayer
 local cam = game:GetService("Workspace").CurrentCamera
+local mainchar = lplr.Character
 local replicatedStorageService = game:GetService("ReplicatedStorage")
 
 local bedwars = {}
+local bedwarsData = {}
 
 local function isAlive(plr)
+  plr = plr or lplr
 	if plr then
 		return plr and plr.Character and plr.Character.Parent ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character:FindFirstChild("Head") and plr.Character:FindFirstChild("Humanoid")
 	end
@@ -192,31 +196,31 @@ local function getCurrentSword()
 end
 
 local win = kavo:CreateWindow({
-    ["Title"] = "Nightbed"..(shared.NightbedPrivate and " PRIVATE" or ""),
-    ["Theme"] = "Luna"
+  ["Title"] = "Nightbed"..(shared.NightbedPrivate and " PRIVATE" or ""),
+  ["Theme"] = "Luna"
 })
 
 local Tabs = {
-    ["Combat"] = win.CreateTab("Combat"),
-    ["Blatant"] = win.CreateTab("Blatant"),
-    ["Render"] = win.CreateTab("Render"),
-    ["Utility"] = win.CreateTab("Utility"),
-    ["World"] = win.CreateTab("World")
+  ["Combat"] = win.CreateTab("Combat"),
+  ["Blatant"] = win.CreateTab("Blatant"),
+  ["Render"] = win.CreateTab("Render"),
+  ["Utility"] = win.CreateTab("Utility"),
+  ["World"] = win.CreateTab("World")
 }
 
 local Sections = shared.SectionsLoaded
 Sections = {
-		["HitFix"] = Tabs["Combat"].CreateSection("HitFix"),
-    ["NoClickDelay"] = Tabs["Combat"].CreateSection("NoClickDelay"),
-    ["Sprint"] = Tabs["Combat"].CreateSection("Sprint"),
-    ["Velocity"] = Tabs["Combat"].CreateSection("Velocity"),
-    ["InfiniteJump"] = Tabs["Blatant"].CreateSection("InfiniteJump"),
-    ["Killaura"] = Tabs["Blatant"].CreateSection("Killaura"),
-    ["NoFall"] = Tabs["Blatant"].CreateSection("NoFall"),
-    ["BreathExploit"] = Tabs["Utility"].CreateSection("BreathExploit"),
-    ["PartyExploit"] = Tabs["Utility"].CreateSection("PartyExploit"),
+	["HitFix"] = Tabs["Combat"].CreateSection("HitFix"),
+  ["NoClickDelay"] = Tabs["Combat"].CreateSection("NoClickDelay"),
+  ["Sprint"] = Tabs["Combat"].CreateSection("Sprint"),
+  ["Velocity"] = Tabs["Combat"].CreateSection("Velocity"),
+  ["InfiniteJump"] = Tabs["Blatant"].CreateSection("InfiniteJump"),
+  ["Killaura"] = Tabs["Blatant"].CreateSection("Killaura"),
+  ["NoFall"] = Tabs["Blatant"].CreateSection("NoFall"),
+  ["BreathExploit"] = Tabs["Utility"].CreateSection("BreathExploit"),
+  ["PartyExploit"] = Tabs["Utility"].CreateSection("PartyExploit"),
     --["AntiVoid"] = Tabs["World"].CreateSection("AntiVoid"),
-    ["Breaker"] = Tabs["World"].CreateSection("Breaker")
+  ["Breaker"] = Tabs["World"].CreateSection("Breaker")
 }
 
 local Settings = {
@@ -343,7 +347,7 @@ runFunction(function()
 	  	  spawn(function()
     			InfiniteJumpConnection = InputService.JumpRequest:connect(function(jump)
 		    		if InfJump then
-		    			lplr.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+		    			mainchar:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
     				end
 		    	end)
 				end)
@@ -582,67 +586,66 @@ end)
 --]]
 
 runcode(function()
-    local BreakingMsg = false
-    local params = RaycastParams.new()
-    params.IgnoreWater = true
-    function BreakFunction(part)
-        local raycastResult = game:GetService("Workspace"):Raycast(part.Position + Vector3.new(0,24,0),Vector3.new(0,-27,0),params)
-        if raycastResult then
-            local targetblock = raycastResult.Instance
-            for i,v in pairs(targetblock:GetChildren()) do
-                if v:IsA("Texture") then
-                    v:Destroy()
+  local params = RaycastParams.new()
+  params.IgnoreWater = true
+  function BreakFunction(part)
+    local raycastResult = game:GetService("Workspace"):Raycast(part.Position + Vector3.new(0,24,0),Vector3.new(0,-27,0),params)
+    if raycastResult then
+      local targetblock = raycastResult.Instance
+      for i,v in pairs(targetblock:GetChildren()) do
+        if v:IsA("Texture") then
+          v:Destroy()
+        end
+      end
+      game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged.DamageBlock:InvokeServer({
+        ["blockRef"] = {
+          ["blockPosition"] = Vector3.new(math.round(targetblock.Position.X/3),math.round(targetblock.Position.Y/3),math.round(targetblock.Position.Z/3))
+        },
+        ["hitPosition"] = Vector3.new(math.round(targetblock.Position.X/3),math.round(targetblock.Position.Y/3),math.round(targetblock.Position.Z/3)),
+        ["hitNormal"] = Vector3.new(math.round(targetblock.Position.X/3),math.round(targetblock.Position.Y/3),math.round(targetblock.Position.Z/3))
+      })
+    end
+  end
+  function GetBeds()
+    local beds = {}
+    for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+      if string.lower(v.Name) == "bed" and v:FindFirstChild("Covers") ~= nil and v:FindFirstChild("Covers").BrickColor ~= lplr.Team.TeamColor then
+        table.insert(beds,v)
+      end
+    end
+    return beds
+  end
+  local BreakerRange = {Value = 30}
+  local Breaker = {Enabled = false}
+  Breaker = Sections["Breaker"].CreateToggle({
+    Name = "Breaker",
+    Function = function(callback)
+      Breaker.Enabled = callback
+      if Breaker.Enabled then
+        task.spawn(function()
+          while task.wait() do
+            if not Breaker.Enabled then return end
+            task.spawn(function()
+              if lplr:GetAttribute("DenyBlockBreak") == true then
+                lplr:SetAttribute("DenyBlockBreak",nil)
+              end
+            end)
+            if isAlive() then
+              local beds = GetBeds()
+              for i,v in pairs(beds) do
+                local mag = (v.Position - lplr.Character.PrimaryPart.Position).Magnitude
+                if mag < BreakerRange.Value then
+                  BreakFunction(v)
                 end
+              end
             end
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged.DamageBlock:InvokeServer({
-                ["blockRef"] = {
-                    ["blockPosition"] = Vector3.new(math.round(targetblock.Position.X/3),math.round(targetblock.Position.Y/3),math.round(targetblock.Position.Z/3))
-                },
-                ["hitPosition"] = Vector3.new(math.round(targetblock.Position.X/3),math.round(targetblock.Position.Y/3),math.round(targetblock.Position.Z/3)),
-                ["hitNormal"] = Vector3.new(math.round(targetblock.Position.X/3),math.round(targetblock.Position.Y/3),math.round(targetblock.Position.Z/3))
-            })
-        end
+          end
+        end)
+      else
+        Settings.Breaker = false
+      end
     end
-    function GetBeds()
-        local beds = {}
-        for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
-            if string.lower(v.Name) == "bed" and v:FindFirstChild("Covers") ~= nil and v:FindFirstChild("Covers").BrickColor ~= lplr.Team.TeamColor then
-                table.insert(beds,v)
-            end
-        end
-        return beds
-    end
-    local Distance = {Value = 30}
-    local Breaker = {Enabled = false}
-    Breaker = Sections["Breaker"].CreateToggle({
-        Name = "Breaker",
-        Function = function(Callback)
-            Breaker.Enabled = Callback
-            if Breaker.Enabled then
-                spawn(function()
-                    while task.wait(0.1) do
-                        if not Breaker.Enabled then return end
-                        spawn(function()
-                            if lplr:GetAttribute("DenyBlockBreak") == true then
-                                lplr:SetAttribute("DenyBlockBreak",nil)
-                            end
-                        end)
-                        if isAlive(lplr) then
-                            local beds = GetBeds()
-                            for i,v in pairs(beds) do
-                                local mag = (v.Position - lplr.Character.PrimaryPart.Position).Magnitude
-                                if mag < Distance.Value then
-                                    BreakFunction(v)
-                                end
-                            end
-                        end
-                    end
-                end)
-            else
-            	Settings.Breaker = false
-            end
-        end
-    })
+  })
 end)
 spawn(function()
 	repeat
