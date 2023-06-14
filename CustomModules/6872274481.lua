@@ -10,7 +10,7 @@ local runFunction = function(func)
   func()
 end
 
-local InputService = game:GetService("UserInputSevice")
+local InputService = game:GetService("UserInputService")
 local playersService = game:GetService("Players")
 local lplr = playersService.LocalPlayer
 local cam = game:GetService("Workspace").CurrentCamera
