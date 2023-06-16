@@ -1,15 +1,14 @@
 repeat task.wait() until game:IsLoaded()
 local isfile = isfile or function(path)
-  local suc, res = pcall(function() return readfile(path) end)
-  return suc and res ~= nil
+	local suc, res = pcall(function() return readfile(path) end)
+	return suc and res ~= nil 
 end
 
 local kavo
-
 if isfile("Nightbed/Libraries/kavo.lua") then
-	kavo = loadstring(readfile("Nightbed/Libraries/kavo.lua"))()
+  kavo = loadstring(readfile("Nightbed/Libraries/kavo.lua"))()
 else
-	kavo = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Libraries/kavo.lua", true))()
+  kavo = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Libraries/kavo.lua", true))()
 end
 shared.kavogui = kavo
 local Sections = {}
@@ -29,21 +28,22 @@ local TeleportString = [[
 queueteleport(TeleportString)
 
 if isfolder("Nightbed") == false then
-  makefolder("Nightbed")
+	makefolder("Nightbed")
 end
 
 if isfolder("Nightbed/assets") == false then
-  makefolder("Nightbed/assets")
+	makefolder("Nightbed/assets")
 end
 
 if isfolder("Nightbed/Profiles") == false then
   makefolder("Nightbed/Profiles")
 end
 local AnyGame = [[
-loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/AnyGame.lua", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/AnyGame.lua",
+true))()
 ]]
 if isfolder("Nightbed/CustomModules") == false then
-  makefolder("Nightbed/CustomModules")
+	makefolder("Nightbed/CustomModules")
 end
 
 function MainLoaded()
@@ -51,15 +51,14 @@ function MainLoaded()
   local customModuleScript = game:HttpGet(customModuleURL, true)
   if customModuleScript then
     local success, error = pcall(function()
-    	loadstring(customModuleScript)()
-	  end)
+      loadstring(customModuleScript)()
+    end)
     if not success then
       warn("Failed To Loaded Modules: " .. tostring(error))
-      --FunctionsLibrary.displayErrorPopup("Error", "CustomModules Not Found\nLaunch As AnyGame\n Error: .. tostring(error), "OK")
       loadstring(AnyGame)()
     end
   else
-  	loadstring(AnyGame)()
+    loadstring(AnyGame)()
   end
 end
 
@@ -76,11 +75,14 @@ end
 --]]
 
 task.spawn(function()
-	MainLoaded()
+  MainLoaded()
 end)
 
 if not shared.FuncsConnect then
-  repeat
-    shared.FuncsConnect = true
-  until shared.FuncsConnect
+  task.spawn(function()
+  	repeat
+  	  task.wait()
+  		shared.FuncsConnect = true
+  	until shared.FuncsConnect
+  end)
 end
