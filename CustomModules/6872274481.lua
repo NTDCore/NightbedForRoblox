@@ -176,7 +176,7 @@ function SwitchTool(tool)
   replicatedStorageService.rbxts_include.node_modules["@rbxts"].net.out._NetManaged.SetInvItem:InvokeServer({
     ["hand"] = tool,
   })
-  repeat task.wait() until lplr.Character.HandInvItem = tool
+  repeat task.wait() until lplr.Character.HandInvItem == tool
 end
 
 local function playAnimation(id) 
