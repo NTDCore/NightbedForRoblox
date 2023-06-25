@@ -390,13 +390,11 @@ runcode(function()
 		})
 		function FixAura(item)
       game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.SetInvItem:InvokeServer({
-        ["hand"] = game:GetService("ReplicatedStorage").Inventories[lplr.Name][item],
+        ["hand"] = item,
       })
+      repeat task.wait() until lplr.Character.HandInvItem = item
 		end
-		function Useless()
-		  return sword ~= nil and sword.tool
-		end
-    FixAura(Useless())
+    FixAura(sword.tool)
 		if not KillauraNoSwing.Enabled then
 			if Killaura.Enabled then
 				playAnimation("rbxassetid://4947108314")
