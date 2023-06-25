@@ -92,7 +92,6 @@ runcode(function()
 		BlockEngine = require(lplr.PlayerScripts.TS.lib["block-engine"]["client-block-engine"]).ClientBlockEngine,
 		ChestController = KnitClient.Controllers.ChestController,
 		ClientHandler = Client,
-		EquipItemRemote = getremote(debug.getconstants(debug.getproto(require(replicatedStorageService.TS.entity.entities["inventory-entity"]).InventoryEntity.equipItem, 3))),
 		getCurrentInventory = function(plr)
 			local plr = plr or lplr
 			local suc, result = pcall(function()
@@ -120,7 +119,6 @@ end)
 local function targetCheck(plr, check)
 	return (check and plr.Character.Humanoid.Health > 0 and plr.Character:FindFirstChild("ForceField") == nil or check == false)
 end
-
 
 local function isPlayerTargetable(plr, target)
 	return plr.Team ~= lplr.Team and plr and isAlive(plr) and targetCheck(plr, target)
@@ -391,16 +389,14 @@ runcode(function()
 				["chargeRatio"] = 0}
 		})
 		function FixAura(item)
-      replicatedStorageService.rbxts_include.node_modules["@rbxts"].net.out._NetManaged.SetInvItem:InvokeServer({
-        ["hand"] = replicatedStorageService.Inventories[lplr.Name][item],
+      game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.SetInvItem:InvokeServer({
+        ["hand"] = game:GetService("ReplicatedStorage").Inventories[lplr.Name][item],
       })
 		end
-		--[[
-		local somethingreal = function()
+		function Useless()
 		  return sword ~= nil and sword.tool
-		end]]
-		-- bedwars devs added AntiAura so Fix??
-    FixAura(sword.tool)
+		end
+    FixAura(Useless())
 		if not KillauraNoSwing.Enabled then
 			if Killaura.Enabled then
 				playAnimation("rbxassetid://4947108314")
