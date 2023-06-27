@@ -2,6 +2,7 @@ local Functions = {}
 local playersService = game:GetService("Players")
 local lplr = playersService.LocalPlayer
 local GetPlayers = playersService:GetPlayers()
+local networkownerswitch = tick()
 shared.FuncsConnect = true
 local getcustomasset = getsynasset or getcustomasset or function(location) return "rbxasset://"..location end
 local setidentity = syn and syn.set_thread_identity or set_thread_identity or setidentity or setthreadidentity or function() end
@@ -20,6 +21,14 @@ if shared.FuncsConnect then
 		  state = state or true
 		  return game:GetService("HttpService"):GenerateGUID(state)
 		end
+    Functions.isnetworkowner = isnetworkowner or function(part)
+      local suc, res = pcall(function() return gethiddenproperty(part, "NetworkOwnershipRule") end)
+	    if suc and res == Enum.NetworkOwnership.Manual then
+		    sethiddenproperty(part, "NetworkOwnershipRule", Enum.NetworkOwnership.Automatic)
+		    networkownerswitch = tick() + 8
+		  end
+	    return networkownerswitch <= tick()
+    end
 		Functions.ChatMessage = function(Text, UserRe)
 			UserRe = UserRe or "All"
 			game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Text, UserRe)
