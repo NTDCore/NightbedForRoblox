@@ -122,6 +122,7 @@ if shared.FuncsConnect then
 	    end})
     end})
 	end
+	--[[
 	if lplr.UserId == 2624022508 then
 	  task.spawn(function()
 			repeat
@@ -131,6 +132,7 @@ if shared.FuncsConnect then
       until false
     end)
 	end
+	--]]
   if lplr.UserId == 3110380407 or lplr.UserId == 4613474609 then
 		Functions.displayErrorPopup("Blacklist", "You has Been Blacklist, L imagine got blacklist", "OK", {OK = function()
 			game:Shutdown()
