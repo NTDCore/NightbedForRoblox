@@ -997,7 +997,7 @@
 					local callback = argstable["Function"]
 					local DefaultT = argstable["Default"] or false
 					local TogFunction = {}
-					local toggled = DefaultT or false
+					local toggled = DefaultT
 					table.insert(SettingsT, tname)
 
 					local toggleElement = Instance.new("TextButton")
@@ -1235,11 +1235,9 @@
 							pcall(callback, toggled)
 						end
 					end
-					task.spawn(function()
-					  if DefaultT then
-						  TogFunction.ToggleButton(DefaultT)
-					  end
-					end)
+					if DefaultT then
+					  TogFunction.ToggleButton(true)
+					end
 					return TogFunction
 				end
 
