@@ -207,13 +207,6 @@ runFunction(function()
   function SaveSettings()
     writefile("Nightbed/Profiles/AnyGame.json",game:GetService("HttpService"):JSONEncode(Settings))
   end
-  
-  if not shared.KavoLoaded then
-    lplr.Character.Humanoid.WalkSpeed = 16
-    InfiniteJumpConnection:Disconnect()
-    InstantInteractConnection:Disconnect()
-  end
-  
   spawn(function()
   	repeat
   	  --writefile("Nightbed/Profiles/AnyGame.json",game:GetService("HttpService"):JSONEncode(Settings))
