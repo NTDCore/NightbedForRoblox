@@ -226,10 +226,10 @@ runFunction(function()
   if suc and type(res) == "table" then 
     Settings = res
     task.wait()
-    if InfiniteJump.Enabled then
+    if InfiniteJump then
     	InfiniteJump.ToggleButton(Settings["InfiniteJump"])
     end
-    if Speed.Enabled then
+    if Speed then
     	Speed.ToggleButton(Settings["Speed"]["Enabled"])
       speedval.Value = Settings["Speed"]["Value"]
     end
