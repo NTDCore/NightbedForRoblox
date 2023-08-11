@@ -1,7 +1,4 @@
 -- nightbed test log
-local nightbedAssets = {
-  ["Nightbed/assets/Cape.png"] = "rbxthumb://type=Asset&id=" .. 14391871286 .. "&w=420&h=420"
-}
 --[[
   Version Info
     a = alpha
@@ -12,14 +9,38 @@ local nightbedAssets = {
     dl = dev log
     d = demo
 --]]
-local NightbedTable = {
+local Service = function(name)
+  return game:GetService(name)
+end
+local nightbedService = {
   ["Version"] = "1.0pr",
-  ["Injected"] = true
+  ["Injected"] = true,
+  ["Assets"] = {
+    ["Nightbed/assets/Cape.png"] = "rbxthumb://type=Asset&id=" .. 14391871286 .. "&w=420&h=420"
+  }
 }
-shared.NBTable = NightbedTable
-shared.NBAssets = nightbedAssets
+local nightbedStore = {
+  ["GuiLibrary"] = {},
+  ["Core"] = {}
+}
+local robloxService = {
+  ["InputService"] = Service("UserInputService"),
+  ["ReplicatedStorage"] = Service("ReplicatedStorage"),
+  ["Game"] = {
+    ["PlaceId"] = game.PlaceId,
+  }
+}
+local executorService = {
+  ["queueteleport"] = queue_on_teleport
+}
+
+shared.NBStore = nightbedStore
+shared.rblxService = robloxService
+shared.executorService = executorService
+shared.NBService = nightbedService
+shared.NBAssets = nightbedService["Assets"]
 local customasset = function(asset)
-  return nightbedAssets[asset] or ""
+  return nightbedService["Assets"][asset] or ""
 end
 getgenv().loadAsset = customasset
 local baseDirectionFile = (shared.NightbedDeveloper and "NightbedDev/" or "Nightbed/")
