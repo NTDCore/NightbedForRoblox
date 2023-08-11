@@ -1,5 +1,9 @@
 -- nightbed test log
 local nightbedInjected = true
+local nightbedAssets = {
+  ["Nightbed/assets/Cape.png"] = "rbxthumb://type=Asset&id=" .. 14391871286 .. "&w=420&h=420"
+}
+shared.NBAssets = nightbedAssets
 local baseDirectionFile = (shared.NightbedDeveloper and "NightbedDev/" or "Nightbed/")
 local nightbedConsole = function(message)
   print("[NIGHTBED]: "..message)
