@@ -4,7 +4,6 @@ local lplr = playersService.LocalPlayer
 local GetPlayers = playersService:GetPlayers()
 local networkownerswitch = tick()
 shared.FuncsConnect = true
-local getcustomasset = getsynasset or getcustomasset or function(location) return "rbxasset://"..location end
 local setidentity = syn and syn.set_thread_identity or set_thread_identity or setidentity or setthreadidentity or function() end
 local getidentity = syn and syn.get_thread_identity or get_thread_identity or getidentity or getthreadidentity or function() return 0 end
 
