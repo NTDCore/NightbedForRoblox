@@ -3,7 +3,8 @@
 Script For Roblox And using anygame
 
 # Script
-```
+
+```lua
 loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/MainScript.lua", true))()
 ```
 
