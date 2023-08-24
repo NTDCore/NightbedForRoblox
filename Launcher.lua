@@ -8,26 +8,36 @@
     b = beta
     dl = dev log
     d = demo
+    t = test
 --]]
+local githubRequest = function(scripturl)
+  return game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/"..scripturl, true)
+end
 local Service = function(name)
   return game:GetService(name)
 end
 local nightbedService = {
-  ["Version"] = "1.0pr",
+  ["Version"] = "1.0t",
   ["Injected"] = true,
   ["Assets"] = {
     ["Nightbed/assets/Cape.png"] = "rbxthumb://type=Asset&id=" .. 14391871286 .. "&w=420&h=420"
   }
 }
 local nightbedStore = {
-  ["GuiLibrary"] = {},
-  ["Core"] = {}
+  ["GuiLibrary"] = {
+  	["Kavo"] = loadstring(githubRequest("Libraries/kavo.lua"))()
+  },
+  ["Core"] = {
+  	["FunctionsLibrary"] = loadstring(githubRequest("Libraries/FunctionsHandler.lua"))(),
+  	["entity"] = (isfile("vape/Libraries/entityHandler.lua") and loadstring(readfile("vape/Libraries/entityHandler.lua"))() or loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/Libraries/entityHandler.lua", true))()),
+  	["sha"] = loadstring(githubRequest("Libraries/sha.lua"))()
+  }
 }
 local robloxService = {
   ["InputService"] = Service("UserInputService"),
   ["ReplicatedStorage"] = Service("ReplicatedStorage"),
   ["Game"] = {
-    ["PlaceId"] = game.PlaceId,
+    ["PlaceId"] = game.PlaceId
   }
 }
 local executorService = {
@@ -43,13 +53,8 @@ local customasset = function(asset)
   return nightbedService["Assets"][asset] or ""
 end
 getgenv().loadAsset = customasset
-local baseDirectionFile = (shared.NightbedDeveloper and "NightbedDev/" or "Nightbed/")
 local nightbedConsole = function(message)
   print("[NIGHTBED]: "..message)
-end
-
-local githubRequest = function(scripturl)
-  return game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/"..scripturl, true)
 end
 
 local NBFolder = function(folder)
@@ -58,12 +63,12 @@ local NBFolder = function(folder)
   end
 end
 
-if isfolder(baseDirectionFile) == false then
-  makefolder(baseDirectionFile)
-  NBFolder(baseDirectionFile.."/CustomModules")
-  NBFolder(baseDirectionFile.."/Core")
-  NBFolder(baseDirectionFile.."/assets")
-  NBFolder(baseDirectionFile.."/Profiles")
+if isfolder("Nightbed") == false then
+  makefolder("Nightbed")
+  NBFolder("Nightbed/CustomModules")
+  NBFolder("Nightbed/Core")
+  NBFolder("Nightbed/assets")
+  NBFolder("Nightbed/Profiles")
 else
   task.wait()
   nightbedConsole("Loading...")
