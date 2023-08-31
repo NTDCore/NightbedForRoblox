@@ -105,6 +105,13 @@
 			TextColor = Color3.fromRGB(119, 209, 138),
 			ElementColor = Color3.fromRGB(24, 24, 24)
 		},
+		Vape = {
+			SchemeColor = Color3.fromRGB(5, 133, 104),
+			Background = Color3.fromRGB(20, 20, 20),
+			Header = Color3.fromRGB(20, 20, 20),
+			TextColor = Color3.fromRGB(240, 248, 246),
+			ElementColor = Color3.fromRGB(26, 25, 26)
+		},
 		Luna = { 
 			SchemeColor = Color3.fromRGB(126, 6, 232), 
 			Background = Color3.fromRGB(0, 0, 0), 
@@ -118,7 +125,7 @@
 			Header = Color3.fromRGB(31, 31, 31), 
 			TextColor = Color3.fromRGB(255,255,255), 
 			ElementColor = Color3.fromRGB(20, 20,20) 
-		 },
+		},
 		Synapse = {
 			SchemeColor = Color3.fromRGB(46, 48, 43),
 			Background = Color3.fromRGB(13, 15, 12),
@@ -181,6 +188,8 @@
 			themeList = themeStyles.Midnight
 		elseif themeList == "Sentinel" then
 			themeList = themeStyles.Sentinel
+		elseif themeList == "Vape" then
+			themeList = themeStyles.Vape
 		elseif themeList == "Luna" then
 			themeList = themeStyles.Luna
 		elseif themeList == "Private" then
