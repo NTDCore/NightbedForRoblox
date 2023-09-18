@@ -17,7 +17,7 @@ local Service = function(name)
   return game:GetService(name)
 end
 local nightbedService = {
-  ["Version"] = "1.0t",
+  ["Version"] = "1.0dl",
   ["Injected"] = true,
   ["Assets"] = {
     ["Nightbed/assets/Cape.png"] = "rbxthumb://type=Asset&id=" .. 14391871286 .. "&w=420&h=420"
@@ -49,6 +49,9 @@ shared.rblxService = robloxService
 shared.executorService = executorService
 shared.NBService = nightbedService
 shared.NBAssets = nightbedService["Assets"]
+shared.funcslib = nightbedService["Core"]["FunctionsLibrary"]
+shared.vapeentity = nightbedService["Core"]["entity"]
+shared.shalib = nightbedService["Core"]["sha"]
 local customasset = function(asset)
   return nightbedService["Assets"][asset] or ""
 end
