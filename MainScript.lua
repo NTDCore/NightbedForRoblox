@@ -1,9 +1,14 @@
 repeat task.wait() until game:IsLoaded()
+local githubRequest = function(scripturl)
+	if scripturl then
+		writefile(scripturl, game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/"..scripturl, true))
+	end
+	return readfile("Nightbed/"..scripturl)
+end
 local isfile = isfile or function(path)
 	local suc, res = pcall(function() return readfile(path) end)
 	return suc and res ~= nil 
 end
-
 local kavo
 if isfile("Nightbed/Core/kavo.lua") then
   kavo = loadstring(readfile("Nightbed/Core/kavo.lua"))()
@@ -13,17 +18,10 @@ end
 shared.kavogui = kavo
 local Sections = {}
 shared.SectionsLoaded = Sections
-local queueteleport = queue_on_teleport
-
-local TeleportString = [[
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/MainScript.lua", true))
-]]
-
-queueteleport(TeleportString)
-
 local AnyGame = [[
 loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Universal.lua", true))()
 ]]
+
 function MainLoaded()
   local customModuleURL = "https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua"
   local customModuleScript = game:HttpGet(customModuleURL, true)
@@ -33,10 +31,10 @@ function MainLoaded()
     end)
     if not success then
       warn("Failed To Loaded Modules: " .. tostring(error))
-      loadstring(AnyGame)()
+      loadstring(githubRequest("Universal.lua"))()
     end
   else
-    loadstring(AnyGame)()
+    loadstring(githubRequest("Universal.lua"))()
   end
 end
 
