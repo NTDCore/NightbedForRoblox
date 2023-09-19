@@ -21,7 +21,7 @@ local nightbedService = {
 	["Version"] = "1.0dl",
 	["Injected"] = true,
 	["Assets"] = {
-		["Nightbed/assets/Cape.png"] = "rbxthumb://type=Asset&id=" .. 14391871286 .. "&w=420&h=420"
+		["Cape.png"] = "rbxthumb://type=Asset&id=" .. 14391871286 .. "&w=420&h=420"
 	}
 }
 local nightbedStore = {
