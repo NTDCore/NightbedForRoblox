@@ -11,9 +11,7 @@
 		t = test
 --]]
 local githubRequest = function(scripturl)
-	if scripturl then
-		writefile(scripturl, game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/"..scripturl, true))
-	end
+	writefile(scripturl, game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/"..scripturl, true))
 	return readfile("Nightbed/"..scripturl)
 end
 local Service = function(name)
