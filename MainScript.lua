@@ -5,10 +5,10 @@ local isfile = isfile or function(path)
 end
 
 local kavo
-if isfile("Nightbed/Libraries/kavo.lua") then
-  kavo = loadstring(readfile("Nightbed/Libraries/kavo.lua"))()
+if isfile("Nightbed/Core/kavo.lua") then
+  kavo = loadstring(readfile("Nightbed/Core/kavo.lua"))()
 else
-  kavo = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Libraries/kavo.lua", true))()
+  kavo = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Core/kavo.lua", true))()
 end
 shared.kavogui = kavo
 local Sections = {}
@@ -22,8 +22,7 @@ local TeleportString = [[
 queueteleport(TeleportString)
 
 local AnyGame = [[
-loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/AnyGame.lua",
-true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Universal.lua", true))()
 ]]
 function MainLoaded()
   local customModuleURL = "https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua"
