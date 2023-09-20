@@ -40,13 +40,8 @@ function MainLoaded()
   end
 end
 
-MainLoaded()
-
-if not shared.FuncsConnect then
-  task.spawn(function()
-  	repeat
-  	  task.wait()
-  		shared.FuncsConnect = true
-  	until shared.FuncsConnect
-  end)
+if shared.NBStore.Injected then
+	task.spawn(MainLoaded)
+else
+	MainLoaded()
 end
