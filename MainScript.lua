@@ -42,6 +42,4 @@ end
 
 if shared.NBStore.Injected then
 	task.spawn(MainLoaded)
-else
-	MainLoaded()
 end
