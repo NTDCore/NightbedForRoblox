@@ -11,8 +11,9 @@ local isfile = isfile or function(path)
 	local suc, res = pcall(function() return readfile(path) end)
 	return suc and res ~= nil 
 end
+local nightbedStore = shared.NBStore
 local kavo
-kavo = loadstring(githubRequest("Core/kavo.lua"))()
+kavo = nightbedStore["GuiLibrary"].Kavo
 shared.kavogui = kavo
 local Sections = {}
 shared.SectionsLoaded = Sections
