@@ -29,10 +29,12 @@ function MainLoaded()
   local customModuleURL = "https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua"
   local customModuleScript = game:HttpGet(customModuleURL, true)
 --]]
-	local customModuleScript = loadstring(githubRequest("CustomModules/"..game.PlaceId..".lua"))()
+	local customModuleScript = game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua", true)
   if customModuleScript then
     local success, error = pcall(function()
-      loadstring(customModuleScript)()
+      writefile("Nightbed/CustomModules/"..game.PlaceId..".lua", "-- Watermask When Updated\n"..customModuleScript)
+      task.wait()
+      loadstring(readfile("Nightbed/CustomModules/"..game.PlaceId..".lua"))()
     end)
     if not success then
       warn("Failed To Loaded Modules: " .. tostring(error))
