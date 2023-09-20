@@ -36,7 +36,7 @@ function MainLoaded()
       task.wait()
       loadstring(readfile("Nightbed/CustomModules/"..game.PlaceId..".lua"))()
     end)
-    if not success then
+    if not success and error and error ~= "404: Not Found" then
       warn("Failed To Loaded Modules: " .. tostring(error))
       loadstring(githubRequest("Universal.lua"))()
     end
