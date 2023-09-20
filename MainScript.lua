@@ -40,9 +40,7 @@ function MainLoaded()
   end
 end
 
-task.spawn(function()
-  MainLoaded()
-end)
+MainLoaded()
 
 if not shared.FuncsConnect then
   task.spawn(function()
