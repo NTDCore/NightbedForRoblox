@@ -1,6 +1,14 @@
 repeat task.wait() until game:IsLoaded()
 local githubRequest = function(scripturl)
-	writefile("Nightbed/"..scripturl, game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/"..scripturl, true))
+	if (not isfile("Nightbed/"..scripturl)) then
+		local suc,res = pcall(function()
+			return game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/"..scripturl, true)
+		end)
+		if scripturl:find(".lua") then
+			res = "-- Watermask When Updated\n"..res
+		end
+		writefile("Nightbed/"..scripturl, res)
+	end
 	return readfile("Nightbed/"..scripturl)
 end
 local isfile = isfile or function(path)
@@ -8,11 +16,7 @@ local isfile = isfile or function(path)
 	return suc and res ~= nil 
 end
 local kavo
-if isfile("Nightbed/Core/kavo.lua") then
-  kavo = loadstring(readfile("Nightbed/Core/kavo.lua"))()
-else
-  kavo = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Core/kavo.lua", true))()
-end
+kavo = loadstring(githubRequest("Core/kavo.lua"))()
 shared.kavogui = kavo
 local Sections = {}
 shared.SectionsLoaded = Sections
