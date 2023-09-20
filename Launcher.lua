@@ -25,17 +25,14 @@ NBFolder("Nightbed/assets")
 NBFolder("Nightbed/Profiles")
 
 local githubRequest = function(scripturl)
-	if (not isfile("Nightbed/"..scripturl)) then
-		local suc,res = pcall(function()
-			return game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/"..readfile("Nightbed/commit.txt").."/"..scripturl, true)
-		end)
-		--
-		if scripturl:find(".lua") then
-			res = "-- Watermask When Updated\n"..res
-		end
-		--]]
-		writefile("Nightbed/"..scripturl, res)
+	local suc,res = pcall(function()
+		return game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/"..readfile("Nightbed/commit.txt").."/"..scripturl, true)
+	end)
+	if scripturl:find(".lua") then
+		res = "-- Watermask When Updated\n"..res
 	end
+		--]]
+	writefile("Nightbed/"..scripturl, res)
 	return readfile("Nightbed/"..scripturl)
 end
 
