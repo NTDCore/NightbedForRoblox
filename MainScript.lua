@@ -1,8 +1,6 @@
 repeat task.wait() until game:IsLoaded()
 local githubRequest = function(scripturl)
-	if scripturl then
-		writefile(scripturl, game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/"..scripturl, true))
-	end
+	writefile("Nightbed/"..scripturl, game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/"..scripturl, true))
 	return readfile("Nightbed/"..scripturl)
 end
 local isfile = isfile or function(path)
