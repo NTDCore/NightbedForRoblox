@@ -110,10 +110,11 @@ for i,v in pairs(game:HttpGet("https://github.com/NTDCore/NightbedForRoblox"):sp
 end
 if isfolder("Nightbed") then 
 	if ((not isfile("Nightbed/commit.txt")) or (readfile("Nightbed/commit.txt") ~= commit or commit == "main")) then
-		for i,v in pairs({"Nightbed/Universal.lua", "Nightbed/MainScript.lua"}) do 
-			if isfile(v) and ({readfile(v):find("-- Watermask When Updated")})[1] == 1 then
-				delfile(v)
-			end 
+		if isfile("Nightbed/MainScript.lua") and ({readfile("Nightbed/MainScript.lua"):find("-- Watermask When Updated")})[1] == 1 then
+			delfile("Nightbed/MainScript.lua")
+		end
+		if isfile("Nightbed/Universal.lua") and ({readfile("Nightbed/Universal.lua"):find("-- Watermask When Updated")})[1] == 1 then
+			delfile("Nightbed/Universal.lua")
 		end
 		if isfolder("Nightbed/CustomModules") then 
 			for i,v in pairs(listfiles("Nightbed/CustomModules")) do 
