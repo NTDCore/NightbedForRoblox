@@ -40,6 +40,4 @@ function MainLoaded()
   end
 end
 
-if shared.NBStore.Injected then
-	task.spawn(MainLoaded)
-end
+MainLoaded()
