@@ -1,5 +1,4 @@
 repeat task.wait() until game:IsLoaded()
-local watermaskScript = "-- Watermask When Updated\n"
 local githubRequest = function(scripturl)
 	if (not isfile("Nightbed/"..scripturl)) then
 		local suc,res = pcall(function()
@@ -27,7 +26,7 @@ function MainLoaded()
   local customModuleScript = game:HttpGet(customModuleURL, true)
   if customModuleScript then
     local success, error = pcall(function()
-      writefile("Nightbed/CustomModules/"..game.PlaceId..".lua", watermaskScript..customModuleScript)
+      writefile("Nightbed/CustomModules/"..game.PlaceId..".lua", "-- Watermask When Updated\n"..customModuleScript)
       task.wait()
       loadstring(readfile("Nightbed/CustomModules/"..game.PlaceId..".lua"))()
     end)
