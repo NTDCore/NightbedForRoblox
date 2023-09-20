@@ -1,15 +1,13 @@
--- Watermask When Updated
 repeat task.wait() until game:IsLoaded()
+local watermaskScript = "-- Watermask When Updated\n"
 local githubRequest = function(scripturl)
 	if (not isfile("Nightbed/"..scripturl)) then
 		local suc,res = pcall(function()
 			return game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/"..readfile("Nightbed/commit.txt").."/"..scripturl, true)
 		end)
-		--[[
 		if scripturl:find(".lua") then
 			res = "-- Watermask When Updated\n"..res
 		end
-		--]]
 		writefile("Nightbed/"..scripturl, res)
 	end
 	return readfile("Nightbed/"..scripturl)
@@ -29,7 +27,7 @@ function MainLoaded()
   local customModuleScript = game:HttpGet(customModuleURL, true)
   if customModuleScript then
     local success, error = pcall(function()
-      writefile("Nightbed/CustomModules/"..game.PlaceId..".lua", customModuleScript)
+      writefile("Nightbed/CustomModules/"..game.PlaceId..".lua", watermaskScript..customModuleScript)
       task.wait()
       loadstring(readfile("Nightbed/CustomModules/"..game.PlaceId..".lua"))()
     end)
