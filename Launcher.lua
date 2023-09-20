@@ -112,7 +112,7 @@ for i,v in pairs(game:HttpGet("https://github.com/NTDCore/NightbedForRoblox"):sp
 end
 if isfolder("Nightbed") then 
 	if ((not isfile("Nightbed/commit.txt")) or (readfile("Nightbed/commit.txt") ~= commit or commit == "main")) then
-		--[[
+		--
 		if isfile("Nightbed/MainScript.lua") and ({readfile("Nightbed/MainScript.lua"):find("-- Watermask When Updated")})[1] == 1 then
 			delfile("Nightbed/MainScript.lua")
 		end
