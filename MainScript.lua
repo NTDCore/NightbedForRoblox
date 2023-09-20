@@ -29,7 +29,7 @@ function MainLoaded()
   local customModuleURL = "https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua"
   local customModuleScript = game:HttpGet(customModuleURL, true)
 --]]
-	local customModuleScript = githubRequest("CustomModules/"..game.PlaceId..".lua")
+	local customModuleScript = loadstring(githubRequest("CustomModules/"..game.PlaceId..".lua"))()
   if customModuleScript then
     local success, error = pcall(function()
       loadstring(customModuleScript)()
