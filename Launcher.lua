@@ -99,4 +99,40 @@ if isfolder("Nightbed") then
 	task.wait(1)
 	nightbedConsole("Success! Loaded")
 end
+
+local commit = "main"
+for i,v in pairs(game:HttpGet("https://github.com/NTDCore/NightbedForRoblox"):split("\n")) do 
+	if v:find("commit") and v:find("fragment") then 
+		local str = v:split("/")[5]
+		commit = str:sub(0, str:find('"') - 1)
+		break
+	end
+end
+if isfolder("Nightbed") then 
+	if ((not isfile("Nightbed/commit.txt")) or (readfile("Nightbed/commit.txt") ~= commit or commit == "main")) then
+		for i,v in pairs({"Nightbed/Universal.lua", "Nightbed/MainScript.lua"}) do 
+			if isfile(v) and ({readfile(v):find("-- Watermask When Updated")})[1] == 1 then
+				delfile(v)
+			end 
+		end
+		if isfolder("Nightbed/CustomModules") then 
+			for i,v in pairs(listfiles("Nightbed/CustomModules")) do 
+				if isfile(v) and ({readfile(v):find("-- Watermask When Updated")})[1] == 1 then
+					delfile(v)
+				end 
+			end
+		end
+		if isfolder("Nightbed/Core") then 
+			for i,v in pairs(listfiles("Nightbed/Core")) do 
+				if isfile(v) and ({readfile(v):find("-- Watermask When Updated")})[1] == 1 then
+					delfile(v)
+				end 
+			end
+		end
+		writefile("Nightbed/commit.txt", commit)
+	end
+else
+	writefile("Nightbed/commit.txt", commit)
+end
+
 return loadstring(githubRequest("MainScript.lua"))()
