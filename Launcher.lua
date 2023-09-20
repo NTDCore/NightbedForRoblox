@@ -10,10 +10,21 @@
 		d = demo
 		t = test
 --]]
+local NBFolder = function(folder)
+	if isfolder(folder) == false then
+		makefolder(folder)
+	end
+end
+
+if isfolder("Nightbed") == false then
+	makefolder("Nightbed")
+end
+
 local githubRequest = function(scripturl)
-	writefile(scripturl, game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/"..scripturl, true))
+	writefile("Nightbed/"..scripturl, game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/"..scripturl, true))
 	return readfile("Nightbed/"..scripturl)
 end
+
 local Service = function(name)
 	return game:GetService(name)
 end
@@ -67,8 +78,7 @@ local NBFolder = function(folder)
 	end
 end
 
-if isfolder("Nightbed") == false then
-	makefolder("Nightbed")
+if isfolder("Nightbed") then
 	NBFolder("Nightbed/CustomModules")
 	NBFolder("Nightbed/Core")
 	NBFolder("Nightbed/assets")
