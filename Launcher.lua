@@ -19,9 +19,21 @@ end
 if isfolder("Nightbed") == false then
 	makefolder("Nightbed")
 end
+NBFolder("Nightbed/CustomModules")
+NBFolder("Nightbed/Core")
+NBFolder("Nightbed/assets")
+NBFolder("Nightbed/Profiles")
 
 local githubRequest = function(scripturl)
-	writefile("Nightbed/"..scripturl, game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/"..scripturl, true))
+	if (not isfile("Nightbed/"..scripturl)) then
+		local suc,res = pcall(function()
+			return game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/"..scripturl, true)
+		end)
+		if scripturl:find(".lua") then
+			res = "-- Watermask When Updated\n"..res
+		end
+		writefile("Nightbed/"..scripturl, res)
+	end
 	return readfile("Nightbed/"..scripturl)
 end
 
@@ -41,7 +53,7 @@ local nightbedStore = {
 	},
 	["Core"] = {
 		["FunctionsLibrary"] = loadstring(githubRequest("Core/FunctionsHandler.lua"))(),
-		["entity"] = (isfile("vape/Libraries/entityHandler.lua") and loadstring(readfile("vape/Libraties/entityHandler.lua"))() or loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/Libraries/entityHandler.lua", true))()),
+		["entity"] = loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/Libraries/entityHandler.lua", true))(),
 		["sha"] = loadstring(githubRequest("Core/sha.lua"))()
 	}
 }
@@ -79,11 +91,6 @@ local NBFolder = function(folder)
 end
 
 if isfolder("Nightbed") then
-	NBFolder("Nightbed/CustomModules")
-	NBFolder("Nightbed/Core")
-	NBFolder("Nightbed/assets")
-	NBFolder("Nightbed/Profiles")
-else
 	task.wait()
 	nightbedConsole("Loading...")
 	task.wait(1)
