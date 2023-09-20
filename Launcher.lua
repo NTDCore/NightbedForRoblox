@@ -67,13 +67,16 @@ local robloxService = {
 local executorService = {
 	["queueteleport"] = queue_on_teleport
 }
+local getStore = function(store, store1)
+	return nightbedStore[store][store1]
+end
 
 shared.NBStore = nightbedStore
 shared.rblxService = robloxService
 shared.executorService = executorService
 shared.NBService = nightbedService
 shared.NBAssets = nightbedService["Assets"]
-shared.funcslib = nightbedService["Core"]["FunctionsLibrary"]
+shared.funcslib = getStore("Core", "FunctionsLibrary")
 shared.vapeentity = nightbedService["Core"]["entity"]
 shared.shalib = nightbedService["Core"]["sha"]
 local customasset = function(asset)
