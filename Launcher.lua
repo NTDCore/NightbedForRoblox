@@ -135,4 +135,4 @@ else
 	writefile("Nightbed/commit.txt", commit)
 end
 
-return loadstring(githubRequest("MainScript.lua"))()
+loadstring(githubRequest("MainScript.lua"))()
