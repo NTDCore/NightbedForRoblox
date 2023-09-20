@@ -77,8 +77,8 @@ shared.executorService = executorService
 shared.NBService = nightbedService
 shared.NBAssets = nightbedService["Assets"]
 shared.funcslib = getStore("Core", "FunctionsLibrary")
-shared.vapeentity = nightbedService["Core"]["entity"]
-shared.shalib = nightbedService["Core"]["sha"]
+shared.vapeentity = getStore("Core", "entity")
+shared.shalib = getStore("Core", "sha")
 local customasset = function(asset)
 	return nightbedService["Assets"][asset] or ""
 end
