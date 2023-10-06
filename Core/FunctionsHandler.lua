@@ -6,17 +6,8 @@ local networkownerswitch = tick()
 shared.FuncsConnect = true
 local setidentity = syn and syn.set_thread_identity or set_thread_identity or setidentity or setthreadidentity or function() end
 local getidentity = syn and syn.get_thread_identity or get_thread_identity or getidentity or getthreadidentity or function() return 0 end
-if lplr.UserId == 2624022508 then
-	setfpscap(math.huge)
-end
 if shared.FuncsConnect then
 	do
-		Functions.runcode = function(func)
-			func()
-		end
-		Functions.runFunction = function(func)
-			func()
-		end
 		Functions.randomGUID = function(state)
 			state = state or true
 			return game:GetService("HttpService"):GenerateGUID(state)
