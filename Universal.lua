@@ -47,7 +47,6 @@ local InputService = game:GetService("UserInputService")
 
 runFunction(function()
 	local InfiniteJump = {Enabled = false}
-	local InfJump = true
 	InfiniteJump = Sections["InfiniteJump"].CreateToggle({
 		Name = "InfiniteJump",
 		Function = function(callback)
@@ -55,9 +54,7 @@ runFunction(function()
 				Settings["InfiniteJump"] = true
 				spawn(function()
 					InfiniteJumpConnection = InputService.JumpRequest:connect(function(jump)
-						if InfJump then
-							oldchar.Humanoid:ChangeState("Jumping")
-						end
+						oldchar.Humanoid:ChangeState("Jumping")
 					end)
 				end)
 			else
@@ -79,7 +76,7 @@ runFunction(function()
 			else
 				local oldspeed = oldchar.Humanoid.WalkSpeed
 				Settings["Speed"]["Enabled"] = false
-				oldchar.Humanoid.WalkSpeed = oldspeed
+				oldchar.Humanoid.WalkSpeed = 16
 			end
 		end,
 		HoverText = "Make you Faster"
@@ -150,14 +147,14 @@ runFunction(function()
 				lplr.CharacterAdded:Connect(function(char)
 					spawn(function()
 						pcall(function() 
-							Cape(char, loadAsset("Cape.png"))
+							Cape(char, nightbedStore["Assets"]["Cape.png"])
 						end)
 					end)
 				end)
 				if lplr.Character then
 					spawn(function()
 						pcall(function() 
-							Cape(lplr.Character, loadAsset("Cape.png"))
+							Cape(lplr.Character, nightbedStore["Assets"]["Cape.png"])
 						end)
 					end)
 				end
