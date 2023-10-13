@@ -1,4 +1,4 @@
-	local kavo = {}
+	local kavo = {Objects = {}}
 	
 	local tween = game:GetService("TweenService")
 	local tweeninfo = TweenInfo.new
@@ -1001,12 +1001,16 @@
 				end 
 
 				function Elements.CreateToggle(argstable)
+					local toggleapi = {
+						["Enabled"] = false
+					}
 					local tname = argstable["Name"]
 					local nTip = argstable["HoverText"] or ""
 					local callback = argstable["Function"]
 					local DefaultT = argstable["Default"] or false
-					local TogFunction = {}
+					local TogFunction = {["Enabled"] = false}
 					local toggled = DefaultT
+					TogFunction["Enabled"] = toggled
 					table.insert(SettingsT, tname)
 
 					local toggleElement = Instance.new("TextButton")
@@ -1125,7 +1129,7 @@
 
 					btn.MouseButton1Click:Connect(function()
 						if not focusing then
-							if toggled == false then
+							if TogFunction["Enabled"] == false then
 								game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
 									ImageTransparency = 0
 								}):Play()
@@ -1166,8 +1170,8 @@
 								end
 								c:Destroy()
 							end
-							toggled = not toggled
-							pcall(callback, toggled)
+							TogFunction["Enabled"] = not TogFunction["Enabled"]
+							pcall(callback, TogFunction["Enabled"])
 						else
 							for i,v in next, infoContainer:GetChildren() do
 								Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
@@ -1229,24 +1233,22 @@
 						end
 					end)
 					function TogFunction.ToggleButton(isTogOn)
-						isTogOn = isTogOn or toggled
+						isTogOn = isTogOn or TogFunction["Enabled"]
 						if isTogOn then
-							toggled = true
+							TogFunction["Enabled"] = true
 							game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
 								ImageTransparency = 0
 							}):Play()
-							pcall(callback, toggled)
+							pcall(callback, TogFunction["Enabled"])
 						else
 							toggled = false
 							game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
 								ImageTransparency = 1
 							}):Play()
-							pcall(callback, toggled)
+							pcall(callback, TogFunction["Enabled"])
 						end
 					end
-					if DefaultT then
-					  TogFunction.ToggleButton(true)
-					end
+					TogFunction.ToggleButton(DefaultT)
 					return TogFunction
 				end
 
@@ -2684,7 +2686,7 @@
 						end
 					end	
 					return labelFunctions
-				end	
+				end
 				return Elements
 			end
 			return Sections
