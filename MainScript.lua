@@ -1,4 +1,5 @@
 repeat task.wait() until game:IsLoaded()
+--[[
 local githubRequest = function(scripturl)
 	local suc,res = pcall(function()
 		return game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/"..readfile("Nightbed/commit.txt").."/"..scripturl, true)
@@ -6,6 +7,10 @@ local githubRequest = function(scripturl)
 	res = "-- Watermask When Updated\n"..res
 	writefile("Nightbed/"..scripturl, res)
 	return readfile("Nightbed/"..scripturl)
+end
+--]]
+function githubRequest(scripturl)
+	return game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/"..scripturl, true)
 end
 local isfile = isfile or function(path)
 	local suc, res = pcall(function() return readfile(path) end)
@@ -29,6 +34,22 @@ local Tabs = {
 shared.Tabs = Tabs
 
 function MainLoaded()
+  local customModuleURL = "https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua"
+  local customModuleScript = game:HttpGet(customModuleURL, true)
+  if customModuleScript then
+    local success, error = pcall(function()
+      loadstring(customModuleScript)()
+    end)
+    if not success then
+      warn("Failed To Loaded Modules: " .. tostring(error))
+      loadstring(githubRequest("Universal.lua"))()
+    end
+  else
+    loadstring(githubRequest("Universal.lua"))()
+  end
+end
+--[[
+function MainLoaded()
   local customModuleURL = "https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/"..readfile("Nightbed/commit.txt").."/CustomModules/"..game.PlaceId..".lua"
   local customModuleScript = game:HttpGet(customModuleURL, true)
   if customModuleScript then
@@ -45,5 +66,6 @@ function MainLoaded()
     loadstring(githubRequest("Universal.lua"))()
   end
 end
+--]]
 
 MainLoaded()
