@@ -10,11 +10,6 @@ local kavo = shared.kavogui
 local FunctionsLibrary = shared.funcslib
 local nightbedStore = shared.NBStore
 local robloxService = shared.rblxService
-local win = kavo:CreateWindow({
-	["Title"] = "Nightbed",
-	["Theme"] = "Luna"
-})
-
 local Settings = {
 	["InfiniteJump"] = false,
 	["Speed"] = {
@@ -27,15 +22,8 @@ local Settings = {
 
 local runFunction = function(func) func() end
 
-local Tabs = {
-	["Combat"] = win.CreateTab("Combat"),
-	["Blatant"] = win.CreateTab("Blatant"),
-	["Render"] = win.CreateTab("Render"),
-	["Utility"] = win.CreateTab("Utility"),
-	["World"] = win.CreateTab("World")
-}
-local Sections = shared.SectionsLoaded
-Sections = {
+local Tabs = shared.Tabs
+local Sections = {
 	["InfiniteJump"] = Tabs["Blatant"].CreateSection("InfiniteJump"),
 	["Speed"] = Tabs["Blatant"].CreateSection("Speed"),
 	["Cape"] = Tabs["Render"].CreateSection("Cape"),
@@ -63,8 +51,7 @@ runFunction(function()
 	InfiniteJump = Sections["InfiniteJump"].CreateToggle({
 		Name = "InfiniteJump",
 		Function = function(callback)
-			InfiniteJump.Enabled = callback
-			if InfiniteJump.Enabled then
+			if callback then
 				Settings["InfiniteJump"] = true
 				spawn(function()
 					InfiniteJumpConnection = InputService.JumpRequest:connect(function(jump)
@@ -85,9 +72,8 @@ runFunction(function()
 	Speed = Sections["Speed"].CreateToggle({
 		Name = "Speed",
 		Function = function(callback)
-			Speed.Enabled = callback
 			Settings["Speed"]["Enabled"] = callback
-			if Speed.Enabled then
+			if callback then
 				Settings["Speed"]["Enabled"] = true
 				oldchar.Humanoid.WalkSpeed = speedval.Value
 			else
@@ -159,34 +145,33 @@ runFunction(function()
 	Cape = Sections["Cape"].CreateToggle({
 		Name = "Cape",
 		Function = function(callback)
-			Cape.Enabled = callback
-				if Cape.Enabled then
-					Settings["Cape"] = true
-					lplr.CharacterAdded:Connect(function(char)
-						spawn(function()
-							pcall(function() 
-								Cape(char, loadAsset("Cape.png"))
-							end)
+			if callback then
+				Settings["Cape"] = true
+				lplr.CharacterAdded:Connect(function(char)
+					spawn(function()
+						pcall(function() 
+							Cape(char, loadAsset("Cape.png"))
 						end)
 					end)
-					if lplr.Character then
-						spawn(function()
-							pcall(function() 
-								Cape(lplr.Character, loadAsset("Cape.png"))
-							end)
+				end)
+				if lplr.Character then
+					spawn(function()
+						pcall(function() 
+							Cape(lplr.Character, loadAsset("Cape.png"))
 						end)
-					end
-				else
-					Settings["Cape"] = false
-					if lplr.Character then
-						for i,v in pairs(lplr.Character:GetDescendants()) do
-							if v.Name == "Cape" then
-								v:Remove()
-							end
+					end)
+				end
+			else
+				Settings["Cape"] = false
+				if lplr.Character then
+					for i,v in pairs(lplr.Character:GetDescendants()) do
+						if v.Name == "Cape" then
+							v:Remove()
 						end
 					end
 				end
-			end,
+			end
+		end,
 		HoverText = "cool cape"
 	})
 	
@@ -194,9 +179,8 @@ runFunction(function()
 	InstantInteract = Sections["InstantInteract"].CreateToggle({
 		["Name"] = "InstantInteract",
 		["Function"] = function(callback)
-			InstantInteract.Enabled = callback
 			Settings["InstantInteract"] = callback
-			if InstantInteract.Enabled then
+			if callback then
 				InstantInteractConnection = game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(function(prompt)
 					fireproximityprompt(prompt)
 				end)
