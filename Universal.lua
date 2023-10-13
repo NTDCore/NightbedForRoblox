@@ -188,16 +188,16 @@ runFunction(function()
 	})
 
 	function SaveSettings()
-		writefile("Nightbed/Profiles/AnyGame.json",game:GetService("HttpService"):JSONEncode(Settings))
+		writefile("Nightbed/Profiles/Universal.json",game:GetService("HttpService"):JSONEncode(Settings))
 	end
 	spawn(function()
 		repeat
-			--writefile("Nightbed/Profiles/AnyGame.json",game:GetService("HttpService"):JSONEncode(Settings))
+			--writefile("Nightbed/Profiles/Universal.json",game:GetService("HttpService"):JSONEncode(Settings))
 			SaveSettings()
 			wait(1.5) -- DONT CHANGE THIS >:(
 		until false
 	end)
-	local suc, res = pcall(function() return game:GetService("HttpService"):JSONDecode(readfile("Nightbed/Profiles/AnyGame.json")) end)
+	local suc, res = pcall(function() return game:GetService("HttpService"):JSONDecode(readfile("Nightbed/Profiles/Universal.json")) end)
 	if suc and type(res) == "table" then 
 		Settings = res
 		task.wait()
