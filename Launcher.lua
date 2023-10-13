@@ -24,14 +24,18 @@ NBFolder("Nightbed/Core")
 NBFolder("Nightbed/assets")
 NBFolder("Nightbed/Profiles")
 
+--[[
 local githubRequest = function(scripturl)
 	local suc,res = pcall(function()
 		return game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/"..readfile("Nightbed/commit.txt").."/"..scripturl, true)
 	end)
 	res = "-- Watermask When Updated\n"..res
-		--]]
 	writefile("Nightbed/"..scripturl, res)
 	return readfile("Nightbed/"..scripturl)
+end
+--]]
+function githubRequest(scripturl)
+	return game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/"..scripturl, true)
 end
 
 local Service = function(name)
@@ -97,6 +101,7 @@ if isfolder("Nightbed") then
 	nightbedConsole("Success! Loaded")
 end
 
+--[[
 local commit = "main"
 for i,v in pairs(game:HttpGet("https://github.com/NTDCore/NightbedForRoblox"):split("\n")) do 
 	if v:find("commit") and v:find("fragment") then 
@@ -128,11 +133,12 @@ if isfolder("Nightbed") then
 				end 
 			end
 		end
-		--]]
+		--
 		writefile("Nightbed/commit.txt", commit)
 	end
 else
 	writefile("Nightbed/commit.txt", commit)
 end
+--]]
 
 return loadstring(githubRequest("MainScript.lua"))()
