@@ -15,8 +15,18 @@ local nightbedStore = shared.NBStore
 local kavo
 kavo = nightbedStore["GuiLibrary"].Kavo
 shared.kavogui = kavo
-local Sections = {}
-shared.SectionsLoaded = Sections
+local win = kavo:CreateWindow({
+	["Title"] = "Nightbed",
+	["Theme"] = (shared.CustomTheme and shared.SetCustomTheme or "Luna")
+})
+local Tabs = {
+	["Combat"] = win.CreateTab("Combat"),
+	["Blatant"] = win.CreateTab("Blatant"),
+	["Render"] = win.CreateTab("Render"),
+	["Utility"] = win.CreateTab("Utility"),
+	["World"] = win.CreateTab("World")
+}
+shared.Tabs = Tabs
 
 function MainLoaded()
   local customModuleURL = "https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/"..readfile("Nightbed/commit.txt").."/CustomModules/"..game.PlaceId..".lua"
