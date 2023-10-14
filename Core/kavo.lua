@@ -1248,7 +1248,9 @@
 							pcall(callback, TogFunction["Enabled"])
 						end
 					end
-					TogFunction.ToggleButton(DefaultT)
+					if DefaultT then
+						TogFunction.ToggleButton(true)
+					end
 					return TogFunction
 				end
 
