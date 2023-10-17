@@ -50,7 +50,8 @@ local nightbedService = {
 }
 local nightbedStore = {
 	["GuiLibrary"] = {
-		["Kavo"] = loadstring(githubRequest("Core/kavo.lua"))()
+		["Kavo"] = loadstring(githubRequest("Core/kavo.lua"))(),
+		["Neverlose"] = loadstring(game:HttpGet("https://raw.githubusercontent.com/3345-c-a-t-s-u-s/NEVERLOSE-UI-Nightly/main/source.lua"))()
 	},
 	["Core"] = {
 		["FunctionsLibrary"] = loadstring(githubRequest("Core/FunctionsHandler.lua"))(),
