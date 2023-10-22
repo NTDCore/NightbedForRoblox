@@ -1,20 +1,19 @@
 # NightbedForRoblox
 
-Script For Roblox And using anygame
+Script For Roblox And using Universal
 
 # Script
 
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/MainScript.lua", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Launcher.lua", true))()
 ```
 
 # Support Game
 
 ```
 BEDWARS
-Arsenal ( soon )
 Ray Mod
-AnyGame
+Universal
 ```
 
 # Library
@@ -25,8 +24,9 @@ kavo : 35%
 GuiLibrary ( soon )
 ```
 
-# Contact
+# Functions
 
 ```
-Discord : Monia#9266
+FunctionsHandler
+VapeEntity
 ```
