@@ -81,7 +81,15 @@ runFunction(function()
 		end,
 		HoverText = "Make you Faster"
 	})
-	
+	speedval = Sections["Speed"].CreateSlider({
+		["Name"] = "Speed Value",
+		["HoverText"] = "Move Faster", 
+		["Max"] = 100,
+		["Min"] = 0,
+		["Function"] = function(s)
+	    speedval["Value"] = s
+		end
+	})
 	function Cape(char, texture)
 		for i,v in pairs(char:GetDescendants()) do
 			if v.Name == "Cape" then
