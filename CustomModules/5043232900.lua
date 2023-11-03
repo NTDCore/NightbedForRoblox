@@ -85,7 +85,7 @@ local enterwea = {["Value"] = ""}
 Sections["SpawnIt"].CreateButton({Name="Weapon Give",HoverText="e",Function=function()
 	WeaponEvent(enterwea["Value"])
 end})
-Sections["SpawnIt"]:NewTextBox({Name="Weapon Name",HoverText="e",Function=function(entername)
+Sections["SpawnIt"].CreateTextBox({Name="Weapon Name",HoverText="e",Function=function(entername)
 	enterwea["Value"] = entername
 end})
 Sections["SpawnIt"].CreateButton({Name="Give Admin Revolver",HoverText="OP",Function=function()
