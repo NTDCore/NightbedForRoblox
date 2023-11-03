@@ -9,7 +9,12 @@ repeat task.wait() until game:IsLoaded()
 local function GetURL(scripturl)
 	return game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/"..scripturl, true)
 end
-local kavo = shared.kavogui
+local kavo
+if (not shared.kavogui) then
+	kavo = loadstring(GetURL("Core/kavo.lua"))()
+else
+	kavo = shared.kavogui
+end
 local function notify(Titlez, Textz, Iconz, Dur)
 game.StarterGui:SetCore("SendNotification", {
     Title = Titlez;
@@ -40,7 +45,8 @@ local Sections = {
 	["Speed"] = Tabs["Blatant"].CreateSection("Speed"),
 	["VoteClean"] = Tabs["Utility"].CreateSection("VoteClean"),
 	["HealthExploit"] = Tabs["Utility"].CreateSection("HealthExploit"),
-	["SpawnObj"] = Tabs["Utility"].CreateSection["Spawn Object"]
+	["SpawnObj"] = Tabs["Utility"].CreateSection("Spawn Object"),
+	["SpawnIt"] = Tabs["Utility"].CreateSection("Weapons")
 }
 
 local InfJump = {["Enabled"] = false}
@@ -99,17 +105,17 @@ ObjectGive.CreateButton({
 	Name = "Object Spawn", HoverText = "Object Give", Function = function()
 	SpawnObject(objecterenter["Value"])
 end})
-ObjectGive:NewTextBox("Object Name", "e", function(val)
-	objecterenter["Value"] = (val)
-end)
+ObjectGive.CreateTextBox({Name = "Object Name", HoverText = "e", Function = function(val)
+	objecterenter["Value"] = val
+end})
 local enterwea = {["Value"] = ""}
-local WeaponGive = Utility:NewSection("Weapon Give")
-WeaponGive:NewButton("Weapon Give", "e", function()
-WeaponEvent(enterwea["Value"])
-end)
-WeaponGive:NewTextBox("Weapon Name", "e", function(entername)
-	enterwea["Value"] = (entername)
-end)
-WeaponGive:NewButton("Give Admin Revolver", "OP", function()
-	game:GetService("ReplicatedStorage").WeaponEvent:FireServer("Admin Revolver")
-end)
+local WeaponGive = Sections["SpawnIt"]
+WeaponGive.CreateButton({Name="Weapon Give",HoverText="e",Function=function()
+	WeaponEvent(enterwea["Value"])
+end})
+WeaponGive:NewTextBox({Name="Weapon Name",HoverText="e",Function=function(entername)
+	enterwea["Value"] = entername
+end})
+WeaponGive.CreateButton({Name="Give Admin Revolver",HoverText="OP",Function=function()
+	WeaponEvent("Admin Revolver")
+end})
