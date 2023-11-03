@@ -41,56 +41,16 @@ end
 local uis = game:GetService("UserInputService")
 local Tabs = shared.Tabs
 local Sections = {
-	["InfiniteJump"] = Tabs["Blatant"].CreateSection("InfiniteJump"),
-	["Speed"] = Tabs["Blatant"].CreateSection("Speed"),
 	["VoteClean"] = Tabs["Utility"].CreateSection("VoteClean"),
 	["HealthExploit"] = Tabs["Utility"].CreateSection("HealthExploit"),
 	["SpawnObj"] = Tabs["Utility"].CreateSection("Spawn Object"),
 	["SpawnIt"] = Tabs["Utility"].CreateSection("Weapons")
 }
 
-local InfJump = {["Enabled"] = false}
-InfJump = Sections["InfiniteJump"].CreateToggle({
-	["Name"] = "InfJump",
-	["HoverText"] = "Allows To Spam Jump",
-	["Function"] = function(callback)
-	  if callback then
-			connectioninfjump = uis.JumpRequest:connect(function(jump)
-				oldchar.Humanoid:ChangeState("Jumping")
-			end)
-		else
-			connectioninfjump:Disconnect()
-		end
-	end
-})
-
-local speedval = {["Value"] = 23}
-local Speed = {["Enabled"] = false}
-Speed = Sections["Speed"].CreateToggle({
-	["Name"] = "Speed",
-	["HoverText"] = "BIMBIMBAMBAM",
-	["Function"] = function(callback)
-	  if callback then
-	    oldchar.Humanoid.WalkSpeed = speedval["Value"]
-	  else
-	    oldchar.Humanoid.WalkSpeed = 16
-		end
-	end
-})
-speedval = Sections["Speed"].CreateSlider({
-	["Name"] = "Speed Value",
-	["HoverText"] = "Move Faster", 
-	["Max"] = 70,
-	["Min"] = 0,
-	["Function"] = function(s)
-    speedval["Value"] = s
-	end
-})
-
 local VoteClean = Sections["VoteClean"]
-VoteClean:NewButton("VoteClean", "clean the map vote", function()
+VoteClean.CreateButton({Name="VoteClean",HoverText="clean the map vote",Function=function()
 	game:GetService("ReplicatedStorage").VotingInProgress.VoteEvent:FireServer()
-end)
+end})
 local HealthExploit = Sections["HealthExploit"]
 HealthExploit:NewButton({
 	Name = "HealthExploit", HoverText = "Much More HP Add to Bullet Proof", Function = function()
