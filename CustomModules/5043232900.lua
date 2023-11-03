@@ -37,7 +37,10 @@ local uis = game:GetService("UserInputService")
 local Tabs = shared.Tabs
 local Sections = {
 	["InfiniteJump"] = Tabs["Blatant"].CreateSection("InfiniteJump"),
-	["Speed"] = Tabs["Blatant"].CreateSection("Speed")
+	["Speed"] = Tabs["Blatant"].CreateSection("Speed"),
+	["VoteClean"] = Tabs["Utility"].CreateSection("VoteClean"),
+	["HealthExploit"] = Tabs["Utility"].CreateSection("HealthExploit"),
+	["SpawnObj"] = Tabs["Utility"].CreateSection["Spawn Object"]
 }
 
 local InfJump = {["Enabled"] = false}
@@ -68,22 +71,34 @@ Speed = Sections["Speed"].CreateToggle({
 		end
 	end
 })
-speed:NewSlider("Speed Value", "Move Faster", 70, 0, function(s)
+speedval = Sections["Speed"].CreateSlider({
+	["Name"] = "Speed Value",
+	["HoverText"] = "Move Faster", 
+	["Max"] = 70,
+	["Min"] = 0,
+	["Function"] = function(s)
     speedval["Value"] = s
-end)
-local VoteClean = Utility:NewSection("VoteClean")
+	end
+})
+
+local VoteClean = Sections["VoteClean"]
 VoteClean:NewButton("VoteClean", "clean the map vote", function()
 	game:GetService("ReplicatedStorage").VotingInProgress.VoteEvent:FireServer()
 end)
-local HealthExploit = Utility:NewSection("HealthExploit")
-HealthExploit:NewButton("HealthExploit", "Much More HP Add to Bullet Proof", function()
-	
-end)
+local HealthExploit = Sections["HealthExploit"]
+HealthExploit:NewButton({
+	Name = "HealthExploit", HoverText = "Much More HP Add to Bullet Proof", Function = function()
+		for i = 1,200 do
+			AddHealth()
+		end
+	end
+})
 local objecterenter = {["Value"] = ""}
-local ObjectGive = Utility:NewSection("Object Spawn")
-ObjectGive:NewButton("Object Spawn", "Object Give", function()
+local ObjectGive = Sections["SpawnObj"]
+ObjectGive.CreateButton({
+	Name = "Object Spawn", HoverText = "Object Give", Function = function()
 	SpawnObject(objecterenter["Value"])
-end)
+end})
 ObjectGive:NewTextBox("Object Name", "e", function(val)
 	objecterenter["Value"] = (val)
 end)
