@@ -35,6 +35,7 @@ end
 local function AddHealth()
 	replistorage.MoreHealth:FireServer()
 end
+
 local function WeaponEvent(weapon)
    replistorage.WeaponEvent:FireServer(weapon)
 end
@@ -48,34 +49,45 @@ local Sections = {
 }
 
 local VoteClean = Sections["VoteClean"]
-VoteClean.CreateButton({Name="VoteClean",HoverText="clean the map vote",Function=function()
-	game:GetService("ReplicatedStorage").VotingInProgress.VoteEvent:FireServer()
-end})
+VoteClean.CreateButton({
+	Name="VoteClean",
+	HoverText="clean the map vote",
+	Function=function()
+		game:GetService("ReplicatedStorage").VotingInProgress.VoteEvent:FireServer()
+	end
+})
 local HealthExploit = Sections["HealthExploit"]
 HealthExploit:NewButton({
-	Name = "HealthExploit", HoverText = "Much More HP Add to Bullet Proof", Function = function()
+	Name = "HealthExploit",
+	HoverText = "Much More HP Add to Bullet Proof",
+	Function = function()
 		for i = 1,200 do
 			AddHealth()
 		end
 	end
 })
 local objecterenter = {["Value"] = ""}
-local ObjectGive = Sections["SpawnObj"]
-ObjectGive.CreateButton({
-	Name = "Object Spawn", HoverText = "Object Give", Function = function()
-	SpawnObject(objecterenter["Value"])
-end})
-ObjectGive.CreateTextBox({Name = "Object Name", HoverText = "e", Function = function(val)
-	objecterenter["Value"] = val
-end})
+Sections["SpawnObj"].CreateButton({
+	Name = "Object Spawn",
+	HoverText = "Object Give",
+	Function = function()
+		SpawnObject(objecterenter["Value"])
+	end
+})
+Sections["SpawnObj"].CreateTextBox({
+	Name = "Object Name",
+	HoverText = "e",
+	Function = function(val)
+		objecterenter["Value"] = val
+	end
+})
 local enterwea = {["Value"] = ""}
-local WeaponGive = Sections["SpawnIt"]
-WeaponGive.CreateButton({Name="Weapon Give",HoverText="e",Function=function()
+Sections["SpawnIt"].CreateButton({Name="Weapon Give",HoverText="e",Function=function()
 	WeaponEvent(enterwea["Value"])
 end})
-WeaponGive:NewTextBox({Name="Weapon Name",HoverText="e",Function=function(entername)
+Sections["SpawnIt"]:NewTextBox({Name="Weapon Name",HoverText="e",Function=function(entername)
 	enterwea["Value"] = entername
 end})
-WeaponGive.CreateButton({Name="Give Admin Revolver",HoverText="OP",Function=function()
+Sections["SpawnIt"].CreateButton({Name="Give Admin Revolver",HoverText="OP",Function=function()
 	WeaponEvent("Admin Revolver")
 end})
