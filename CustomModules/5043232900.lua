@@ -57,7 +57,7 @@ VoteClean.CreateButton({
 	end
 })
 local HealthExploit = Sections["HealthExploit"]
-HealthExploit:NewButton({
+HealthExploit.CreateButton({
 	Name = "HealthExploit",
 	HoverText = "Much More HP Add to Bullet Proof",
 	Function = function()
