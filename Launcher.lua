@@ -63,7 +63,9 @@ local robloxService = {
 	["InputService"] = Service("UserInputService"),
 	["ReplicatedStorage"] = Service("ReplicatedStorage"),
 	["Game"] = {
-		["PlaceId"] = game.PlaceId
+		["PlaceId"] = game.PlaceId,
+		["JobId"] = game.JobId,
+		["GameId"] = game.GameId
 	}
 }
 local executorService = {
