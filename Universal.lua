@@ -9,6 +9,7 @@ local entityLibrary = shared.vapeentity
 local kavo = shared.kavogui
 local FunctionsLibrary = shared.funcslib
 local nightbedStore = shared.NBStore
+local nightbedService = shared.NBService
 local robloxService = shared.rblxService
 local Settings = {
 	["InfiniteJump"] = false,
@@ -179,7 +180,6 @@ runFunction(function()
 		end,
 		HoverText = "cool cape"
 	})
-	
 	local InstantInteract = {Enabled = false}
 	InstantInteract = Sections["InstantInteract"].CreateToggle({
 		["Name"] = "InstantInteract",
@@ -203,7 +203,7 @@ runFunction(function()
 			--writefile("Nightbed/Profiles/Universal.json",game:GetService("HttpService"):JSONEncode(Settings))
 			SaveSettings()
 			wait(1.5) -- DONT CHANGE THIS >:(
-		until false
+		until not shared.NBInjected
 	end)
 	local suc, res = pcall(function() return game:GetService("HttpService"):JSONDecode(readfile("Nightbed/Profiles/Universal.json")) end)
 	if suc and type(res) == "table" then 
