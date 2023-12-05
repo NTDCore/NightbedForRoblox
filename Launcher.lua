@@ -43,11 +43,11 @@ local Service = function(name)
 end
 local nightbedService = {
 	["Version"] = "1.0dl",
-	["Injected"] = true,
 	["Assets"] = {
 		["Cape.png"] = "rbxthumb://type=Asset&id=" .. 14391871286 .. "&w=420&h=420"
 	}
 }
+shared.NBInjected = true
 local nightbedStore = {
 	["GuiLibrary"] = {
 		["Kavo"] = loadstring(githubRequest("Core/kavo.lua"))(),
