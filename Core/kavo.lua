@@ -1,5 +1,4 @@
 	local kavo = {Objects = {}}
-	
 	local tween = game:GetService("TweenService")
 	local tweeninfo = TweenInfo.new
 	local input = game:GetService("UserInputService")
@@ -317,7 +316,8 @@
 				Position = UDim2.new(0, Main.AbsolutePosition.X + (Main.AbsoluteSize.X / 2), 0, Main.AbsolutePosition.Y + (Main.AbsoluteSize.Y / 2))
 			}):Play()
 			wait(1)
-			shared.KavoLoaded = false
+			shared.NBInjected = nil
+			shared.KavoLoaded = nil
 			ScreenGui:Destroy()
 		end)
 
