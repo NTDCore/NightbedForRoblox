@@ -1,14 +1,4 @@
 repeat task.wait() until game:IsLoaded()
---[[
-local githubRequest = function(scripturl)
-	local suc,res = pcall(function()
-		return game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/"..readfile("Nightbed/commit.txt").."/"..scripturl, true)
-	end)
-	res = "-- Watermask When Updated\n"..res
-	writefile("Nightbed/"..scripturl, res)
-	return readfile("Nightbed/"..scripturl)
-end
---]]
 function githubRequest(scripturl)
 	return game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/"..scripturl, true)
 end
@@ -34,40 +24,17 @@ local Tabs = {
 shared.Tabs = Tabs
 
 function MainLoaded()
-  local customModuleURL = "https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua"
-  local customModuleScript = game:HttpGet(customModuleURL, true)
-  if customModuleScript then
-    local success, error = pcall(function()
-      loadstring(customModuleScript)()
-    end)
-    if not success then
-      warn("Failed To Loaded Modules: " .. tostring(error))
-      loadstring(githubRequest("Universal.lua"))()
-    end
---[[
-  else
-    loadstring(githubRequest("Universal.lua"))()
---]]
-  end
+	local customModuleURL = "https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/"..game.PlaceId..".lua"
+	local customModuleScript = game:HttpGet(customModuleURL, true)
+	if customModuleScript then
+		local success, error = pcall(function()
+			loadstring(customModuleScript)()
+		end)
+		if not success then
+			warn("Failed To Loaded Modules: " .. tostring(error))
+			loadstring(githubRequest("Universal.lua"))()
+		end
+	end
 end
---[[
-function MainLoaded()
-  local customModuleURL = "https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/"..readfile("Nightbed/commit.txt").."/CustomModules/"..game.PlaceId..".lua"
-  local customModuleScript = game:HttpGet(customModuleURL, true)
-  if customModuleScript then
-    local success, error = pcall(function()
-      writefile("Nightbed/CustomModules/"..game.PlaceId..".lua", "-- Watermask When Updated\n"..customModuleScript)
-      task.wait()
-      loadstring(readfile("Nightbed/CustomModules/"..game.PlaceId..".lua"))()
-    end)
-    if not success then
-      warn("Failed To Loaded Modules: " .. tostring(error))
-      loadstring(githubRequest("Universal.lua"))()
-    end
-  else
-    loadstring(githubRequest("Universal.lua"))()
-  end
-end
---]]
 
 MainLoaded()
