@@ -202,7 +202,7 @@ runFunction(function()
 		repeat
 			--writefile("Nightbed/Profiles/Universal.json",game:GetService("HttpService"):JSONEncode(Settings))
 			SaveSettings()
-			wait(1.5) -- DONT CHANGE THIS >:(
+			wait(1.3)
 		until not shared.NBInjected
 	end)
 	local suc, res = pcall(function() return game:GetService("HttpService"):JSONDecode(readfile("Nightbed/Profiles/Universal.json")) end)
