@@ -20,14 +20,6 @@ Universal
 # Library
 
 ```
-Mercury : 65%
-kavo : 35%
-GuiLibrary ( soon )
-```
-
-# Functions
-
-```
-FunctionsHandler
-VapeEntity
+FunctionsLibrary
+entityHandler
 ```
