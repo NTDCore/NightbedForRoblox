@@ -11,15 +11,7 @@ local FunctionsLibrary = shared.funcslib
 local nightbedStore = shared.NBStore
 local nightbedService = shared.NBService
 local robloxService = shared.rblxService
-local Settings = {
-	["InfiniteJump"] = false,
-	["Speed"] = {
-		["Enabled"] = false,
-		["Value"] = 54,
-	},
-	["Cape"] = false,
-	["InstantInteract"] = false
-}
+local Settings = {}
 
 local runFunction = function(func) func() end
 
