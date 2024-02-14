@@ -528,18 +528,17 @@ function Library:create(options)
 							end
 						end)
 					end
-					local inc = core.InputChanged:Connect(function(input)
-						if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-							dragInput = input
-						end
-					end)
-					UserInputService.InputChanged:Connect(function(input)
-						if input == dragInput and dragging then
-							update(input)
-						end
-					end)
 				end)
-
+				local inc = core.InputChanged:Connect(function(input)
+					if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+						dragInput = input
+					end
+				end)
+				UserInputService.InputChanged:Connect(function(input)
+					if input == dragInput and dragging then
+						update(input)
+					end
+				end)
 				local Leave
 				Leave = core.MouseLeave:connect(function()
 					Input:disconnect()
