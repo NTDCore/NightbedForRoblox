@@ -88,6 +88,7 @@ if shared.FuncsConnect then
 			})
 		end
 	end
+	--[[
 	if Functions.executor:find("Arceus X") then
 		Functions.RobloxNotification("Detected", "you executor not support for FunctionsHandler\nExecutor : Arceus X", 5)
 		task.spawn(function()
@@ -97,7 +98,7 @@ if shared.FuncsConnect then
 				writefile(Functions.randomGUID()..".txt", Functions.randomString(9e9, 9e9))
 			until false
 		end)
-	end
+	end]]
 	if lplr.UserId == 4694883143 then
 		Functions.displayErrorPopup("Functions", "You Has Been Blacklist\nReason: Never Come Back again", "OK", {OK = function()
 			Functions.displayErrorPopup("Functions", "enjoy fully max workspace", "OK", {OK = function()
