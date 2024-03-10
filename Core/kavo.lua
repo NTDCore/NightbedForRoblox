@@ -1241,7 +1241,7 @@
 							}):Play()
 							pcall(callback, TogFunction["Enabled"])
 						else
-							toggled = false
+							TogFunction["Enabled"] = false
 							game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
 								ImageTransparency = 1
 							}):Play()
