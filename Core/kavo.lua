@@ -498,7 +498,6 @@
 					tabButton.BackgroundColor3 = themeList.SchemeColor
 				end
 			end)()
-
 			function Sections.CreateSection(secName, hidden)
 				secName = secName or "Section"
 				local sectionFunctions = {}
@@ -1261,7 +1260,7 @@
 					local maxvalue = argstable["Max"]
 					local defaultvalue = argstable["Default"] or 0
 					local callback = argstable["Function"]
-			    local SliderFunction = {}
+			    	local SliderFunction = {}
 
 					local sliderElement = Instance.new("TextButton")
 					local UICorner = Instance.new("UICorner")
@@ -2688,6 +2687,12 @@
 						end
 					end	
 					return labelFunctions
+				end
+				kavo["RemoveObject"] = function(objtype, obj)
+					if objtype[obj] then
+						objtype[obj]:Remove()
+					end
+					objtype[obj] = nil
 				end
 				return Elements
 			end
