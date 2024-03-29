@@ -1260,7 +1260,7 @@
 					local maxvalue = argstable["Max"]
 					local defaultvalue = argstable["Default"] or 0
 					local callback = argstable["Function"]
-			    	local SliderFunction = {}
+			    	local SliderFunction = {["Value"] = 0}
 
 					local sliderElement = Instance.new("TextButton")
 					local UICorner = Instance.new("UICorner")
@@ -1442,14 +1442,16 @@
 							}):Play()
 							Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 149) * sliderDrag.AbsoluteSize.X) + tonumber(minvalue)) or 0
 							pcall(function()
-								callback(Value)
+								SliderFunction["Value"] = Value
+								callback(SliderFunction["Value"])
 							end)
 							sliderDrag:TweenSize(UDim2.new(0, math.clamp(mouse.X - sliderDrag.AbsolutePosition.X, 0, 149), 0, 6), "InOut", "Linear", 0.05, true)
 							moveconnection = mouse.Move:Connect(function()
 								val.Text = Value
 								Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 149) * sliderDrag.AbsoluteSize.X) + tonumber(minvalue))
 								pcall(function()
-									callback(Value)
+									SliderFunction["Value"] = Value
+									callback(SliderFunction["Value"])
 								end)
 								sliderDrag:TweenSize(UDim2.new(0, math.clamp(mouse.X - sliderDrag.AbsolutePosition.X, 0, 149), 0, 6), "InOut", "Linear", 0.05, true)
 							end)
@@ -1457,7 +1459,8 @@
 								if Mouse.UserInputType == Enum.UserInputType.MouseButton1 or Mouse.UserInputType == Enum.UserInputType.Touch then
 									Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 149) * sliderDrag.AbsoluteSize.X) + tonumber(minvalue))
 									pcall(function()
-										callback(Value)
+										SliderFunction["Value"] = Value
+										callback(SliderFunction["Value"])
 									end)
 									val.Text = Value
 									game.TweenService:Create(val, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
@@ -1497,9 +1500,10 @@
 						end
 					end)
 					function SliderFunction.SetSlider(val2)
-					  Value = val2
+					  Value = val2 or Value
 					  pcall(function()
-					    callback(Value)
+					    SliderFunction["Value"] = Value
+						callback(SliderFunction["Value"])
 					  end)
 					  val.Text = Value
 					  game.TweenService:Create(val, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
@@ -1511,6 +1515,7 @@
 						moveconnection:Disconnect()
 						releaseconnection:Disconnect()
 					end
+					return SliderFunction
 				end
 
 				function Elements.CreateDropdown(argstable)
