@@ -9,6 +9,13 @@ script that have been discontinued now :)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Launcher.lua", true))()
 ```
 
+# Changelogs
+
+```diff
+5/4/2024
++ ???
+```
+
 # Support Game
 
 ```
