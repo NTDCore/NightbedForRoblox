@@ -2706,12 +2706,6 @@
 					end	
 					return labelFunctions
 				end
-				kavo["RemoveObject"] = function(objtype, obj)
-					if objtype[obj] then
-						objtype[obj]:Remove()
-					end
-					objtype[obj] = nil
-				end
 				return Elements
 			end
 			return Sections
