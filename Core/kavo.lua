@@ -1500,18 +1500,15 @@
 						end
 					end)
 					function SliderFunction.SetSlider(val2)
-					  Value = val2 or Value
-					  pcall(function()
-					    SliderFunction["Value"] = Value
-						callback(SliderFunction["Value"])
-					  end)
-					  val.Text = Value
-					  game.TweenService:Create(val, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-										TextTransparency = 1
-									}):Play()
+						Value2 = val2 or Value
+						pcall(function()
+							SliderFunction["Value"] = Value2	
+							callback(SliderFunction["Value"])
+						end)
+						val.Text = Value2
+						game.TweenService:Create(val, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {TextTransparency = 1}):Play()
 						sliderDrag:TweenSize(UDim2.new(0, math.clamp(mouse.X -
-						sliderDrag.AbsolutePosition.X or (val2 / maxvalue), 0, 149), 0, 6), "InOut", "Linear", 0.05,
-						true)
+						sliderDrag.AbsolutePosition.X or (Value2 / maxvalue), 0, 149), 0, 6), "InOut", "Linear", 0.05, true)
 						moveconnection:Disconnect()
 						releaseconnection:Disconnect()
 					end
