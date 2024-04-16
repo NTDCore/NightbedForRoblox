@@ -1513,7 +1513,7 @@
 						releaseconnection:Disconnect()
 					end
 					if defaultvalue then
-						SliderFunction.SliderFunction(defaultvalue)
+						SliderFunction.SetSlider(defaultvalue)
 					end
 					return SliderFunction
 				end
