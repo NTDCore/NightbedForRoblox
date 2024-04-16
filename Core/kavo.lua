@@ -1435,6 +1435,8 @@
 					end)()
 
 					local Value
+					local moveconnection
+					local releaseconnection
 					sliderBtn.MouseButton1Down:Connect(function()
 						if not focusing then
 							game.TweenService:Create(val, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
@@ -1467,8 +1469,14 @@
 										TextTransparency = 1
 									}):Play()
 									sliderDrag:TweenSize(UDim2.new(0, math.clamp(mouse.X - sliderDrag.AbsolutePosition.X, 0, 149), 0, 6), "InOut", "Linear", 0.05, true)
-									moveconnection:Disconnect()
-									releaseconnection:Disconnect()
+									if moveconnection then
+										moveconnection:Disconnect()
+										moveconnection = nil
+									end
+									if releaseconnection then
+										releaseconnection:Disconnect()
+										releaseconnection = nil
+									end
 								end
 							end)
 						else
@@ -1508,8 +1516,14 @@
 						val.Text = Value2
 						game.TweenService:Create(val, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {TextTransparency = 1}):Play()
 						sliderDrag:TweenSize(UDim2.new(0, math.clamp(mouse.X - sliderDrag.AbsolutePosition.X or (Value2 / maxvalue), 0, 149), 0, 6), "InOut", "Linear", 0.05, true)
-						moveconnection:Disconnect()
-						releaseconnection:Disconnect()
+						if moveconnection then
+							moveconnection:Disconnect()
+							moveconnection = nil
+						end
+						if releaseconnection then
+							releaseconnection:Disconnect()
+							releaseconnection = nil
+						end
 					end
 					if defaultvalue then
 						SliderFunction.SetSlider(defaultvalue)
