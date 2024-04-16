@@ -15,7 +15,7 @@ local Settings = {
 	['InfiniteJump'] = false,
 	['Speed'] = {
 		['Enabled'] = false,
-		['Value'] = 54,
+		['Value'] = 16,
 	},
 	['Cape'] = false,
 	['InstantInteract'] = false
@@ -90,6 +90,7 @@ runFunction(function()
 		['Min'] = 0,
 		['Function'] = function(s)
 			speedval['Value'] = s
+			Settings['Speed']['Value'] = s
 			Speed.ToggleButton()
 			Speed.ToggleButton()
 		end,
@@ -223,7 +224,8 @@ runFunction(function()
 		end
 		if Speed then
 			Speed.ToggleButton(Settings['Speed']['Enabled'])
-			speedval.Value = Settings['Speed']['Value']
+			speedval.SetSlider(Settings['Speed']['Value'])
+			--speedval.Value = Settings['Speed']['Value']
 		end
 		if InstantInteract then
 			InstantInteract.ToggleButton(Settings['InstantInteract'])

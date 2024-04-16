@@ -1512,6 +1512,9 @@
 						moveconnection:Disconnect()
 						releaseconnection:Disconnect()
 					end
+					if defaultvalue then
+						SliderFunction.SliderFunction(defaultvalue)
+					end
 					return SliderFunction
 				end
 
