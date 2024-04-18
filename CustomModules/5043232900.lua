@@ -15,21 +15,20 @@ if (not shared.kavogui) then
 else
 	kavo = shared.kavogui
 end
-local function notify(Titlez, Textz, Dur)
+local function notify(Titlez, Textz, Iconz, Dur)
 game.StarterGui:SetCore("SendNotification", {
     Title = Titlez;
     Text = Textz;
+    Icon = Iconz;
     Duration = Dur;
 })
 end
-notify('Monia',[[to plang hub: YOU CANT DEFEAT ME HAHAHA WE CAN SPAWN ADMIN GUN BITCH]], 10)
 local connectioninfjump
 local players = game:GetService("Players")
 local lplr = players.LocalPlayer
 local oldchar = lplr.Character
-local workspace = cloneref(game:GetService('Workspace'))
 local cam = workspace.CurrentCamera
-local replistorage = cloneref(game:GetService("ReplicatedStorage"))
+local replistorage = game:GetService("ReplicatedStorage")
 function SpawnObject(object)
 	replistorage.SpawnObject:FireServer(object)
 end
