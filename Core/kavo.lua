@@ -1233,7 +1233,7 @@
 					end)
 					function TogFunction.ToggleButton(isTogOn)
 						isTogOn = isTogOn or TogFunction["Enabled"]
-						if isTogOn then
+						if isTogOn or not TogFunction['Enabled'] then
 							TogFunction["Enabled"] = true
 							game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
 								ImageTransparency = 0
@@ -1536,7 +1536,8 @@
 					local dropinf = argstable["HoverText"] or ""
 					local list = argstable["List"]
 					local callback = argstable["Function"]
-					local DropFunction = {}
+					local defaultdropdown = argstable['Default'] or ''
+					local DropFunction = {['Value'] = defaultdropdown}
 
 					local opened = false
 					local DropYSize = 33
@@ -1654,7 +1655,7 @@
 					itemTextbox.Position = UDim2.new(0.0970000029, 0, 0.273000002, 0)
 					itemTextbox.Size = UDim2.new(0, 138, 0, 14)
 					itemTextbox.Font = Enum.Font.GothamSemibold
-					itemTextbox.Text = dropname
+					itemTextbox.Text = dropname	
 					itemTextbox.RichText = true
 					itemTextbox.TextColor3 = themeList.TextColor
 					itemTextbox.TextSize = 14.000
@@ -1806,7 +1807,8 @@
 							if not focusing then
 								opened = false
 								callback(v)
-								itemTextbox.Text = v
+								DropFunction['Value'] = v
+								itemTextbox.Text = DropFunction['Value']
 								dropFrame:TweenSize(UDim2.new(0, 352, 0, 33), 'InOut', 'Linear', 0.08)
 								wait(0.1)
 								updateSectionFrame()
@@ -1906,8 +1908,9 @@
 							optionSelect.MouseButton1Click:Connect(function()
 								if not focusing then
 									opened = false
-									callback(v)
-									itemTextbox.Text = v
+									DropFunction['Value'] = v
+									callback(DropFunction['Value'])
+									itemTextbox.Text = DropFunction['Value']
 									dropFrame:TweenSize(UDim2.new(0, 352, 0, 33), 'InOut', 'Linear', 0.08)
 									wait(0.1)
 									updateSectionFrame()
@@ -1976,6 +1979,20 @@
 							updateSectionFrame()
 							UpdateSize()
 						end
+					end
+					DropFunction.SetValue = function(obj)
+						if obj then
+							for i,v in list do
+								if v == obj then
+									DropFunction['Value'] = v
+									callback(DropFunction['Value'])
+									itemTextbox.Text = DropFunction['Value']
+								end
+							end
+						end
+					end
+					if defaultdropdown then
+						DropFunction.SetValue(defaultdropdown)
 					end
 					return DropFunction
 				end

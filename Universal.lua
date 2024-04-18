@@ -1,9 +1,10 @@
 --[[
 	Credits
 	Infinite Yield - InfJump
-	engospy - RemoteEvent
-	Kavo Owner - kavo ui
-	7GrandDadPGN (xylex) - Vape Entity
+	engospy - some of the remote
+	xHeptc - kavo ui
+	7GrandDadPGN (xylex) - Vape Entity, RunLoops
+	Krampus - Decompiler
 --]]
 local entityLibrary = shared.vapeentity
 local kavo = shared.kavogui
@@ -21,7 +22,7 @@ local Settings = {
 	['InstantInteract'] = false
 }
 
-local runFunction = function(func) func() end
+local run = function(func) func() end
 
 local Tabs = shared.Tabs
 local Sections = {
@@ -47,8 +48,50 @@ local oldchar = lplr.Character
 local workspace = cloneref(game:GetService('Workspace'))
 local gameCamera = workspace.CurrentCamera
 local InputService = cloneref(game:GetService('UserInputService'))
+local runService = cloneref(game:GetService('RunService'))
+local RunLoops = {RenderStepTable = {}, StepTable = {}, HeartTable = {}}
+do
+	function RunLoops:BindToRenderStep(name, func)
+		if RunLoops.RenderStepTable[name] == nil then
+			RunLoops.RenderStepTable[name] = runService.RenderStepped:Connect(func)
+		end
+	end
 
-runFunction(function()
+	function RunLoops:UnbindFromRenderStep(name)
+		if RunLoops.RenderStepTable[name] then
+			RunLoops.RenderStepTable[name]:Disconnect()
+			RunLoops.RenderStepTable[name] = nil
+		end
+	end
+
+	function RunLoops:BindToStepped(name, func)
+		if RunLoops.StepTable[name] == nil then
+			RunLoops.StepTable[name] = runService.Stepped:Connect(func)
+		end
+	end
+
+	function RunLoops:UnbindFromStepped(name)
+		if RunLoops.StepTable[name] then
+			RunLoops.StepTable[name]:Disconnect()
+			RunLoops.StepTable[name] = nil
+		end
+	end
+
+	function RunLoops:BindToHeartbeat(name, func)
+		if RunLoops.HeartTable[name] == nil then
+			RunLoops.HeartTable[name] = runService.Heartbeat:Connect(func)
+		end
+	end
+
+	function RunLoops:UnbindFromHeartbeat(name)
+		if RunLoops.HeartTable[name] then
+			RunLoops.HeartTable[name]:Disconnect()
+			RunLoops.HeartTable[name] = nil
+		end
+	end
+end
+
+run(function()
 	local InfiniteJump = {Enabled = false}
 	InfiniteJump = Sections['InfiniteJump'].CreateToggle({
 		Name = 'InfiniteJump',
