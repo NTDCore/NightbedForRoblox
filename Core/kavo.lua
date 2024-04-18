@@ -116,7 +116,7 @@
 			Background = Color3.fromRGB(0, 0, 0), 
 			Header = Color3.fromRGB(31, 31, 31), 
 			TextColor = Color3.fromRGB(255,255,255), 
-			ElementColor = Color3.fromRGB(31, 31, 31) 
+			ElementColor = Color3.fromRGB(31, 31, 31)
 		},
 		Private = {
 			SchemeColor = Color3.fromRGB(255, 212,0), 
@@ -601,6 +601,13 @@
 				end
 				updateSectionFrame()
 				UpdateSize()
+				function Sections.SetVisible(callback)
+					if callback or sectionHead.Visible == true then
+						sectionHead.Visible = false
+					else
+						sectionHead.Visible = true
+					end
+				end
 				local Elements = {}
 				function Elements.CreateButton(argstable)
 					local bname = argstable["Name"]
@@ -1510,7 +1517,7 @@
 					function SliderFunction.SetSlider(val2)
 						Value2 = val2 or Value
 						pcall(function()
-							SliderFunction["Value"] = Value2	
+							SliderFunction["Value"] = Value2
 							callback(SliderFunction["Value"])
 						end)
 						val.Text = Value2
