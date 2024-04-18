@@ -603,9 +603,9 @@
 				UpdateSize()
 				function Sections.SetVisible(callback)
 					if callback or sectionHead.Visible == true then
-						sectionHead.Visible = false
+						sectionHead.Visible = (sectionHead.Visible == true and false or callback)
 					else
-						sectionHead.Visible = true
+						sectionHead.Visible = (sectionHead.Visible == false and true or callback)
 					end
 				end
 				local Elements = {}
