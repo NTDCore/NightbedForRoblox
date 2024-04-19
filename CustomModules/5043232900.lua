@@ -85,7 +85,7 @@ InfiniteHP = HealthExploit.CreateToggle({
 		end
 	end
 })
-local AddonsExploit = Section["AddonsExploit"]
+local AddonsExploit = Sections["AddonsExploit"]
 AddonsExploit.CreateButton({
 	Name = 'AddonsExploit',
 	Function = function()
