@@ -94,7 +94,7 @@ AddonsExploit.CreateButton({
 		for i,v in replistorage:GetChildren() do
 			local cloned = v:Clone()
 			cloned.Parent = lplr.PlayerGui.Spawner.SpawnFrame.Addons
-			cloned.Visible = true
+			--cloned.Visible = true
 		end
 	end
 })
