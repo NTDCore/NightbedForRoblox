@@ -43,6 +43,7 @@ end
 local uis = game:GetService("UserInputService")
 local Tabs = shared.Tabs
 local Sections = {
+	['AddonsExploit'] = Tabs['Utility'].CreateSection('AddonsExploit'),
 	["VoteClean"] = Tabs["Utility"].CreateSection("VoteClean"),
 	["HealthExploit"] = Tabs["Utility"].CreateSection("HealthExploit"),
 	["SpawnObj"] = Tabs["Utility"].CreateSection("Spawn Object"),
@@ -64,6 +65,34 @@ HealthExploit.CreateButton({
 	Function = function()
 		for i = 1,200 do
 			AddHealth()
+		end
+	end
+})
+local InfiniteHP = {Enabled = false}
+InfiniteHP = HealthExploit.CreateToggle({
+	Name = "InfiniteHP",
+	HoverText = "Much More HP Add to Bullet Proof",
+	Function = function(callback)
+		if callback then
+			task.spawn(function()
+				repeat
+					task.wait(0)
+					lplr.Character.FallDamage.RemoteEvent:FireServer({
+						[1] = -math.huge
+					})
+				until (not InfiniteHP.Enabled)
+			end)
+		end
+	end
+})
+local AddonsExploit = Section["AddonsExploit"]
+AddonsExploit.CreateButton({
+	Name = 'AddonsExploit',
+	Function = function()
+		for i,v in replistorage:GetChildren() do
+			local cloned = v:Clone()
+			cloned.Parent = lplr.PlayerGui.Spawner.SpawnFrame.Addons
+			cloned.Visible = true
 		end
 	end
 })
