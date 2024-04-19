@@ -77,9 +77,11 @@ InfiniteHP = HealthExploit.CreateToggle({
 			task.spawn(function()
 				repeat
 					task.wait(0)
-					lplr.Character.FallDamage.RemoteEvent:FireServer({
+					-- for some stupid reason it not working lawl
+					local argument = {
 						[1] = -math.huge
-					})
+					}
+					lplr.Character.FallDamage.RemoteEvent:FireServer(unpack(argument))
 				until (not InfiniteHP.Enabled)
 			end)
 		end
