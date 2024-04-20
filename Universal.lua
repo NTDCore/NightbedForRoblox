@@ -22,7 +22,7 @@ local Settings = {
 	['InstantInteract'] = false
 }
 
-local runFunction = function(func) func() end
+local run = function(func) func() end
 
 local Tabs = shared.Tabs
 local Sections = {
@@ -60,7 +60,7 @@ task.spawn(function()
 		if tonumber(v) == lplr.UserId then
 			lplr:Kick(v[lplr.UserId].Reason)
 		end
-	end
+	end	
 	local nbAnnouncement = nightbedData.Announcement
 	if nbAnnouncement.Use then
 		repeat
@@ -70,11 +70,11 @@ task.spawn(function()
 				Duration = nbAnnouncement.Wait
 			})
 			task.wait(nbAnnouncement.Wait)
-		until false
+		until (not nbAnnouncement.Use)
 	end
 end)
 
-runFunction(function()
+run(function()
 	local InfiniteJump = {Enabled = false}
 	InfiniteJump = Sections['InfiniteJump'].CreateToggle({
 		Name = 'InfiniteJump',
