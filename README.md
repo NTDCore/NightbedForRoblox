@@ -1,6 +1,6 @@
 # Nightbed | 1.0.0 Reborn
 
-script that just working
+something that just works
 
 # Script
 
