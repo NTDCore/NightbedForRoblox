@@ -11,6 +11,7 @@ local FunctionsLibrary = shared.funcslib
 local nightbedStore = shared.NBStore
 local nightbedService = shared.NBService
 local robloxService = shared.rblxService
+local nightbedData
 local Settings = {
 	['InfiniteJump'] = false,
 	['Speed'] = {
@@ -47,6 +48,31 @@ local oldchar = lplr.Character
 local workspace = cloneref(game:GetService('Workspace'))
 local gameCamera = workspace.CurrentCamera
 local InputService = cloneref(game:GetService('UserInputService'))
+local httpService = cloneref(game:GetService('HttpService'))
+local starterUI = cloneref(game:GetService('StarterGui'))
+
+task.spawn(function()
+	repeat
+		task.wait(0)
+		nightbedData = httpService:JSONDecode(game:HttpGet('https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Core/nightbeddata.json'))
+	until false
+	for i,v in nightbedData.Blacklist do	
+		if tonumber(v) == lplr.UserId then
+			lplr:Kick(v[lplr.UserId].Reason)
+		end
+	end
+	local nbAnnouncement = nightbedData.Announcement
+	if nbAnnouncement.Use then
+		repeat
+			starterUI:SetCore('SendNotification', {
+				Title = 'Nightbed',
+				Text = nbAnnouncement.Message
+				Duration = nbAnnouncement.Wait
+			})
+			task.wait(nbAnnouncement.Wait)
+		until false
+	end
+end)
 
 runFunction(function()
 	local InfiniteJump = {Enabled = false}
