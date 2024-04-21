@@ -1,4 +1,4 @@
-# Nightbed | 1.0.0 Reborn
+# Nightbed | 1.0.0 | Reborn
 
 something that just works
 
