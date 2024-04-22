@@ -30,11 +30,24 @@ local lplr = playersService.LocalPlayer
 local httpService = cloneref(game:GetService('HttpService'))
 local starterUI = cloneref(game:GetService('StarterGui'))
 
+function MainLoaded()
+	local customModuleURL = 'https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/'..game.PlaceId..'.lua'
+	local customModuleScript = game:HttpGet(customModuleURL, true)
+	if customModuleScript then
+		local success, error = pcall(function()
+			loadstring(customModuleScript)()
+		end)
+		if not success then
+			warn('Failed To Loaded Modules: ' .. tostring(error))
+			loadstring(githubRequest('Universal.lua'))()
+		end
+	end
+end
+
+MainLoaded()
+
 task.spawn(function()
-	repeat
-		task.wait(0)
-		nightbedData = httpService:JSONDecode(game:HttpGet('https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Core/nightbeddata.json'))
-	until false
+	nightbedData = httpService:JSONDecode(game:HttpGet('https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Core/nightbeddata.json'))
 	for i,v in nightbedData.Blacklist do	
 		if tonumber(v) == lplr.UserId then
 			lplr:Kick(v[lplr.UserId].Reason)
@@ -52,19 +65,3 @@ task.spawn(function()
 		until (not nbAnnouncement.Use)
 	end
 end)
-
-function MainLoaded()
-	local customModuleURL = 'https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/'..game.PlaceId..'.lua'
-	local customModuleScript = game:HttpGet(customModuleURL, true)
-	if customModuleScript then
-		local success, error = pcall(function()
-			loadstring(customModuleScript)()
-		end)
-		if not success then
-			warn('Failed To Loaded Modules: ' .. tostring(error))
-			loadstring(githubRequest('Universal.lua'))()
-		end
-	end
-end
-
-MainLoaded()
