@@ -32,13 +32,6 @@ local Sections = {
 	['InstantInteract'] = Tabs['Utility'].CreateSection('InstantInteract')
 }
 
-function createnotification(Titlez, Textz, Dur)
-	game.StarterGui:SetCore('SendNotification', {
-		Title = Titlez;
-		Text = Textz;
-		Duration = Dur;
-	})
-end
 local cloneref = cloneref or function(obj) return obj end
 local InfiniteJumpConnection
 local InstantInteractConnection
