@@ -29,6 +29,7 @@ local playersService = cloneref(game:GetService('Players'))
 local lplr = playersService.LocalPlayer
 local httpService = cloneref(game:GetService('HttpService'))
 local starterUI = cloneref(game:GetService('StarterGui'))
+local nightbedData
 
 function MainLoaded()
 	local customModuleURL = 'https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/'..game.PlaceId..'.lua'
