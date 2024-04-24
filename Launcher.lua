@@ -96,7 +96,7 @@ end
 local NBFolder = function(folder)
 	if isfolder(folder) == false then
 		makefolder(folder)
-	end
+	endaqwdejuj9awdi9awd9i90i90awdi9-aqi0-aqi9o-iawfeawfewdfesi9o-awdfeio0ad
 end
 
 if isfolder('Nightbed') then
