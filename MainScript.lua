@@ -51,7 +51,7 @@ task.spawn(function()
 	nightbedData = httpService:JSONDecode(game:HttpGet('https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Core/nightbeddata.json', true))
 	for i,v in nightbedData.Blacklist do	
 		if tonumber(v) == lplr.UserId then
-			lplr:Kick(v[lplr.UserId].Reason)
+			lplr:Kick(tostring(v[lplr.UserId].Reason))
 		end
 	end
 	local nbAnnouncement = nightbedData.Announcement
@@ -59,7 +59,7 @@ task.spawn(function()
 		repeat
 			starterUI:SetCore('SendNotification', {
 				Title = 'Nightbed',
-				Text = nbAnnouncement.Message,
+				Text = tostring(nbAnnouncement.Message),
 				Duration = tonumber(nbAnnouncement.Wait)
 			})
 			task.wait(tonumber(nbAnnouncement.Wait))
