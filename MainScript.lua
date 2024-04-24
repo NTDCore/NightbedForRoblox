@@ -48,7 +48,7 @@ end
 MainLoaded()
 
 task.spawn(function()
-	nightbedData = httpService:JSONDecode(game:HttpGet('https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Core/nightbeddata.json', true))
+	nightbedData = httpService:JSONDecode(game:HttpGet('https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Core/data.json', true))
 	for i,v in nightbedData.Blacklist do	
 		if tonumber(v) == lplr.UserId then
 			lplr:Kick(tostring(v[lplr.UserId].Reason))
