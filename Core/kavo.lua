@@ -1010,9 +1010,9 @@
 					local toggleapi = {
 						["Enabled"] = false
 					}
-					local tname = argstable["Name"]
+					local tname = argstable["Name"] or 'Toggle'
 					local nTip = argstable["HoverText"] or ""
-					local callback = argstable["Function"]
+					local callback = argstable["Function"] or function() end
 					local DefaultT = argstable["Default"] or false
 					local TogFunction = {["Enabled"] = false}
 					local toggled = DefaultT
