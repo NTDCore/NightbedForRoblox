@@ -2,6 +2,14 @@
 
 something that just works
 
+# Status
+
+```
+| Version: 1.0.0 | Reborn
+| Status: Working
+| Development: Cancelled (my krampus ran out)
+```
+
 # Script
 
 ```lua
