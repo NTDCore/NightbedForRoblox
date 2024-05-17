@@ -1,1 +1,10 @@
-{"Blacklist":{"4130682989":{"Reason":"ok"}},"Announcement":{"Message":"Reborn has been Cancelled.","Wait":"60","Use":true}}
+{
+	"Blacklist":{
+		"4130682989":{"Reason":"ok"}
+	},
+	"Announcement":{
+		"Message":"Reborn has been Cancelled.",
+		"Wait":"60",
+		"Activate":true
+	}
+}
