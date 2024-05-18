@@ -55,7 +55,7 @@ task.spawn(function()
 		end
 	end
 	local nbAnnouncement = nightbedData.Announcement
-	if nbAnnouncement.Use then
+	if nbAnnouncement.Activate then
 		repeat
 			starterUI:SetCore('SendNotification', {
 				Title = 'Nightbed',
@@ -63,6 +63,6 @@ task.spawn(function()
 				Duration = tonumber(nbAnnouncement.Wait)
 			})
 			task.wait(tonumber(nbAnnouncement.Wait))
-		until (not nbAnnouncement.Use)
+		until (not nbAnnouncement.Activate)
 	end
 end)
