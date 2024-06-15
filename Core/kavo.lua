@@ -1020,7 +1020,6 @@
 					table.insert(kavo.connections, {
 						name = tname,
 						connectiontype = 'toggle',
-						Function = TogFunction['Function'],
 						enabled = TogFunction['Enabled']
 					})
 					local nTip = argstable["HoverText"] or ""
@@ -1262,8 +1261,9 @@
 							pcall(callback, TogFunction["Enabled"])
 						end
 					end
-					TogFunction.newFunction = function(func)
-						TogFunction['Function'] = func
+					TogFunction.newFunction = function(newfunc)
+						TogFunction['Function'] = newfunc
+						callback = newfunc
 					end
 					--[[
 						Test.newFunction(function(hehehe)
