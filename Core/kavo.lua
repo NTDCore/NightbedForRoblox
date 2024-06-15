@@ -1,4 +1,6 @@
-	local kavo = {Objects = {}}
+	local kavo = {
+		connections = {}
+	}
 	local tween = game:GetService("TweenService")
 	local tweeninfo = TweenInfo.new
 	local input = game:GetService("UserInputService")
@@ -1011,12 +1013,18 @@
 						["Enabled"] = false
 					}
 					local tname = argstable["Name"] or 'Toggle'
-					local nTip = argstable["HoverText"] or ""
-					local callback = argstable["Function"] or function() end
 					local DefaultT = argstable["Default"] or false
-					local TogFunction = {["Enabled"] = false}
+					local TogFunction = {["Enabled"] = false, ['Function'] = argstable['Function'] or function() end}
 					local toggled = DefaultT
 					TogFunction["Enabled"] = toggled
+					table.insert(kavo.connections, {
+						name = tname,
+						connectiontype = 'toggle',
+						Function = TogFunction['Function'],
+						enabled = TogFunction['Enabled']
+					})
+					local nTip = argstable["HoverText"] or ""
+					local callback = TogFunction['Function']
 					table.insert(SettingsT, tname)
 
 					local toggleElement = Instance.new("TextButton")
@@ -1254,6 +1262,14 @@
 							pcall(callback, TogFunction["Enabled"])
 						end
 					end
+					TogFunction.newFunction = function(func)
+						TogFunction['Function'] = func
+					end
+					--[[
+						Test.newFunction(function(hehehe)
+							print(hehehe)
+						end)
+					--]]
 					if DefaultT then
 						TogFunction.ToggleButton(true)
 					end
