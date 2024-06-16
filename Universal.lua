@@ -16,7 +16,7 @@ local Settings = {
 	['InfiniteJump'] = false,
 	['Speed'] = {
 		['Enabled'] = false,
-		['Value'] = 16,
+		['Value'] = 16
 	},
 	['Cape'] = false,
 	['InstantInteract'] = false
@@ -31,6 +31,7 @@ local Sections = {
 	['Cape'] = Tabs['Render'].CreateSection('Cape'),
 	['InstantInteract'] = Tabs['Utility'].CreateSection('InstantInteract')
 }
+shared.Sections = Sections
 
 local cloneref = cloneref or function(obj) return obj end
 local InfiniteJumpConnection
@@ -41,6 +42,7 @@ local oldchar = lplr.Character
 local workspace = cloneref(game:GetService('Workspace'))
 local gameCamera = workspace.CurrentCamera
 local InputService = cloneref(game:GetService('UserInputService'))
+local proximityPromptService = cloneref(game:GetService('ProximityPromptService'))
 
 run(function()
 	local InfiniteJump = {Enabled = false}
@@ -49,7 +51,7 @@ run(function()
 		Function = function(callback)
 			if callback then
 				Settings['InfiniteJump'] = true
-				spawn(function()
+				task.spawn(function()
 					InfiniteJumpConnection = InputService.JumpRequest:connect(function(jump)
 						oldchar.Humanoid:ChangeState('Jumping')
 					end)
@@ -190,7 +192,7 @@ run(function()
 		['Function'] = function(callback)
 			Settings['InstantInteract'] = callback
 			if callback then
-				InstantInteractConnection = game:GetService('ProximityPromptService').PromptButtonHoldBegan:Connect(function(prompt)
+				InstantInteractConnection = proximityPromptService.PromptButtonHoldBegan:Connect(function(prompt)
 					fireproximityprompt(prompt)
 				end)
 			else

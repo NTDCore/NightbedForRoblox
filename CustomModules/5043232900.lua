@@ -42,13 +42,12 @@ local function WeaponEvent(weapon)
 end
 local uis = game:GetService("UserInputService")
 local Tabs = shared.Tabs
-local Sections = {
-	['AddonsExploit'] = Tabs['Utility'].CreateSection('AddonsExploit'),
-	["VoteClean"] = Tabs["Utility"].CreateSection("VoteClean"),
-	["HealthExploit"] = Tabs["Utility"].CreateSection("HealthExploit"),
-	["SpawnObj"] = Tabs["Utility"].CreateSection("Spawn Object"),
-	["SpawnIt"] = Tabs["Utility"].CreateSection("Weapons")
-}
+local Sections = shared.Sections
+Sections['AddonsExploit'] = Tabs['Utility'].CreateSection('AddonsExploit')
+Sections["VoteClean"] = Tabs["Utility"].CreateSection("VoteClean")
+Sections["HealthExploit"] = Tabs["Utility"].CreateSection("HealthExploit")
+Sections["SpawnObj"] = Tabs["Utility"].CreateSection("Spawn Object")
+Sections["SpawnIt"] = Tabs["Utility"].CreateSection("Weapons")
 
 local VoteClean = Sections["VoteClean"]
 VoteClean.CreateButton({
