@@ -31,21 +31,7 @@ local httpService = cloneref(game:GetService('HttpService'))
 local starterUI = cloneref(game:GetService('StarterGui'))
 local nightbedData
 
-function MainLoaded()
-	local customModuleURL = 'https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/'..game.PlaceId..'.lua'
-	local customModuleScript = game:HttpGet(customModuleURL, true)
-	if customModuleScript then
-		local success, error = pcall(function()
-			loadstring(customModuleScript)()
-		end)
-		if not success then
-			warn('Failed To Loaded Modules: ' .. tostring(error))
-			loadstring(githubRequest('Universal.lua'))()
-		end
-	end
-end
-
-MainLoaded()
+loadstring(githubRequest('Universal.lua'))()
 
 task.spawn(function()
 	nightbedData = httpService:JSONDecode(game:HttpGet('https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Core/data.json', true))
