@@ -200,7 +200,6 @@ run(function()
 			end
 		end
 	})
-
 	function SaveSettings()
 		writefile('Nightbed/Profiles/Universal.json',game:GetService('HttpService'):JSONEncode(Settings))
 	end
@@ -227,20 +226,18 @@ run(function()
 			InstantInteract.ToggleButton(Settings['InstantInteract'])
 		end
 	end
-end)
-
-function MainLoaded()
-	local customModuleURL = 'https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/'..game.PlaceId..'.lua'
-	local customModuleScript = game:HttpGet(customModuleURL, true)
-	if customModuleScript then
-		local success, error = pcall(function()
-			loadstring(customModuleScript)()
-		end)
-		if not success then
-			warn('Failed To Loaded Modules: ' .. tostring(error))
-			--loadstring(githubRequest('Universal.lua'))()
+	local MainLoaded = function()
+		local customModuleURL = 'https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/'..game.PlaceId..'.lua'
+		local customModuleScript = game:HttpGet(customModuleURL, true)
+		if customModuleScript then
+			local success, error = pcall(function()
+				loadstring(customModuleScript)()
+			end)
+			if not success then
+				warn('Failed To Loaded Modules: ' .. tostring(error))
+				--loadstring(githubRequest('Universal.lua'))()
+			end
 		end
 	end
-end
-
-MainLoaded()
+	MainLoaded()
+end)

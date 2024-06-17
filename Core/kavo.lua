@@ -806,7 +806,7 @@
 						end
 					end)()
 
-					function ButtonFunction:UpdateButton(newTitle)
+					function ButtonFunction.renameButton(newTitle)
 						btnInfo.Text = newTitle
 					end
 					return ButtonFunction
@@ -1261,12 +1261,12 @@
 							pcall(callback, TogFunction["Enabled"])
 						end
 					end
-					TogFunction.newFunction = function(newfunc)
+					TogFunction.replaceFunction = function(newfunc)
 						TogFunction['Function'] = newfunc
 						callback = newfunc
 					end
 					--[[
-						Test.newFunction(function(hehehe)
+						Test.replaceFunction(function(hehehe)
 							print(hehehe)
 						end)
 					--]]
@@ -2722,7 +2722,7 @@
 					end)()
 					updateSectionFrame()
 					UpdateSize()
-					function labelFunctions:UpdateLabel(newText)
+					function labelFunctions.renameLabel(newText)
 						if label.Text ~= "  "..newText then
 							label.Text = "  "..newText
 						end
