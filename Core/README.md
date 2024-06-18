@@ -183,3 +183,48 @@ haha.replaceFunction(function(hehe)
 	end
 end)
 ```
+
+## Slider
+
+```lua
+SectionName.CreateSlider({
+	['Name'] = 'silly slider', -- string
+	Min = 0, -- number
+	["Max"] = 100, -- number
+	Default = 1, -- number | or just remove this if you dont want to set it default hehe :3
+	Function = function(val)
+		print('current value is '..val)
+	end
+})
+```
+
+### Slider Function
+
+Set Value
+```lua
+local sillyslider = SectionName.CreateSlider({
+	['Name'] = 'silly slider', -- string
+	Min = 0, -- number
+	["Max"] = 100, -- number
+	Default = 1, -- number | or just remove this if you dont want to set it default hehe :3
+	Function = function(val)
+		print('current value is '..val)
+	end
+})
+sillyslider.SetValue(12) -- number | oh shit am getting silly :3 HELPQWDJQWI9DUQW0QWDUJOIDJQWKP
+```
+
+## Textbox
+
+```lua
+SectionName.CreateTextBox({
+	Name = 'SILLY >:3',
+	Function = function(val)
+		print(val)
+	end
+})
+```
+
+## Keybind
+
+do it tomorrow i feel very silly :3
