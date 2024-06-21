@@ -48,7 +48,7 @@
 		tween:Create(obj, tweeninfo(duration, ...), properties):Play()
 	end
 
-	shared.KavoLoaded = true
+  shared.KavoLoaded = true
 	local themes = {
 		SchemeColor = Color3.fromRGB(74, 99, 135),
 		Background = Color3.fromRGB(36, 37, 43),
@@ -2670,7 +2670,6 @@
 							}):Play()
 							rainbow = true
 							rainbowconnection = rs.RenderStepped:Connect(function()
-								task.wait(0.75)
 								setrgbcolor({zigzag(counter),1,1})
 								counter = counter + 0.01
 							end)
