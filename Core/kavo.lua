@@ -48,7 +48,7 @@
 		tween:Create(obj, tweeninfo(duration, ...), properties):Play()
 	end
 
-  shared.KavoLoaded = true
+	shared.KavoLoaded = true
 	local themes = {
 		SchemeColor = Color3.fromRGB(74, 99, 135),
 		Background = Color3.fromRGB(36, 37, 43),
@@ -2223,8 +2223,9 @@
 				function Elements.CreateColorPicker(argstable)
 					local colText = argstable["Name"]
 					local colInf = argstable["HoverText"] or ""
-					local defcolor = argstable["Default"]
+					local defcolor = argstable["Default"] or Color3.fromRGB(1,1,1)
 					local callback = argstable["Function"]
+					local colorFunction = {}
 					local h, s, v = Color3.toHSV(defcolor)
 					local ms = game.Players.LocalPlayer:GetMouse()
 					local colorOpened = false
@@ -2658,13 +2659,13 @@
 					end
 					local function togglerainbow()
 						if rainbow then
-							game.TweenService:Create(toggleEnabled, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {
+							game.TweenService:Create(toggleEnabled, TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {
 								ImageTransparency = 1
 							}):Play()
 							rainbow = false
 							rainbowconnection:Disconnect()
 						else
-							game.TweenService:Create(toggleEnabled, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {
+							game.TweenService:Create(toggleEnabled, TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {
 								ImageTransparency = 0
 							}):Play()
 							rainbow = true
@@ -2687,6 +2688,9 @@
 						end
 					end)
 					setcolor({h,s,v})
+					colorFunction.setColor = function(h,s,v)
+						return setcolor({h,s,v})
+					end
 				end
 
 				function Elements.CreateLabel(argstable)

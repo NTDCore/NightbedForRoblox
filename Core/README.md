@@ -292,3 +292,24 @@ local aa = SectionName.CreateDropdown({
 })
 aa.Refresh(newsillylist)
 ```
+
+Set Value
+
+```lua
+local aa = SectionName.CreateDropdown({
+	Name = 'Silly dropdown',
+	HoverText = 'silly dropdown',
+	List = {'silly', 'king', 'shortvi'},
+	Function = function(val)
+		if val == 'silly' then
+			print('silly!!! :3')
+		elseif val == 'king' then
+			print('silly king! :3 (please not me singing again :sob:)')
+		else
+			print('silly shortvi :3')
+		end
+	end
+})
+
+aa.SetValue('shortvi')
+```
