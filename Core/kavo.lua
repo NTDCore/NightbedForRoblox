@@ -2659,19 +2659,19 @@
 					end
 					local function togglerainbow()
 						if rainbow then
-							game.TweenService:Create(toggleEnabled, TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {
+							game.TweenService:Create(toggleEnabled, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {
 								ImageTransparency = 1
 							}):Play()
 							rainbow = false
 							rainbowconnection:Disconnect()
 						else
-							game.TweenService:Create(toggleEnabled, TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {
+							game.TweenService:Create(toggleEnabled, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {
 								ImageTransparency = 0
 							}):Play()
 							rainbow = true
 							rainbowconnection = rs.RenderStepped:Connect(function()
 								setrgbcolor({zigzag(counter),1,1})
-								counter = counter + 0.01
+								counter = counter + 1
 							end)
 						end
 					end
