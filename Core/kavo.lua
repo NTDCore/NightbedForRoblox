@@ -2670,8 +2670,9 @@
 							}):Play()
 							rainbow = true
 							rainbowconnection = rs.RenderStepped:Connect(function()
+								task.wait(0.75)
 								setrgbcolor({zigzag(counter),1,1})
-								counter = counter + 0.1
+								counter = counter + 0.01
 							end)
 						end
 					end
