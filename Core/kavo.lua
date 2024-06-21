@@ -2000,7 +2000,10 @@
 							UpdateSize()
 						end
 					end
-					DropFunction.SetValue = function() end
+					DropFunction.SetValue = function(aaaa)
+						callback(aaaa)
+						itemTextbox.Text = aaaa
+					end
 					return DropFunction
 				end
 				function Elements.CreateKeybind(argstable)
