@@ -2671,7 +2671,7 @@
 							rainbow = true
 							rainbowconnection = rs.RenderStepped:Connect(function()
 								setrgbcolor({zigzag(counter),1,1})
-								counter = counter + 1
+								counter = counter + 0.1
 							end)
 						end
 					end
