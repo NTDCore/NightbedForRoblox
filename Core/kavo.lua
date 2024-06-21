@@ -48,7 +48,7 @@
 		tween:Create(obj, tweeninfo(duration, ...), properties):Play()
 	end
 
-  shared.KavoLoaded = true
+	shared.KavoLoaded = true
 	local themes = {
 		SchemeColor = Color3.fromRGB(74, 99, 135),
 		Background = Color3.fromRGB(36, 37, 43),
