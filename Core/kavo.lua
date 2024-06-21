@@ -161,7 +161,7 @@
 
 	local LibName = tostring(math.random(1, 100))..tostring(math.random(1,50))..tostring(math.random(1, 100))
 
-	function kavo:ToggleWindow()
+	function kavo:ToggleUI()
 		if game.CoreGui[LibName].Enabled then
 			game.CoreGui[LibName].Enabled = false
 		else
@@ -1890,7 +1890,7 @@
 						end)()
 					end
 
-					function DropFunction:Refresh(newList)
+					function DropFunction.Refresh(newList)
 						newList = newList or {}
 						for i,v in next, dropFrame:GetChildren() do
 							if v.Name == "optionSelect" then
@@ -2000,6 +2000,7 @@
 							UpdateSize()
 						end
 					end
+					DropFunction.SetValue = function() end
 					return DropFunction
 				end
 				function Elements.CreateKeybind(argstable)

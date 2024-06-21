@@ -227,6 +227,68 @@ SectionName.CreateTextBox({
 
 ## Keybind
 
-do it tomorrow i feel very silly :3
+```lua
+SectionName.CreateKeybind({
+	Name = 'SILLY BIND!',
+	HoverText = 'press Z to silly :3',
+	Keybind = Enum.KeyCode.Z,
+	Function = function()
+		print('silly!')
+	end
+})
+```
 
-(sorry am lazy :3 tomorrow i promise)
+### Keybind Toggle UI
+
+```lua
+SectionName.CreateKeybind({
+	Name = 'Toggle Silly UI :3',
+	HoverText = 'press Z to silly :3',
+	Keybind = Enum.KeyCode.Z,
+	Function = function()
+		UI:ToggleUI()
+	end
+})
+```
+
+## Dropdown
+
+```lua
+SectionName.CreateDropdown({
+	Name = 'Silly dropdown',
+	HoverText = 'silly dropdown',
+	List = {'silly', 'king', 'shortvi'},
+	Function = function(val)
+		if val == 'silly' then
+			print('silly!!! :3')
+		elseif val == 'king' then
+			print('silly king! :3 (please not me singing again :sob:)')
+		else
+			print('silly shortvi :3')
+		end
+	end
+})
+```
+
+### Dropdown Function
+
+Refresh (lol)
+
+```lua
+local newsillylist = {'airstrike', 'tsar bomba', 'gay wanker'}
+local aa = SectionName.CreateDropdown({
+	Name = 'Silly dropdown',
+	HoverText = 'silly dropdown',
+	List = {'silly', 'king', 'shortvi'},
+	Function = function(val)
+		if val == 'silly' then
+			print('silly!!! :3')
+		elseif val == 'king' then
+			print('silly king! :3 (please not me singing again :sob:)')
+		else
+			print('silly shortvi :3')
+		end
+	end
+})
+aa.Refresh(newsillylist)
+```
