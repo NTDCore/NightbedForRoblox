@@ -313,3 +313,19 @@ local aa = SectionName.CreateDropdown({
 
 aa.SetValue('shortvi')
 ```
+
+## Color Picker
+
+```lua
+SectionName.CreateColorPicker({
+	Name = 'gay wanker colorpicker',
+	HoverText = 'changing color',
+	Function = function(color)
+		print(color)
+	end
+})
+```
+
+## Learn more from Original 1
+
+https://xheptcofficial.gitbook.io/kavo-library
