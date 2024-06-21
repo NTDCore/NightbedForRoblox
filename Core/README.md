@@ -143,7 +143,7 @@ local haha = SectionName.CreateToggle({
 })
 ```
 
-toggle have auto table so, if you do
+toggle have auto table so, if you do like this
 ```lua
 local haha = SectionName.CreateToggle({
 	['Name'] = 'silly default :3', -- string
