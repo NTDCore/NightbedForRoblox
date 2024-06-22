@@ -7,7 +7,7 @@ something that just works
 ```
 | Version: 1.0.0 | Reborn
 | Status: Working
-| Development: Cancelled (my krampus ran out)
+| Development: Secretly Continued
 ```
 
 # Script
