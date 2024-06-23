@@ -5,6 +5,6 @@
 	"Announcement":{
 		"Message":"Reborn has been Cancelled.",
 		"Wait":"60",
-		"Activate":true
+		"Activate":false
 	}
 }
