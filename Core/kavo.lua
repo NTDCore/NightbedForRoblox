@@ -1551,6 +1551,14 @@
 					if defaultvalue then
 						SliderFunction.SetSlider(defaultvalue)
 					end
+					SliderFunction.replaceFunction = function(value) -- idgaf if am on mobile
+						callback = value
+					end
+					--[[
+					Haha.replaceFunction(function(val)
+						print(val)
+					end)
+					--]]
 					return SliderFunction
 				end
 
