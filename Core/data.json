@@ -1,5 +1,6 @@
 {
 	"Blacklist":{},
+	"Version":"1.0.0",
 	"Announcement":{
 		"Message":"Updating lol",
 		"Wait":"60",
