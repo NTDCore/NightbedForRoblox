@@ -1,15 +1,3 @@
--- nightbed test log
---[[
-	Version Info
-		a = alpha
-		pr = pre release
-		fr = full release
-		bt = beta test
-		b = beta
-		dl = dev log
-		d = demo
-		t = test
---]]
 local NBFolder = function(folder)
 	if isfolder(folder) == false then
 		makefolder(folder)
@@ -24,17 +12,7 @@ NBFolder('Nightbed/Core')
 NBFolder('Nightbed/assets')
 NBFolder('Nightbed/Profiles')
 
---[[
 local githubRequest = function(scripturl)
-	local suc,res = pcall(function()
-		return game:HttpGet('https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/'..readfile('Nightbed/commit.txt')..'/'..scripturl, true)
-	end)
-	res = '-- Watermask When Updated\n'..res
-	writefile('Nightbed/'..scripturl, res)
-	return readfile('Nightbed/'..scripturl)
-end
---]]
-function githubRequest(scripturl)
 	return game:HttpGet('https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/'..scripturl, true)
 end
 local cloneref = cloneref or function(obj)
@@ -43,8 +21,9 @@ end
 local Service = function(name)
 	return cloneref(game:GetService(name))
 end
+local Data = Service('HttpService'):JSONDecode(githubRequest('Core/data.json')) -- lol
 local nightbedService = {
-	['Version'] = '1.0.0r',
+	['Version'] = Data.Version,
 	['Assets'] = {
 		['Cape.png'] = 'rbxthumb://type=Asset&id=' .. 14391871286 .. '&w=420&h=420'
 	}
