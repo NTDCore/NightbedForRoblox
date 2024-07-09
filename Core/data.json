@@ -1,9 +1,7 @@
 {
-	"Blacklist":{
-		"4130682989":{"Reason":"ok"}
-	},
+	"Blacklist":{},
 	"Announcement":{
-		"Message":"Reborn has been Cancelled.",
+		"Message":"Updating lol",
 		"Wait":"60",
 		"Activate":false
 	}
