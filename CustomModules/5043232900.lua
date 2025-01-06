@@ -16,11 +16,11 @@ else
 	kavo = shared.kavogui
 end
 local function notify(Titlez, Textz, Dur)
-game.StarterGui:SetCore("SendNotification", {
-    Title = Titlez;
-    Text = Textz;
-    Duration = Dur;
-})
+	game.StarterGui:SetCore("SendNotification", {
+		Title = Titlez;
+		Text = Textz;
+		Duration = Dur;
+	})
 end
 local connectioninfjump
 local cloneref = cloneref or function(aaa) return aaa end
@@ -54,7 +54,10 @@ VoteClean.CreateButton({
 	Name="VoteClean",
 	HoverText="clean the map vote",
 	Function=function()
-		game:GetService("ReplicatedStorage").VotingInProgress.VoteEvent:FireServer()
+		replistorage.VotingInProgress.VoteEvent:FireServer()
+		for i = 1,20 do
+			replistorage.VotingInProgress.VoteAdded:FireServer()
+		end
 	end
 })
 local HealthExploit = Sections["HealthExploit"]
@@ -105,6 +108,16 @@ Sections["SpawnObj"].CreateButton({
 		SpawnObject(objecterenter["Value"])
 	end
 })
+Sections["SpawnObj"].CreateButton({
+	Name = "Disaster",
+	HoverText = "",
+	Function = function()
+		SpawnObject('Flood')
+		SpawnObject('bigbadblizzard')
+		SpawnObject('Tornado')
+		SpawnObject('Meteors')
+	end
+})
 Sections["SpawnObj"].CreateTextBox({
 	Name = "Object Name",
 	HoverText = "e",
@@ -118,6 +131,9 @@ Sections["SpawnIt"].CreateButton({Name="Weapon Give",HoverText="e",Function=func
 end})
 Sections["SpawnIt"].CreateTextBox({Name="Weapon Name",HoverText="e",Function=function(entername)
 	enterwea["Value"] = entername
+end})
+Sections["SpawnIt"].CreateButton({Name="Give Crucifix",HoverText="OP",Function=function()
+	WeaponEvent("Crucifix")
 end})
 Sections["SpawnIt"].CreateButton({Name="Give Admin Revolver",HoverText="OP",Function=function()
 	WeaponEvent("Admin Revolver")
