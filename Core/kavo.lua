@@ -6,9 +6,6 @@ local tweeninfo = TweenInfo.new
 local input = game:GetService("UserInputService")
 local run = game:GetService("RunService")
 
-makefolder('project');
-makefolder('project/profiles');
-
 local configloaded: boolean = false;
 local Utility = {}
 local Objects = {}
@@ -177,6 +174,10 @@ end
 function kavo:CreateWindow(argstable)
 	local kavName = argstable["Title"]
 	local themeList = argstable["Theme"]
+	local projectName = argstable['proj'] or 'project'
+	kavo.scriptName = projectName
+	makefolder(projectName);
+	makefolder(projectName..'/profiles');
 	if not themeList then
 		themeList = themes
 	end
@@ -2787,7 +2788,7 @@ function kavo:CreateWindow(argstable)
 end
 function kavo:load()
 	local suc, res = pcall(function() --> config system
-		local config: table = game:GetService('HttpService'):JSONDecode(readfile('project/profiles/'.. game.PlaceId.. '.json'));
+		local config: table = game:GetService('HttpService'):JSONDecode(readfile('/profiles/'.. game.PlaceId.. '.json'));
 		if config and type(config) == 'table' then
 			for i,v in config do
 				local object = objectsapi[i]
@@ -2824,7 +2825,7 @@ task.spawn(function()
 	repeat
 		if not configloaded then break end
 		print('yes')
-		writefile('project/profiles/'.. game.PlaceId.. '.json', game:GetService('HttpService'):JSONEncode(objectsapi));
+		writefile(kavo.scriptName..'/profiles/'.. game.PlaceId.. '.json', game:GetService('HttpService'):JSONEncode(objectsapi));
 		task.wait(5);
 	until not configloaded;
 end)
