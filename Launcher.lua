@@ -36,7 +36,7 @@ local nightbedStore = {
 	},
 	['Core'] = {
 		['FunctionsLibrary'] = loadstring(githubRequest('Core/FunctionsHandler.lua'))(),
-		['entity'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/Libraries/entityHandler.lua', true))(),
+		['entity'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/libraries/entity.lua', true))(),
 		['sha'] = loadstring(githubRequest('Core/sha.lua'))()
 	}
 }
