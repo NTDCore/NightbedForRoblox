@@ -55,7 +55,7 @@ VoteClean.CreateButton({
 	HoverText="clean the map vote",
 	Function=function()
 		replistorage.VotingInProgress.VoteEvent:FireServer()
-		for i = 1,20 do
+		for i = 1,#players:GetPlayers() + 1 do
 			replistorage.VotingInProgress.VoteAdded:FireServer()
 		end
 	end
@@ -95,8 +95,11 @@ AddonsExploit.CreateButton({
 	Function = function()
 		for i,v in replistorage.AddonStorage:GetChildren() do
 			local cloned = v:Clone()
-			cloned.Parent = lplr.PlayerGui.Spawner.SpawnFrame.Addons
-			--cloned.Visible = true
+			for i2, v2 in lplr.PlayerGui.Spawner.SpawnFrame.Addons:GetChildren() do
+				if not v2.Name == v.Name then
+					cloned.Parent = lplr.PlayerGui.Spawner.SpawnFrame.Addons
+				end
+			end
 		end
 	end
 })
