@@ -95,11 +95,7 @@ AddonsExploit.CreateButton({
 	Function = function()
 		for i,v in replistorage.AddonStorage:GetChildren() do
 			local cloned = v:Clone()
-			for i2, v2 in lplr.PlayerGui.Spawner.SpawnFrame.Addons:GetChildren() do
-				if not v2.Name == v.Name then
-					cloned.Parent = lplr.PlayerGui.Spawner.SpawnFrame.Addons
-				end
-			end
+			cloned.Parent = lplr.PlayerGui.Spawner.SpawnFrame.Addons
 		end
 	end
 })
