@@ -12,8 +12,10 @@ NBFolder('Nightbed/Core')
 NBFolder('Nightbed/assets')
 NBFolder('Nightbed/Profiles')
 
+local httpService = cloneref(game.GetService(game, 'HttpService'))
+
 local githubRequest = function(scripturl)
-	return game:HttpGet('https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/'..scripturl, true)
+	return game:HttpGet('https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/'..httpService:JSONDecode(game:HttpGet('https://api.github.com/repos/NTDCore/NightbedForRoblox/commits'))[1].sha..'/'..scripturl, true)
 end
 local cloneref = cloneref or function(obj)
 	return obj

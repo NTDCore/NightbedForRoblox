@@ -34,6 +34,10 @@ local Sections = {
 shared.Sections = Sections
 
 local cloneref = cloneref or function(obj) return obj end
+local httpService = cloneref(game.GetService(game, 'HttpService'))
+local githubRequest = function(scripturl)
+	return game:HttpGet('https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/'..httpService:JSONDecode(game:HttpGet('https://api.github.com/repos/NTDCore/NightbedForRoblox/commits'))[1].sha..'/'..scripturl, true)
+end
 local InfiniteJumpConnection
 local InstantInteractConnection
 local playersService = cloneref(game:GetService('Players'))
@@ -227,7 +231,7 @@ run(function()
 		end
 	end
 	local MainLoaded = function()
-		local customModuleURL = 'https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/CustomModules/'..game.PlaceId..'.lua'
+		local customModuleURL = 'https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/'..httpService:JSONDecode(game:HttpGet('https://api.github.com/repos/NTDCore/NightbedForRoblox/commits'))[1].sha..'/CustomModules/'..game.PlaceId..'.lua'
 		local customModuleScript = game:HttpGet(customModuleURL, true)
 		if customModuleScript then
 			local success, error = pcall(function()
