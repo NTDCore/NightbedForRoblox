@@ -14,7 +14,7 @@ shared.kavogui = kavo
 local win = kavo:CreateWindow({
 	['Title'] = 'Nightbed v'..shared.NBService['Version'],
 	['Theme'] = (shared.CustomTheme and shared.SetCustomTheme or 'Luna'),
-	['proj'] = 'nightbed'
+	['proj'] = 'nightbeded'
 })
 local Tabs = {
 	['Combat'] = win.CreateTab('Combat'),
