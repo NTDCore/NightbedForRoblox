@@ -4,13 +4,13 @@ local NBFolder = function(folder)
 	end
 end
 
-if isfolder('Nightbed') == false then
-	makefolder('Nightbed')
+if isfolder('nightbed') == false then
+	makefolder('nightbed')
 end
-NBFolder('Nightbed/CustomModules')
-NBFolder('Nightbed/Core')
-NBFolder('Nightbed/assets')
-NBFolder('Nightbed/Profiles')
+NBFolder('nightbed/CustomModules')
+NBFolder('nightbed/Core')
+NBFolder('nightbed/assets')
+NBFolder('nightbed/Profiles')
 
 local cloneref = cloneref or function(obj)
 	return obj
@@ -18,7 +18,7 @@ end
 
 local httpService = cloneref(game.GetService(game, 'HttpService'))
 local githubRequest = function(scripturl)
-	return game:HttpGet('https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/'..httpService:JSONDecode(game:HttpGet('https://api.github.com/repos/NTDCore/NightbedForRoblox/commits'))[1].sha..'/'..scripturl, true)
+	return game:HttpGet('https://raw.githubusercontent.com/NTDCore/nightbedForRoblox/'..httpService:JSONDecode(game:HttpGet('https://api.github.com/repos/NTDCore/nightbedForRoblox/commits'))[1].sha..'/'..scripturl, true)
 end
 
 local Service = function(name)
@@ -72,20 +72,13 @@ local customasset = function(asset)
 end
 getgenv().loadAsset = customasset
 local nightbedConsole = function(message)
-	print('[NIGHTBED]: '..message)
+	print('[nightbed]: '..message)
 end
 
 local NBFolder = function(folder)
 	if isfolder(folder) == false then
 		makefolder(folder)
 	end
-end
-
-if isfolder('Nightbed') then
-	task.wait()
-	nightbedConsole('Loading...')
-	task.wait(1)
-	nightbedConsole('Success! Loaded')
 end
 
 return loadstring(githubRequest('MainScript.lua'))()

@@ -1,10 +1,10 @@
 local kavo = {
 	connections = {}
 }
-local tween = game:GetService("TweenService")
+local tween = game:GetService('TweenService')
 local tweeninfo = TweenInfo.new
-local input = game:GetService("UserInputService")
-local run = game:GetService("RunService")
+local input = game:GetService('UserInputService')
+local run = game:GetService('RunService')
 
 local configloaded: boolean = false;
 local Utility = {}
@@ -144,13 +144,13 @@ local themeStyles = {
 		ElementColor = Color3.fromRGB(22, 29, 31)
 	}
 }
-local oldTheme = ""
+local oldTheme = ''
 
 local SettingsT = {
 
 }
 
-local Name = "kavoConfig.JSON"
+local Name = 'kavoConfig.JSON'
 
 pcall(function()
 
@@ -172,8 +172,8 @@ function kavo:ToggleUI()
 end
 
 function kavo:CreateWindow(argstable)
-	local kavName = argstable["Title"]
-	local themeList = argstable["Theme"]
+	local kavName = argstable['Title']
+	local themeList = argstable['Theme']
 	local projectName = argstable['proj'] or 'project'
 	kavo.scriptName = projectName
 	makefolder(projectName);
@@ -181,29 +181,29 @@ function kavo:CreateWindow(argstable)
 	if not themeList then
 		themeList = themes
 	end
-	if themeList == "DarkTheme" then
+	if themeList == 'DarkTheme' then
 		themeList = themeStyles.DarkTheme
-	elseif themeList == "LightTheme" then
+	elseif themeList == 'LightTheme' then
 		themeList = themeStyles.LightTheme
-	elseif themeList == "BloodTheme" then
+	elseif themeList == 'BloodTheme' then
 		themeList = themeStyles.BloodTheme
-	elseif themeList == "GrapeTheme" then
+	elseif themeList == 'GrapeTheme' then
 		themeList = themeStyles.GrapeTheme
-	elseif themeList == "Ocean" then
+	elseif themeList == 'Ocean' then
 		themeList = themeStyles.Ocean
-	elseif themeList == "Midnight" then
+	elseif themeList == 'Midnight' then
 		themeList = themeStyles.Midnight
-	elseif themeList == "Sentinel" then
+	elseif themeList == 'Sentinel' then
 		themeList = themeStyles.Sentinel
-	elseif themeList == "Vape" then
+	elseif themeList == 'Vape' then
 		themeList = themeStyles.Vape
-	elseif themeList == "Luna" then
+	elseif themeList == 'Luna' then
 		themeList = themeStyles.Luna
-	elseif themeList == "Private" then
+	elseif themeList == 'Private' then
 		themeList = themeStyles.Private
-	elseif themeList == "Synapse" then
+	elseif themeList == 'Synapse' then
 		themeList = themeStyles.Synapse
-	elseif themeList == "Serpent" then
+	elseif themeList == 'Serpent' then
 		themeList = themeStyles.Serpent
 	else
 		if themeList.SchemeColor == nil then
@@ -221,35 +221,35 @@ function kavo:CreateWindow(argstable)
 
 	themeList = themeList or {}
 	local selectedTab 
-	kavName = kavName or "Library"
+	kavName = kavName or 'Library'
 	table.insert(kavo, kavName)
 	for i,v in pairs(game.CoreGui:GetChildren()) do
-		if v:IsA("ScreenGui") and v.Name == kavName then
+		if v:IsA('ScreenGui') and v.Name == kavName then
 			v:Destroy()
 		end
 	end
-	local ScreenGui = Instance.new("ScreenGui")
-	local Main = Instance.new("Frame")
-	local MainCorner = Instance.new("UICorner")
-	local MainHeader = Instance.new("Frame")
-	local headerCover = Instance.new("UICorner")
-	local coverup = Instance.new("Frame")
-	local title = Instance.new("TextLabel")
-	local close = Instance.new("ImageButton")
-	local MainSide = Instance.new("Frame")
-	local sideCorner = Instance.new("UICorner")
-	local coverup_2 = Instance.new("Frame")
-	local tabFrames = Instance.new("Frame")
-	local tabListing = Instance.new("UIListLayout")
-	local pages = Instance.new("Frame")
-	local Pages = Instance.new("Folder")
-	local infoContainer = Instance.new("Frame")
+	local ScreenGui = Instance.new('ScreenGui')
+	local Main = Instance.new('Frame')
+	local MainCorner = Instance.new('UICorner')
+	local MainHeader = Instance.new('Frame')
+	local headerCover = Instance.new('UICorner')
+	local coverup = Instance.new('Frame')
+	local title = Instance.new('TextLabel')
+	local close = Instance.new('ImageButton')
+	local MainSide = Instance.new('Frame')
+	local sideCorner = Instance.new('UICorner')
+	local coverup_2 = Instance.new('Frame')
+	local tabFrames = Instance.new('Frame')
+	local tabListing = Instance.new('UIListLayout')
+	local pages = Instance.new('Frame')
+	local Pages = Instance.new('Folder')
+	local infoContainer = Instance.new('Frame')
 
-	local blurFrame = Instance.new("Frame")
+	local blurFrame = Instance.new('Frame')
 
 	kavo:DraggingEnabled(MainHeader, Main)
 
-	blurFrame.Name = "blurFrame"
+	blurFrame.Name = 'blurFrame'
 	blurFrame.Parent = pages
 	blurFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 	blurFrame.BackgroundTransparency = 1
@@ -263,7 +263,7 @@ function kavo:CreateWindow(argstable)
 	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	ScreenGui.ResetOnSpawn = false
 
-	Main.Name = "Main"
+	Main.Name = 'Main'
 	Main.Parent = ScreenGui
 	Main.BackgroundColor3 = themeList.Background
 	Main.ClipsDescendants = true
@@ -271,27 +271,27 @@ function kavo:CreateWindow(argstable)
 	Main.Size = UDim2.new(0, 525, 0, 318)
 
 	MainCorner.CornerRadius = UDim.new(0, 4)
-	MainCorner.Name = "MainCorner"
+	MainCorner.Name = 'MainCorner'
 	MainCorner.Parent = Main
 
-	MainHeader.Name = "MainHeader"
+	MainHeader.Name = 'MainHeader'
 	MainHeader.Parent = Main
 	MainHeader.BackgroundColor3 = themeList.Header
-	Objects[MainHeader] = "BackgroundColor3"
+	Objects[MainHeader] = 'BackgroundColor3'
 	MainHeader.Size = UDim2.new(0, 525, 0, 29)
 	headerCover.CornerRadius = UDim.new(0, 4)
-	headerCover.Name = "headerCover"
+	headerCover.Name = 'headerCover'
 	headerCover.Parent = MainHeader
 
-	coverup.Name = "coverup"
+	coverup.Name = 'coverup'
 	coverup.Parent = MainHeader
 	coverup.BackgroundColor3 = themeList.Header
-	Objects[coverup] = "BackgroundColor3"
+	Objects[coverup] = 'BackgroundColor3'
 	coverup.BorderSizePixel = 0
 	coverup.Position = UDim2.new(0, 0, 0.758620679, 0)
 	coverup.Size = UDim2.new(0, 525, 0, 7)
 
-	title.Name = "title"
+	title.Name = 'title'
 	title.Parent = MainHeader
 	title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	title.BackgroundTransparency = 1.000
@@ -305,14 +305,14 @@ function kavo:CreateWindow(argstable)
 	title.TextSize = 16.000
 	title.TextXAlignment = Enum.TextXAlignment.Left
 
-	close.Name = "close"
+	close.Name = 'close'
 	close.Parent = MainHeader
 	close.BackgroundTransparency = 1.000
 	close.Position = UDim2.new(0.949999988, 0, 0.137999997, 0)
 	close.Size = UDim2.new(0, 21, 0, 21)
 	close.ZIndex = 2
 	local qweqweqwe = false;
-	close.Image = "rbxassetid://3926305904"
+	close.Image = 'rbxassetid://3926305904'
 	close.ImageRectOffset = Vector2.new(284, 4)
 	close.ImageRectSize = Vector2.new(24, 24)
 	close.MouseButton1Click:Connect(function()
@@ -340,37 +340,37 @@ function kavo:CreateWindow(argstable)
 		ScreenGui:Destroy()
 	end)
 
-	MainSide.Name = "MainSide"
+	MainSide.Name = 'MainSide'
 	MainSide.Parent = Main
 	MainSide.BackgroundColor3 = themeList.Header
-	Objects[MainSide] = "Header"
+	Objects[MainSide] = 'Header'
 	MainSide.Position = UDim2.new(-7.4505806e-09, 0, 0.0911949649, 0)
 	MainSide.Size = UDim2.new(0, 149, 0, 289)
 
 	sideCorner.CornerRadius = UDim.new(0, 4)
-	sideCorner.Name = "sideCorner"
+	sideCorner.Name = 'sideCorner'
 	sideCorner.Parent = MainSide
 
-	coverup_2.Name = "coverup"
+	coverup_2.Name = 'coverup'
 	coverup_2.Parent = MainSide
 	coverup_2.BackgroundColor3 = themeList.Header
-	Objects[coverup_2] = "Header"
+	Objects[coverup_2] = 'Header'
 	coverup_2.BorderSizePixel = 0
 	coverup_2.Position = UDim2.new(0.949939311, 0, 0, 0)
 	coverup_2.Size = UDim2.new(0, 7, 0, 289)
 
-	tabFrames.Name = "tabFrames"
+	tabFrames.Name = 'tabFrames'
 	tabFrames.Parent = MainSide
 	tabFrames.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	tabFrames.BackgroundTransparency = 1.000
 	tabFrames.Position = UDim2.new(0.0438990258, 0, -0.00066378375, 0)
 	tabFrames.Size = UDim2.new(0, 135, 0, 283)
 
-	tabListing.Name = "tabListing"
+	tabListing.Name = 'tabListing'
 	tabListing.Parent = tabFrames
 	tabListing.SortOrder = Enum.SortOrder.LayoutOrder
 
-	pages.Name = "pages"
+	pages.Name = 'pages'
 	pages.Parent = Main
 	pages.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	pages.BackgroundTransparency = 1.000
@@ -378,10 +378,10 @@ function kavo:CreateWindow(argstable)
 	pages.Position = UDim2.new(0.299047589, 0, 0.122641519, 0)
 	pages.Size = UDim2.new(0, 360, 0, 269)
 
-	Pages.Name = "Pages"
+	Pages.Name = 'Pages'
 	Pages.Parent = pages
 
-	infoContainer.Name = "infoContainer"
+	infoContainer.Name = 'infoContainer'
 	infoContainer.Parent = Main
 	infoContainer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	infoContainer.BackgroundTransparency = 1.000
@@ -402,15 +402,15 @@ function kavo:CreateWindow(argstable)
 	end)()
 
 	function kavo:ChangeColor(prope,color)
-		if prope == "Background" then
+		if prope == 'Background' then
 			themeList.Background = color
-		elseif prope == "SchemeColor" then
+		elseif prope == 'SchemeColor' then
 			themeList.SchemeColor = color
-		elseif prope == "Header" then
+		elseif prope == 'Header' then
 			themeList.Header = color
-		elseif prope == "TextColor" then
+		elseif prope == 'TextColor' then
 			themeList.TextColor = color
-		elseif prope == "ElementColor" then
+		elseif prope == 'ElementColor' then
 			themeList.ElementColor = color
 		end
 	end
@@ -419,11 +419,11 @@ function kavo:CreateWindow(argstable)
 	local first = true
 
 	function Tabs.CreateTab(tabName)
-		tabName = tabName or "Tab"
-		local tabButton = Instance.new("TextButton")
-		local UICorner = Instance.new("UICorner")
-		local page = Instance.new("ScrollingFrame")
-		local pageListing = Instance.new("UIListLayout")
+		tabName = tabName or 'Tab'
+		local tabButton = Instance.new('TextButton')
+		local UICorner = Instance.new('UICorner')
+		local page = Instance.new('ScrollingFrame')
+		local pageListing = Instance.new('UIListLayout')
 
 		local function UpdateSize()
 			local cS = pageListing.AbsoluteContentSize
@@ -433,7 +433,7 @@ function kavo:CreateWindow(argstable)
 			}):Play()
 		end
 
-		page.Name = "Page"
+		page.Name = 'Page'
 		page.Parent = Pages
 		page.Active = true
 		page.BackgroundColor3 = themeList.Background
@@ -444,21 +444,21 @@ function kavo:CreateWindow(argstable)
 		page.Visible = false
 		page.ScrollBarImageColor3 = Color3.fromRGB(themeList.SchemeColor.r * 255 - 16, themeList.SchemeColor.g * 255 - 15, themeList.SchemeColor.b * 255 - 28)
 
-		pageListing.Name = "pageListing"
+		pageListing.Name = 'pageListing'
 		pageListing.Parent = page
 		pageListing.SortOrder = Enum.SortOrder.LayoutOrder
 		pageListing.Padding = UDim.new(0, 5)
 
-		tabButton.Name = tabName.."TabButton"
+		tabButton.Name = tabName..'TabButton'
 		tabButton.Parent = tabFrames
 		tabButton.BackgroundColor3 = themeList.SchemeColor
-		Objects[tabButton] = "SchemeColor"
+		Objects[tabButton] = 'SchemeColor'
 		tabButton.Size = UDim2.new(0, 135, 0, 28)
 		tabButton.AutoButtonColor = false
 		tabButton.Font = Enum.Font.Gotham
 		tabButton.Text = tabName
 		tabButton.TextColor3 = themeList.TextColor
-		Objects[tabButton] = "TextColor3"
+		Objects[tabButton] = 'TextColor3'
 		tabButton.TextSize = 14.000
 		tabButton.BackgroundTransparency = 1
 
@@ -487,7 +487,7 @@ function kavo:CreateWindow(argstable)
 			end
 			page.Visible = true
 			for i,v in next, tabFrames:GetChildren() do
-				if v:IsA("TextButton") then
+				if v:IsA('TextButton') then
 					if themeList.SchemeColor == Color3.fromRGB(255,255,255) then
 						Utility:TweenObject(v, {TextColor3 = Color3.fromRGB(255,255,255)}, 0.2)
 					end 
@@ -518,17 +518,17 @@ function kavo:CreateWindow(argstable)
 			end
 		end)()
 		function Sections.CreateSection(secName, hidden)
-			secName = secName or "Section"
+			secName = secName or 'Section'
 			local sectionFunctions = {}
 			local modules = {}
 			hidden = hidden or false
-			local sectionFrame = Instance.new("Frame")
-			local sectionlistoknvm = Instance.new("UIListLayout")
-			local sectionHead = Instance.new("Frame")
-			local sHeadCorner = Instance.new("UICorner")
-			local sectionName = Instance.new("TextLabel")
-			local sectionInners = Instance.new("Frame")
-			local sectionElListing = Instance.new("UIListLayout")
+			local sectionFrame = Instance.new('Frame')
+			local sectionlistoknvm = Instance.new('UIListLayout')
+			local sectionHead = Instance.new('Frame')
+			local sHeadCorner = Instance.new('UICorner')
+			local sectionName = Instance.new('TextLabel')
+			local sectionInners = Instance.new('Frame')
+			local sectionElListing = Instance.new('UIListLayout')
 
 			if hidden then
 				sectionHead.Visible = false
@@ -536,21 +536,21 @@ function kavo:CreateWindow(argstable)
 				sectionHead.Visible = true
 			end
 
-			sectionFrame.Name = "sectionFrame"
+			sectionFrame.Name = 'sectionFrame'
 			sectionFrame.Parent = page
 			sectionFrame.BackgroundColor3 = themeList.Background--36, 37, 43
 			sectionFrame.BorderSizePixel = 0
 
-			sectionlistoknvm.Name = "sectionlistoknvm"
+			sectionlistoknvm.Name = 'sectionlistoknvm'
 			sectionlistoknvm.Parent = sectionFrame
 			sectionlistoknvm.SortOrder = Enum.SortOrder.LayoutOrder
 			sectionlistoknvm.Padding = UDim.new(0, 5)
 
 			for i,v in pairs(sectionInners:GetChildren()) do
 				while wait() do
-					if v:IsA("Frame") or v:IsA("TextButton") then
+					if v:IsA('Frame') or v:IsA('TextButton') then
 						function size(pro)
-							if pro == "Size" then
+							if pro == 'Size' then
 								UpdateSize()
 								updateSectionFrame()
 							end
@@ -559,17 +559,17 @@ function kavo:CreateWindow(argstable)
 					end
 				end
 			end
-			sectionHead.Name = "sectionHead"
+			sectionHead.Name = 'sectionHead'
 			sectionHead.Parent = sectionFrame
 			sectionHead.BackgroundColor3 = themeList.SchemeColor
-			Objects[sectionHead] = "BackgroundColor3"
+			Objects[sectionHead] = 'BackgroundColor3'
 			sectionHead.Size = UDim2.new(0, 352, 0, 33)
 
 			sHeadCorner.CornerRadius = UDim.new(0, 4)
-			sHeadCorner.Name = "sHeadCorner"
+			sHeadCorner.Name = 'sHeadCorner'
 			sHeadCorner.Parent = sectionHead
 
-			sectionName.Name = "sectionName"
+			sectionName.Name = 'sectionName'
 			sectionName.Parent = sectionHead
 			sectionName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			sectionName.BackgroundTransparency = 1.000
@@ -580,7 +580,7 @@ function kavo:CreateWindow(argstable)
 			sectionName.Text = secName
 			sectionName.RichText = true
 			sectionName.TextColor3 = themeList.TextColor
-			Objects[sectionName] = "TextColor3"
+			Objects[sectionName] = 'TextColor3'
 			sectionName.TextSize = 14.000
 			sectionName.TextXAlignment = Enum.TextXAlignment.Left
 			if themeList.SchemeColor == Color3.fromRGB(255,255,255) then
@@ -590,13 +590,13 @@ function kavo:CreateWindow(argstable)
 				Utility:TweenObject(sectionName, {TextColor3 = Color3.fromRGB(255,255,255)}, 0.2)
 			end 
 
-			sectionInners.Name = "sectionInners"
+			sectionInners.Name = 'sectionInners'
 			sectionInners.Parent = sectionFrame
 			sectionInners.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			sectionInners.BackgroundTransparency = 1.000
 			sectionInners.Position = UDim2.new(0, 0, 0.190751448, 0)
 
-			sectionElListing.Name = "sectionElListing"
+			sectionElListing.Name = 'sectionElListing'
 			sectionElListing.Parent = sectionInners
 			sectionElListing.SortOrder = Enum.SortOrder.LayoutOrder
 			sectionElListing.Padding = UDim.new(0, 3)
@@ -629,18 +629,18 @@ function kavo:CreateWindow(argstable)
 			end
 			local Elements = {}
 			function Elements.CreateButton(argstable)
-				local bname = argstable["Name"]
-				local tipINf = argstable["HoverText"] or ""
-				local callback = argstable["Function"]
+				local bname = argstable['Name']
+				local tipINf = argstable['HoverText'] or ''
+				local callback = argstable['Function']
 				showLogo = showLogo or true
 				local ButtonFunction = {}
 
-				local buttonElement = Instance.new("TextButton")
-				local UICorner = Instance.new("UICorner")
-				local btnInfo = Instance.new("TextLabel")
-				local viewInfo = Instance.new("ImageButton")
-				local touch = Instance.new("ImageLabel")
-				local Sample = Instance.new("ImageLabel")
+				local buttonElement = Instance.new('TextButton')
+				local UICorner = Instance.new('UICorner')
+				local btnInfo = Instance.new('TextLabel')
+				local viewInfo = Instance.new('ImageButton')
+				local touch = Instance.new('ImageLabel')
+				local Sample = Instance.new('ImageLabel')
 
 				table.insert(modules, bname)
 
@@ -651,72 +651,72 @@ function kavo:CreateWindow(argstable)
 				buttonElement.Size = UDim2.new(0, 352, 0, 33)
 				buttonElement.AutoButtonColor = false
 				buttonElement.Font = Enum.Font.SourceSans
-				buttonElement.Text = ""
+				buttonElement.Text = ''
 				buttonElement.TextColor3 = Color3.fromRGB(0, 0, 0)
 				buttonElement.TextSize = 14.000
-				Objects[buttonElement] = "BackgroundColor3"
+				Objects[buttonElement] = 'BackgroundColor3'
 
 				UICorner.CornerRadius = UDim.new(0, 4)
 				UICorner.Parent = buttonElement
 
-				viewInfo.Name = "viewInfo"
+				viewInfo.Name = 'viewInfo'
 				viewInfo.Parent = buttonElement
 				viewInfo.BackgroundTransparency = 1.000
 				viewInfo.LayoutOrder = 9
 				viewInfo.Position = UDim2.new(0.930000007, 0, 0.151999995, 0)
 				viewInfo.Size = UDim2.new(0, 23, 0, 23)
 				viewInfo.ZIndex = 2
-				viewInfo.Image = "rbxassetid://3926305904"
+				viewInfo.Image = 'rbxassetid://3926305904'
 				viewInfo.ImageColor3 = themeList.SchemeColor
-				Objects[viewInfo] = "ImageColor3"
+				Objects[viewInfo] = 'ImageColor3'
 				viewInfo.ImageRectOffset = Vector2.new(764, 764)
 				viewInfo.ImageRectSize = Vector2.new(36, 36)
 
-				Sample.Name = "Sample"
+				Sample.Name = 'Sample'
 				Sample.Parent = buttonElement
 				Sample.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				Sample.BackgroundTransparency = 1.000
-				Sample.Image = "http://www.roblox.com/asset/?id=4560909609"
+				Sample.Image = 'http://www.roblox.com/asset/?id=4560909609'
 				Sample.ImageColor3 = themeList.SchemeColor
-				Objects[Sample] = "ImageColor3"
+				Objects[Sample] = 'ImageColor3'
 				Sample.ImageTransparency = 0.600
 
-				local moreInfo = Instance.new("TextLabel")
-				local UICorner = Instance.new("UICorner")
+				local moreInfo = Instance.new('TextLabel')
+				local UICorner = Instance.new('UICorner')
 
-				moreInfo.Name = "TipMore"
+				moreInfo.Name = 'TipMore'
 				moreInfo.Parent = infoContainer
 				moreInfo.BackgroundColor3 = Color3.fromRGB(themeList.SchemeColor.r * 255 - 14, themeList.SchemeColor.g * 255 - 17, themeList.SchemeColor.b * 255 - 13)
 				moreInfo.Position = UDim2.new(0, 0, 2, 0)
 				moreInfo.Size = UDim2.new(0, 353, 0, 33)
 				moreInfo.ZIndex = 9
 				moreInfo.Font = Enum.Font.GothamSemibold
-				moreInfo.Text = "  "..tipINf
+				moreInfo.Text = '  '..tipINf
 				moreInfo.RichText = true
 				moreInfo.TextColor3 = themeList.TextColor
-				Objects[moreInfo] = "TextColor3"
+				Objects[moreInfo] = 'TextColor3'
 				moreInfo.TextSize = 14.000
 				moreInfo.TextXAlignment = Enum.TextXAlignment.Left
-				Objects[moreInfo] = "BackgroundColor3"
+				Objects[moreInfo] = 'BackgroundColor3'
 
 				UICorner.CornerRadius = UDim.new(0, 4)
 				UICorner.Parent = moreInfo
 
-				touch.Name = "touch"
+				touch.Name = 'touch'
 				touch.Parent = buttonElement
 				touch.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				touch.BackgroundTransparency = 1.000
 				touch.BorderColor3 = Color3.fromRGB(27, 42, 53)
 				touch.Position = UDim2.new(0.0199999996, 0, 0.180000007, 0)
 				touch.Size = UDim2.new(0, 21, 0, 21)
-				touch.Image = "rbxassetid://3926305904"
+				touch.Image = 'rbxassetid://3926305904'
 				touch.ImageColor3 = themeList.SchemeColor
-				Objects[touch] = "SchemeColor"
+				Objects[touch] = 'SchemeColor'
 				touch.ImageRectOffset = Vector2.new(84, 204)
 				touch.ImageRectSize = Vector2.new(36, 36)
 				touch.ImageTransparency = 0
 
-				btnInfo.Name = "btnInfo"
+				btnInfo.Name = 'btnInfo'
 				btnInfo.Parent = buttonElement
 				btnInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				btnInfo.BackgroundTransparency = 1.000
@@ -726,7 +726,7 @@ function kavo:CreateWindow(argstable)
 				btnInfo.Text = bname
 				btnInfo.RichText = true
 				btnInfo.TextColor3 = themeList.TextColor
-				Objects[btnInfo] = "TextColor3"
+				Objects[btnInfo] = 'TextColor3'
 				btnInfo.TextSize = 14.000
 				btnInfo.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -830,51 +830,51 @@ function kavo:CreateWindow(argstable)
 			end
 
 			function Elements.CreateTextBox(argstable)
-				local tname = argstable["Name"]
-				local tTip = argstable["HoverText"] or ""
-				local callback = argstable["Function"]
-				local textboxElement = Instance.new("TextButton")
-				local UICorner = Instance.new("UICorner")
-				local viewInfo = Instance.new("ImageButton")
-				local write = Instance.new("ImageLabel")
-				local TextBox = Instance.new("TextBox")
-				local UICorner_2 = Instance.new("UICorner")
-				local togName = Instance.new("TextLabel")
+				local tname = argstable['Name']
+				local tTip = argstable['HoverText'] or ''
+				local callback = argstable['Function']
+				local textboxElement = Instance.new('TextButton')
+				local UICorner = Instance.new('UICorner')
+				local viewInfo = Instance.new('ImageButton')
+				local write = Instance.new('ImageLabel')
+				local TextBox = Instance.new('TextBox')
+				local UICorner_2 = Instance.new('UICorner')
+				local togName = Instance.new('TextLabel')
 
-				textboxElement.Name = "textboxElement"
+				textboxElement.Name = 'textboxElement'
 				textboxElement.Parent = sectionInners
 				textboxElement.BackgroundColor3 = themeList.ElementColor
 				textboxElement.ClipsDescendants = true
 				textboxElement.Size = UDim2.new(0, 352, 0, 33)
 				textboxElement.AutoButtonColor = false
 				textboxElement.Font = Enum.Font.SourceSans
-				textboxElement.Text = ""
+				textboxElement.Text = ''
 				textboxElement.TextColor3 = Color3.fromRGB(0, 0, 0)
 				textboxElement.TextSize = 14.000
 
 				UICorner.CornerRadius = UDim.new(0, 4)
 				UICorner.Parent = textboxElement
 
-				viewInfo.Name = "viewInfo"
+				viewInfo.Name = 'viewInfo'
 				viewInfo.Parent = textboxElement
 				viewInfo.BackgroundTransparency = 1.000
 				viewInfo.LayoutOrder = 9
 				viewInfo.Position = UDim2.new(0.930000007, 0, 0.151999995, 0)
 				viewInfo.Size = UDim2.new(0, 23, 0, 23)
 				viewInfo.ZIndex = 2
-				viewInfo.Image = "rbxassetid://3926305904"
+				viewInfo.Image = 'rbxassetid://3926305904'
 				viewInfo.ImageColor3 = themeList.SchemeColor
 				viewInfo.ImageRectOffset = Vector2.new(764, 764)
 				viewInfo.ImageRectSize = Vector2.new(36, 36)
 
-				write.Name = "write"
+				write.Name = 'write'
 				write.Parent = textboxElement
 				write.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				write.BackgroundTransparency = 1.000
 				write.BorderColor3 = Color3.fromRGB(27, 42, 53)
 				write.Position = UDim2.new(0.0199999996, 0, 0.180000007, 0)
 				write.Size = UDim2.new(0, 21, 0, 21)
-				write.Image = "rbxassetid://3926305904"
+				write.Image = 'rbxassetid://3926305904'
 				write.ImageColor3 = themeList.SchemeColor
 				write.ImageRectOffset = Vector2.new(324, 604)
 				write.ImageRectSize = Vector2.new(36, 36)
@@ -889,15 +889,15 @@ function kavo:CreateWindow(argstable)
 				TextBox.ClearTextOnFocus = false
 				TextBox.Font = Enum.Font.Gotham
 				TextBox.PlaceholderColor3 = Color3.fromRGB(themeList.SchemeColor.r * 255 - 19, themeList.SchemeColor.g * 255 - 26, themeList.SchemeColor.b * 255 - 35)
-				TextBox.PlaceholderText = "Type here!"
-				TextBox.Text = ""
+				TextBox.PlaceholderText = 'Type here!'
+				TextBox.Text = ''
 				TextBox.TextColor3 = themeList.SchemeColor
 				TextBox.TextSize = 12.000
 
 				UICorner_2.CornerRadius = UDim.new(0, 4)
 				UICorner_2.Parent = TextBox
 
-				togName.Name = "togName"
+				togName.Name = 'togName'
 				togName.Parent = textboxElement
 				togName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				togName.BackgroundTransparency = 1.000
@@ -910,10 +910,10 @@ function kavo:CreateWindow(argstable)
 				togName.TextSize = 14.000
 				togName.TextXAlignment = Enum.TextXAlignment.Left
 
-				local moreInfo = Instance.new("TextLabel")
-				local UICorner = Instance.new("UICorner")
+				local moreInfo = Instance.new('TextLabel')
+				local UICorner = Instance.new('UICorner')
 
-				moreInfo.Name = "TipMore"
+				moreInfo.Name = 'TipMore'
 				moreInfo.Parent = infoContainer
 				moreInfo.BackgroundColor3 = Color3.fromRGB(themeList.SchemeColor.r * 255 - 14, themeList.SchemeColor.g * 255 - 17, themeList.SchemeColor.b * 255 - 13)
 				moreInfo.Position = UDim2.new(0, 0, 2, 0)
@@ -921,7 +921,7 @@ function kavo:CreateWindow(argstable)
 				moreInfo.ZIndex = 9
 				moreInfo.Font = Enum.Font.GothamSemibold
 				moreInfo.RichText = true
-				moreInfo.Text = "  "..tTip
+				moreInfo.Text = '  '..tTip
 				moreInfo.TextColor3 = Color3.fromRGB(255, 255, 255)
 				moreInfo.TextSize = 14.000
 				moreInfo.TextXAlignment = Enum.TextXAlignment.Left
@@ -990,7 +990,7 @@ function kavo:CreateWindow(argstable)
 						callback(TextBox.Text)
 						objectsapi[argstable.Name].Value = TextBox.Text
 						wait(0.18)
-						TextBox.Text = ""  
+						TextBox.Text = ''  
 					end
 				end)
 
@@ -1033,68 +1033,68 @@ function kavo:CreateWindow(argstable)
 
 			function Elements.CreateToggle(argstable)
 				local toggleapi = {
-					["Enabled"] = false
+					['Enabled'] = false
 				}
-				local tname = argstable["Name"] or 'Toggle'
-				local DefaultT = argstable["Default"] or false
-				local TogFunction = {['Name'] = argstable.Name or '', ["Enabled"] = false, ['Function'] = argstable['Function'] or function() end, Type = 'Toggle'}
+				local tname = argstable['Name'] or 'Toggle'
+				local DefaultT = argstable['Default'] or false
+				local TogFunction = {['Name'] = argstable.Name or '', ['Enabled'] = false, ['Function'] = argstable['Function'] or function() end, Type = 'Toggle'}
 				local toggled = DefaultT
-				TogFunction["Enabled"] = toggled
+				TogFunction['Enabled'] = toggled
 				table.insert(kavo.connections, {
 					name = tname,
 					connectiontype = 'toggle',
 					enabled = TogFunction['Enabled']
 				})
-				local nTip = argstable["HoverText"] or ""
+				local nTip = argstable['HoverText'] or ''
 				local callback = TogFunction['Function']
 				table.insert(SettingsT, tname)
 
-				local toggleElement = Instance.new("TextButton")
-				local UICorner = Instance.new("UICorner")
-				local toggleDisabled = Instance.new("ImageLabel")
-				local toggleEnabled = Instance.new("ImageLabel")
-				local togName = Instance.new("TextLabel")
-				local viewInfo = Instance.new("ImageButton")
-				local Sample = Instance.new("ImageLabel")
+				local toggleElement = Instance.new('TextButton')
+				local UICorner = Instance.new('UICorner')
+				local toggleDisabled = Instance.new('ImageLabel')
+				local toggleEnabled = Instance.new('ImageLabel')
+				local togName = Instance.new('TextLabel')
+				local viewInfo = Instance.new('ImageButton')
+				local Sample = Instance.new('ImageLabel')
 
-				toggleElement.Name = "toggleElement"
+				toggleElement.Name = 'toggleElement'
 				toggleElement.Parent = sectionInners
 				toggleElement.BackgroundColor3 = themeList.ElementColor
 				toggleElement.ClipsDescendants = true
 				toggleElement.Size = UDim2.new(0, 352, 0, 33)
 				toggleElement.AutoButtonColor = false
 				toggleElement.Font = Enum.Font.SourceSans
-				toggleElement.Text = ""
+				toggleElement.Text = ''
 				toggleElement.TextColor3 = Color3.fromRGB(0, 0, 0)
 				toggleElement.TextSize = 14.000
 
 				UICorner.CornerRadius = UDim.new(0, 4)
 				UICorner.Parent = toggleElement
 
-				toggleDisabled.Name = "toggleDisabled"
+				toggleDisabled.Name = 'toggleDisabled'
 				toggleDisabled.Parent = toggleElement
 				toggleDisabled.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				toggleDisabled.BackgroundTransparency = 1.000
 				toggleDisabled.Position = UDim2.new(0.0199999996, 0, 0.180000007, 0)
 				toggleDisabled.Size = UDim2.new(0, 21, 0, 21)
-				toggleDisabled.Image = "rbxassetid://3926309567"
+				toggleDisabled.Image = 'rbxassetid://3926309567'
 				toggleDisabled.ImageColor3 = themeList.SchemeColor
 				toggleDisabled.ImageRectOffset = Vector2.new(628, 420)
 				toggleDisabled.ImageRectSize = Vector2.new(48, 48)
 
-				toggleEnabled.Name = "toggleEnabled"
+				toggleEnabled.Name = 'toggleEnabled'
 				toggleEnabled.Parent = toggleElement
 				toggleEnabled.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				toggleEnabled.BackgroundTransparency = 1.000
 				toggleEnabled.Position = UDim2.new(0.0199999996, 0, 0.180000007, 0)
 				toggleEnabled.Size = UDim2.new(0, 21, 0, 21)
-				toggleEnabled.Image = "rbxassetid://3926309567"
+				toggleEnabled.Image = 'rbxassetid://3926309567'
 				toggleEnabled.ImageColor3 = themeList.SchemeColor
 				toggleEnabled.ImageRectOffset = Vector2.new(784, 420)
 				toggleEnabled.ImageRectSize = Vector2.new(48, 48)
 				toggleEnabled.ImageTransparency = 1.000
 
-				togName.Name = "togName"
+				togName.Name = 'togName'
 				togName.Parent = toggleElement
 				togName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				togName.BackgroundTransparency = 1.000
@@ -1107,30 +1107,30 @@ function kavo:CreateWindow(argstable)
 				togName.TextSize = 14.000
 				togName.TextXAlignment = Enum.TextXAlignment.Left
 
-				viewInfo.Name = "viewInfo"
+				viewInfo.Name = 'viewInfo'
 				viewInfo.Parent = toggleElement
 				viewInfo.BackgroundTransparency = 1.000
 				viewInfo.LayoutOrder = 9
 				viewInfo.Position = UDim2.new(0.930000007, 0, 0.151999995, 0)
 				viewInfo.Size = UDim2.new(0, 23, 0, 23)
 				viewInfo.ZIndex = 2
-				viewInfo.Image = "rbxassetid://3926305904"
+				viewInfo.Image = 'rbxassetid://3926305904'
 				viewInfo.ImageColor3 = themeList.SchemeColor
 				viewInfo.ImageRectOffset = Vector2.new(764, 764)
 				viewInfo.ImageRectSize = Vector2.new(36, 36)
 
-				Sample.Name = "Sample"
+				Sample.Name = 'Sample'
 				Sample.Parent = toggleElement
 				Sample.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				Sample.BackgroundTransparency = 1.000
-				Sample.Image = "http://www.roblox.com/asset/?id=4560909609"
+				Sample.Image = 'http://www.roblox.com/asset/?id=4560909609'
 				Sample.ImageColor3 = themeList.SchemeColor
 				Sample.ImageTransparency = 0.600
 
-				local moreInfo = Instance.new("TextLabel")
-				local UICorner = Instance.new("UICorner")
+				local moreInfo = Instance.new('TextLabel')
+				local UICorner = Instance.new('UICorner')
 
-				moreInfo.Name = "TipMore"
+				moreInfo.Name = 'TipMore'
 				moreInfo.Parent = infoContainer
 				moreInfo.BackgroundColor3 = Color3.fromRGB(themeList.SchemeColor.r * 255 - 14, themeList.SchemeColor.g * 255 - 17, themeList.SchemeColor.b * 255 - 13)
 				moreInfo.Position = UDim2.new(0, 0, 2, 0)
@@ -1138,7 +1138,7 @@ function kavo:CreateWindow(argstable)
 				moreInfo.ZIndex = 9
 				moreInfo.Font = Enum.Font.GothamSemibold
 				moreInfo.RichText = true
-				moreInfo.Text = "  "..nTip
+				moreInfo.Text = '  '..nTip
 				moreInfo.TextColor3 = themeList.TextColor
 				moreInfo.TextSize = 14.000
 				moreInfo.TextXAlignment = Enum.TextXAlignment.Left
@@ -1165,7 +1165,7 @@ function kavo:CreateWindow(argstable)
 
 				btn.MouseButton1Click:Connect(function()
 					if not focusing then
-						if TogFunction["Enabled"] == false then
+						if TogFunction['Enabled'] == false then
 							game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
 								ImageTransparency = 0
 							}):Play()
@@ -1206,9 +1206,9 @@ function kavo:CreateWindow(argstable)
 							end
 							c:Destroy()
 						end
-						TogFunction["Enabled"] = not TogFunction["Enabled"]
+						TogFunction['Enabled'] = not TogFunction['Enabled']
 						objectsapi[argstable.Name].Enabled = TogFunction.Enabled;
-						pcall(callback, TogFunction["Enabled"])
+						pcall(callback, TogFunction['Enabled'])
 					else
 						for i,v in next, infoContainer:GetChildren() do
 							Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
@@ -1270,15 +1270,15 @@ function kavo:CreateWindow(argstable)
 					end
 				end)
 				function TogFunction.ToggleButton(isTogOn)
-					isTogOn = isTogOn or TogFunction["Enabled"]
-					TogFunction["Enabled"] = isTogOn
-					pcall(callback, TogFunction["Enabled"])
+					isTogOn = isTogOn or TogFunction['Enabled']
+					TogFunction['Enabled'] = isTogOn
+					pcall(callback, TogFunction['Enabled'])
 					if isTogOn then
 						game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
 							ImageTransparency = 0
 						}):Play()
 					else
-						TogFunction["Enabled"] = false
+						TogFunction['Enabled'] = false
 						game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
 							ImageTransparency = 1
 						}):Play()
@@ -1301,41 +1301,41 @@ function kavo:CreateWindow(argstable)
 			end
 
 			function Elements.CreateSlider(argstable)
-				local slidInf = argstable["Name"]
-				local slidTip = argstable["HoverText"] or ""
-				local minvalue = argstable["Min"]
-				local maxvalue = argstable["Max"]
-				local defaultvalue = argstable["Default"] or 0
-				local callback = argstable["Function"]
-				local SliderFunction = {["Value"] = defaultvalue, Type = 'Slider'}
+				local slidInf = argstable['Name']
+				local slidTip = argstable['HoverText'] or ''
+				local minvalue = argstable['Min']
+				local maxvalue = argstable['Max']
+				local defaultvalue = argstable['Default'] or 0
+				local callback = argstable['Function']
+				local SliderFunction = {['Value'] = defaultvalue, Type = 'Slider'}
 
-				local sliderElement = Instance.new("TextButton")
-				local UICorner = Instance.new("UICorner")
-				local togName = Instance.new("TextLabel")
-				local viewInfo = Instance.new("ImageButton")
-				local sliderBtn = Instance.new("TextButton")
-				local UICorner_2 = Instance.new("UICorner")
-				local UIListLayout = Instance.new("UIListLayout")
-				local sliderDrag = Instance.new("Frame")
-				local UICorner_3 = Instance.new("UICorner")
-				local write = Instance.new("ImageLabel")
-				local val = Instance.new("TextLabel")
+				local sliderElement = Instance.new('TextButton')
+				local UICorner = Instance.new('UICorner')
+				local togName = Instance.new('TextLabel')
+				local viewInfo = Instance.new('ImageButton')
+				local sliderBtn = Instance.new('TextButton')
+				local UICorner_2 = Instance.new('UICorner')
+				local UIListLayout = Instance.new('UIListLayout')
+				local sliderDrag = Instance.new('Frame')
+				local UICorner_3 = Instance.new('UICorner')
+				local write = Instance.new('ImageLabel')
+				local val = Instance.new('TextLabel')
 
-				sliderElement.Name = "sliderElement"
+				sliderElement.Name = 'sliderElement'
 				sliderElement.Parent = sectionInners
 				sliderElement.BackgroundColor3 = themeList.ElementColor
 				sliderElement.ClipsDescendants = true
 				sliderElement.Size = UDim2.new(0, 352, 0, 33)
 				sliderElement.AutoButtonColor = false
 				sliderElement.Font = Enum.Font.SourceSans
-				sliderElement.Text = ""
+				sliderElement.Text = ''
 				sliderElement.TextColor3 = Color3.fromRGB(0, 0, 0)
 				sliderElement.TextSize = 14.000
 
 				UICorner.CornerRadius = UDim.new(0, 4)
 				UICorner.Parent = sliderElement
 
-				togName.Name = "togName"
+				togName.Name = 'togName'
 				togName.Parent = sliderElement
 				togName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				togName.BackgroundTransparency = 1.000
@@ -1348,19 +1348,19 @@ function kavo:CreateWindow(argstable)
 				togName.TextSize = 14.000
 				togName.TextXAlignment = Enum.TextXAlignment.Left
 
-				viewInfo.Name = "viewInfo"
+				viewInfo.Name = 'viewInfo'
 				viewInfo.Parent = sliderElement
 				viewInfo.BackgroundTransparency = 1.000
 				viewInfo.LayoutOrder = 9
 				viewInfo.Position = UDim2.new(0.930000007, 0, 0.151999995, 0)
 				viewInfo.Size = UDim2.new(0, 23, 0, 23)
 				viewInfo.ZIndex = 2
-				viewInfo.Image = "rbxassetid://3926305904"
+				viewInfo.Image = 'rbxassetid://3926305904'
 				viewInfo.ImageColor3 = themeList.SchemeColor
 				viewInfo.ImageRectOffset = Vector2.new(764, 764)
 				viewInfo.ImageRectSize = Vector2.new(36, 36)
 
-				sliderBtn.Name = "sliderBtn"
+				sliderBtn.Name = 'sliderBtn'
 				sliderBtn.Parent = sliderElement
 				sliderBtn.BackgroundColor3 = Color3.fromRGB(themeList.ElementColor.r * 255 + 5, themeList.ElementColor.g * 255 + 5, themeList.ElementColor.b * 255  + 5)
 				sliderBtn.BorderSizePixel = 0
@@ -1368,7 +1368,7 @@ function kavo:CreateWindow(argstable)
 				sliderBtn.Size = UDim2.new(0, 149, 0, 6)
 				sliderBtn.AutoButtonColor = false
 				sliderBtn.Font = Enum.Font.SourceSans
-				sliderBtn.Text = ""
+				sliderBtn.Text = ''
 				sliderBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
 				sliderBtn.TextSize = 14.000
 
@@ -1378,7 +1378,7 @@ function kavo:CreateWindow(argstable)
 				UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 				UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
 
-				sliderDrag.Name = "sliderDrag"
+				sliderDrag.Name = 'sliderDrag'
 				sliderDrag.Parent = sliderBtn
 				sliderDrag.BackgroundColor3 = themeList.SchemeColor
 				sliderDrag.BorderColor3 = Color3.fromRGB(74, 99, 135)
@@ -1387,19 +1387,19 @@ function kavo:CreateWindow(argstable)
 
 				UICorner_3.Parent = sliderDrag
 
-				write.Name = "write"
+				write.Name = 'write'
 				write.Parent = sliderElement
 				write.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				write.BackgroundTransparency = 1.000
 				write.BorderColor3 = Color3.fromRGB(27, 42, 53)
 				write.Position = UDim2.new(0.0199999996, 0, 0.180000007, 0)
 				write.Size = UDim2.new(0, 21, 0, 21)
-				write.Image = "rbxassetid://3926307971"
+				write.Image = 'rbxassetid://3926307971'
 				write.ImageColor3 = themeList.SchemeColor
 				write.ImageRectOffset = Vector2.new(404, 164)
 				write.ImageRectSize = Vector2.new(36, 36)
 
-				val.Name = "val"
+				val.Name = 'val'
 				val.Parent = sliderElement
 				val.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				val.BackgroundTransparency = 1.000
@@ -1412,17 +1412,17 @@ function kavo:CreateWindow(argstable)
 				val.TextTransparency = 1.000
 				val.TextXAlignment = Enum.TextXAlignment.Right
 
-				local moreInfo = Instance.new("TextLabel")
-				local UICorner = Instance.new("UICorner")
+				local moreInfo = Instance.new('TextLabel')
+				local UICorner = Instance.new('UICorner')
 
-				moreInfo.Name = "TipMore"
+				moreInfo.Name = 'TipMore'
 				moreInfo.Parent = infoContainer
 				moreInfo.BackgroundColor3 = Color3.fromRGB(themeList.SchemeColor.r * 255 - 14, themeList.SchemeColor.g * 255 - 17, themeList.SchemeColor.b * 255 - 13)
 				moreInfo.Position = UDim2.new(0, 0, 2, 0)
 				moreInfo.Size = UDim2.new(0, 353, 0, 33)
 				moreInfo.ZIndex = 9
 				moreInfo.Font = Enum.Font.GothamSemibold
-				moreInfo.Text = "  "..slidTip
+				moreInfo.Text = '  '..slidTip
 				moreInfo.TextColor3 = themeList.TextColor
 				moreInfo.TextSize = 14.000
 				moreInfo.RichText = true
@@ -1441,10 +1441,10 @@ function kavo:CreateWindow(argstable)
 
 				updateSectionFrame()
 				UpdateSize()
-				local mouse = game:GetService("Players").LocalPlayer:GetMouse();
+				local mouse = game:GetService('Players').LocalPlayer:GetMouse();
 
 				local ms = game.Players.LocalPlayer:GetMouse()
-				local uis = game:GetService("UserInputService")
+				local uis = game:GetService('UserInputService')
 				local btn = sliderElement
 				local infBtn = viewInfo
 				local hovering = false
@@ -1491,32 +1491,32 @@ function kavo:CreateWindow(argstable)
 						}):Play()
 						Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 149) * sliderDrag.AbsoluteSize.X) + tonumber(minvalue)) or 0
 						pcall(function()
-							SliderFunction["Value"] = Value
-							objectsapi[argstable.Name].Value = SliderFunction["Value"]
-							callback(SliderFunction["Value"])
+							SliderFunction['Value'] = Value
+							objectsapi[argstable.Name].Value = SliderFunction['Value']
+							callback(SliderFunction['Value'])
 						end)
-						sliderDrag:TweenSize(UDim2.new(0, math.clamp(mouse.X - sliderDrag.AbsolutePosition.X, 0, 149), 0, 6), "InOut", "Linear", 0.05, true)
+						sliderDrag:TweenSize(UDim2.new(0, math.clamp(mouse.X - sliderDrag.AbsolutePosition.X, 0, 149), 0, 6), 'InOut', 'Linear', 0.05, true)
 						moveconnection = mouse.Move:Connect(function()
 							val.Text = Value
 							Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 149) * sliderDrag.AbsoluteSize.X) + tonumber(minvalue))
 							pcall(function()
-								SliderFunction["Value"] = Value
-								callback(SliderFunction["Value"])
+								SliderFunction['Value'] = Value
+								callback(SliderFunction['Value'])
 							end)
-							sliderDrag:TweenSize(UDim2.new(0, math.clamp(mouse.X - sliderDrag.AbsolutePosition.X, 0, 149), 0, 6), "InOut", "Linear", 0.05, true)
+							sliderDrag:TweenSize(UDim2.new(0, math.clamp(mouse.X - sliderDrag.AbsolutePosition.X, 0, 149), 0, 6), 'InOut', 'Linear', 0.05, true)
 						end)
 						releaseconnection = uis.InputEnded:Connect(function(Mouse)
 							if Mouse.UserInputType == Enum.UserInputType.MouseButton1 or Mouse.UserInputType == Enum.UserInputType.Touch then
 								Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 149) * sliderDrag.AbsoluteSize.X) + tonumber(minvalue))
 								pcall(function()
-									SliderFunction["Value"] = Value
-									callback(SliderFunction["Value"])
+									SliderFunction['Value'] = Value
+									callback(SliderFunction['Value'])
 								end)
 								val.Text = Value
 								game.TweenService:Create(val, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
 									TextTransparency = 1
 								}):Play()
-								sliderDrag:TweenSize(UDim2.new(0, math.clamp(mouse.X - sliderDrag.AbsolutePosition.X, 0, 149), 0, 6), "InOut", "Linear", 0.05, true)
+								sliderDrag:TweenSize(UDim2.new(0, math.clamp(mouse.X - sliderDrag.AbsolutePosition.X, 0, 149), 0, 6), 'InOut', 'Linear', 0.05, true)
 								if moveconnection then
 									moveconnection:Disconnect()
 									moveconnection = nil
@@ -1558,13 +1558,13 @@ function kavo:CreateWindow(argstable)
 				function SliderFunction.SetSlider(val2)
 					val2 = val2 or Value
 					pcall(function()
-						SliderFunction["Value"] = val2
+						SliderFunction['Value'] = val2
 						objectsapi[argstable.Name].Value = val2
-						callback(SliderFunction["Value"])
+						callback(SliderFunction['Value'])
 					end)
 					val.Text = val2
 					game.TweenService:Create(val, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {TextTransparency = 1}):Play()
-					sliderDrag:TweenSize(UDim2.new(0, math.clamp(mouse.X - sliderDrag.AbsolutePosition.X or (val2 / maxvalue), 0, 149), 0, 6), "InOut", "Linear", 0.05, true)
+					sliderDrag:TweenSize(UDim2.new(0, math.clamp(mouse.X - sliderDrag.AbsolutePosition.X or (val2 / maxvalue), 0, 149), 0, 6), 'InOut', 'Linear', 0.05, true)
 					if moveconnection then
 						moveconnection:Disconnect()
 						moveconnection = nil
@@ -1591,35 +1591,35 @@ function kavo:CreateWindow(argstable)
 			end
 
 			function Elements.CreateDropdown(argstable)
-				local dropname = argstable["Name"]
-				local dropinf = argstable["HoverText"] or ""
-				local list = argstable["List"]
-				local callback = argstable["Function"]
+				local dropname = argstable['Name']
+				local dropinf = argstable['HoverText'] or ''
+				local list = argstable['List']
+				local callback = argstable['Function']
 				local DropFunction = {Type = 'Dropdown', Value = ''}
 
 				local opened = false
 				local DropYSize = 33
 
 
-				local dropFrame = Instance.new("Frame")
-				local dropOpen = Instance.new("TextButton")
-				local listImg = Instance.new("ImageLabel")
-				local itemTextbox = Instance.new("TextLabel")
-				local viewInfo = Instance.new("ImageButton")
-				local UICorner = Instance.new("UICorner")
-				local UIListLayout = Instance.new("UIListLayout")
-				local Sample = Instance.new("ImageLabel")
+				local dropFrame = Instance.new('Frame')
+				local dropOpen = Instance.new('TextButton')
+				local listImg = Instance.new('ImageLabel')
+				local itemTextbox = Instance.new('TextLabel')
+				local viewInfo = Instance.new('ImageButton')
+				local UICorner = Instance.new('UICorner')
+				local UIListLayout = Instance.new('UIListLayout')
+				local Sample = Instance.new('ImageLabel')
 
 				local ms = game.Players.LocalPlayer:GetMouse()
-				Sample.Name = "Sample"
+				Sample.Name = 'Sample'
 				Sample.Parent = dropOpen
 				Sample.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				Sample.BackgroundTransparency = 1.000
-				Sample.Image = "http://www.roblox.com/asset/?id=4560909609"
+				Sample.Image = 'http://www.roblox.com/asset/?id=4560909609'
 				Sample.ImageColor3 = themeList.SchemeColor
 				Sample.ImageTransparency = 0.600
 
-				dropFrame.Name = "dropFrame"
+				dropFrame.Name = 'dropFrame'
 				dropFrame.Parent = sectionInners
 				dropFrame.BackgroundColor3 = themeList.Background
 				dropFrame.BorderSizePixel = 0
@@ -1628,13 +1628,13 @@ function kavo:CreateWindow(argstable)
 				dropFrame.ClipsDescendants = true
 				local sample = Sample
 				local btn = dropOpen
-				dropOpen.Name = "dropOpen"
+				dropOpen.Name = 'dropOpen'
 				dropOpen.Parent = dropFrame
 				dropOpen.BackgroundColor3 = themeList.ElementColor
 				dropOpen.Size = UDim2.new(0, 352, 0, 33)
 				dropOpen.AutoButtonColor = false
 				dropOpen.Font = Enum.Font.SourceSans
-				dropOpen.Text = ""
+				dropOpen.Text = ''
 				dropOpen.TextColor3 = Color3.fromRGB(0, 0, 0)
 				dropOpen.TextSize = 14.000
 				dropOpen.ClipsDescendants = true
@@ -1642,7 +1642,7 @@ function kavo:CreateWindow(argstable)
 					if not focusing then
 						if opened then
 							opened = false
-							dropFrame:TweenSize(UDim2.new(0, 352, 0, 33), "InOut", "Linear", 0.08)
+							dropFrame:TweenSize(UDim2.new(0, 352, 0, 33), 'InOut', 'Linear', 0.08)
 							wait(0.1)
 							updateSectionFrame()
 							UpdateSize()
@@ -1664,7 +1664,7 @@ function kavo:CreateWindow(argstable)
 							c:Destroy()
 						else
 							opened = true
-							dropFrame:TweenSize(UDim2.new(0, 352, 0, UIListLayout.AbsoluteContentSize.Y), "InOut", "Linear", 0.08, true)
+							dropFrame:TweenSize(UDim2.new(0, 352, 0, UIListLayout.AbsoluteContentSize.Y), 'InOut', 'Linear', 0.08, true)
 							wait(0.1)
 							updateSectionFrame()
 							UpdateSize()
@@ -1694,19 +1694,19 @@ function kavo:CreateWindow(argstable)
 					end
 				end)
 
-				listImg.Name = "listImg"
+				listImg.Name = 'listImg'
 				listImg.Parent = dropOpen
 				listImg.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				listImg.BackgroundTransparency = 1.000
 				listImg.BorderColor3 = Color3.fromRGB(27, 42, 53)
 				listImg.Position = UDim2.new(0.0199999996, 0, 0.180000007, 0)
 				listImg.Size = UDim2.new(0, 21, 0, 21)
-				listImg.Image = "rbxassetid://3926305904"
+				listImg.Image = 'rbxassetid://3926305904'
 				listImg.ImageColor3 = themeList.SchemeColor
 				listImg.ImageRectOffset = Vector2.new(644, 364)
 				listImg.ImageRectSize = Vector2.new(36, 36)
 
-				itemTextbox.Name = "itemTextbox"
+				itemTextbox.Name = 'itemTextbox'
 				itemTextbox.Parent = dropOpen
 				itemTextbox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				itemTextbox.BackgroundTransparency = 1.000
@@ -1719,14 +1719,14 @@ function kavo:CreateWindow(argstable)
 				itemTextbox.TextSize = 14.000
 				itemTextbox.TextXAlignment = Enum.TextXAlignment.Left
 
-				viewInfo.Name = "viewInfo"
+				viewInfo.Name = 'viewInfo'
 				viewInfo.Parent = dropOpen
 				viewInfo.BackgroundTransparency = 1.000
 				viewInfo.LayoutOrder = 9
 				viewInfo.Position = UDim2.new(0.930000007, 0, 0.151999995, 0)
 				viewInfo.Size = UDim2.new(0, 23, 0, 23)
 				viewInfo.ZIndex = 2
-				viewInfo.Image = "rbxassetid://3926305904"
+				viewInfo.Image = 'rbxassetid://3926305904'
 				viewInfo.ImageColor3 = themeList.SchemeColor
 				viewInfo.ImageRectOffset = Vector2.new(764, 764)
 				viewInfo.ImageRectSize = Vector2.new(36, 36)
@@ -1734,13 +1734,13 @@ function kavo:CreateWindow(argstable)
 				UICorner.CornerRadius = UDim.new(0, 4)
 				UICorner.Parent = dropOpen
 
-				local Sample = Instance.new("ImageLabel")
+				local Sample = Instance.new('ImageLabel')
 
-				Sample.Name = "Sample"
+				Sample.Name = 'Sample'
 				Sample.Parent = dropOpen
 				Sample.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				Sample.BackgroundTransparency = 1.000
-				Sample.Image = "http://www.roblox.com/asset/?id=4560909609"
+				Sample.Image = 'http://www.roblox.com/asset/?id=4560909609'
 				Sample.ImageColor3 = themeList.SchemeColor
 				Sample.ImageTransparency = 0.600
 
@@ -1752,13 +1752,13 @@ function kavo:CreateWindow(argstable)
 				UpdateSize()
 
 				local ms = game.Players.LocalPlayer:GetMouse()
-				local uis = game:GetService("UserInputService")
+				local uis = game:GetService('UserInputService')
 				local infBtn = viewInfo
 
-				local moreInfo = Instance.new("TextLabel")
-				local UICorner = Instance.new("UICorner")
+				local moreInfo = Instance.new('TextLabel')
+				local UICorner = Instance.new('UICorner')
 
-				moreInfo.Name = "TipMore"
+				moreInfo.Name = 'TipMore'
 				moreInfo.Parent = infoContainer
 				moreInfo.BackgroundColor3 = Color3.fromRGB(themeList.SchemeColor.r * 255 - 14, themeList.SchemeColor.g * 255 - 17, themeList.SchemeColor.b * 255 - 13)
 				moreInfo.Position = UDim2.new(0, 0, 2, 0)
@@ -1766,7 +1766,7 @@ function kavo:CreateWindow(argstable)
 				moreInfo.ZIndex = 9
 				moreInfo.RichText = true
 				moreInfo.Font = Enum.Font.GothamSemibold
-				moreInfo.Text = "  "..dropinf
+				moreInfo.Text = '  '..dropinf
 				moreInfo.TextColor3 = themeList.TextColor
 				moreInfo.TextSize = 14.000
 				moreInfo.TextXAlignment = Enum.TextXAlignment.Left
@@ -1834,29 +1834,29 @@ function kavo:CreateWindow(argstable)
 				end)     
 
 				for i,v in next, list do
-					local optionSelect = Instance.new("TextButton")
-					local UICorner_2 = Instance.new("UICorner")
-					local Sample1 = Instance.new("ImageLabel")
+					local optionSelect = Instance.new('TextButton')
+					local UICorner_2 = Instance.new('UICorner')
+					local Sample1 = Instance.new('ImageLabel')
 
 					local ms = game.Players.LocalPlayer:GetMouse()
-					Sample1.Name = "Sample1"
+					Sample1.Name = 'Sample1'
 					Sample1.Parent = optionSelect
 					Sample1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 					Sample1.BackgroundTransparency = 1.000
-					Sample1.Image = "http://www.roblox.com/asset/?id=4560909609"
+					Sample1.Image = 'http://www.roblox.com/asset/?id=4560909609'
 					Sample1.ImageColor3 = themeList.SchemeColor
 					Sample1.ImageTransparency = 0.600
 
 					local sample1 = Sample1
 					DropYSize = DropYSize + 33
-					optionSelect.Name = "optionSelect"
+					optionSelect.Name = 'optionSelect'
 					optionSelect.Parent = dropFrame
 					optionSelect.BackgroundColor3 = themeList.ElementColor
 					optionSelect.Position = UDim2.new(0, 0, 0.235294119, 0)
 					optionSelect.Size = UDim2.new(0, 352, 0, 33)
 					optionSelect.AutoButtonColor = false
 					optionSelect.Font = Enum.Font.GothamSemibold
-					optionSelect.Text = "  "..v
+					optionSelect.Text = '  '..v
 					optionSelect.TextColor3 = Color3.fromRGB(themeList.TextColor.r * 255 - 6, themeList.TextColor.g * 255 - 6, themeList.TextColor.b * 255 - 6)
 					optionSelect.TextSize = 14.000
 					optionSelect.TextXAlignment = Enum.TextXAlignment.Left
@@ -1930,33 +1930,33 @@ function kavo:CreateWindow(argstable)
 				function DropFunction.Refresh(newList)
 					newList = newList or {}
 					for i,v in next, dropFrame:GetChildren() do
-						if v.Name == "optionSelect" then
+						if v.Name == 'optionSelect' then
 							v:Destroy()
 						end
 					end
 					for i,v in next, newList do
-						local optionSelect = Instance.new("TextButton")
-						local UICorner_2 = Instance.new("UICorner")
-						local Sample11 = Instance.new("ImageLabel")
+						local optionSelect = Instance.new('TextButton')
+						local UICorner_2 = Instance.new('UICorner')
+						local Sample11 = Instance.new('ImageLabel')
 						local ms = game.Players.LocalPlayer:GetMouse()
-						Sample11.Name = "Sample11"
+						Sample11.Name = 'Sample11'
 						Sample11.Parent = optionSelect
 						Sample11.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 						Sample11.BackgroundTransparency = 1.000
-						Sample11.Image = "http://www.roblox.com/asset/?id=4560909609"
+						Sample11.Image = 'http://www.roblox.com/asset/?id=4560909609'
 						Sample11.ImageColor3 = themeList.SchemeColor
 						Sample11.ImageTransparency = 0.600
 
 						local sample11 = Sample11
 						DropYSize = DropYSize + 33
-						optionSelect.Name = "optionSelect"
+						optionSelect.Name = 'optionSelect'
 						optionSelect.Parent = dropFrame
 						optionSelect.BackgroundColor3 = themeList.ElementColor
 						optionSelect.Position = UDim2.new(0, 0, 0.235294119, 0)
 						optionSelect.Size = UDim2.new(0, 352, 0, 33)
 						optionSelect.AutoButtonColor = false
 						optionSelect.Font = Enum.Font.GothamSemibold
-						optionSelect.Text = "  "..v
+						optionSelect.Text = '  '..v
 						optionSelect.TextColor3 = Color3.fromRGB(themeList.TextColor.r * 255 - 6, themeList.TextColor.g * 255 - 6, themeList.TextColor.b * 255 - 6)
 						optionSelect.TextSize = 14.000
 						optionSelect.TextXAlignment = Enum.TextXAlignment.Left
@@ -2027,12 +2027,12 @@ function kavo:CreateWindow(argstable)
 						end)()
 					end
 					if opened then 
-						dropFrame:TweenSize(UDim2.new(0, 352, 0, UIListLayout.AbsoluteContentSize.Y), "InOut", "Linear", 0.08, true)
+						dropFrame:TweenSize(UDim2.new(0, 352, 0, UIListLayout.AbsoluteContentSize.Y), 'InOut', 'Linear', 0.08, true)
 						wait(0.1)
 						updateSectionFrame()
 						UpdateSize()
 					else
-						dropFrame:TweenSize(UDim2.new(0, 352, 0, 33), "InOut", "Linear", 0.08)
+						dropFrame:TweenSize(UDim2.new(0, 352, 0, 33), 'InOut', 'Linear', 0.08)
 						wait(0.1)
 						updateSectionFrame()
 						UpdateSize()
@@ -2048,43 +2048,43 @@ function kavo:CreateWindow(argstable)
 				return DropFunction
 			end
 			function Elements.CreateKeybind(argstable)
-				local keytext = argstable["Name"]
-				local keyinf = argstable["HoverText"] or ""
-				local first = argstable["Keybind"]
-				local callback = argstable["Function"]
+				local keytext = argstable['Name']
+				local keyinf = argstable['HoverText'] or ''
+				local first = argstable['Keybind']
+				local callback = argstable['Function']
 				local oldKey = first.Name
-				local keybindElement = Instance.new("TextButton")
-				local UICorner = Instance.new("UICorner")
-				local togName = Instance.new("TextLabel")
-				local viewInfo = Instance.new("ImageButton")
-				local touch = Instance.new("ImageLabel")
-				local Sample = Instance.new("ImageLabel")
-				local togName_2 = Instance.new("TextLabel")
+				local keybindElement = Instance.new('TextButton')
+				local UICorner = Instance.new('UICorner')
+				local togName = Instance.new('TextLabel')
+				local viewInfo = Instance.new('ImageButton')
+				local touch = Instance.new('ImageLabel')
+				local Sample = Instance.new('ImageLabel')
+				local togName_2 = Instance.new('TextLabel')
 
 				local ms = game.Players.LocalPlayer:GetMouse()
-				local uis = game:GetService("UserInputService")
+				local uis = game:GetService('UserInputService')
 				local infBtn = viewInfo
 
-				local moreInfo = Instance.new("TextLabel")
-				local UICorner1 = Instance.new("UICorner")
+				local moreInfo = Instance.new('TextLabel')
+				local UICorner1 = Instance.new('UICorner')
 
 				local sample = Sample
 
-				keybindElement.Name = "keybindElement"
+				keybindElement.Name = 'keybindElement'
 				keybindElement.Parent = sectionInners
 				keybindElement.BackgroundColor3 = themeList.ElementColor
 				keybindElement.ClipsDescendants = true
 				keybindElement.Size = UDim2.new(0, 352, 0, 33)
 				keybindElement.AutoButtonColor = false
 				keybindElement.Font = Enum.Font.SourceSans
-				keybindElement.Text = ""
+				keybindElement.Text = ''
 				keybindElement.TextColor3 = Color3.fromRGB(0, 0, 0)
 				keybindElement.TextSize = 14.000
 				keybindElement.MouseButton1Click:connect(function(e) 
 					if not focusing then
-						togName_2.Text = ". . ."
+						togName_2.Text = '. . .'
 						local a, b = game:GetService('UserInputService').InputBegan:wait();
-						if a.KeyCode.Name ~= "Unknown" then
+						if a.KeyCode.Name ~= 'Unknown' then
 							togName_2.Text = a.KeyCode.Name
 							oldKey = a.KeyCode.Name;
 						end
@@ -2112,7 +2112,7 @@ function kavo:CreateWindow(argstable)
 					end
 				end)
 
-				game:GetService("UserInputService").InputBegan:connect(function(current, ok) 
+				game:GetService('UserInputService').InputBegan:connect(function(current, ok) 
 					if not ok then 
 						if current.KeyCode.Name == oldKey then 
 							callback()
@@ -2120,7 +2120,7 @@ function kavo:CreateWindow(argstable)
 					end
 				end)
 
-				moreInfo.Name = "TipMore"
+				moreInfo.Name = 'TipMore'
 				moreInfo.Parent = infoContainer
 				moreInfo.BackgroundColor3 = Color3.fromRGB(themeList.SchemeColor.r * 255 - 14, themeList.SchemeColor.g * 255 - 17, themeList.SchemeColor.b * 255 - 13)
 				moreInfo.Position = UDim2.new(0, 0, 2, 0)
@@ -2128,21 +2128,21 @@ function kavo:CreateWindow(argstable)
 				moreInfo.ZIndex = 9
 				moreInfo.RichText = true
 				moreInfo.Font = Enum.Font.GothamSemibold
-				moreInfo.Text = "  "..keyinf
+				moreInfo.Text = '  '..keyinf
 				moreInfo.TextColor3 = themeList.TextColor
 				moreInfo.TextSize = 14.000
 				moreInfo.TextXAlignment = Enum.TextXAlignment.Left
 
-				Sample.Name = "Sample"
+				Sample.Name = 'Sample'
 				Sample.Parent = keybindElement
 				Sample.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				Sample.BackgroundTransparency = 1.000
-				Sample.Image = "http://www.roblox.com/asset/?id=4560909609"
+				Sample.Image = 'http://www.roblox.com/asset/?id=4560909609'
 				Sample.ImageColor3 = themeList.SchemeColor
 				Sample.ImageTransparency = 0.600
 
 
-				togName.Name = "togName"
+				togName.Name = 'togName'
 				togName.Parent = keybindElement
 				togName.BackgroundColor3 = themeList.TextColor
 				togName.BackgroundTransparency = 1.000
@@ -2155,14 +2155,14 @@ function kavo:CreateWindow(argstable)
 				togName.TextSize = 14.000
 				togName.TextXAlignment = Enum.TextXAlignment.Left
 
-				viewInfo.Name = "viewInfo"
+				viewInfo.Name = 'viewInfo'
 				viewInfo.Parent = keybindElement
 				viewInfo.BackgroundTransparency = 1.000
 				viewInfo.LayoutOrder = 9
 				viewInfo.Position = UDim2.new(0.930000007, 0, 0.151999995, 0)
 				viewInfo.Size = UDim2.new(0, 23, 0, 23)
 				viewInfo.ZIndex = 2
-				viewInfo.Image = "rbxassetid://3926305904"
+				viewInfo.Image = 'rbxassetid://3926305904'
 				viewInfo.ImageColor3 = themeList.SchemeColor
 				viewInfo.ImageRectOffset = Vector2.new(764, 764)
 				viewInfo.ImageRectSize = Vector2.new(36, 36)
@@ -2219,19 +2219,19 @@ function kavo:CreateWindow(argstable)
 				UICorner.CornerRadius = UDim.new(0, 4)
 				UICorner.Parent = keybindElement
 
-				touch.Name = "touch"
+				touch.Name = 'touch'
 				touch.Parent = keybindElement
 				touch.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				touch.BackgroundTransparency = 1.000
 				touch.BorderColor3 = Color3.fromRGB(27, 42, 53)
 				touch.Position = UDim2.new(0.0199999996, 0, 0.180000007, 0)
 				touch.Size = UDim2.new(0, 21, 0, 21)
-				touch.Image = "rbxassetid://3926305904"
+				touch.Image = 'rbxassetid://3926305904'
 				touch.ImageColor3 = themeList.SchemeColor
 				touch.ImageRectOffset = Vector2.new(364, 284)
 				touch.ImageRectSize = Vector2.new(36, 36)
 
-				togName_2.Name = "togName"
+				togName_2.Name = 'togName'
 				togName_2.Parent = keybindElement
 				togName_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				togName_2.BackgroundTransparency = 1.000
@@ -2262,51 +2262,51 @@ function kavo:CreateWindow(argstable)
 			end
 
 			function Elements.CreateColorPicker(argstable)
-				local colText = argstable["Name"]
-				local colInf = argstable["HoverText"] or ""
-				local defcolor = argstable["Default"] or Color3.fromRGB(1,1,1)
-				local callback = argstable["Function"]
+				local colText = argstable['Name']
+				local colInf = argstable['HoverText'] or ''
+				local defcolor = argstable['Default'] or Color3.fromRGB(1,1,1)
+				local callback = argstable['Function']
 				local colorFunction = {}
 				local h, s, v = Color3.toHSV(defcolor)
 				local ms = game.Players.LocalPlayer:GetMouse()
 				local colorOpened = false
-				local colorElement = Instance.new("TextButton")
-				local UICorner = Instance.new("UICorner")
-				local colorHeader = Instance.new("Frame")
-				local UICorner_2 = Instance.new("UICorner")
-				local touch = Instance.new("ImageLabel")
-				local togName = Instance.new("TextLabel")
-				local viewInfo = Instance.new("ImageButton")
-				local colorCurrent = Instance.new("Frame")
-				local UICorner_3 = Instance.new("UICorner")
-				local UIListLayout = Instance.new("UIListLayout")
-				local colorInners = Instance.new("Frame")
-				local UICorner_4 = Instance.new("UICorner")
-				local rgb = Instance.new("ImageButton")
-				local UICorner_5 = Instance.new("UICorner")
-				local rbgcircle = Instance.new("ImageLabel")
-				local darkness = Instance.new("ImageButton")
-				local UICorner_6 = Instance.new("UICorner")
-				local darkcircle = Instance.new("ImageLabel")
-				local toggleDisabled = Instance.new("ImageLabel")
-				local toggleEnabled = Instance.new("ImageLabel")
-				local onrainbow = Instance.new("TextButton")
-				local togName_2 = Instance.new("TextLabel")
+				local colorElement = Instance.new('TextButton')
+				local UICorner = Instance.new('UICorner')
+				local colorHeader = Instance.new('Frame')
+				local UICorner_2 = Instance.new('UICorner')
+				local touch = Instance.new('ImageLabel')
+				local togName = Instance.new('TextLabel')
+				local viewInfo = Instance.new('ImageButton')
+				local colorCurrent = Instance.new('Frame')
+				local UICorner_3 = Instance.new('UICorner')
+				local UIListLayout = Instance.new('UIListLayout')
+				local colorInners = Instance.new('Frame')
+				local UICorner_4 = Instance.new('UICorner')
+				local rgb = Instance.new('ImageButton')
+				local UICorner_5 = Instance.new('UICorner')
+				local rbgcircle = Instance.new('ImageLabel')
+				local darkness = Instance.new('ImageButton')
+				local UICorner_6 = Instance.new('UICorner')
+				local darkcircle = Instance.new('ImageLabel')
+				local toggleDisabled = Instance.new('ImageLabel')
+				local toggleEnabled = Instance.new('ImageLabel')
+				local onrainbow = Instance.new('TextButton')
+				local togName_2 = Instance.new('TextLabel')
 
 				--Properties:
-				local Sample = Instance.new("ImageLabel")
-				Sample.Name = "Sample"
+				local Sample = Instance.new('ImageLabel')
+				Sample.Name = 'Sample'
 				Sample.Parent = colorHeader
 				Sample.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				Sample.BackgroundTransparency = 1.000
-				Sample.Image = "http://www.roblox.com/asset/?id=4560909609"
+				Sample.Image = 'http://www.roblox.com/asset/?id=4560909609'
 				Sample.ImageColor3 = themeList.SchemeColor
 				Sample.ImageTransparency = 0.600
 
 				local btn = colorHeader
 				local sample = Sample
 
-				colorElement.Name = "colorElement"
+				colorElement.Name = 'colorElement'
 				colorElement.Parent = sectionInners
 				colorElement.BackgroundColor3 = themeList.ElementColor
 				colorElement.BackgroundTransparency = 1.000
@@ -2315,14 +2315,14 @@ function kavo:CreateWindow(argstable)
 				colorElement.Size = UDim2.new(0, 352, 0, 33)
 				colorElement.AutoButtonColor = false
 				colorElement.Font = Enum.Font.SourceSans
-				colorElement.Text = ""
+				colorElement.Text = ''
 				colorElement.TextColor3 = Color3.fromRGB(0, 0, 0)
 				colorElement.TextSize = 14.000
 				colorElement.MouseButton1Click:Connect(function()
 					if not focusing then
 						if colorOpened then
 							colorOpened = false
-							colorElement:TweenSize(UDim2.new(0, 352, 0, 33), "InOut", "Linear", 0.08)
+							colorElement:TweenSize(UDim2.new(0, 352, 0, 33), 'InOut', 'Linear', 0.08)
 							wait(0.1)
 							updateSectionFrame()
 							UpdateSize()
@@ -2344,7 +2344,7 @@ function kavo:CreateWindow(argstable)
 							c:Destroy()
 						else
 							colorOpened = true
-							colorElement:TweenSize(UDim2.new(0, 352, 0, 141), "InOut", "Linear", 0.08, true)
+							colorElement:TweenSize(UDim2.new(0, 352, 0, 141), 'InOut', 'Linear', 0.08, true)
 							wait(0.1)
 							updateSectionFrame()
 							UpdateSize()
@@ -2376,7 +2376,7 @@ function kavo:CreateWindow(argstable)
 				UICorner.CornerRadius = UDim.new(0, 4)
 				UICorner.Parent = colorElement
 
-				colorHeader.Name = "colorHeader"
+				colorHeader.Name = 'colorHeader'
 				colorHeader.Parent = colorElement
 				colorHeader.BackgroundColor3 = themeList.ElementColor
 				colorHeader.Size = UDim2.new(0, 352, 0, 33)
@@ -2385,19 +2385,19 @@ function kavo:CreateWindow(argstable)
 				UICorner_2.CornerRadius = UDim.new(0, 4)
 				UICorner_2.Parent = colorHeader
 
-				touch.Name = "touch"
+				touch.Name = 'touch'
 				touch.Parent = colorHeader
 				touch.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				touch.BackgroundTransparency = 1.000
 				touch.BorderColor3 = Color3.fromRGB(27, 42, 53)
 				touch.Position = UDim2.new(0.0199999996, 0, 0.180000007, 0)
 				touch.Size = UDim2.new(0, 21, 0, 21)
-				touch.Image = "rbxassetid://3926305904"
+				touch.Image = 'rbxassetid://3926305904'
 				touch.ImageColor3 = themeList.SchemeColor
 				touch.ImageRectOffset = Vector2.new(44, 964)
 				touch.ImageRectSize = Vector2.new(36, 36)
 
-				togName.Name = "togName"
+				togName.Name = 'togName'
 				togName.Parent = colorHeader
 				togName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				togName.BackgroundTransparency = 1.000
@@ -2410,17 +2410,17 @@ function kavo:CreateWindow(argstable)
 				togName.RichText = true
 				togName.TextXAlignment = Enum.TextXAlignment.Left
 
-				local moreInfo = Instance.new("TextLabel")
-				local UICorner = Instance.new("UICorner")
+				local moreInfo = Instance.new('TextLabel')
+				local UICorner = Instance.new('UICorner')
 
-				moreInfo.Name = "TipMore"
+				moreInfo.Name = 'TipMore'
 				moreInfo.Parent = infoContainer
 				moreInfo.BackgroundColor3 = Color3.fromRGB(themeList.SchemeColor.r * 255 - 14, themeList.SchemeColor.g * 255 - 17, themeList.SchemeColor.b * 255 - 13)
 				moreInfo.Position = UDim2.new(0, 0, 2, 0)
 				moreInfo.Size = UDim2.new(0, 353, 0, 33)
 				moreInfo.ZIndex = 9
 				moreInfo.Font = Enum.Font.GothamSemibold
-				moreInfo.Text = "  "..colInf
+				moreInfo.Text = '  '..colInf
 				moreInfo.TextColor3 = themeList.TextColor
 				moreInfo.TextSize = 14.000
 				moreInfo.RichText = true
@@ -2429,14 +2429,14 @@ function kavo:CreateWindow(argstable)
 				UICorner.CornerRadius = UDim.new(0, 4)
 				UICorner.Parent = moreInfo
 
-				viewInfo.Name = "viewInfo"
+				viewInfo.Name = 'viewInfo'
 				viewInfo.Parent = colorHeader
 				viewInfo.BackgroundTransparency = 1.000
 				viewInfo.LayoutOrder = 9
 				viewInfo.Position = UDim2.new(0.930000007, 0, 0.151999995, 0)
 				viewInfo.Size = UDim2.new(0, 23, 0, 23)
 				viewInfo.ZIndex = 2
-				viewInfo.Image = "rbxassetid://3926305904"
+				viewInfo.Image = 'rbxassetid://3926305904'
 				viewInfo.ImageColor3 = themeList.SchemeColor
 				viewInfo.ImageRectOffset = Vector2.new(764, 764)
 				viewInfo.ImageRectSize = Vector2.new(36, 36)
@@ -2461,7 +2461,7 @@ function kavo:CreateWindow(argstable)
 					end
 				end)   
 
-				colorCurrent.Name = "colorCurrent"
+				colorCurrent.Name = 'colorCurrent'
 				colorCurrent.Parent = colorHeader
 				colorCurrent.BackgroundColor3 = defcolor
 				colorCurrent.Position = UDim2.new(0.792613626, 0, 0.212121218, 0)
@@ -2474,7 +2474,7 @@ function kavo:CreateWindow(argstable)
 				UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 				UIListLayout.Padding = UDim.new(0, 3)
 
-				colorInners.Name = "colorInners"
+				colorInners.Name = 'colorInners'
 				colorInners.Parent = colorElement
 				colorInners.BackgroundColor3 = themeList.ElementColor
 				colorInners.Position = UDim2.new(0, 0, 0.255319148, 0)
@@ -2483,91 +2483,91 @@ function kavo:CreateWindow(argstable)
 				UICorner_4.CornerRadius = UDim.new(0, 4)
 				UICorner_4.Parent = colorInners
 
-				rgb.Name = "rgb"
+				rgb.Name = 'rgb'
 				rgb.Parent = colorInners
 				rgb.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				rgb.BackgroundTransparency = 1.000
 				rgb.Position = UDim2.new(0.0198863633, 0, 0.0476190485, 0)
 				rgb.Size = UDim2.new(0, 211, 0, 93)
-				rgb.Image = "http://www.roblox.com/asset/?id=6523286724"
+				rgb.Image = 'http://www.roblox.com/asset/?id=6523286724'
 
 				UICorner_5.CornerRadius = UDim.new(0, 4)
 				UICorner_5.Parent = rgb
 
-				rbgcircle.Name = "rbgcircle"
+				rbgcircle.Name = 'rbgcircle'
 				rbgcircle.Parent = rgb
 				rbgcircle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				rbgcircle.BackgroundTransparency = 1.000
 				rbgcircle.Size = UDim2.new(0, 14, 0, 14)
-				rbgcircle.Image = "rbxassetid://3926309567"
+				rbgcircle.Image = 'rbxassetid://3926309567'
 				rbgcircle.ImageColor3 = Color3.fromRGB(0, 0, 0)
 				rbgcircle.ImageRectOffset = Vector2.new(628, 420)
 				rbgcircle.ImageRectSize = Vector2.new(48, 48)
 
-				darkness.Name = "darkness"
+				darkness.Name = 'darkness'
 				darkness.Parent = colorInners
 				darkness.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				darkness.BackgroundTransparency = 1.000
 				darkness.Position = UDim2.new(0.636363626, 0, 0.0476190485, 0)
 				darkness.Size = UDim2.new(0, 18, 0, 93)
-				darkness.Image = "http://www.roblox.com/asset/?id=6523291212"
+				darkness.Image = 'http://www.roblox.com/asset/?id=6523291212'
 
 				UICorner_6.CornerRadius = UDim.new(0, 4)
 				UICorner_6.Parent = darkness
 
-				darkcircle.Name = "darkcircle"
+				darkcircle.Name = 'darkcircle'
 				darkcircle.Parent = darkness
 				darkcircle.AnchorPoint = Vector2.new(0.5, 0)
 				darkcircle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				darkcircle.BackgroundTransparency = 1.000
 				darkcircle.Size = UDim2.new(0, 14, 0, 14)
-				darkcircle.Image = "rbxassetid://3926309567"
+				darkcircle.Image = 'rbxassetid://3926309567'
 				darkcircle.ImageColor3 = Color3.fromRGB(0, 0, 0)
 				darkcircle.ImageRectOffset = Vector2.new(628, 420)
 				darkcircle.ImageRectSize = Vector2.new(48, 48)
 
-				toggleDisabled.Name = "toggleDisabled"
+				toggleDisabled.Name = 'toggleDisabled'
 				toggleDisabled.Parent = colorInners
 				toggleDisabled.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				toggleDisabled.BackgroundTransparency = 1.000
 				toggleDisabled.Position = UDim2.new(0.704659104, 0, 0.0657142699, 0)
 				toggleDisabled.Size = UDim2.new(0, 21, 0, 21)
-				toggleDisabled.Image = "rbxassetid://3926309567"
+				toggleDisabled.Image = 'rbxassetid://3926309567'
 				toggleDisabled.ImageColor3 = themeList.SchemeColor
 				toggleDisabled.ImageRectOffset = Vector2.new(628, 420)
 				toggleDisabled.ImageRectSize = Vector2.new(48, 48)
 
-				toggleEnabled.Name = "toggleEnabled"
+				toggleEnabled.Name = 'toggleEnabled'
 				toggleEnabled.Parent = colorInners
 				toggleEnabled.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				toggleEnabled.BackgroundTransparency = 1.000
 				toggleEnabled.Position = UDim2.new(0.704999983, 0, 0.0659999996, 0)
 				toggleEnabled.Size = UDim2.new(0, 21, 0, 21)
-				toggleEnabled.Image = "rbxassetid://3926309567"
+				toggleEnabled.Image = 'rbxassetid://3926309567'
 				toggleEnabled.ImageColor3 = themeList.SchemeColor
 				toggleEnabled.ImageRectOffset = Vector2.new(784, 420)
 				toggleEnabled.ImageRectSize = Vector2.new(48, 48)
 				toggleEnabled.ImageTransparency = 1.000
 
-				onrainbow.Name = "onrainbow"
+				onrainbow.Name = 'onrainbow'
 				onrainbow.Parent = toggleEnabled
 				onrainbow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				onrainbow.BackgroundTransparency = 1.000
 				onrainbow.Position = UDim2.new(2.90643607e-06, 0, 0, 0)
 				onrainbow.Size = UDim2.new(1, 0, 1, 0)
 				onrainbow.Font = Enum.Font.SourceSans
-				onrainbow.Text = ""
+				onrainbow.Text = ''
 				onrainbow.TextColor3 = Color3.fromRGB(0, 0, 0)
 				onrainbow.TextSize = 14.000
 
-				togName_2.Name = "togName"
+				togName_2.Name = 'togName'
 				togName_2.Parent = colorInners
 				togName_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				togName_2.BackgroundTransparency = 1.000
 				togName_2.Position = UDim2.new(0.779999971, 0, 0.100000001, 0)
 				togName_2.Size = UDim2.new(0, 278, 0, 14)
 				togName_2.Font = Enum.Font.GothamSemibold
-				togName_2.Text = "Rainbow"
+				togName_2.Text = 'Rainbow'
 				togName_2.TextColor3 = themeList.TextColor
 				togName_2.TextSize = 14.000
 				togName_2.TextXAlignment = Enum.TextXAlignment.Left
@@ -2626,7 +2626,7 @@ function kavo:CreateWindow(argstable)
 				local plr = game.Players.LocalPlayer
 				local mouse = plr:GetMouse()
 				local uis = game:GetService('UserInputService')
-				local rs = game:GetService("RunService")
+				local rs = game:GetService('RunService')
 				local colorpicker = false
 				local darknesss = false
 				local dark = false
@@ -2724,7 +2724,7 @@ function kavo:CreateWindow(argstable)
 				rgb.MouseButton1Down:connect(function()colorpicker=true end)
 				dark.MouseButton1Down:connect(function()darknesss=true end)
 				uis.InputEnded:Connect(function(input)
-					if input.UserInputType.Name == "MouseButton1" or input.UserInputType.Name == "Touch" then
+					if input.UserInputType.Name == 'MouseButton1' or input.UserInputType.Name == 'Touch' then
 						if darknesss then darknesss = false end
 						if colorpicker then colorpicker = false end
 					end
@@ -2738,20 +2738,20 @@ function kavo:CreateWindow(argstable)
 
 			function Elements.CreateLabel(argstable)
 				local labelFunctions = {}
-				local label = Instance.new("TextLabel")
-				local UICorner = Instance.new("UICorner")
-				label.Name = "label"
+				local label = Instance.new('TextLabel')
+				local UICorner = Instance.new('UICorner')
+				label.Name = 'label'
 				label.Parent = sectionInners
 				label.BackgroundColor3 = themeList.SchemeColor
 				label.BorderSizePixel = 0
 				label.ClipsDescendants = true
-				label.Text = argstable["Text"]
+				label.Text = argstable['Text']
 				label.Size = UDim2.new(0, 352, 0, 33)
 				label.Font = Enum.Font.Gotham
-				label.Text = "  "..title
+				label.Text = '  '..title
 				label.RichText = true
 				label.TextColor3 = themeList.TextColor
-				Objects[label] = "TextColor3"
+				Objects[label] = 'TextColor3'
 				label.TextSize = 14.000
 				label.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -2774,8 +2774,8 @@ function kavo:CreateWindow(argstable)
 				updateSectionFrame()
 				UpdateSize()
 				function labelFunctions.renameLabel(newText)
-					if label.Text ~= "  "..newText then
-						label.Text = "  "..newText
+					if label.Text ~= '  '..newText then
+						label.Text = '  '..newText
 					end
 				end	
 				return labelFunctions
@@ -2824,7 +2824,7 @@ task.spawn(function()
 	task.wait(0.25);
 	repeat
 		if not configloaded then break end
-		print('yes')
+		--print('yes')
 		writefile(kavo.scriptName..'/profiles/'.. game.PlaceId.. '.json', game:GetService('HttpService'):JSONEncode(objectsapi));
 		task.wait(5);
 	until not configloaded;
