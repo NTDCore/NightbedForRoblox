@@ -2788,7 +2788,7 @@ function kavo:CreateWindow(argstable)
 end
 function kavo:load()
 	local suc, res = pcall(function() --> config system
-		local config: table = game:GetService('HttpService'):JSONDecode(readfile('/profiles/'.. game.PlaceId.. '.json'));
+		local config: table = game:GetService('HttpService'):JSONDecode(readfile(kavo.scriptName..'/profiles/'.. game.PlaceId.. '.json'));
 		if config and type(config) == 'table' then
 			for i,v in config do
 				local object = objectsapi[i]
