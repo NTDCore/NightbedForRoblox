@@ -1,7 +1,11 @@
 -- credit to xylex (ty for isfile fix?)
 repeat task.wait() until game:IsLoaded()
+local cloneref = cloneref or function(obj)
+	return obj
+end
+local httpService = cloneref(game.GetService(game, 'HttpService'))
 function githubRequest(scripturl)
-	return game:HttpGet('https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/'..scripturl, true)
+	return game:HttpGet('https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/'..httpService:JSONDecode(game:HttpGet('https://api.github.com/repos/NTDCore/nightbedForRoblox/commits'))[1].sha..'/'..scripturl, true)
 end
 local isfile = isfile or function(path)
 	local suc, res = pcall(function() return readfile(path) end)
@@ -35,7 +39,7 @@ local nightbedData
 loadstring(githubRequest('Universal.lua'))()
 
 task.spawn(function()
-	nightbedData = httpService:JSONDecode(game:HttpGet('https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/Core/data.json', true))
+	nightbedData = httpService:JSONDecode(game:HttpGet('https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/'..httpService:JSONDecode(game:HttpGet('https://api.github.com/repos/NTDCore/nightbedForRoblox/commits'))[1].sha..'/Core/data.json', true))
 	for i,v in nightbedData.Blacklist do	
 		if tonumber(v) == lplr.UserId then
 			lplr:Kick(tostring(v[lplr.UserId].Reason))
