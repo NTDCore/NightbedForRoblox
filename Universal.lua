@@ -25,12 +25,16 @@ local nightbedData
 local run = function(func) func() end
 
 local Tabs = shared.Tabs
-local Sections = {
-	['InfiniteJump'] = Tabs['Blatant'].CreateSection('InfiniteJump'),
-	['Speed'] = Tabs['Blatant'].CreateSection('Speed'),
-	['InstantInteract'] = Tabs['Utility'].CreateSection('InstantInteract')
-}
-shared.Sections = Sections
+if not shared.nightbedopen then
+	local Sections = {
+		['InfiniteJump'] = Tabs['Blatant'].CreateSection('InfiniteJump'),
+		['Speed'] = Tabs['Blatant'].CreateSection('Speed'),
+		['InstantInteract'] = Tabs['Utility'].CreateSection('InstantInteract')
+	}
+	shared.Sections = Sections
+else
+	shared.Sections = {}
+end
 
 local cloneref = cloneref or function(obj) return obj end
 local httpService = cloneref(game.GetService(game, 'HttpService'))
@@ -48,67 +52,69 @@ local InputService = cloneref(game:GetService('UserInputService'))
 local proximityPromptService = cloneref(game:GetService('ProximityPromptService'))
 
 run(function()
-	local InfiniteJump = {Enabled = false}
-	InfiniteJump = Sections['InfiniteJump'].CreateToggle({
-		Name = 'InfiniteJump',
-		Function = function(callback)
-			if callback then
-				Settings['InfiniteJump'] = true
-				task.spawn(function()
-					InfiniteJumpConnection = InputService.JumpRequest:connect(function(jump)
-						oldchar.Humanoid:ChangeState('Jumping')
+	if not shared.nightbedopen then
+		local InfiniteJump = {Enabled = false}
+		InfiniteJump = Sections['InfiniteJump'].CreateToggle({
+			Name = 'InfiniteJump',
+			Function = function(callback)
+				if callback then
+					Settings['InfiniteJump'] = true
+					task.spawn(function()
+						InfiniteJumpConnection = InputService.JumpRequest:connect(function(jump)
+							oldchar.Humanoid:ChangeState('Jumping')
+						end)
 					end)
-				end)
-			else
-				Settings['InfiniteJump'] = false
-				InfiniteJumpConnection:Disconnect()
+				else
+					Settings['InfiniteJump'] = false
+					InfiniteJumpConnection:Disconnect()
+				end
+			end,
+			HoverText = 'Make you can jump any place'
+		})
+		local Speed = {Enabled = false}
+		local speedval = {Value = 16}
+		Speed = Sections['Speed'].CreateToggle({
+			Name = 'Speed',
+			Function = function(callback)
+				Settings['Speed']['Enabled'] = callback
+				if callback then
+					Settings['Speed']['Enabled'] = true
+					oldchar.Humanoid.WalkSpeed = speedval.Value
+				else
+					Settings['Speed']['Enabled'] = false
+					oldchar.Humanoid.WalkSpeed = 16
+				end
+			end,
+			HoverText = 'Make you Faster'
+		})
+		speedval = Sections['Speed'].CreateSlider({
+			['Name'] = 'Speed Value',
+			['HoverText'] = 'Move Faster', 
+			['Max'] = 100,
+			['Min'] = 0,
+			['Function'] = function(s)
+				speedval['Value'] = s
+				Settings['Speed']['Value'] = s
+				Speed.ToggleButton()
+				Speed.ToggleButton()
+			end,
+			['Default'] = 16
+		})
+		local InstantInteract = {Enabled = false}
+		InstantInteract = Sections['InstantInteract'].CreateToggle({
+			['Name'] = 'InstantInteract',
+			['Function'] = function(callback)
+				Settings['InstantInteract'] = callback
+				if callback then
+					InstantInteractConnection = proximityPromptService.PromptButtonHoldBegan:Connect(function(prompt)
+						fireproximityprompt(prompt)
+					end)
+				else
+					InstantInteractConnection:Disconnect()
+				end
 			end
-		end,
-		HoverText = 'Make you can jump any place'
-	})
-	local Speed = {Enabled = false}
-	local speedval = {Value = 16}
-	Speed = Sections['Speed'].CreateToggle({
-		Name = 'Speed',
-		Function = function(callback)
-			Settings['Speed']['Enabled'] = callback
-			if callback then
-				Settings['Speed']['Enabled'] = true
-				oldchar.Humanoid.WalkSpeed = speedval.Value
-			else
-				Settings['Speed']['Enabled'] = false
-				oldchar.Humanoid.WalkSpeed = 16
-			end
-		end,
-		HoverText = 'Make you Faster'
-	})
-	speedval = Sections['Speed'].CreateSlider({
-		['Name'] = 'Speed Value',
-		['HoverText'] = 'Move Faster', 
-		['Max'] = 100,
-		['Min'] = 0,
-		['Function'] = function(s)
-			speedval['Value'] = s
-			Settings['Speed']['Value'] = s
-			Speed.ToggleButton()
-			Speed.ToggleButton()
-		end,
-		['Default'] = 16
-	})
-	local InstantInteract = {Enabled = false}
-	InstantInteract = Sections['InstantInteract'].CreateToggle({
-		['Name'] = 'InstantInteract',
-		['Function'] = function(callback)
-			Settings['InstantInteract'] = callback
-			if callback then
-				InstantInteractConnection = proximityPromptService.PromptButtonHoldBegan:Connect(function(prompt)
-					fireproximityprompt(prompt)
-				end)
-			else
-				InstantInteractConnection:Disconnect()
-			end
-		end
-	})
+		})
+	end
 	-- function SaveSettings()
 	-- 	writefile('Nightbed/Profiles/Universal.json',game:GetService('HttpService'):JSONEncode(Settings))
 	-- end

@@ -118,6 +118,15 @@ Sections['SpawnObj'].CreateButton({
 		typeshit:spawn('Meteors')
 	end
 })
+Sections['SpawnObj'].CreateButton({
+	Name = 'HiroshimaBomber',
+	HoverText = '',
+	Function = function()
+		for i = 1,50 do
+			typeshit:spawn('Nuke')
+		end
+	end
+})
 Sections['SpawnObj'].CreateTextBox({
 	Name = 'Object Name',
 	HoverText = 'e',
