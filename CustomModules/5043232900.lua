@@ -23,7 +23,7 @@ local function notify(Titlez, Textz, Dur)
 	})
 end
 local connectioninfjump
-local cloneref = cloneref and {identifyexecutor()}[1] ~= 'Xeno' or function(aaa) return aaa end
+local cloneref = cloneref and not identifyexecutor():find('Xeno') or function(aaa) return aaa end
 local players = cloneref(game:GetService('Players'))
 local lplr = players.LocalPlayer
 local oldchar = lplr.Character
@@ -33,14 +33,13 @@ local replistorage = cloneref(game:GetService('ReplicatedStorage'))
 
 local typeshit = {}
 function typeshit:spawn(object)
-	replistorage.typeshit:spawn:FireServer(object)
+	replistorage.SpawnObject:FireServer(object)
 end
 function typeshit:morehealth()
 	replistorage.MoreHealth:FireServer()
 end
-
 function typeshit:weapon(weapon)
-   replistorage.typeshit:weapon:FireServer(weapon)
+	replistorage.WeaponEvent:FireServer(weapon)
 end
 local uis = cloneref(game:GetService('UserInputService'))
 local Tabs = shared.Tabs
