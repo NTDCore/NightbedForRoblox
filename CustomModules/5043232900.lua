@@ -7,52 +7,54 @@ if your skid make sure to credit source to me or anyone
 --]]
 repeat task.wait() until game:IsLoaded()
 local function GetURL(scripturl)
-	return game:HttpGet("https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/"..scripturl, true)
+	return game:HttpGet('https://raw.githubusercontent.com/NTDCore/NightbedForRoblox/main/'..scripturl, true)
 end
 local kavo
 if (not shared.kavogui) then
-	kavo = loadstring(GetURL("Core/kavo.lua"))()
+	kavo = loadstring(GetURL('Core/kavo.lua'))()
 else
 	kavo = shared.kavogui
 end
 local function notify(Titlez, Textz, Dur)
-	game.StarterGui:SetCore("SendNotification", {
+	game.StarterGui:SetCore('SendNotification', {
 		Title = Titlez;
 		Text = Textz;
 		Duration = Dur;
 	})
 end
 local connectioninfjump
-local cloneref = cloneref or function(aaa) return aaa end
-local players = cloneref(game:GetService("Players"))
+local cloneref = cloneref and {identifyexecutor()}[1] ~= 'Xeno' or function(aaa) return aaa end
+local players = cloneref(game:GetService('Players'))
 local lplr = players.LocalPlayer
 local oldchar = lplr.Character
 local workspace = cloneref(game:GetService('Workspace'))
 local cam = workspace.CurrentCamera
-local replistorage = cloneref(game:GetService("ReplicatedStorage"))
-function SpawnObject(object)
-	replistorage.SpawnObject:FireServer(object)
+local replistorage = cloneref(game:GetService('ReplicatedStorage'))
+
+local typeshit = {}
+function typeshit:spawn(object)
+	replistorage.typeshit:spawn:FireServer(object)
 end
-local function AddHealth()
+function typeshit:morehealth()
 	replistorage.MoreHealth:FireServer()
 end
 
-local function WeaponEvent(weapon)
-   replistorage.WeaponEvent:FireServer(weapon)
+function typeshit:weapon(weapon)
+   replistorage.typeshit:weapon:FireServer(weapon)
 end
-local uis = game:GetService("UserInputService")
+local uis = cloneref(game:GetService('UserInputService'))
 local Tabs = shared.Tabs
 local Sections = shared.Sections
 Sections['AddonsExploit'] = Tabs['Utility'].CreateSection('AddonsExploit')
-Sections["VoteClean"] = Tabs["Utility"].CreateSection("VoteClean")
-Sections["HealthExploit"] = Tabs["Utility"].CreateSection("HealthExploit")
-Sections["SpawnObj"] = Tabs["Utility"].CreateSection("Spawn Object")
-Sections["SpawnIt"] = Tabs["Utility"].CreateSection("Weapons")
+Sections['VoteClean'] = Tabs['Utility'].CreateSection('VoteClean')
+Sections['HealthExploit'] = Tabs['Utility'].CreateSection('HealthExploit')
+Sections['SpawnObj'] = Tabs['Utility'].CreateSection('Spawn Object')
+Sections['SpawnIt'] = Tabs['Utility'].CreateSection('Weapons')
 
-local VoteClean = Sections["VoteClean"]
+local VoteClean = Sections['VoteClean']
 VoteClean.CreateButton({
-	Name="VoteClean",
-	HoverText="clean the map vote",
+	Name='VoteClean',
+	HoverText='clean the map vote',
 	Function=function()
 		replistorage.VotingInProgress.VoteEvent:FireServer()
 		for i = 1,#players:GetPlayers() + 1 do
@@ -60,20 +62,20 @@ VoteClean.CreateButton({
 		end
 	end
 })
-local HealthExploit = Sections["HealthExploit"]
+local HealthExploit = Sections['HealthExploit']
 HealthExploit.CreateButton({
-	Name = "HealthExploit",
-	HoverText = "Much More HP Add to Bullet Proof",
+	Name = 'HealthExploit',
+	HoverText = 'Much More HP Add to Bullet Proof',
 	Function = function()
 		for i = 1,200 do
-			AddHealth()
+			typeshit:morehealth()
 		end
 	end
 })
 local InfiniteHP = {Enabled = false}
 InfiniteHP = HealthExploit.CreateToggle({
-	Name = "InfiniteHP",
-	HoverText = "Much More HP Add to Bullet Proof",
+	Name = 'InfiniteHP',
+	HoverText = 'Much More HP Add to Bullet Proof',
 	Function = function(callback)
 		if callback then
 			task.spawn(function()
@@ -89,7 +91,7 @@ InfiniteHP = HealthExploit.CreateToggle({
 		end
 	end
 })
-local AddonsExploit = Sections["AddonsExploit"]
+local AddonsExploit = Sections['AddonsExploit']
 AddonsExploit.CreateButton({
 	Name = 'AddonsExploit',
 	Function = function()
@@ -99,41 +101,46 @@ AddonsExploit.CreateButton({
 		end
 	end
 })
-local objecterenter = {["Value"] = ""}
-Sections["SpawnObj"].CreateButton({
-	Name = "Object Spawn",
-	HoverText = "Object Give",
+local objecterenter = {['Value'] = ''}
+Sections['SpawnObj'].CreateButton({
+	Name = 'Object Spawn',
+	HoverText = 'Object Give',
 	Function = function()
-		SpawnObject(objecterenter["Value"])
+		typeshit:spawn(objecterenter['Value'])
 	end
 })
-Sections["SpawnObj"].CreateButton({
-	Name = "Disaster",
-	HoverText = "",
+Sections['SpawnObj'].CreateButton({
+	Name = 'Disaster',
+	HoverText = '',
 	Function = function()
-		SpawnObject('Flood')
-		SpawnObject('bigbadblizzard')
-		SpawnObject('Tornado')
-		SpawnObject('Meteors')
+		typeshit:spawn('Flood')
+		typeshit:spawn('bigbadblizzard')
+		typeshit:spawn('Tornado')
+		typeshit:spawn('Meteors')
 	end
 })
-Sections["SpawnObj"].CreateTextBox({
-	Name = "Object Name",
-	HoverText = "e",
+Sections['SpawnObj'].CreateTextBox({
+	Name = 'Object Name',
+	HoverText = 'e',
 	Function = function(val)
-		objecterenter["Value"] = val
+		objecterenter['Value'] = val
 	end
 })
-local enterwea = {["Value"] = ""}
-Sections["SpawnIt"].CreateButton({Name="Weapon Give",HoverText="e",Function=function()
-	WeaponEvent(enterwea["Value"])
+local enterwea = {['Value'] = ''}
+Sections['SpawnIt'].CreateButton({Name='Weapon Give',HoverText='e',Function=function()
+	typeshit:weapon(enterwea['Value'])
 end})
-Sections["SpawnIt"].CreateTextBox({Name="Weapon Name",HoverText="e",Function=function(entername)
-	enterwea["Value"] = entername
+Sections['SpawnIt'].CreateTextBox({Name='Weapon Name',HoverText='e',Function=function(entername)
+	enterwea['Value'] = entername
 end})
-Sections["SpawnIt"].CreateButton({Name="Give Crucifix",HoverText="OP",Function=function()
-	WeaponEvent("Crucifix")
+Sections['SpawnIt'].CreateButton({Name='Give Crucifix',HoverText='OP',Function=function()
+	typeshit:weapon('Crucifix')
 end})
-Sections["SpawnIt"].CreateButton({Name="Give Admin Revolver",HoverText="OP",Function=function()
-	WeaponEvent("Admin Revolver")
+Sections['SpawnIt'].CreateButton({Name='Give Admin Revolver',HoverText='OP',Function=function()
+	typeshit:weapon('Admin Revolver')
+end})
+Sections['SpawnIt'].CreateButton({Name='Give All Items',HoverText='OP',Function=function()
+	for i,v in replistorage.Miscs.Viewmodels:GetChildren() do
+		typeshit:weapon(v.Name:gsub('v_', ''))
+	end
 end})
