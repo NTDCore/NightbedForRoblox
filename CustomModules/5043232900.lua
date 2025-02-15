@@ -51,7 +51,7 @@ Sections['HealthExploit'] = Tabs['Utility'].CreateSection('HealthExploit')
 Sections['SpawnObj'] = Tabs['Utility'].CreateSection('Spawn Object')
 Sections['SpawnIt'] = Tabs['Utility'].CreateSection('Weapons')
 
-local NoFall = {Enabled = false, Connections = {}},
+local NoFall = {Enabled = false, Connections = {}}
 NoFall = Sections.NoFall.CreateToggle({
 	Name = 'NoFall',
 	HoverText = 'Much More HP Add to Bullet Proof',
