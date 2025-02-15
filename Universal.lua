@@ -52,7 +52,7 @@ local InputService = cloneref(game:GetService('UserInputService'))
 local proximityPromptService = cloneref(game:GetService('ProximityPromptService'))
 
 run(function()
-	if not shared.nightbedopen then
+	--if not shared.nightbedopen then
 		local InfiniteJump = {Enabled = false}
 		InfiniteJump = Sections['InfiniteJump'].CreateToggle({
 			Name = 'InfiniteJump',
@@ -114,7 +114,7 @@ run(function()
 				end
 			end
 		})
-	end
+	--end
 	-- function SaveSettings()
 	-- 	writefile('Nightbed/Profiles/Universal.json',game:GetService('HttpService'):JSONEncode(Settings))
 	-- end
