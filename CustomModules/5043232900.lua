@@ -44,11 +44,40 @@ end
 local uis = cloneref(game:GetService('UserInputService'))
 local Tabs = shared.Tabs
 local Sections = shared.Sections
+Sections.NoFall = Tabs.Blatant.CreateSection('NoFall')
 Sections['AddonsExploit'] = Tabs['Utility'].CreateSection('AddonsExploit')
 Sections['VoteClean'] = Tabs['Utility'].CreateSection('VoteClean')
 Sections['HealthExploit'] = Tabs['Utility'].CreateSection('HealthExploit')
 Sections['SpawnObj'] = Tabs['Utility'].CreateSection('Spawn Object')
 Sections['SpawnIt'] = Tabs['Utility'].CreateSection('Weapons')
+
+local NoFall = {Enabled = false, Connections = {}},
+NoFall = Sections.NoFall.CreateToggle({
+	Name = 'NoFall',
+	HoverText = 'Much More HP Add to Bullet Proof',
+	Function = function(callback)
+		if callback then
+			task.spawn(function()
+				if lplr.Character then
+					lplr.Character.FallDamage.Enabled = false
+				end
+				table.insert(NoFall.Connections, lplr.CharacterAdded:Connect(function(char)
+					if char then
+						char:WaitForChild('FallDamage').Enabled = false
+					end
+				end))
+			end)
+		else
+			if lplr.Character then
+				lplr.Character.FallDamage.Enabled = true
+			end
+			for i,v in NoFall.Connections do
+				v:Disconnect()
+				v = nil
+			end
+		end
+	end
+})
 
 local VoteClean = Sections['VoteClean']
 VoteClean.CreateButton({

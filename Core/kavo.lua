@@ -1033,11 +1033,12 @@ function kavo:CreateWindow(argstable)
 
 			function Elements.CreateToggle(argstable)
 				local toggleapi = {
-					['Enabled'] = false
+					['Enabled'] = false,
+					Connections = {}
 				}
 				local tname = argstable['Name'] or 'Toggle'
 				local DefaultT = argstable['Default'] or false
-				local TogFunction = {['Name'] = argstable.Name or '', ['Enabled'] = false, ['Function'] = argstable['Function'] or function() end, Type = 'Toggle'}
+				local TogFunction = {['Name'] = argstable.Name or '', ['Enabled'] = false, ['Function'] = argstable['Function'] or function() end, Type = 'Toggle', Connections = {}}
 				local toggled = DefaultT
 				TogFunction['Enabled'] = toggled
 				table.insert(kavo.connections, {

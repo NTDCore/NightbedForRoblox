@@ -25,12 +25,12 @@ local nightbedData
 local run = function(func) func() end
 
 local Tabs = shared.Tabs
+local Sections = {
+	['InfiniteJump'] = Tabs['Blatant'].CreateSection('InfiniteJump'),
+	['Speed'] = Tabs['Blatant'].CreateSection('Speed'),
+	['InstantInteract'] = Tabs['Utility'].CreateSection('InstantInteract')
+}
 if not shared.nightbedopen then
-	local Sections = {
-		['InfiniteJump'] = Tabs['Blatant'].CreateSection('InfiniteJump'),
-		['Speed'] = Tabs['Blatant'].CreateSection('Speed'),
-		['InstantInteract'] = Tabs['Utility'].CreateSection('InstantInteract')
-	}
 	shared.Sections = Sections
 else
 	shared.Sections = {}
